@@ -49,6 +49,8 @@ UNIVERSAL_SHOP_MODE = CHEATY_STUFF             -- Should the main shop contain S
 GOLD_PER_TICK = 99999                 		    -- How much gold should players get per tick?
 USE_CUSTOM_XP_VALUES = CHEATY_STUFF             -- Should we use custom XP values to level up heroes, or the default Dota numbers?
 
+MUSIC = false
+
 
 
 -- Fill this table up with the required XP per level if you want to change it
@@ -317,7 +319,9 @@ function GameMode:OnGameInProgress()
 
 	Timers:CreateTimer(0, function() -- Start this timer 30 game-time seconds later
 		--print("This function is called 30 seconds after the game begins, and every 30 seconds thereafter")
-		EmitGlobalSound("barebones.Music")
+		if MUSIC then
+			EmitGlobalSound("barebones.Music")
+		end
 		--[[Returns:void
 		Play named sound for all players
 		]]

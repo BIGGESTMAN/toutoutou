@@ -6,7 +6,6 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityTextureName"			"tidehunter_anchor_smash"
 
@@ -20,6 +19,10 @@
 			"particle"	"particles/foundering_anchor_root.vpcf"
 			"particle"	"particles/foundering_anchor_aura.vpcf"
 			"particle"	"particles/foundering_anchor_aura_alt.vpcf"
+			"particle"	"particles/status_fx/status_effect_ghost.vpcf"
+			"particle"	"particles/items_fx/ghost.vpcf"
+			"particle"	"particles/foundering_anchor_ghost_damage.vpcf"
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_pugna.vsndevts"
 		}
 
 		// Casting
@@ -93,6 +96,21 @@
 				"var_type"				"FIELD_INTEGER"
 				"anchor_duration"		"20"
 			}
+			"13"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"ghost_form_damage"		"30 40 50 60"
+			}
+			"14"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"ghost_damage_radius"	"250"
+			}
+			"15"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"ghost_damage_interval"	"1"
+			}
 		}
 
 		"OnSpellStart"
@@ -137,7 +155,18 @@
 				"Aura_Teams"    	"DOTA_UNIT_TARGET_TEAM_ENEMY"
 				"Aura_Types"    	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 				"Aura_Flags"    	"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
-	    	}
+
+				"ThinkInterval"  "%update_interval"
+
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+			    		"ScriptFile"	"heroes/hero_murasa/foundering_anchor.lua"
+			    		"Function"		"checkGhostForm"
+					}
+				}
+			}
 
 	    	"modifier_drag"
 	    	{
@@ -219,5 +248,26 @@
 	    			}
 	    		}
 	    	}
+
+	    	"modifier_anchor_ghost"
+			{
+				"IsHidden"					"1"
+				"IsPurgable"				"0"
+				"StatusEffectName" 			"particles/status_fx/status_effect_ghost.vpcf"
+				"StatusEffectPriority" 		"15"
+				"EffectName"            	"particles/items_fx/ghost.vpcf"
+				"EffectAttachType"      	"PATTACH_ABSORIGIN"
+
+				"ThinkInterval"  "%ghost_damage_interval"
+
+	    		"OnIntervalThink"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_murasa/foundering_anchor.lua"
+	    				"Function"		"dealGhostDamage"
+	    			}
+	    		}
+			}
 		}
 	}
