@@ -7,11 +7,15 @@ function throwAnchor(keys)
 	local ability_level = ability:GetLevel() - 1
 	local speed = ability:GetLevelSpecialValueFor("speed", ability_level)
 
+	-- Spend a charge
 	caster.anchor_charges = caster.anchor_charges - 1
 
+	-- Create the anchor unit
 	local anchor = CreateUnitByName("anchor", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeam())
 	ability:ApplyDataDrivenModifier(caster, anchor, keys.anchor_modifier, {})
+	anchor.units_hit = {}
 
+	-- Various movement variable
 	local target_point = keys.target_points[1]
 	local anchor_location = anchor:GetAbsOrigin()
 	local direction = (target_point - anchor_location):Normalized()
@@ -23,7 +27,6 @@ function throwAnchor(keys)
 
 	anchor:SetForwardVector(direction)
 	anchor:SetAbsOrigin(anchor:GetAbsOrigin() + height_offset)
-	anchor.units_hit = {}
 
 	Timers:CreateTimer(0, function()
 		anchor_location = anchor:GetAbsOrigin()
@@ -120,6 +123,8 @@ function updateCharges(keys)
 	local charge_restore_time = ability:GetLevelSpecialValueFor("charge_restore_time", ability_level)
 
 	if not caster.anchor_charges then caster.anchor_charges = 0 end
+	local remaining_time_for_charge = (1 - caster.anchor_charges % 1) * charge_restore_time
+
 	if caster.anchor_charges < max_charges then
 		caster.anchor_charges = caster.anchor_charges + ability:GetLevelSpecialValueFor("update_interval", ability_level) / charge_restore_time
 	else
@@ -128,11 +133,16 @@ function updateCharges(keys)
 
 	if caster.anchor_charges >= 1 then
 		ability:ApplyDataDrivenModifier(caster, caster, keys.charges_modifier, {})
-		caster:SetModifierStackCount(keys.charges_modifier, caster, math.floor(caster.anchor_charges))
+		local old_stack_count = caster:GetModifierStackCount(keys.charges_modifier, caster)
+		local new_stack_count = math.floor(caster.anchor_charges)
+		caster:SetModifierStackCount(keys.charges_modifier, caster, new_stack_count)
+		if new_stack_count ~= old_stack_count and new_stack_count ~= max_charges then
+			caster:FindModifierByName(keys.charges_modifier):SetDuration(remaining_time_for_charge, true)
+		end
 	else
 		caster:RemoveModifierByName(keys.charges_modifier)
 		if ability:IsCooldownReady() then
-			ability:StartCooldown((1 - caster.anchor_charges) * charge_restore_time)
+			ability:StartCooldown(remaining_time_for_charge)
 		end
 	end
 end
