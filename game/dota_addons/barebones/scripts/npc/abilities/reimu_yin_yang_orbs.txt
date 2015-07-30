@@ -1,0 +1,122 @@
+	"yin_yang_orbs"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_ATTACK"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_BUILDING"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"FightRecapLevel"				"1"
+		"AbilityTextureName"			"disruptor_thunder_strike"
+		"MaxLevel" 						"4"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			//"soundfile"			"sounds/weapons/hero/weaver/time_lapse.vsnd_c"
+			"particle"			"particles/units/heroes/hero_sven/sven_spell_great_cleave.vpcf"
+		}
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"128"
+		"AbilityCastPoint"				"0.0"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"15"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"cleave_percent"		"30 40 50 60"
+				"_value"				"DOTA_Tooltip_Ability_yin_yang_orbs_Cleave_Percent"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bounces"				"2 3 4 5"
+				"_value"				"DOTA_Tooltip_Ability_yin_yang_orbs_Bounces"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"cleave_radius"			"250"
+				"_value"				"DOTA_Tooltip_Ability_yin_yang_orbs_Cleave_Radius"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bounce_range"			"500"
+				"_value"				"DOTA_Tooltip_Ability_yin_yang_orbs_Bounce_Range"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"slow_duration"			"1.0 1.0 1.0 1.0"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"silence_duration"		"0.5"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_yin_yang_orbs"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+
+				"Orb"
+				{
+					"Priority"			"DOTA_ORB_PRIORITY_ABILITY"
+					"CastAttack"		"1"
+				}
+				
+				"OnOrbFire"
+				{
+					"SpendMana"
+					{
+						"Mana"		"%AbilityManaCost"
+					}
+					
+					"FireSound"
+					{
+						"EffectName"	"sounds/weapons/hero/weaver/time_lapse.vsnd_c"
+						"Target"		"CASTER"
+					}
+				}
+
+				"OnOrbImpact"
+				// "%attack_damage" is set to the damage value before mitigation
+				{
+					"CleaveAttack"
+					{
+						"CleavePercent"		"%cleave_percent"
+						"CleaveRadius"		"%cleave_radius"
+						"CleaveEffect"		"particles/units/heroes/hero_sven/sven_spell_great_cleave.vpcf"
+					}
+
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_reimu/yin_yang_orbs.lua"
+						"Function"		"yinYangOrbsCreateDummy"
+					}
+				}
+			}
+		}
+	}

@@ -1,0 +1,194 @@
+	"master_spark"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"FightRecapLevel"				"1"
+		"AbilityTextureName"			"wisp_tether"
+		"MaxLevel" 						"4"
+		"RequiredLevel"					"1"
+		"LevelsBetweenUpgrades"			"2"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_phoenix.vsndevts"
+			"particle"					"particles/units/heroes/hero_phoenix/phoenix_sunray.vpcf"
+			"particle"					"particles/units/heroes/hero_phoenix/phoenix_sunray_beam_enemy.vpcf"
+		}
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.4"
+		"AbilityCastRange"				"700 800 900 1000"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"10 9 8 7"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"100 120 140 160"
+
+		"AbilityChannelTime" 			"2.0 2.0 2.0 2.0"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"slow"					"-60"
+				"_value"				"DOTA_Tooltip_Ability_master_spark_Slow"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"linger_duration"		"0.5"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"range"					"600 700 800 900"
+				"_value"				"DOTA_Tooltip_Ability_master_spark_Range"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"start_radius"			"300"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"end_radius"			"450"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_interval"		"0.1"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"175 250 325 400"
+				"_value"				"DOTA_Tooltip_Ability_master_spark_Damage"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"2 2 2 2"
+			}
+		}
+
+		"OnSpellStart"
+	    {
+			"RunScript"
+			{
+				"ScriptFile"			"heroes/hero_marisa/master_spark.lua"
+				"Function"				"masterSparkStart"
+				"sound_dummy_modifier"	"modifier_master_spark_dummy"
+				"blazing_star_modifier"	"modifier_blazing_star"
+			}
+
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/hero_marisa/master_spark.lua"
+				"Function"		"masterSpark"
+				"slow_modifier"	"modifier_master_spark_slow"
+				"burn_particle"	"particles/units/heroes/hero_phoenix/phoenix_sunray_beam_enemy.vpcf"
+			}
+
+	    	"ApplyModifier"
+	    	{
+	    		"ModifierName"			"modifier_master_spark"
+	    		"Target" 				"CASTER"
+	    	}
+	    }
+
+	    "Modifiers"
+	    {
+	    	"modifier_master_spark"
+	    	{
+	    		"IsHidden"		"0"
+	    		"ThinkInterval"	"%damage_interval"
+
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_marisa/master_spark.lua"
+						"Function"		"masterSpark"
+						"slow_modifier"	"modifier_master_spark_slow"
+						"burn_particle"	"particles/units/heroes/hero_phoenix/phoenix_sunray_beam_enemy.vpcf"
+					}
+				}
+	    	}
+
+	    	"modifier_master_spark_slow"
+	    	{
+	    		"IsHidden"		"0"
+	    		"IsDebuff"		"1"
+
+				"Duration"	"%linger_duration"
+
+				"Properties"
+				{
+
+				    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%slow"
+				}
+	    	}
+
+	    	"modifier_master_spark_dummy"
+	    	{
+	    		"OnCreated"
+				{
+					"ApplyModifier"
+					{
+						"Target"		"TARGET"
+						"ModifierName"	"modifier_phased"
+					}
+				}
+				
+				"States"
+				{
+					"MODIFIER_STATE_PROVIDES_VISION"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_INVULNERABLE"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_HEALTH_BAR"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_UNIT_COLLISION"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NOT_ON_MINIMAP"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_UNSELECTABLE"			"MODIFIER_STATE_VALUE_ENABLED"
+				}
+	    	}
+	    }
+
+	   "OnChannelFinish"
+	   {
+			"RemoveModifier"
+			{
+				"ModifierName"	"modifier_master_spark"
+				"Target" 		"CASTER"
+			}
+
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/hero_marisa/master_spark.lua"
+				"Function"		"masterSparkEnd"
+			}
+	   }
+
+	   "OnChannelInterrupted"
+	   {
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/hero_marisa/master_spark.lua"
+				"Function"		"masterSparkCancelled"
+			}
+	   }
+	}

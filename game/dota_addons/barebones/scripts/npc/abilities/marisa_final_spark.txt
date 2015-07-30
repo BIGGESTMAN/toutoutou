@@ -1,0 +1,199 @@
+	"final_spark"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"FightRecapLevel"				"2"
+		"AbilityTextureName"			"phoenix_sun_ray"
+		"MaxLevel" 						"3"
+		"RequiredLevel"					"6"
+		"LevelsBetweenUpgrades"			"5"
+		"AbilityCastAnimation"			"ACT_DOTA_RUN"
+		"ActivityModifier"				"+haste"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_phoenix.vsndevts"
+			"particle"					"particles/units/heroes/hero_phoenix/phoenix_sunray.vpcf"
+			"particle"					"particles/units/heroes/hero_phoenix/phoenix_sunray_beam_enemy.vpcf"
+		}
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"1.2 1.0 0.8"
+		"AbilityCastRange"				"1100"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"120 100 80"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"220 340 460"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"stun_duration"			"1"
+				"_value"				"DOTA_Tooltip_Ability_final_spark_Stun_Duration"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"range"					"1000"
+				"_value"				"DOTA_Tooltip_Ability_final_spark_Range"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"start_radius"			"400"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"end_radius"			"550"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_interval"		"0.1"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"250 340 430"
+				"_value"				"DOTA_Tooltip_Ability_final_spark_Damage"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"1 1 1 1"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"cast_point"			"1.2 1.0 0.8"
+				"_value"				"DOTA_Tooltip_Ability_final_spark_Cast_Point"
+			}
+		}
+
+		"OnSpellStart"
+	    {
+			"RunScript"
+			{
+				"ScriptFile"			"heroes/hero_marisa/final_spark.lua"
+				"Function"				"finalSparkStart"
+				"sound_dummy_modifier"	"modifier_final_spark_dummy"
+			}
+
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/hero_marisa/final_spark.lua"
+				"Function"		"finalSpark"
+				"stun_modifier"	"modifier_final_spark_stun"
+				"burn_particle"	"particles/units/heroes/hero_phoenix/phoenix_sunray_beam_enemy.vpcf"
+			}
+
+	    	"ApplyModifier"
+	    	{
+	    		"ModifierName"			"modifier_final_spark"
+	    		"Target" 				"CASTER"
+	    	}
+	    }
+
+	    "Modifiers"
+	    {
+	    	"modifier_final_spark"
+	    	{
+	    		"IsHidden"		"0"
+	    		"IsPurgable"	"0"
+	    		"Duration"		"%duration"
+
+	    		"ThinkInterval"	"%damage_interval"
+
+	    		"STATES"
+				{
+					"MODIFIER_STATE_STUNNED"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
+
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_marisa/final_spark.lua"
+						"Function"		"finalSpark"
+						"stun_modifier"	"modifier_final_spark_stun"
+						"burn_particle"	"particles/units/heroes/hero_phoenix/phoenix_sunray_beam_enemy.vpcf"
+					}
+				}
+
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_marisa/final_spark.lua"
+						"Function"		"finalSparkEnd"
+					}
+				}
+	    	}
+
+	    	"modifier_final_spark_stun"
+	    	{
+	    		"IsHidden"		"0"
+	    		"IsDebuff"		"1"
+
+				"Duration"	"%stun_duration"
+
+				"STATES"
+				{
+					"MODIFIER_STATE_STUNNED"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
+
+				"EffectName"	"particles/generic_gameplay/generic_stunned.vpcf"
+				"EffectAttachType"	"follow_overhead"
+
+				"OnCreated"
+				{
+					"FireSound"
+					{
+						"EffectName"	"Hero_Slarder.Bash"
+						"Target" 		"TARGET"
+					}
+				}
+	    	}
+
+	    	"modifier_final_spark_dummy"
+	    	{
+	    		"OnCreated"
+				{
+					"ApplyModifier"
+					{
+						"Target"		"TARGET"
+						"ModifierName"	"modifier_phased"
+					}
+				}
+				
+				"States"
+				{
+					"MODIFIER_STATE_PROVIDES_VISION"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_INVULNERABLE"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_HEALTH_BAR"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_UNIT_COLLISION"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NOT_ON_MINIMAP"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_UNSELECTABLE"			"MODIFIER_STATE_VALUE_ENABLED"
+				}
+	    	}
+	    }
+	}

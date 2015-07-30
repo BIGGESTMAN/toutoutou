@@ -1,0 +1,142 @@
+	"poison_breath"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityTextureName"			"venomancer_venomous_gale"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+
+		"AbilityCastPoint"				"0.3"
+		"AbilityCooldown"				"12"
+		"AbilityManaCost"				"70 80 90 100"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"particle"					"particles/units/heroes/hero_pudge/pudge_rot.vpcf"
+		}
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"initial_damage"		"30 45 60 75"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_per_second"		"55 70 85 100"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"275 300 325 350"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"slow"					"30 35 40 45"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"slow_duration"			"0.5"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"gas_duration"			"20"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"travel_speed"			"200"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"update_interval"		"0.03"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"CreateThinker"
+	        {
+	            "ModifierName"	"modifier_poison_breath"
+	            "Target"		"POINT"
+	        }
+		}
+
+		"Modifiers"
+		{
+			"modifier_poison_breath"
+			{
+				"Aura" 			"modifier_poison_breath_hit"
+				"Aura_Radius" 	"%radius"
+				"Aura_Teams" 	"DOTA_UNIT_TARGET_TEAM_BOTH"
+				"Aura_Types" 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+
+				"Duration"		"%gas_duration"
+
+				"OnCreated"
+				{
+					"AttachEffect"
+					{
+						"EffectName"		"particles/units/heroes/hero_pudge/pudge_rot.vpcf"
+						"EffectAttachType"	"follow_origin"
+						"Target"			"TARGET"
+
+						"ControlPoints"
+						{
+							"00"	"0 0 0"
+							"01"	"%radius 0 0"
+						}
+					}
+
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_medicine/poison_breath.lua"
+						"Function"		"setCloudPosition"
+					}
+				}
+
+				"ThinkInterval"		"%update_interval"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_medicine/poison_breath.lua"
+						"Function"		"movePoisonCloud"
+					}
+				}
+				
+				"States"
+				{
+					"MODIFIER_STATE_NO_UNIT_COLLISION"		"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+
+			"modifier_poison_breath_hit"
+			{
+				"Duration"		"%slow_duration"
+
+				"ThinkInterval"		"%update_interval"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_medicine/poison_breath.lua"
+						"Function"		"dealDamage"
+					}
+				}
+			}
+		}
+	}

@@ -1,0 +1,116 @@
+	"yin_yang_orbs_dummy"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityTextureName"			"disruptor_thunder_strike"
+
+		"precache"
+		{
+			//"soundfile"			"soundevents/game_sounds_heroes/game_sounds_luna.vsndevts"
+			"particle"			"particles/units/heroes/hero_ancient_apparition/ancient_apparition_base_attack.vpcf"
+		}
+
+
+		//"slow_percent" "-20"
+		//"slow_duration" "1.0"
+		//"silence_duration" "0.5"
+
+		"AbilitySpecial"
+		{	
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"slow_percent"			"-20 -20 -20 -20"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"slow_duration"			"1.0 1.0 1.0 1.0"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"silence_duration"		"0.5"
+			}
+		}
+
+		"OnProjectileHitUnit"
+		{
+			"DeleteOnHit"	"1"
+
+			"FireSound"
+			{
+				"EffectName"	"Hero_Luna.MoonGlaive.Impact"
+				"Target" 		"TARGET"
+			}
+			
+			"RunScript"
+			{
+				"ScriptFile"		"scripts/vscripts/heroes/hero_reimu/yin_yang_orbs.lua"
+				"Function"			"yinYangOrbsDummyCreated"
+				"modifier_slow" 	"modifier_yin_yang_orbs_slow"
+				"modifier_silence"	"modifier_yin_yang_orbs_silence"
+				"particle"			"particles/units/heroes/hero_ancient_apparition/ancient_apparition_base_attack.vpcf"
+			}
+
+		}
+
+		"Modifiers"
+		{
+			"modifier_yin_yang_orbs_dummy_unit"
+			{
+				"States"
+				{
+					"MODIFIER_STATE_INVULNERABLE"					"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_HEALTH_BAR"					"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_UNIT_COLLISION"				"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NOT_ON_MINIMAP"					"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_UNSELECTABLE"					"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_FLYING"							"MODIFIER_STATE_VALUE_ENABLED"
+				}
+
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"		"scripts/vscripts/heroes/hero_reimu/yin_yang_orbs.lua"
+						"Function"			"yinYangOrbsDummyCreated"
+						"modifier_slow" 	"modifier_yin_yang_orbs_slow"
+						"modifier_silence"	"modifier_yin_yang_orbs_silence"
+						"particle"			"particles/units/heroes/hero_ancient_apparition/ancient_apparition_base_attack.vpcf"
+					}
+				}
+			}
+
+			"modifier_yin_yang_orbs_slow"
+			{
+				"Duration"		"1.0"
+				"IsDebuff"		"1"
+				"IsHidden"		"0"
+				"IsPurgable"	"1"
+
+				"Properties"
+				{
+				    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "-20" 
+				}
+			}
+
+			"modifier_yin_yang_orbs_silence"
+			{
+				"Duration"		"0.5"
+				"IsHidden"		"0"
+				"IsDebuff"		"1"
+				"IsPurgable"	"1"
+
+				"States"
+				{
+					"MODIFIER_STATE_SILENCED" "MODIFIER_STATE_VALUE_ENABLED"
+				}
+				"EffectName"	"particles/generic_gameplay/generic_silence.vpcf"
+				"EffectAttachType"	"follow_overhead"
+			}
+		}
+	}

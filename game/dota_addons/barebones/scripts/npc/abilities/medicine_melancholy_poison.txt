@@ -1,0 +1,164 @@
+	"melancholy_poison"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"alchemist_acid_spray"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+
+		"AbilityCooldown"				"5"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_slardar.vsndevts"
+			"particle"					"particles/units/heroes/hero_pugna/pugna_netherblast.vpcf"
+			"particle"					"particles/generic_gameplay/generic_stunned.vpcf"
+		}
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"max_venom"				"60"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"venom_gained_per_second"	"2"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"350"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"health_regen"			"0.15 0.2 0.25 0.3"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"magic_resist"			"0.9"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"venom_released_per_second" "40 35 30 25"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_per_second"		"100 110 120 130"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"release_delay"			"1"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"stun_duration"			"0.2"
+			}
+			"10"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"update_interval"		"0.1"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_venom"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+				"IsPurgable"	"0"
+
+				"ThinkInterval"	"%update_interval"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_medicine/melancholy_poison.lua"
+						"Function"		"melancholyPoisonTick"
+						"stun_modifier"	"modifier_stun"
+						"particle"		"particles/units/heroes/hero_pugna/pugna_netherblast.vpcf"
+						"display_modifier"	"modifier_venom_display"
+					}
+				}
+
+				"OnTakeDamage"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_medicine/melancholy_poison.lua"
+						"Function"		"checkVenomRelease"
+						"damage_taken"	"%attack_damage"
+						"release_charging_modifier"	"modifier_release_charging"
+					}
+				}
+			}
+
+			"modifier_release_charging"
+			{
+				"IsHidden"		"0"
+				"IsPurgable"	"0"
+				"Duration"		"%release_delay"
+
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_medicine/melancholy_poison.lua"
+						"Function"		"venomRelease"
+					}
+				}
+			}
+
+			"modifier_stun"
+			{
+				"IsHidden"		"0"
+
+				"Duration"		"%stun_duration"
+
+				"STATES"
+				{
+					"MODIFIER_STATE_STUNNED"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
+
+				"EffectName"	"particles/generic_gameplay/generic_stunned.vpcf"
+				"EffectAttachType"	"follow_overhead"
+
+				"OnCreated"
+				{
+					"FireSound"
+					{
+						"EffectName"	"Hero_Slarder.Bash"
+						"Target" 		"TARGET"
+					}
+				}
+			}
+
+			"modifier_venom_display"
+			{
+				"IsHidden"		"0"
+				"IsPurgable"	"0"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS" "%magic_resist"
+				    "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%health_regen" 
+				}
+			}
+		}
+	}

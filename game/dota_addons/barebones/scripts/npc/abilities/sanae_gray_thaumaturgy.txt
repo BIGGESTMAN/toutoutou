@@ -1,0 +1,142 @@
+	"gray_thaumaturgy"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityTextureName"			"alchemist_unstable_concoction"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"particle"					"particles/gray_thaumaturgy.vpcf"
+		}
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"agility_gain"			"2 3 4 5"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"agility_loss"			"0.4 0.6 0.8 1.0"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"550 600 650 700"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"agility_loss_scaling"	"0"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"update_interval"		"1"
+			}
+		}
+
+		"Modifiers"
+		{
+	    	"modifier_gray_thaumaturgy"
+	    	{
+	    		"Passive"				"1"
+				"IsHidden"				"1"
+				"IsPurgable"			"0"
+
+				"Attributes"			"MODIFIER_ATTRIBUTE_PERMANENT"
+
+				"OnDealDamage"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_sanae/gray_thaumaturgy.lua"
+						"Function"		"gainAgility"
+						"modifier"		"modifier_gray_thaumaturgy_stacks"
+					}
+				}
+
+				"ThinkInterval"			"%update_interval"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_sanae/gray_thaumaturgy.lua"
+						"Function"		"agilityDecay"
+						"modifier"		"modifier_gray_thaumaturgy_stacks"
+					}
+				}
+	    	}
+
+	    	"modifier_gray_thaumaturgy_stacks"
+	    	{
+				"Passive"				"0"
+				"IsHidden"				"0"
+				"IsPurgable"			"0"
+
+				"Attributes"			"MODIFIER_ATTRIBUTE_PERMANENT"
+
+				"ThinkInterval"			"%update_interval"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_sanae/gray_thaumaturgy.lua"
+						"Function"		"updateParticle"
+						"particle"		"particles/gray_thaumaturgy.vpcf"
+						"modifier"		"modifier_gray_thaumaturgy_stacks"
+					}
+
+					"RunScript"
+					{
+						"ScriptFile"		"heroes/hero_sanae/gray_thaumaturgy.lua"
+						"Function"			"updateDebuff"
+					}
+				}
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"		"1"
+				}
+
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_sanae/gray_thaumaturgy.lua"
+						"Function"		"updateParticle"
+						"particle"		"particles/gray_thaumaturgy.vpcf"
+						"modifier"		"modifier_gray_thaumaturgy_stacks"
+					}
+
+					"RunScript"
+					{
+						"ScriptFile"		"heroes/hero_sanae/gray_thaumaturgy.lua"
+						"Function"			"updateDebuff"
+					}
+				}
+
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_sanae/gray_thaumaturgy.lua"
+						"Function"		"updateParticle"
+						"particle"		"particles/gray_thaumaturgy.vpcf"
+						"modifier"		"modifier_gray_thaumaturgy_stacks"
+					}
+				}
+	    	}
+		}
+	}

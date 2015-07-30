@@ -1,0 +1,148 @@
+	"opening_wind"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"FightRecapLevel"				"2"
+		"AbilityTextureName"			"skywrath_mage_arcane_bolt"
+		"MaxLevel" 						"3"
+		"RequiredLevel"					"6"
+		"LevelsBetweenUpgrades"			"5"
+
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_4"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"particle"	"particles/units/heroes/hero_invoker/invoker_tornado.vpcf"
+		}
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.1"
+		"AbilityCastRange"				"1600"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"80 70 60"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"190"
+
+		"AbilityDamage"					"100 150 200"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"11 14 17"
+				"_value"				"DOTA_Tooltip_Ability_opening_wind_Duration"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"speed"					"1500"
+				"_value"				"DOTA_Tooltip_Ability_opening_wind_Speed"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"225"
+				"_value"				"DOTA_Tooltip_Ability_opening_wind_Radius"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"range"					"1500"
+				"_value"				"DOTA_Tooltip_Ability_opening_wind_Range"
+			}
+		}
+
+		"OnSpellStart"
+	    {
+	        "LinearProjectile"
+	        {
+	            "Target" "POINT"
+	            "EffectName" "particles/units/heroes/hero_invoker/invoker_tornado.vpcf"
+	            "MoveSpeed" "%speed"
+	            "StartPosition" "attach_attack1"
+	            "StartRadius" "%radius"
+	            "EndRadius" "%radius"
+	            "FixedDistance" "%range"
+	            "TargetTeams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+	            "TargetTypes" "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+	            "TargetFlags" "DOTA_UNIT_TARGET_FLAG_NONE"
+	            "HasFrontalCone" "0"
+	            "ProvidesVision" "1"
+	            "VisionRadius" "300"
+	        }
+	    }
+
+	    "OnProjectileHitUnit"
+	    {
+	        "DeleteOnHit" "0"
+
+	        "Damage"
+        	{
+        		"Target"	"TARGET"
+        		"Type"		"DAMAGE_TYPE_MAGICAL"
+        		"Damage"	"%AbilityDamage"
+        	}
+
+        	"RunScript"
+        	{
+        		"ScriptFile"	"heroes/hero_aya/opening_wind.lua"
+        		"Function"		"openingWindHit"
+        		"modifier"		"modifier_opening_wind_hit"
+         		"sub_ability"	"illusionary_dominance"
+        	}
+	    }
+
+	    "OnUpgrade"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/hero_aya/opening_wind.lua"
+				"Function"		"onUpgrade"
+				
+				"sub_ability"	"illusionary_dominance"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_opening_wind_hit"
+			{
+				"IsHidden"		"0"
+				"Duration"		"%duration"
+
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_aya/opening_wind.lua"
+						"Function"		"disableIllusionaryDominance"
+						
+						"sub_ability"	"illusionary_dominance"
+					}
+
+					"RemoveModifier"
+					{
+						"ModifierName"	"modifier_illusionary_dominance_accelerating"
+						"target"		"CASTER"
+					}
+				}
+			}
+		}
+	}

@@ -1,0 +1,111 @@
+	"wind_gods_fan"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"FightRecapLevel"				"1"
+		"AbilityTextureName"			"riki_backstab"
+		"MaxLevel" 						"4"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"particle"  "particles/econ/items/phantom_assassin/phantom_assassin_weapon_runed_scythe/phantom_assassin_ambient_blade_runed_scythe_c.vpcf"
+		}
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"minimum_damage"		"10"
+				"_value"				"DOTA_Tooltip_Ability_wind_gods_fan_Minimum_Damage"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"maximum_damage"		"60 130 200 270"
+				"_value"				"DOTA_Tooltip_Ability_wind_gods_fan_Maximum_Damage"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"max_damage_distance"	"1500"
+				"_value"				"DOTA_Tooltip_Ability_wind_gods_fan_Max_Damage_Distance"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movespeed"				"8 12 16 20"
+				"_value"				"DOTA_Tooltip_Ability_wind_gods_fan_Movespeed"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"cooldown_check_interval" "0.03"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_wind_gods_fan_bonus_movespeed"
+			{
+				"Passive"	"1"
+				"IsHidden"	"0"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"		"%movespeed"
+				}
+			}
+
+			"modifier_wind_gods_fan_bonus_damage"
+			{
+				"Passive"	"1"
+				"IsHidden"	"0"
+
+				"ThinkInterval"		"%cooldown_check_interval"
+
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"					"heroes/hero_aya/wind_gods_fan.lua"
+						"Function"						"windGodsFanUpdateDamage"
+						"damage_modifier"				"modifier_wind_gods_fan_bonus_damage"
+						"full_modifier"					"modifier_wind_gods_fan_full"
+					}
+				}
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"			"1"
+				}
+
+				"OnAttackLanded"
+				{
+					"RunScript"
+					{
+						"ScriptFile"					"heroes/hero_aya/wind_gods_fan.lua"
+						"Function"						"windGodsFanResetDamage"
+						"damage_modifier"				"modifier_wind_gods_fan_bonus_damage"
+						"full_modifier"					"modifier_wind_gods_fan_full"
+					}
+				}
+			}
+
+			"modifier_wind_gods_fan_full"
+			{
+				"IsHidden"			"1"
+
+				"EffectName"		"particles/econ/items/phantom_assassin/phantom_assassin_weapon_runed_scythe/phantom_assassin_ambient_blade_runed_scythe_c.vpcf"
+				"EffectAttachType"	"follow_origin"
+			}
+		}
+	}

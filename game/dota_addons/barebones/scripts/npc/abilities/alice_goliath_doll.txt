@@ -1,0 +1,106 @@
+	"goliath_doll"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET"
+		"FightRecapLevel"				"2"
+		"AbilityTextureName"			"elder_titan_ancestral_spirit"
+		"MaxLevel" 						"3"
+		"RequiredLevel"					"6"
+		"LevelsBetweenUpgrades"			"5"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"particle"					"particles/units/heroes/hero_ogre_magi/ogre_magi_bloodlust_buff.vpcf"
+		}
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.3"
+		"AbilityCastRange"				"500"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"130"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"200 320 440"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"dolls_war_buff_duration" "4"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"dolls_war_attackspeed"	"50 60 70"
+				"_value"				"DOTA_Tooltip_Ability_Goliath_Doll_Dolls_War_Attackspeed"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"dolls_war_movespeed"	"15 20 25"
+				"_value"				"DOTA_Tooltip_Ability_Goliath_Doll_Dolls_War_Movespeed"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"60 70 80"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"RunScript"
+	        {
+	        	"ScriptFile"	"heroes/hero_alice/goliath_doll.lua"
+	        	"Function"		"spawnDoll"
+	        	"Target"		"POINT"
+	        	"cleave_ability" "goliath_doll_cleave"
+	        	"bash_ability"	"goliath_doll_bash"
+	        	"modifier"		"modifier_goliath_doll"
+	        }
+		}
+
+		"Modifiers"
+		{
+			"modifier_goliath_doll_dolls_war_buff"
+			{
+				"IsHidden"		"0"
+
+				"Duration"		"%dolls_war_buff_duration"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%dolls_war_attackspeed"
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%dolls_war_movespeed"
+				}
+
+				"EffectName"	"particles/units/heroes/hero_ogre_magi/ogre_magi_bloodlust_buff.vpcf"
+			}
+
+			"modifier_goliath_doll"
+			{
+				"IsHidden"				"1"
+				"IsPurgable"			"0"
+
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_alice/goliath_doll.lua"
+						"Function"		"killDoll"
+					}
+				}
+			}
+		}
+	}
