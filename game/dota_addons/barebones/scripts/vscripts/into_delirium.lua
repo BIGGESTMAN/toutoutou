@@ -11,3 +11,7 @@ function into_delirium:OnSpellStart()
 	local duration = self:GetLevelSpecialValueFor("duration", ability_level)
 	self:GetCursorTarget():AddNewModifier(caster, self, "modifier_neurotoxin", {duration = duration})
 end
+
+function into_delirium:GetCastAnimation()
+	return ACT_DOTA_CAST_ABILITY_1
+end

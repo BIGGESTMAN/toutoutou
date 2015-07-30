@@ -263,7 +263,7 @@
 	"npc_dota_hero_medicine"
 	{
 		"AbilityLayout" 		"4"
-		"override_hero"			"npc_dota_hero_undying"
+		"override_hero"			"npc_dota_hero_pugna"
 		"SoundSet"				"0"	
 		"Ability1"				"poison_breath"
 		"Ability2"				"gassing_garden"
@@ -451,7 +451,7 @@
 	"npc_dota_hero_reisen"
 	{
 		"AbilityLayout" 		"4"
-		"override_hero"			"npc_dota_hero_meepo"
+		"override_hero"			"npc_dota_hero_sniper"
 		"SoundSet"				"0"
 		"Ability1"				"menacing_hallucination"
 		"Ability2"				"invisible_full_moon"

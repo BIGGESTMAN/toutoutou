@@ -205,6 +205,8 @@
 	    		"IsHidden"			"1"
 	    		"IsPurgable"		"0"
 
+	    		"Attributes"		"MODIFIER_ATTRIBUTE_PERMANENT"
+
 	    		"ThinkInterval"  "%update_interval"
 
 	    		"OnIntervalThink"

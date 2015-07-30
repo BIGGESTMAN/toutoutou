@@ -9,7 +9,7 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 
 		"AbilityTextureName"			"storm_spirit_overload"
-		"AbilityCastAnimation"			"ACT_DOTA_TELEPORT"
+		"AbilityCastAnimation"			"ACT_DOTA_INTRO"
 
 		// Precache
 		//-------------------------------------------------------------------------------------------------------------

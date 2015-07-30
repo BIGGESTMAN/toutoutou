@@ -4,9 +4,9 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET"
-		"AbilityTextureName"			"terrorblade_conjure_image"
 
-		"AbilityCastAnimation"			"ACT_DOTA_POOF_END"
+		"AbilityTextureName"			"terrorblade_conjure_image"
+		"AbilityCastAnimation"			"ACT_DOTA_TELEPORT_END"
 
 		// Precache
 		//-------------------------------------------------------------------------------------------------------------
