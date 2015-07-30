@@ -575,7 +575,7 @@
 	"npc_dota_hero_murasa"
 	{
 		"AbilityLayout" 		"4"
-		"override_hero"			"npc_dota_hero_tidehunter"
+		"override_hero"			"npc_dota_hero_kunkka"
 		"SoundSet"				"0"
 		"Ability1"				"foundering_anchor"
 		"Ability2"				""

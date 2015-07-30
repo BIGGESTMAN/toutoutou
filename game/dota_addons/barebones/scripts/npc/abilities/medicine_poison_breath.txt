@@ -28,21 +28,25 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"initial_damage"		"30 45 60 75"
+				"_value"				"DOTA_Tooltip_Ability_Poison_Breath_Initial_Damage"
 			}
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"damage_per_second"		"55 70 85 100"
+				"_value"				"DOTA_Tooltip_Ability_Poison_Breath_Damage_Per_Second"
 			}
 			"03"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"radius"				"275 300 325 350"
+				"_value"				"DOTA_Tooltip_Ability_Poison_Breath_Radius"
 			}
 			"04"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"slow"					"30 35 40 45"
+				"_value"				"DOTA_Tooltip_Ability_Poison_Breath_Slow"
 			}
 			"05"
 			{
@@ -53,11 +57,12 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"gas_duration"			"20"
+				"_value"				"DOTA_Tooltip_Ability_Poison_Breath_Duration"
 			}
 			"07"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"travel_speed"			"200"
+				"travel_speed"			"150"
 			}
 			"08"
 			{

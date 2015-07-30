@@ -30,16 +30,19 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"base_damage"			"30 50 70 90"
+				"_value"				"DOTA_Tooltip_Ability_Gassing_Garden_Base_Damage"
 			}
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"duration"				"20"
+				"_value"				"DOTA_Tooltip_Ability_Gassing_Garden_Duration"
 			}
 			"03"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"radius"				"300"
+				"_value"				"DOTA_Tooltip_Ability_Gassing_Garden_Radius"
 			}
 		}
 
