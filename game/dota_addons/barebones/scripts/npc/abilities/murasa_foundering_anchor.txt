@@ -123,7 +123,7 @@
 	    		"anchor_modifier"	"modifier_anchor"
 	    		"drag_modifier"		"modifier_drag"
 	    		"root_modifier"		"modifier_root"
-	    		"charges_modifier"	"modifier_charges"
+	    		"anchor_charges_modifier"	"modifier_anchor_charges"
 	    		"aura_particle"		"particles/foundering_anchor_aura.vpcf"
 			}
 	    }
@@ -228,7 +228,7 @@
 				}
 	    	}
 
-	    	"modifier_charges"
+	    	"modifier_anchor_charges"
 	    	{
 	    		"IsHidden"			"0"
 	    		"IsPurgable"		"0"
@@ -250,7 +250,7 @@
 	    			{
 	    				"ScriptFile"	"heroes/hero_murasa/foundering_anchor.lua"
 	    				"Function"		"updateCharges"
-	    				"charges_modifier"	"modifier_charges"
+	    				"anchor_charges_modifier"	"modifier_anchor_charges"
 	    			}
 	    		}
 	    	}

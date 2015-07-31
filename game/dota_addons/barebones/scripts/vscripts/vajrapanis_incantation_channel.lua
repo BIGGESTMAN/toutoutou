@@ -1,14 +1,14 @@
 -- require "libraries/animations"
 
 vajrapanis_incantation_channel = class({})
-LinkLuaModifier("modifier_charges", "heroes/hero_byakuren/modifier_charges.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier("modifier_vajrapanis_charges", "heroes/hero_byakuren/modifier_vajrapanis_charges.lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier("modifier_incantation_channeling", "heroes/hero_byakuren/modifier_incantation_channeling.lua", LUA_MODIFIER_MOTION_NONE )
 
 function vajrapanis_incantation_channel:OnSpellStart()
 	if IsServer() then
 		local caster = self:GetCaster()
 		if not caster:HasModifier("modifier_incantation_channeling") then
-			caster:RemoveModifierByName("modifier_charges")
+			caster:RemoveModifierByName("modifier_vajrapanis_charges")
 		end
 
 		caster:AddNewModifier(caster, self, "modifier_incantation_channeling", {duration = self:GetChannelTime() * 2})
@@ -21,8 +21,8 @@ function vajrapanis_incantation_channel:OnChannelFinish(interrupted)
 		local ability_level = self:GetLevel() - 1
 
 		if not interrupted then
-			caster:AddNewModifier(caster, self, "modifier_charges", {duration = self:GetLevelSpecialValueFor("charges_duration", ability_level)})
-			local modifier = caster:FindModifierByName("modifier_charges")
+			caster:AddNewModifier(caster, self, "modifier_vajrapanis_charges", {duration = self:GetLevelSpecialValueFor("charges_duration", ability_level)})
+			local modifier = caster:FindModifierByName("modifier_vajrapanis_charges")
 			if modifier:GetStackCount() < self:GetLevelSpecialValueFor("max_charges", ability_level) then
 				modifier:IncrementStackCount()
 				if modifier:GetStackCount() < self:GetLevelSpecialValueFor("max_charges", ability_level) then

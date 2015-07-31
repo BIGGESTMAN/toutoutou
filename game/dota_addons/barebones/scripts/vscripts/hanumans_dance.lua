@@ -22,7 +22,7 @@ function hanumans_dance:OnSpellStart()
 		end
 
 		if not caster:HasModifier("modifier_dance_recastable") then
-			local charge_modifier = caster:FindModifierByName("modifier_charges")
+			local charge_modifier = caster:FindModifierByName("modifier_vajrapanis_charges")
 			if charge_modifier:GetStackCount() > 1 then
 				charge_modifier:DecrementStackCount()
 			else

@@ -150,15 +150,18 @@ function updateCharges(keys)
 	end
 
 	if caster.anchor_charges >= 1 then
-		ability:ApplyDataDrivenModifier(caster, caster, keys.charges_modifier, {})
-		local old_stack_count = caster:GetModifierStackCount(keys.charges_modifier, caster)
+		ability:ApplyDataDrivenModifier(caster, caster, keys.anchor_charges_modifier, {})
+		local old_stack_count = caster:GetModifierStackCount(keys.anchor_charges_modifier, caster)
 		local new_stack_count = math.floor(caster.anchor_charges)
-		caster:SetModifierStackCount(keys.charges_modifier, caster, new_stack_count)
+		caster:SetModifierStackCount(keys.anchor_charges_modifier, caster, new_stack_count)
 		if new_stack_count ~= old_stack_count and new_stack_count ~= max_charges then
-			caster:FindModifierByName(keys.charges_modifier):SetDuration(remaining_time_for_charge, true)
+			print(keys.anchor_charges_modifier)
+			print(caster:FindModifierByName(keys.anchor_charges_modifier))
+			print(remaining_time_for_charge)
+			caster:FindModifierByName(keys.anchor_charges_modifier):SetDuration(remaining_time_for_charge, true)
 		end
 	else
-		caster:RemoveModifierByName(keys.charges_modifier)
+		caster:RemoveModifierByName(keys.anchor_charges_modifier)
 		if ability:IsCooldownReady() then
 			ability:StartCooldown(remaining_time_for_charge)
 		end
