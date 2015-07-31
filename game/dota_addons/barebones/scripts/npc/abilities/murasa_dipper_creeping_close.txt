@@ -101,7 +101,7 @@
 				"Properties"
 				{
 					"MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PHYSICAL"		"1"
-					"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS"		"%increased_magic_damage"
+					"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_DECREPIFY_UNIQUE"		"%increased_magic_damage"
 				}
 				
 				"States"
