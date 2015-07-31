@@ -8,7 +8,8 @@
 
 		"precache"
 		{
-
+			"particle"					"particles/status_fx/status_effect_naga_riptide.vpcf"
+			"particle"					"particles/units/heroes/hero_siren/naga_siren_riptide_debuff.vpcf"
 		}
 
 		"AbilitySpecial"
@@ -101,6 +102,11 @@
 	    				"Target" 		"ATTACKER"
 	    			}
 	    		}
+
+				"StatusEffectName" 			"particles/status_fx/status_effect_naga_riptide.vpcf"
+				"StatusEffectPriority" 		"15"
+				"EffectName"            	"particles/units/heroes/hero_siren/naga_siren_riptide_debuff.vpcf"
+				"EffectAttachType"      	"PATTACH_ABSORIGIN"
 	    	}
 
 	    	"modifier_drowned_buff"
@@ -137,6 +143,11 @@
 	    		{
 	    			"MODIFIER_PROPERTY_MANACOST_PERCENTAGE" "100"
 	    		}
+
+				"StatusEffectName" 			"particles/status_fx/status_effect_naga_riptide.vpcf"
+				"StatusEffectPriority" 		"15"
+				"EffectName"            	"particles/units/heroes/hero_siren/naga_siren_riptide_debuff.vpcf"
+				"EffectAttachType"      	"PATTACH_ABSORIGIN"
 	    	}
 		}
 	}

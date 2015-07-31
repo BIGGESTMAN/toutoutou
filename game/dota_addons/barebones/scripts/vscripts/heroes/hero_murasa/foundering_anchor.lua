@@ -1,6 +1,6 @@
 LinkLuaModifier("modifier_resists_reduction", "heroes/hero_murasa/modifier_resists_reduction.lua", LUA_MODIFIER_MOTION_NONE )
 
-require "heroes/hero_murasa/throw_anchor"
+require "heroes/hero_murasa/anchors"
 
 function throwAnchor(keys)
 	local caster = keys.caster
@@ -10,6 +10,8 @@ function throwAnchor(keys)
 	caster.anchor_charges = caster.anchor_charges - 1
 
 	anchor(caster, ability, keys.target_points[1])
+
+	EmitSoundOn("Touhou.Anchor_Cast", caster)
 end
 
 function resistsReductionModifierCreated(keys)

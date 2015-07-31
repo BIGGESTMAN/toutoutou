@@ -20,4 +20,6 @@ function blink(keys)
 	-- 		ability:ApplyDataDrivenModifier(caster, anchor, "modifier_anchor_ghost", {})
 	-- 	end
 	-- end
+
+	EmitSoundOn("Touhou.Dipper_Cast", caster)
 end

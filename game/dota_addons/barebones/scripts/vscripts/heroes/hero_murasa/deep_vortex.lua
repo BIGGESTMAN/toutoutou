@@ -1,4 +1,4 @@
-require "heroes/hero_murasa/throw_anchor"
+require "heroes/hero_murasa/anchors"
 
 function deepVortexCast(keys)
 	local caster = keys.caster
@@ -58,13 +58,13 @@ function deepVortexCast(keys)
 			for i=1,anchors do
 				local vector = RotatePosition(Vector(0,0,0), QAngle(0,i * 360 / anchors,0), caster:GetForwardVector())
 				local target = caster_location + vector * ability:GetLevelSpecialValueFor("radius", ability_level)
-				DebugDrawCircle(target, Vector(255,64,64), 1, 50, false, 2)
-
 				anchor(caster, anchor_ability, target)
 			end
 			caster.anchor_charges = anchor_ability:GetLevelSpecialValueFor("max_charges", anchor_ability:GetLevel())
 		end
 	end
+
+	EmitSoundOn("Touhou.Vortex_Cast", caster)
 end
 
 function maelstromTick(keys)

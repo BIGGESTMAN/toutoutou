@@ -120,10 +120,6 @@
 	    		"ScriptFile"		"heroes/hero_murasa/foundering_anchor.lua"
 	    		"Function"			"throwAnchor"
         		"Target"			"POINT"
-	    		"anchor_modifier"	"modifier_anchor"
-	    		"drag_modifier"		"modifier_drag"
-	    		"root_modifier"		"modifier_root"
-	    		"aura_particle"		"particles/foundering_anchor_aura.vpcf"
 			}
 	    }
 
