@@ -1,14 +1,11 @@
-function damageDealt(keys)
-	-- print("DAMAGE DEALT --------------------")
-	-- for k,v in pairs(keys) do
-	-- 	print(k,v)
-	-- end
-	-- keys.ability:ApplyDataDrivenModifier(keys.caster, keys.unit, "modifier_damage_taken", {})
+LinkLuaModifier("modifier_sinker_ghost_enemies", "heroes/hero_murasa/modifier_sinker_ghost_enemies.lua", LUA_MODIFIER_MOTION_NONE )
+
+function checkAttackSpeedRemoval(keys)
+	if not keys.target:HasModifier(keys.drowned_modifier) then
+		keys.attacker:RemoveModifierByName(keys.drowned_buff)
+	end
 end
 
-function damageTaken(keys)
-	-- print("DAMAGE TAKEN --------------------")
-	-- for k,v in pairs(keys) do
-	-- 	print(k,v)
-	-- end
+function sinkerGhostModifierCreated(keys)
+	keys.target:AddNewModifier(keys.caster, keys.ability, "modifier_sinker_ghost_enemies", {})
 end

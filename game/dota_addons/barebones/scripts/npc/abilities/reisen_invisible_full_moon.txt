@@ -21,9 +21,9 @@
 		// Casting
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.5"
-		"AbilityCooldown"				"18 13 8 3"
-		"AbilityManaCost"				"50"
-		"AbilityCastRange"				"700 800 900 1000"
+		"AbilityCooldown"				"20 16 12 8"
+		"AbilityManaCost"				"80"
+		"AbilityCastRange"				"700"
 
 		// Special
 		//-------------------------------------------------------------------------------------------------------------
@@ -32,17 +32,17 @@
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"duration"				"16"
+				"duration"				"12"
 			}
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"radius"				"500"
+				"radius"				"500 550 600 650"
 			}
 			"03"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"fade_delay"			"2 1.5 1 0.5"
+				"fade_delay"			"2.1 1.8 1.5 1.2"
 			}
 			"04"
 			{
@@ -97,7 +97,7 @@
 	    			"MODIFIER_STATE_TRUESIGHT_IMMUNE"		"MODIFIER_STATE_VALUE_ENABLED"
 	    		}
 
-	    		"OnAttackLanded"
+	    		"OnDealDamage"
 	    		{
 	    			"ApplyModifier"
 	    			{

@@ -16,23 +16,33 @@
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"attack_speed_change"	"16 24 32 40"
+				"attack_speed_buff"		"16 24 32 40"
 			}
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"mana_cost_increase"	"25 30 35 40"
+				"attack_speed_debuff"	"-16 -24 -32 -40"
 			}
 			"03"
 			{
 				"var_type"				"FIELD_INTEGER"
+				"mana_cost_increase"	"25 30 35 40"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
 				"duration"				"6"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"update_interval"		"0.03"
 			}
 		}
 
 		"Modifiers"
 		{
-			"modifier_gray_thaumaturgy"
+			"modifier_sinker_ghost"
 	    	{
 	    		"Passive"				"1"
 				"IsHidden"				"1"
@@ -40,28 +50,92 @@
 
 				"Attributes"			"MODIFIER_ATTRIBUTE_PERMANENT"
 
-				"OnDealDamage"
+				"ThinkInterval"  "%update_interval"
+
+				"OnIntervalThink"
 				{
 					"RunScript"
 					{
-						"ScriptFile"	"heroes/hero_murasa/sinker_ghost.lua"
-						"Function"		"damageDealt"
+	    				"ScriptFile"	"heroes/hero_murasa/sinker_ghost.lua"
+						"Function"		"sinkerGhostModifierCreated"
+					}
+				}
+
+	    		"OnCreated"
+				{
+					"RunScript"
+					{
+	    				"ScriptFile"	"heroes/hero_murasa/sinker_ghost.lua"
+						"Function"		"sinkerGhostModifierCreated"
+					}
+				}
+
+				"OnRespawn"
+				{
+					"RunScript"
+					{
+	    				"ScriptFile"	"heroes/hero_murasa/sinker_ghost.lua"
+						"Function"		"sinkerGhostModifierCreated"
 					}
 				}
 	    	}
 
-	    	"modifier_damage_taken"
+	    	"modifier_drowned"
 	    	{
-	    		"IsHidden"				"0"
-	    		"Duration"				"0.5"
+	    		"IsHidden"			"0"
+	    		"IsPurgable"		"1"
+	    		"IsDebuff"			"1"
 
-	    		"OnTakeDamage"
+	    		"Duration"		"%duration"
+
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%attack_speed_debuff"
+	    		}
+
+	    		"OnAttacked"
+	    		{
+	    			"ApplyModifier"
+	    			{
+	    				"ModifierName"	"modifier_drowned_buff"
+	    				"Target" 		"ATTACKER"
+	    			}
+	    		}
+	    	}
+
+	    	"modifier_drowned_buff"
+	    	{
+	    		"IsHidden"			"0"
+	    		"IsPurgable"		"1"
+
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%attack_speed_buff"
+	    		}
+
+	    		"OnAttack"
 	    		{
 	    			"RunScript"
 	    			{
 	    				"ScriptFile"	"heroes/hero_murasa/sinker_ghost.lua"
-	    				"Function"		"damageTaken"
+	    				"Function"		"checkAttackSpeedRemoval"
+	    				"drowned_modifier"	"modifier_drowned"
+	    				"drowned_buff"	"modifier_drowned_buff"
 	    			}
+	    		}
+	    	}
+
+	    	"modifier_drenched"
+	    	{
+	    		"IsHidden"			"0"
+	    		"IsPurgable"		"1"
+	    		"IsDebuff"			"1"
+	    		
+	    		"Duration"		"%duration"
+
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_MANACOST_PERCENTAGE" "%mana_cost_increase"
 	    		}
 	    	}
 		}
