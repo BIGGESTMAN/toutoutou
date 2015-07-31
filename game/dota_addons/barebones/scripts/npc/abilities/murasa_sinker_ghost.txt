@@ -135,7 +135,7 @@
 
 	    		"Properties"
 	    		{
-	    			"MODIFIER_PROPERTY_MANACOST_PERCENTAGE" "%mana_cost_increase"
+	    			"MODIFIER_PROPERTY_MANACOST_PERCENTAGE" "100"
 	    		}
 	    	}
 		}

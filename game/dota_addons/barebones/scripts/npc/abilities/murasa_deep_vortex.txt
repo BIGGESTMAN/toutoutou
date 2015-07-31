@@ -70,10 +70,15 @@
 				"var_type"				"FIELD_FLOAT"
 				"slow_linger_duration"	"0.5"
 			}
-			"07"
+			"09"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"damage_interval"		"1"
+			}
+			"10"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"scepter_anchors"		"8"
 			}
 		}
 

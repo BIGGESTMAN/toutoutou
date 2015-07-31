@@ -1,3 +1,5 @@
+require "heroes/hero_murasa/throw_anchor"
+
 function deepVortexCast(keys)
 	local caster = keys.caster
 	local ability = keys.ability
@@ -15,7 +17,6 @@ function deepVortexCast(keys)
 
 	local total_ticks = ability:GetLevelSpecialValueFor("duration", ability_level) / ability:GetLevelSpecialValueFor("damage_interval", ability_level)
 	local damage = ability:GetLevelSpecialValueFor("total_damage", ability_level) / total_ticks
-	print(damage)
 
 	Timers:CreateTimer(0, function()
 		if not dummy_unit:IsNull() then
@@ -33,7 +34,6 @@ function deepVortexCast(keys)
 			local magic_damage_percentage = 1 - physical_damage_percentage
 			local physical_damage = physical_damage_percentage * damage
 			local magic_damage = magic_damage_percentage * damage
-			print(physical_damage, magic_damage)
 
 			for k,unit in pairs(targets) do
 				ApplyDamage({victim = unit, attacker = caster, damage = physical_damage, damage_type = DAMAGE_TYPE_PHYSICAL})
@@ -49,6 +49,22 @@ function deepVortexCast(keys)
 	Timers:CreateTimer(ability:GetLevelSpecialValueFor("duration", ability_level), function()
 		dummy_unit:RemoveSelf()
 	end)
+
+	if caster:HasScepter() then
+		local anchor_ability = caster:FindAbilityByName("foundering_anchor")
+		if anchor_ability then
+			local anchors = ability:GetLevelSpecialValueFor("scepter_anchors", ability_level)
+			local caster_location = caster:GetAbsOrigin()
+			for i=1,anchors do
+				local vector = RotatePosition(Vector(0,0,0), QAngle(0,i * 360 / anchors,0), caster:GetForwardVector())
+				local target = caster_location + vector * ability:GetLevelSpecialValueFor("radius", ability_level)
+				DebugDrawCircle(target, Vector(255,64,64), 1, 50, false, 2)
+
+				anchor(caster, anchor_ability, target)
+			end
+			caster.anchor_charges = anchor_ability:GetLevelSpecialValueFor("max_charges", anchor_ability:GetLevel())
+		end
+	end
 end
 
 function maelstromTick(keys)

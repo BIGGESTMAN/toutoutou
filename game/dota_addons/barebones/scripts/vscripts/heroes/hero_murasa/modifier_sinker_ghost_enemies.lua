@@ -1,7 +1,9 @@
+-- Called _enemies because i'm lazy and it used to make sense -- just the lua, non-datadriven counterpark to modifier_sinker_ghost
+
 modifier_sinker_ghost_enemies = class({})
 
 function modifier_sinker_ghost_enemies:IsHidden()
-	return false
+	return true
 end
 
 function modifier_sinker_ghost_enemies:IsPurgable()
