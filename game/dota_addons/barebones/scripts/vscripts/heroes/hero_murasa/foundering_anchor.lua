@@ -2,7 +2,6 @@ LinkLuaModifier("modifier_resists_reduction", "heroes/hero_murasa/modifier_resis
 
 function throwAnchor(keys)
 	local caster = keys.caster
-	local target = keys.target
 	local ability = keys.ability
 	local ability_level = ability:GetLevel() - 1
 	local speed = ability:GetLevelSpecialValueFor("speed", ability_level)
@@ -14,9 +13,7 @@ function throwAnchor(keys)
 	local anchor = CreateUnitByName("anchor", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeam())
 	ability:ApplyDataDrivenModifier(caster, anchor, keys.anchor_modifier, {})
 	anchor.units_hit = {}
-
-	-- if not caster.anchors then caster.anchors = {} end
-	-- caster.anchors[anchor] = true
+	anchor.units_dragging = {}
 
 	-- Various movement variable
 	local target_point = keys.target_points[1]
@@ -32,92 +29,95 @@ function throwAnchor(keys)
 	anchor:SetAbsOrigin(anchor:GetAbsOrigin() + height_offset)
 
 	Timers:CreateTimer(0, function()
-		local caster_ghosted = caster:HasModifier("modifier_ghost")
-		local damage_type = DAMAGE_TYPE_PHYSICAL
-		if caster_ghosted then damage_type = DAMAGE_TYPE_MAGICAL end
+		if not anchor:HasModifier("modifier_pulled") then
+			local caster_ghosted = caster:HasModifier("modifier_ghost")
+			local damage_type = DAMAGE_TYPE_PHYSICAL
+			if caster_ghosted then damage_type = DAMAGE_TYPE_MAGICAL end
 
-		anchor_location = anchor:GetAbsOrigin()
-		local distance = (target_point - anchor_location):Length2D()
-		if distance > arrival_distance then
-			-- Move projectile
-			anchor:SetAbsOrigin(anchor_location + direction * dummy_speed)
+			anchor_location = anchor:GetAbsOrigin()
+			local distance = (target_point - anchor_location):Length2D()
+			if distance > arrival_distance then
+				-- Move projectile
+				anchor:SetAbsOrigin(anchor_location + direction * dummy_speed)
 
-			-- Check for units hit
-			local team = caster:GetTeamNumber()
-			local origin = anchor_location
-			local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
-			local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
-			local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
-			local iOrder = FIND_ANY_ORDER
-			local radius = ability:GetLevelSpecialValueFor("drag_radius", ability_level)
+				-- Check for units hit
+				local team = caster:GetTeamNumber()
+				local origin = anchor_location
+				local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
+				local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
+				local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
+				local iOrder = FIND_ANY_ORDER
+				local radius = ability:GetLevelSpecialValueFor("drag_radius", ability_level)
 
-			local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
-			local damage = ability:GetLevelSpecialValueFor("drag_damage", ability_level)
+				local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
+				local damage = ability:GetLevelSpecialValueFor("drag_damage", ability_level)
 
-			for k,unit in pairs(targets) do
-				if not unit:HasModifier(keys.drag_modifier) then
-					ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
-					if not caster_ghosted then
-						ability:ApplyDataDrivenModifier(anchor, unit, keys.drag_modifier, {})
+				for k,unit in pairs(targets) do
+					if not anchor.units_hit[unit] then
+						ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
 						anchor.units_hit[unit] = true
+						if not caster_ghosted then
+							ability:ApplyDataDrivenModifier(anchor, unit, keys.drag_modifier, {})
+							anchor.units_dragging[unit] = true
+						end
 					end
 				end
-			end
 
-			if not caster_ghosted then
-				for unit,v in pairs(anchor.units_hit) do
-					local anchor_direction = anchor:GetForwardVector()
-					local direction_towards_anchor = (anchor:GetAbsOrigin() - unit:GetAbsOrigin()):Normalized()
-					local angle = anchor_direction:Dot(direction_towards_anchor)
+				if not caster_ghosted then
+					for unit,v in pairs(anchor.units_dragging) do
+						local anchor_direction = anchor:GetForwardVector()
+						local direction_towards_anchor = (anchor:GetAbsOrigin() - unit:GetAbsOrigin()):Normalized()
+						local angle = anchor_direction:Dot(direction_towards_anchor)
 
-					local target_distance = (unit:GetAbsOrigin() - anchor:GetAbsOrigin()):Length2D()
+						local target_distance = (unit:GetAbsOrigin() - anchor:GetAbsOrigin()):Length2D()
 
-					if target_distance > drag_distance and angle > 0 then
-						local target_direction = (unit:GetAbsOrigin() - anchor:GetAbsOrigin()):Normalized()
-						unit:SetAbsOrigin(anchor:GetAbsOrigin() + drag_distance * target_direction)
+						if target_distance > drag_distance and angle > 0 then
+							local target_direction = (unit:GetAbsOrigin() - anchor:GetAbsOrigin()):Normalized()
+							unit:SetAbsOrigin(anchor:GetAbsOrigin() + drag_distance * target_direction)
+						end
 					end
+				else
+					-- Release dragged units
+					for unit,v in pairs(anchor.units_dragging) do
+						unit:RemoveModifierByName(keys.drag_modifier)
+						FindClearSpaceForUnit(unit, unit:GetAbsOrigin(), false)
+					end
+					anchor.units_dragging = {}
 				end
+
+				return 0.03
 			else
+				anchor:SetAbsOrigin(target_point + height_offset)
+				anchor:SetForwardVector((anchor:GetForwardVector() + Vector(0,0,-1)):Normalized()) -- Goofy shit to make anchor look stuck in the ground
+
 				-- Release dragged units
-				for unit,v in pairs(anchor.units_hit) do
+				for unit,v in pairs(anchor.units_dragging) do
 					unit:RemoveModifierByName(keys.drag_modifier)
 					FindClearSpaceForUnit(unit, unit:GetAbsOrigin(), false)
 				end
-				anchor.units_hit = {}
+				anchor.units_dragging = {}
+
+				-- Root and damage in impact area
+				local team = caster:GetTeamNumber()
+				local origin = anchor_location
+				local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
+				local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
+				local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
+				local iOrder = FIND_ANY_ORDER
+				local radius = ability:GetLevelSpecialValueFor("destination_radius", ability_level)
+
+				local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
+				local damage = ability:GetLevelSpecialValueFor("destination_damage", ability_level)
+
+				for k,unit in pairs(targets) do
+					ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
+					ability:ApplyDataDrivenModifier(anchor, unit, keys.root_modifier, {})
+				end
+
+				Timers:CreateTimer(ability:GetLevelSpecialValueFor("anchor_duration", ability_level), function()
+					anchor:RemoveSelf()
+				end)
 			end
-
-			return 0.03
-		else
-			anchor:SetAbsOrigin(target_point + height_offset)
-			anchor:SetForwardVector((anchor:GetForwardVector() + Vector(0,0,-1)):Normalized()) -- Goofy shit to make anchor look stuck in the ground
-
-			-- Release dragged units
-			for unit,v in pairs(anchor.units_hit) do
-				unit:RemoveModifierByName(keys.drag_modifier)
-				FindClearSpaceForUnit(unit, unit:GetAbsOrigin(), false)
-			end
-
-			-- Root and damage in impact area
-			local team = caster:GetTeamNumber()
-			local origin = anchor_location
-			local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
-			local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
-			local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
-			local iOrder = FIND_ANY_ORDER
-			local radius = ability:GetLevelSpecialValueFor("destination_radius", ability_level)
-
-			local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
-			local damage = ability:GetLevelSpecialValueFor("destination_damage", ability_level)
-
-			for k,unit in pairs(targets) do
-				ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
-				ability:ApplyDataDrivenModifier(anchor, unit, keys.root_modifier, {})
-			end
-
-			Timers:CreateTimer(ability:GetLevelSpecialValueFor("anchor_duration", ability_level), function()
-				-- caster.anchors[anchor] = nil
-				anchor:RemoveSelf()
-			end)
 		end
 	end)
 
@@ -170,6 +170,16 @@ function checkRestoreCharges(keys)
 	local ability_level = ability:GetLevel()
 
 	if ability_level == 1 then caster.anchor_charges = ability:GetLevelSpecialValueFor("max_charges", ability_level) end
+end
+
+function upgradeDraggingAnchor(keys)
+	local caster = keys.caster
+	local ability = keys.ability
+	local ability_level = ability:GetLevel()
+
+	if ability_level == 1 then
+		caster:FindAbilityByName("dragging_anchor"):SetLevel(ability_level)
+	end
 end
 
 function checkGhostForm(keys)

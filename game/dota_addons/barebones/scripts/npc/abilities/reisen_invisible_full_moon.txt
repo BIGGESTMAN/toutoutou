@@ -70,7 +70,7 @@
 		{
 	    	"modifier_invisible_full_moon"
 	    	{
-	    		"IsHidden"				"0"
+	    		"IsHidden"				"1"
 	    		"IsPurgable"			"1"
 
 				"ThinkInterval" 		"%update_interval"

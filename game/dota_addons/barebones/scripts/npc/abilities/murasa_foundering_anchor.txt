@@ -135,6 +135,12 @@
 	    		"ScriptFile"	"heroes/hero_murasa/foundering_anchor.lua"
 	    		"Function"		"checkRestoreCharges"
 	    	}
+
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"	"heroes/hero_murasa/foundering_anchor.lua"
+	    		"Function"		"upgradeDraggingAnchor"
+	    	}
 	    }
 
 		"Modifiers"

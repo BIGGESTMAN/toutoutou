@@ -41,11 +41,9 @@ function updateParticle(keys)
 		if not caster.gray_thaumaturgy_particle then
 			caster.gray_thaumaturgy_particle = ParticleManager:CreateParticle(keys.particle, PATTACH_ABSORIGIN_FOLLOW, caster)
 			ParticleManager:SetParticleControl(caster.gray_thaumaturgy_particle, 0, caster:GetAbsOrigin())
-			-- ParticleManager:SetParticleControl(caster.gray_thaumaturgy_particle, 1, caster:GetAbsOrigin())
-			-- ParticleManager:SetParticleControlEnt(explosion_particle, 0, dummy_unit, PATTACH_POINT_FOLLOW, "attach_hitloc", dummy_unit:GetAbsOrigin(), true)
 			ParticleManager:SetParticleControlEnt(caster.gray_thaumaturgy_particle, 1, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", caster:GetAbsOrigin(), true)
 		end
-		local alpha_factor = 15 -- Determines to what degree stacks increase visiblity of the particle
+		local alpha_factor = 15 -- Determines to what degree stacks increase visiblity of the particle, higher = less visible particle
 		local alpha = (1 - 1 / (math.pow(caster.gray_thaumaturgy_agility / alpha_factor, 2) + 1))
 		ParticleManager:SetParticleControl(caster.gray_thaumaturgy_particle, 2, Vector(alpha,0,0))
 	else

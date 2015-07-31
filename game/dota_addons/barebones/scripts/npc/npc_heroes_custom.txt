@@ -574,14 +574,14 @@
 
 	"npc_dota_hero_murasa"
 	{
-		"AbilityLayout" 		"4"
+		"AbilityLayout" 		"5"
 		"override_hero"			"npc_dota_hero_kunkka"
 		"SoundSet"				"0"
 		"Ability1"				"foundering_anchor"
 		"Ability2"				"dipper_creeping_close"
-		"Ability3"				""
+		"Ability3"				"sinker_ghost"
 		"Ability4"				""
-		"Ability5"				""
+		"Ability5"				"dragging_anchor"
 		"Ability6"				""
 		"Ability7"				"attribute_bonus"
 		"Ability8"				""
