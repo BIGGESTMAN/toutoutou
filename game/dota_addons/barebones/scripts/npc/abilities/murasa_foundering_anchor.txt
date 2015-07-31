@@ -146,7 +146,6 @@
 				{
 					"MODIFIER_STATE_INVULNERABLE"			"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_NO_HEALTH_BAR"			"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_NO_UNIT_COLLISION"		"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_NOT_ON_MINIMAP"			"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_UNSELECTABLE"			"MODIFIER_STATE_VALUE_ENABLED"
 				}
@@ -258,6 +257,11 @@
 				"StatusEffectPriority" 		"15"
 				"EffectName"            	"particles/items_fx/ghost.vpcf"
 				"EffectAttachType"      	"PATTACH_ABSORIGIN"
+
+	    		"States"
+				{
+					"MODIFIER_STATE_NO_UNIT_COLLISION"		"MODIFIER_STATE_VALUE_ENABLED"
+				}
 
 				"ThinkInterval"  "%ghost_damage_interval"
 

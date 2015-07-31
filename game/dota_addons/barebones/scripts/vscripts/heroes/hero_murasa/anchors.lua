@@ -39,6 +39,7 @@ function moveAnchor(caster, ability, anchor, target_point, pulling)
 	local arrival_distance = 25
 	local height_offset = Vector(0,0,75)
 	local drag_distance = 50
+	local drag_hitbox_offset = 200
 
 	anchor:SetForwardVector(direction)
 	if pulling then anchor:SetForwardVector(direction * -1) end -- Flipped because moving backwards
@@ -57,13 +58,17 @@ function moveAnchor(caster, ability, anchor, target_point, pulling)
 				anchor:SetAbsOrigin(anchor_location + direction * dummy_speed)
 
 				-- Check for units hit
+				local anchor_direction = anchor:GetForwardVector()
+				if pulling then anchor_direction = anchor:GetForwardVector() * -1 end -- Flipped because facing backwards
+
 				local team = caster:GetTeamNumber()
-				local origin = anchor_location
+				local origin = anchor_location + anchor_direction * drag_hitbox_offset
 				local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
 				local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
 				local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
 				local iOrder = FIND_ANY_ORDER
 				local radius = ability:GetLevelSpecialValueFor("drag_radius", ability_level)
+				-- DebugDrawCircle(origin, Vector(180,40,40), 1, radius, true, 0.5)
 
 				local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
 				local damage = ability:GetLevelSpecialValueFor("drag_damage", ability_level)
@@ -81,16 +86,14 @@ function moveAnchor(caster, ability, anchor, target_point, pulling)
 
 				if not caster_ghosted then
 					for unit,v in pairs(anchor.units_dragging) do
-						local anchor_direction = anchor:GetForwardVector()
-						if pulling then anchor_direction = anchor:GetForwardVector() * -1 end -- Flipped because facing backwards
-						local direction_towards_anchor = (anchor:GetAbsOrigin() - unit:GetAbsOrigin()):Normalized()
+						local direction_towards_anchor = (origin - unit:GetAbsOrigin()):Normalized()
 						local angle = anchor_direction:Dot(direction_towards_anchor)
 
-						local target_distance = (unit:GetAbsOrigin() - anchor:GetAbsOrigin()):Length2D()
+						local target_distance = (unit:GetAbsOrigin() - origin):Length2D()
 
 						if target_distance > drag_distance and angle > 0 then
-							local target_direction = (unit:GetAbsOrigin() - anchor:GetAbsOrigin()):Normalized()
-							unit:SetAbsOrigin(anchor:GetAbsOrigin() + drag_distance * target_direction)
+							local target_direction = (unit:GetAbsOrigin() - origin):Normalized()
+							unit:SetAbsOrigin(origin + drag_distance * target_direction)
 						end
 					end
 				else
@@ -134,11 +137,15 @@ function moveAnchor(caster, ability, anchor, target_point, pulling)
 					end
 
 					EmitSoundOn("Touhou.Anchor_Impact", anchor)
+
+					Timers:CreateTimer(ability:GetLevelSpecialValueFor("anchor_duration", ability_level), function()
+						if not anchor:IsNull() then anchor:RemoveSelf() end
+					end)
+				else
+					anchor:RemoveSelf()
 				end
 
-				Timers:CreateTimer(ability:GetLevelSpecialValueFor("anchor_duration", ability_level), function()
-					if not anchor:IsNull() then anchor:RemoveSelf() end
-				end)
+				
 			end
 		end
 	end)
