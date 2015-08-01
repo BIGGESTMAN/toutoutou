@@ -10,7 +10,7 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 		"FightRecapLevel"				"2"
-		"AbilityTextureName"			"skywrath_mage_arcane_bolt"
+		"AbilityTextureName"			"brewmaster_storm_cyclone"
 		"MaxLevel" 						"3"
 		"RequiredLevel"					"6"
 		"LevelsBetweenUpgrades"			"5"

@@ -10,7 +10,6 @@ function seaSplitStart(keys)
 
 	local dummy_unit = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeam())
 	ability:ApplyDataDrivenModifier(caster, dummy_unit, keys.dummy_modifier, {})
-	-- dummy_unit:SetAbsOrigin(caster:GetAbsOrigin())
 
 	local target_point = keys.target_points[1]
 	local dummy_location = dummy_unit:GetAbsOrigin()

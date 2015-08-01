@@ -22,6 +22,7 @@ function hanumans_dance:OnSpellStart()
 			modifier.prior_slashes = caster:GetModifierStackCount("modifier_dance_recastable", caster)
 		end
 
+		-- Spend a charge
 		local charge_modifier = caster:FindModifierByName("modifier_vajrapanis_charges")
 		if charge_modifier:GetStackCount() > 1 then
 			charge_modifier:DecrementStackCount()
@@ -52,4 +53,8 @@ end
 
 function hanumans_dance:GetCastAnimation()
 	return ACT_DOTA_ATTACK
+end
+
+function hanumans_dance:GetCooldown( nLevel )
+	return self:GetCaster():GetSecondsPerAttack()
 end

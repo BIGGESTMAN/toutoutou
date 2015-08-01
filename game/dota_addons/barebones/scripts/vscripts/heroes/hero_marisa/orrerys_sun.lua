@@ -2,9 +2,6 @@ function orrerysSunStart( event )
 	local caster = event.caster
 	if (caster:IsAlive()) then
 		local ability = event.ability
-		local playerID = caster:GetPlayerID()
-		local radius = ability:GetLevelSpecialValueFor( "radius", ability:GetLevel() - 1 )
-		local duration = 10
 		local orbs = ability:GetLevelSpecialValueFor( "orbs", ability:GetLevel() - 1 )
 		local unit_name = "orrerys_sun_orb"
 
@@ -13,21 +10,14 @@ function orrerysSunStart( event )
 			caster.orbs = {}
 		end
 
-		local existing_orb_count = 0
-		for k,orb in pairs(caster.orbs) do
-			existing_orb_count = existing_orb_count + 1
-		end
-
 		local particles = {"particles/orrerys_sun_yellow.vpcf", "particles/orrerys_sun_green.vpcf", "particles/orrerys_sun_orange.vpcf",
 						   "particles/orrerys_sun_pink.vpcf", "particles/orrerys_sun_blue.vpcf", "particles/orrerys_sun_red.vpcf"}
-		print("Spawning "..orbs - existing_orb_count.." orbs")
-		for i=1,orbs - existing_orb_count do
+		for i=1,orbs do
 			local unit = CreateUnitByName(unit_name, caster:GetAbsOrigin(), true, caster, caster, caster:GetTeamNumber())
 			local particle = ParticleManager:CreateParticle(particles[#caster.orbs + 1], PATTACH_ABSORIGIN, unit)
 			ParticleManager:SetParticleControlEnt(particle, 1, unit, PATTACH_ABSORIGIN, "attach_origin", unit:GetAbsOrigin(), true)
 			ParticleManager:SetParticleControlEnt(particle, 0, unit, PATTACH_ABSORIGIN, "attach_origin", unit:GetAbsOrigin(), true)
 
-			-- The modifier takes care of the rotation logic
 			ability:ApplyDataDrivenModifier(caster, unit, "modifier_orrerys_sun_orb", {})
 			
 			-- Add the spawned unit to the table
@@ -49,8 +39,6 @@ function updateOrbs( event )
 	local vertical_distance_from_caster = ability:GetLevelSpecialValueFor( "vertical_distance_from_caster", ability:GetLevel() - 1 )
 	local number_of_orbs = #caster.orbs
 
-	local caster_facing = caster:GetForwardVector()
-	local caster_facing_degrees = math.atan2(caster_facing.y, caster_facing.x) * 180 / math.pi
 	local rotation_point = caster_location + Vector(0,0,1) * vertical_distance_from_caster
 
 	-- Make orbs spin
@@ -65,7 +53,6 @@ function updateOrbs( event )
 
 	for orb_number=1, number_of_orbs do
 		local angle = (360 / number_of_orbs) * (orb_number - 1)
-		local angleRadians = angle * math.pi / 180
 		local target_point = RotatePosition(rotation_point, QAngle(0,angle,0), prototype_target_point)
 		caster.orbs[orb_number]:SetAbsOrigin(target_point)
 	end
