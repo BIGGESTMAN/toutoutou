@@ -27,6 +27,8 @@ function indrasThunderCast(keys)
 
 	local dummy_speed = speed * 0.03
 	local arrival_distance = 25
+	local total_degrees_rotated = 90
+	local bead_count_factor = 120 -- 120 = arbitrary number to make the number of beads reasonable
 
 	local radius = ability:GetLevelSpecialValueFor("radius", ability_level)
 
@@ -49,33 +51,39 @@ function indrasThunderCast(keys)
 				local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
 				local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
 				local iOrder = FIND_ANY_ORDER
-				DebugDrawCircle(origin, Vector(180,180,40), 1, radius, true, 0.5)
 
 				local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
 				local damage = ability:GetLevelSpecialValueFor("damage", ability_level)
 				local damage_type = ability:GetAbilityDamageType()
 
 				local pull_duration = ability:GetLevelSpecialValueFor("pull_duration", ability_level)
-				local elapsed_time = 0
+				dummy_projectile.elapsed_time = 0
 				local update_interval = ability:GetLevelSpecialValueFor("update_interval", ability_level)
-				local angle_rotated = 90
 
 				for k,unit in pairs(targets) do
 					ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
 					ability:ApplyDataDrivenModifier(caster, unit, "modifier_pulled", {})
 				end
 
+				-- Lightning strike particle and sound
+				local lightning_particle = ParticleManager:CreateParticle("particles/byakuren/indras_thunder_lightning.vpcf", PATTACH_ABSORIGIN, dummy_projectile)
+				EmitSoundOn("Hero_Zuus.LightningBolt", dummy_projectile)
+				for i=3,15 do
+					ParticleManager:SetParticleControl(lightning_particle, i, Vector(radius * .8, 0, 0))
+				end
+
 				-- Spin/vacuum hit units
 				Timers:CreateTimer(0, function()
-					if elapsed_time < pull_duration then
+					if dummy_projectile.elapsed_time < pull_duration then
 						for k,unit in pairs(targets) do
-							unit:SetAbsOrigin(RotatePosition(target_point, QAngle(0,angle_rotated * (update_interval / pull_duration),0), unit:GetAbsOrigin()))
+							local spin_angle = total_degrees_rotated * (update_interval / pull_duration) * -1 -- inverted so it matches the bead rotation because i'm great
+							unit:SetAbsOrigin(RotatePosition(target_point, QAngle(0,spin_angle,0), unit:GetAbsOrigin()))
 							local vacuum_center_distance = (target_point - unit:GetAbsOrigin()):Length2D()
 							local vacuum_center_direction = (target_point - unit:GetAbsOrigin()):Normalized()
 							-- overcomplicated shit to keep units moving at a constant rate towards the center, probably didn't need to implement it this way but oh well
-							unit:SetAbsOrigin(unit:GetAbsOrigin() + vacuum_center_direction * vacuum_center_distance * (elapsed_time / pull_duration))
+							unit:SetAbsOrigin(unit:GetAbsOrigin() + vacuum_center_direction * vacuum_center_distance * (dummy_projectile.elapsed_time / pull_duration))
 						end
-						elapsed_time = elapsed_time + update_interval
+						dummy_projectile.elapsed_time = dummy_projectile.elapsed_time + update_interval
 						return update_interval
 					else
 						caster.bead_dummy_projectiles[dummy_projectile] = nil
@@ -98,7 +106,7 @@ function indrasThunderCast(keys)
 	end)
 
 	--------------------------------------------- Beads ---------------------------------------------
-	local beads = math.ceil(2 * math.pi * radius / 120) -- 120 = arbitrary number to make the number of beads reasonable
+	local beads = math.ceil(2 * math.pi * radius / bead_count_factor)
 	local unit_name = "npc_dummy_unit"
 
 	-- Initialize the table to keep track of all beads
@@ -129,10 +137,15 @@ function updateBeads( event )
 	local dummy_location = dummy_projectile:GetAbsOrigin()
 	local ability = event.ability
 	local ability_level = ability:GetLevel() - 1
-	local radius = ability:GetLevelSpecialValueFor("radius", ability_level)
 	local vertical_distance_offset = 80
 	local rotation_time = 1.5
 	local number_of_beads = #dummy_projectile.beads
+
+	local radius = ability:GetLevelSpecialValueFor("radius", ability_level)
+	if dummy_projectile.elapsed_time then
+		local percent_contracted = dummy_projectile.elapsed_time / ability:GetLevelSpecialValueFor("pull_duration", ability_level)
+		radius = radius * (1 - percent_contracted)
+	end
 
 	local rotation_point = dummy_location + Vector(0,0,1) * vertical_distance_offset
 

@@ -17,6 +17,8 @@
 		"precache"
 		{
 			"particle"					"particles/byakuren/bead_possibility_3.vpcf"
+			"particle"					"particles/byakuren/indras_thunder_lightning.vpcf"
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_zuus.vsndevts"
 		}
 
 		// Casting

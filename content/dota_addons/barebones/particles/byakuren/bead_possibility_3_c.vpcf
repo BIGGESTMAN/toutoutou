@@ -72,7 +72,6 @@
 		},
 		{
 			_class = "C_OP_PositionLock"
-			m_nControlPointNumber = 1
 		},
 	]
 	m_Initializers =
