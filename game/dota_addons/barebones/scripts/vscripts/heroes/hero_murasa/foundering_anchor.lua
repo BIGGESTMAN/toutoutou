@@ -43,7 +43,7 @@ function updateCharges(keys)
 		local old_stack_count = caster:GetModifierStackCount(keys.anchor_charges_modifier, caster)
 		local new_stack_count = math.floor(caster.anchor_charges)
 		caster:SetModifierStackCount(keys.anchor_charges_modifier, caster, new_stack_count)
-		if new_stack_count ~= old_stack_count and new_stack_count ~= max_charges then
+		if new_stack_count ~= old_stack_count and new_stack_count ~= max_charges and caster:IsAlive() then
 			caster:FindModifierByName(keys.anchor_charges_modifier):SetDuration(remaining_time_for_charge, true)
 		end
 	else

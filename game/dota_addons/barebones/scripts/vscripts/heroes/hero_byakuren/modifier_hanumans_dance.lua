@@ -14,7 +14,7 @@ function modifier_hanumans_dance:OnIntervalThink()
 		local ability = self:GetAbility()
 		local ability_level = ability:GetLevel() - 1
 
-		if caster:HasModifier("modifier_vajrapanis_charges") or caster:HasModifier("modifier_dance_recastable") then
+		if caster:HasModifier("modifier_vajrapanis_charges") --[[or caster:HasModifier("modifier_dance_recastable") --]] then
 			ability:SetActivated(true)
 		else
 			ability:SetActivated(false)
@@ -39,6 +39,7 @@ function modifier_hanumans_dance:OnAttack( params )
 	if params.attacker == self:GetParent() then
 		if not self:GetCaster():HasModifier("modifier_dancing") then
 			self:GetCaster():RemoveModifierByName("modifier_dance_recastable")
+			self:GetAbility():StartCooldown(params.attacker:GetSecondsPerAttack())
 		end
 	end
 end

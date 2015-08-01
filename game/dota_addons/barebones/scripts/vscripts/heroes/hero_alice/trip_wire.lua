@@ -42,8 +42,11 @@ function updateWire(keys)
 	for wire,v in pairs(caster.wires) do
 		local target1 = wire[1]
 		local target2 = wire[2]
-		local range = (target2:GetAbsOrigin() - target1:GetAbsOrigin()):Length2D()
-		if range <= ability:GetLevelSpecialValueFor("max_length", ability_level) and target1:IsAlive() and target2:IsAlive() and wire[3]:IsAlive() then
+		local range = nil
+		if not target1:IsNull() and not target2:IsNull() then -- make sure both wire attachees still exist
+			range = (target2:GetAbsOrigin() - target1:GetAbsOrigin()):Length2D()
+		end
+		if range and range <= ability:GetLevelSpecialValueFor("max_length", ability_level) and target1:IsAlive() and target2:IsAlive() and wire[3]:IsAlive() then
 			-- Update wire unit position
 			wire[3]:SetAbsOrigin((target1:GetAbsOrigin() + target2:GetAbsOrigin()) / 2 + Vector(0,0,50))
 

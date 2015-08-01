@@ -1,19 +1,17 @@
 modifier_dancing = class({})
 
--- require "libraries/animations"
-
 function modifier_dancing:OnCreated( kv )
 	if IsServer() then
 		local caster = self:GetCaster()
-		for k,v in pairs(kv) do
-			print(k,v)
-		end
+		-- for k,v in pairs(kv) do
+		-- 	print(k,v)
+		-- end
 		local ability = self:GetAbility()
 		local ability_level = ability:GetLevel() -1
 
 		self.minimum_range = 75
 		self.distance_traveled = 0
-		self.total_dash_duration = 1 / caster:GetAttacksPerSecond()
+		self.total_dash_duration = caster:GetSecondsPerAttack()
 		self.dash_range = ability:GetLevelSpecialValueFor("dash_range", ability_level)
 		self.speed = self.dash_range / self.total_dash_duration
 
@@ -25,8 +23,8 @@ function modifier_dancing:OnCreated( kv )
 		-- Place autoattack on cooldown afterward
 		caster:AttackNoEarlierThan(caster:GetSecondsPerAttack())
 
-		-- local animation_properties = {duration=self.total_dash_duration, activity=ACT_DOTA_ATTACK, rate=(25 / 30) / self.total_dash_duration, translate="meld"}
-		-- StartAnimation(caster, animation_properties)
+		local animation_properties = {duration=self.total_dash_duration, activity=ACT_DOTA_ATTACK, rate=(25 / 30) / self.total_dash_duration, translate="meld"}
+		StartAnimation(caster, animation_properties)
 	end
 end
 

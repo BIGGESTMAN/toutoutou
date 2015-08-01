@@ -61,6 +61,7 @@ function deepVortexCast(keys)
 				anchor(caster, anchor_ability, target)
 			end
 			caster.anchor_charges = anchor_ability:GetLevelSpecialValueFor("max_charges", anchor_ability:GetLevel())
+			anchor_ability:EndCooldown()
 		end
 	end
 

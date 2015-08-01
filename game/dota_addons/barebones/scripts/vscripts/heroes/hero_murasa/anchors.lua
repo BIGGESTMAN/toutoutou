@@ -53,12 +53,12 @@ function moveAnchor(caster, ability, anchor, target_point, pulling)
 
 			anchor_location = anchor:GetAbsOrigin()
 			local distance = (target_point - anchor_location):Length2D()
+			local anchor_direction = anchor:GetForwardVector()
 			if distance > arrival_distance then
 				-- Move projectile
 				anchor:SetAbsOrigin(anchor_location + direction * dummy_speed)
 
 				-- Check for units hit
-				local anchor_direction = anchor:GetForwardVector()
 				if pulling then anchor_direction = anchor:GetForwardVector() * -1 end -- Flipped because facing backwards
 
 				local team = caster:GetTeamNumber()
@@ -94,6 +94,7 @@ function moveAnchor(caster, ability, anchor, target_point, pulling)
 						if target_distance > drag_distance and angle > 0 then
 							local target_direction = (unit:GetAbsOrigin() - origin):Normalized()
 							unit:SetAbsOrigin(origin + drag_distance * target_direction)
+							unit:SetForwardVector(anchor_direction * -1) -- Force units to look backwards
 						end
 					end
 				else
@@ -115,6 +116,7 @@ function moveAnchor(caster, ability, anchor, target_point, pulling)
 				for unit,v in pairs(anchor.units_dragging) do
 					unit:RemoveModifierByName("modifier_drag")
 					FindClearSpaceForUnit(unit, unit:GetAbsOrigin(), false)
+					unit:SetForwardVector(anchor_direction * -1) -- Force units to look backwards
 				end
 				anchor.units_dragging = {}
 
