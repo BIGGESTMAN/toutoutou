@@ -13,7 +13,7 @@ function blazingStarStart( keys )
 	if master_spark_ability:GetLevel() > 0 then
 		local current_cooldown = master_spark_ability:GetCooldownTimeRemaining()
 		master_spark_ability:EndCooldown()
-		local refund_mana = caster:GetMana() > master_spark_ability:GetManaCost(master_spark_ability:GetLevel())
+		local refund_mana = caster:GetMana() > master_spark_ability:GetManaCost(master_spark_ability:GetLevel() - 1)
 		caster:CastAbilityImmediately(master_spark_ability, 1)
 		if refund_mana then master_spark_ability:RefundManaCost() end
 		master_spark_ability:EndCooldown()

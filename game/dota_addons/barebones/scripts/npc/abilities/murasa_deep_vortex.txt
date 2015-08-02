@@ -34,31 +34,37 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"duration"				"8"
+				"_value"				"DOTA_Tooltip_Ability_Deep_Vortex_Duration"
 			}
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"radius"				"600"
+				"_value"				"DOTA_Tooltip_Ability_Deep_Vortex_Radius"
 			}
 			"03"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"center_radius"			"125"
+				"_value"				"DOTA_Tooltip_Ability_Deep_Vortex_Center_Radius"
 			}
 			"04"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"total_damage"			"360 520 680"
+				"_value"				"DOTA_Tooltip_Ability_Deep_Vortex_Total_Damage"
 			}
 			"05"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"slow"					"-30 -35 -40"
+				"_value"				"DOTA_Tooltip_Ability_Deep_Vortex_Slow"
 			}
 			"06"
 			{
 				"var_type"				"FIELD_FLOAT"
 				"stun_duration"			"2 2.5 3"
+				"_value"				"DOTA_Tooltip_Ability_Deep_Vortex_Stun_Duration"
 			}
 			"07"
 			{

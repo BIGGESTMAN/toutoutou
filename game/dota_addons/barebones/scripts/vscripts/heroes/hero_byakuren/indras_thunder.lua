@@ -116,9 +116,8 @@ function indrasThunderCast(keys)
 	for i=1,beads do
 		local unit = CreateUnitByName(unit_name, caster:GetAbsOrigin(), true, caster, caster, caster:GetTeamNumber())
 		local particle = ParticleManager:CreateParticle(particle, PATTACH_ABSORIGIN, unit)
-		-- ParticleManager:SetParticleControlEnt(particle, 1, unit, PATTACH_ABSORIGIN, "attach_origin", unit:GetAbsOrigin(), true)
 		ParticleManager:SetParticleControlEnt(particle, 0, unit, PATTACH_ABSORIGIN, "attach_origin", unit:GetAbsOrigin(), true)
-		ParticleManager:ReleaseParticleIndex(particle)
+		ParticleManager:ReleaseParticleIndex(particle) -- no idea if this line is necessary
 
 		ability:ApplyDataDrivenModifier(caster, unit, keys.bead_modifier, {})
 		

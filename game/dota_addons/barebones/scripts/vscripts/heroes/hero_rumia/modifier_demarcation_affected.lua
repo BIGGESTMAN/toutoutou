@@ -22,7 +22,7 @@ function modifier_demarcation_affected:OnTakeDamage(params)
 	if IsServer() then
 		local caster = self:GetCaster()
 		local ability = self:GetAbility()
-		local ability_level = ability:GetLevel()
+		local ability_level = ability:GetLevel() - 1
 		if  self:GetParent() == params.unit and params.damage_type == DAMAGE_TYPE_MAGICAL and
 			not params.unit:HasModifier("modifier_demarcation_cooldown") and
 			(not self.trigger_counts[params.unit] or self.trigger_counts[params.unit] < ability:GetLevelSpecialValueFor("max_triggers", ability_level)) then

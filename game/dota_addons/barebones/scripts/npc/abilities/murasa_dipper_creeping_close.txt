@@ -48,6 +48,19 @@
 				"var_type"				"FIELD_INTEGER"
 				"range"					"550"
 			}
+			// Following two are for tooltips only, need to be kept synced with foundering anchor spell's abilityspecials
+			"13"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"ghost_form_damage"		"30 40 50 60"
+				"_value"				"DOTA_Tooltip_Ability_Dipper_Creeping_Close_Ghost_Form_Damage"
+			}
+			"14"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"ghost_damage_radius"	"250"
+				"_value"				"DOTA_Tooltip_Ability_Dipper_Creeping_Close_Ghost_Damage_Radius"
+			}
 		}
 
 		"OnSpellStart"

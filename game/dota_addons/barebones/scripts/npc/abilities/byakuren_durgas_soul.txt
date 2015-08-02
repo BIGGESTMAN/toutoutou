@@ -1,0 +1,152 @@
+	"durgas_soul"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+
+		"AbilityTextureName"			"invoker_sun_strike"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
+
+		"precache"
+		{
+			"particle"					"particles/byakuren/durgas_soul.vpcf"
+			"particle"					"particles/byakuren/durgas_soul_charging.vpcf"
+			"particle"					"particles/byakuren/durgas_soul_pop.vpcf"
+		}
+
+		"AbilityCastPoint"				"0"
+		"AbilityCooldown"				"12 10 8 6"
+		"AbilityManaCost"				"0"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"1"
+				"_value"				"DOTA_Tooltip_Ability_Deep_Vortex_Radius"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"range"					"300"
+				"_value"				"DOTA_Tooltip_Ability_Deep_Vortex_Radius"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"initial_radius"		"200"
+				"_value"				"DOTA_Tooltip_Ability_Deep_Vortex_Center_Radius"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"end_radius"			"300"
+				"_value"				"DOTA_Tooltip_Ability_Deep_Vortex_Total_Damage"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"100 170 240 310"
+				"_value"				"DOTA_Tooltip_Ability_Deep_Vortex_Slow"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_increase"		"0.2"
+				"_value"				"DOTA_Tooltip_Ability_Deep_Vortex_Stun_Duration"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"update_interval"	"0.03"
+			}
+		}
+
+		"OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"			"heroes/hero_byakuren/durgas_soul.lua"
+	    		"Function"				"durgasSoulCast"
+	    		"modifier"				"modifier_casting"
+	    	}
+	    }
+
+		"Modifiers"
+		{
+	    	"modifier_casting"
+	    	{
+	    		"IsPurgable"	"0"
+
+	    		"Duration"		"%duration"
+
+	    		"States"
+				{
+					"MODIFIER_STATE_COMMAND_RESTRICTED"		"MODIFIER_STATE_VALUE_ENABLED"
+				}
+
+				"ThinkInterval"  "%update_interval"
+
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_byakuren/durgas_soul.lua"
+						"Function"		"updateHealth"
+					}
+				}
+
+				"OnTakeDamage"
+				{
+					"RunScript"
+					{
+		    			"ScriptFile"	"heroes/hero_byakuren/durgas_soul.lua"
+						"Function"		"damageTaken"
+						"DamageTaken"	"%attack_damage"
+					}
+				}
+
+		    	"OnStateChanged"
+				{
+					"RunScript"
+					{
+		    			"ScriptFile"	"heroes/hero_byakuren/durgas_soul.lua"
+						"Function"		"modifierApplied"
+					}
+				}
+
+				"OnDestroy"
+				{
+					"RunScript"
+			    	{
+			    		"ScriptFile"	"heroes/hero_byakuren/durgas_soul.lua"
+			    		"Function"		"chargeTimeFinished"
+			    		"particle"		"particles/byakuren/durgas_soul.vpcf"
+			    	}
+				}
+	    	}
+
+	    	"modifier_durgas_soul"
+			{
+				"IsHidden"		"1"
+				"Passive"		"1"
+
+				"ThinkInterval"  "%update_interval"
+
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_byakuren/durgas_soul"
+						"Function"		"updateAbilityActivated"
+					}
+				}
+			}
+		}
+	}

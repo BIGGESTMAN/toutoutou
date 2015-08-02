@@ -94,7 +94,7 @@ function moveAnchor(caster, ability, anchor, target_point, pulling)
 						if target_distance > drag_distance and angle > 0 then
 							local target_direction = (unit:GetAbsOrigin() - origin):Normalized()
 							unit:SetAbsOrigin(origin + drag_distance * target_direction)
-							unit:SetForwardVector(anchor_direction * -1) -- Force units to look backwards
+							unit:SetForwardVector(anchor_direction * -1) -- Force units to look backwards -- note that this doesn't actually work
 						end
 					end
 				else
@@ -102,6 +102,7 @@ function moveAnchor(caster, ability, anchor, target_point, pulling)
 					for unit,v in pairs(anchor.units_dragging) do
 						unit:RemoveModifierByName("modifier_drag")
 						FindClearSpaceForUnit(unit, unit:GetAbsOrigin(), false)
+						unit:SetForwardVector(anchor_direction * -1) -- Force units to look backwards -- note that this doesn't actually work
 					end
 					anchor.units_dragging = {}
 				end
@@ -116,7 +117,7 @@ function moveAnchor(caster, ability, anchor, target_point, pulling)
 				for unit,v in pairs(anchor.units_dragging) do
 					unit:RemoveModifierByName("modifier_drag")
 					FindClearSpaceForUnit(unit, unit:GetAbsOrigin(), false)
-					unit:SetForwardVector(anchor_direction * -1) -- Force units to look backwards
+					unit:SetForwardVector(anchor_direction * -1) -- Force units to look backwards -- note that this doesn't actually work because of findclearspaceforunit changing their facing?
 				end
 				anchor.units_dragging = {}
 

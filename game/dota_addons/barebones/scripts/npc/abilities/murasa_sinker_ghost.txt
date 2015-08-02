@@ -18,6 +18,8 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"attack_speed_buff"		"16 24 32 40"
+				"_value"				"DOTA_Tooltip_Ability_Sinker_Ghost_Attack_Speed_Buff" // Will only be right as long as buff and debuff are the same
+
 			}
 			"02"
 			{
@@ -28,11 +30,14 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"mana_cost_increase"	"25 30 35 40"
+				"_value"				"DOTA_Tooltip_Ability_Sinker_Ghost_Mana_Cost_Increase"
+
 			}
 			"04"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"duration"				"6"
+				"_value"				"DOTA_Tooltip_Ability_Sinker_Ghost_Duration"
 			}
 			"04"
 			{
@@ -113,6 +118,8 @@
 	    	{
 	    		"IsHidden"			"0"
 	    		"IsPurgable"		"1"
+	    		
+	    		"Duration"		"%duration"
 
 	    		"Properties"
 	    		{

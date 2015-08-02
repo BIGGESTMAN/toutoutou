@@ -56,7 +56,7 @@ end
 
 function checkRestoreCharges(keys)
 	local ability = keys.ability
-	local ability_level = ability:GetLevel()
+	local ability_level = ability:GetLevel() - 1
 
 	if ability_level == 1 then caster.anchor_charges = ability:GetLevelSpecialValueFor("max_charges", ability_level) end
 end
@@ -64,7 +64,7 @@ end
 function upgradeDraggingAnchor(keys)
 	local caster = keys.caster
 	local ability = keys.ability
-	local ability_level = ability:GetLevel()
+	local ability_level = ability:GetLevel() - 1
 
 	if ability_level == 1 then
 		caster:FindAbilityByName("dragging_anchor"):SetLevel(ability_level)
@@ -86,7 +86,7 @@ end
 function dealGhostDamage(keys)
 	local caster = keys.caster
 	local ability = keys.ability
-	local ability_level = ability:GetLevel()
+	local ability_level = ability:GetLevel() - 1
 	local anchor = keys.target
 
 	local team = caster:GetTeamNumber()

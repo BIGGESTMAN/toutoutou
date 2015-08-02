@@ -13,7 +13,7 @@ function midnightBirdCast(keys)
 
 	-- local caster = keys.caster
 	-- local ability = keys.ability
-	-- local ability_level = ability:GetLevel()
+	-- local ability_level = ability:GetLevel() - 1
 	-- local duration = ability:GetLevelSpecialValueFor("duration", ability_level)
 	-- local radius = ability:GetLevelSpecialValueFor("radius", ability_level)
 	

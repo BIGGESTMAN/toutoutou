@@ -3,7 +3,7 @@ require "heroes/hero_murasa/anchors"
 function deepVortexCast(keys)
 	local caster = keys.caster
 	local ability = keys.ability
-	local ability_level = ability:GetLevel()
+	local ability_level = ability:GetLevel() - 1
 	local target_point = caster:GetAbsOrigin()
 
 	local dummy_unit = CreateUnitByName("npc_dummy_unit", target_point, false, caster, caster, caster:GetTeamNumber())
@@ -60,7 +60,7 @@ function deepVortexCast(keys)
 				local target = caster_location + vector * ability:GetLevelSpecialValueFor("radius", ability_level)
 				anchor(caster, anchor_ability, target)
 			end
-			caster.anchor_charges = anchor_ability:GetLevelSpecialValueFor("max_charges", anchor_ability:GetLevel())
+			caster.anchor_charges = anchor_ability:GetLevelSpecialValueFor("max_charges", anchor_ability:GetLevel() - 1)
 			anchor_ability:EndCooldown()
 		end
 	end
@@ -71,7 +71,7 @@ end
 function maelstromTick(keys)
 	local caster = keys.caster
 	local ability = keys.ability
-	local ability_level = ability:GetLevel()
+	local ability_level = ability:GetLevel() - 1
 	local dummy = keys.target
 	local modifier = dummy:FindModifierByName("modifier_maelstrom")
 

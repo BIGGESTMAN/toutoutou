@@ -40,6 +40,7 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"resists_reduction_radius" "400"
+				"_value"				"DOTA_Tooltip_Ability_Foundering_Anchor_Resists_Reduction_Radius"
 			}
 			"02"
 			{
@@ -55,36 +56,43 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"drag_damage"			"30 50 70 90"
+				"_value"				"DOTA_Tooltip_Ability_Foundering_Anchor_Drag_Damage"
 			}
 			"05"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"destination_radius"	"250"
+				"_value"				"DOTA_Tooltip_Ability_Foundering_Anchor_Destination_Radius"
 			}
 			"06"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"destination_damage"	"60 100 140 180"
+				"_value"				"DOTA_Tooltip_Ability_Foundering_Anchor_Destination_Damage"
 			}
 			"07"
 			{
 				"var_type"				"FIELD_FLOAT"
 				"root_duration"			"1.2"
+				"_value"				"DOTA_Tooltip_Ability_Foundering_Anchor_Root_Duration"
 			}
 			"08"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"resists_reduction"		"8 10 12 14"
+				"_value"				"DOTA_Tooltip_Ability_Foundering_Anchor_Resists_Reduction"
 			}
 			"09"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"max_charges"			"1 2 3 4"
+				"_value"				"DOTA_Tooltip_Ability_Foundering_Anchor_Max_Charges"
 			}
 			"10"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"charge_restore_time"	"10"
+				"_value"				"DOTA_Tooltip_Ability_Foundering_Anchor_Charge_Restore_Time"
 			}
 			"11"
 			{

@@ -3,7 +3,7 @@ require "heroes/hero_murasa/anchors"
 function pullAnchors(keys)
 	local caster = keys.caster
 	local ability = keys.ability
-	local ability_level = ability:GetLevel()
+	local ability_level = ability:GetLevel() - 1
 
 	local team = caster:GetTeamNumber()
 	local origin = keys.target_points[1]
