@@ -11,8 +11,8 @@ function fantasySealCast( keys )
 			local projectile_attributes = {
 		        Target = target,
 		        Source = caster,
-		        EffectName = "particles/reimu/fantasy_seal.vpcf",
-		        Ability = ability,
+				EffectName = "particles/reimu/fantasy_seal2.vpcf",
+				Ability = ability,
 		        bDodgeable = true,
 		        bProvidesVision = false,
 		        iMoveSpeed = ability:GetLevelSpecialValueFor("projectile_speed", ability_level),

@@ -35,7 +35,6 @@
 		},
 		{
 			_class = "C_OP_PositionLock"
-			m_nControlPointNumber = 3
 		},
 		{
 			_class = "C_OP_OscillateScalar"
@@ -60,6 +59,7 @@
 		},
 		{
 			_class = "C_INIT_CreateWithinSphere"
+			m_nControlPointNumber = 3
 		},
 		{
 			_class = "C_INIT_RandomRadius"
@@ -82,7 +82,6 @@
 				210,
 				255,
 			]
-			m_nTintCP = 1
 		},
 		{
 			_class = "C_INIT_RandomAlpha"

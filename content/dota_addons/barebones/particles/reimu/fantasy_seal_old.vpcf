@@ -22,9 +22,8 @@
 		},
 		{
 			_class = "C_OP_InterpolateRadius"
+			m_flStartScale = 0.000000
 			m_flBias = 0.850000
-			m_bDisableOperator = true
-			m_flEndScale = 0.000000
 		},
 		{
 			_class = "C_OP_ColorInterpolate"
@@ -54,17 +53,20 @@
 	[
 		{
 			_class = "C_INIT_RandomLifeTime"
-			m_fLifetimeMax = 0.200000
-			m_fLifetimeMin = 0.050000
+			m_fLifetimeMax = 1.000000
+			m_fLifetimeMin = 0.750000
 		},
 		{
 			_class = "C_INIT_RandomRadius"
-			m_flRadiusMax = 160.000000
+			m_flRadiusMax = 250.000000
 			m_flRadiusMin = 100.000000
 		},
 		{
 			_class = "C_INIT_CreateWithinSphere"
 			m_nControlPointNumber = 3
+		},
+		{
+			_class = "C_INIT_RandomSequence"
 		},
 		{
 			_class = "C_INIT_RandomRotation"
@@ -92,6 +94,7 @@
 	[
 		{
 			_class = "C_OP_ContinuousEmitter"
+			m_flEmitRate = 5.000000
 		},
 	]
 	m_Children =
