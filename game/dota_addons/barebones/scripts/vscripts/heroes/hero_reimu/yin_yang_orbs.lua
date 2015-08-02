@@ -34,15 +34,6 @@ function yinYangOrbsDummyCreated( keys )
 		local alreadySlowed = false;
 		for k,v in pairs(target:FindAllModifiers()) do
 			print ("value: ", v, "; key: ", k)
-			-- print (v.MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT)
-			-- print (v.MODIFIER_PROPERTY_MOVESPEED_BASE_OVERRIDE)
-			-- print (v.MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE)
-			-- print (v.MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE_UNIQUE)
-			-- print (v.MODIFIER_PROPERTY_MOVESPEED_BONUS_UNIQUE)
-			-- print (v.MODIFIER_PROPERTY_MOVESPEED_ABSOLUTE)
-			-- print (v.MODIFIER_PROPERTY_MOVESPEED_ABSOLUTE_MIN)
-			-- print (v.MODIFIER_PROPERTY_MOVESPEED_LIMIT)
-			-- print (v.MODIFIER_PROPERTY_MOVESPEED_MAX)
 			print ("ms thingy: ", target:GetMoveSpeedModifier(target:GetBaseMoveSpeed()))
 
 			if target:GetMoveSpeedModifier(target:GetBaseMoveSpeed()) < target:GetBaseMoveSpeed() then
@@ -51,9 +42,7 @@ function yinYangOrbsDummyCreated( keys )
 				break;
 			end
 		end
-		--print (target:HasModifier(keys.modifier_slow))
 		ability:ApplyDataDrivenModifier(caster, target, keys.modifier_slow, {})
-		--print (target:HasModifier(keys.modifier_slow))
 		if alreadySlowed then
 			ability:ApplyDataDrivenModifier(caster, target, keys.modifier_silence, {})
 		end

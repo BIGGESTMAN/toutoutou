@@ -31,4 +31,56 @@ function midnightBirdCast(keys)
 	-- 		print(k2,v2)
 	-- 	end
 	-- end
+
+	local caster = keys.caster
+	local ability = keys.ability
+	local ability_level = ability:GetLevel() - 1
+
+	GameRules:SetCustomGameTeamMaxPlayers(6, 10)
+	local dummy_unit = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeam())
+	ability:ApplyDataDrivenModifier(caster, dummy_unit, keys.dummy_modifier, {})
+	local vision_dummy = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, 6)
+	ability:ApplyDataDrivenModifier(caster, vision_dummy, "modifier_midnight_bird_vision_dummy", {})
+	Timers:CreateTimer(ability:GetLevelSpecialValueFor("duration", ability_level), function()
+		vision_dummy:RemoveSelf()
+	end)
+	-- AddFOWViewer(6, dummy_unit:GetAbsOrigin(), ability:GetLevelSpecialValueFor("radius", ability_level), ability:GetLevelSpecialValueFor("duration", ability_level), true)
+
+	Timers:CreateTimer(ability:GetLevelSpecialValueFor("duration", ability_level), function()
+		dummy_unit:RemoveSelf()
+	end)
+end
+
+function midnightBirdAOE(keys)
+	-- print("!")
+	-- local caster = keys.caster
+	-- local ability = keys.ability
+	-- local ability_level = ability:GetLevel() - 1
+	-- local target = keys.target
+
+	-- local team = caster:GetTeamNumber()
+	-- local origin = target:GetAbsOrigin()
+	-- local iTeam = DOTA_UNIT_TARGET_TEAM_BOTH
+	-- local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_HERO
+	-- local iFlag = DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES
+	-- local iOrder = FIND_ANY_ORDER
+	-- local radius = ability:GetLevelSpecialValueFor("radius", ability_level)
+
+	-- local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
+
+	-- for k,unit in pairs(targets) do
+	-- 	print("?")
+	-- 	ability:ApplyDataDrivenModifier(caster, unit, "modifier_midnight_bird_blinded", {})
+	-- end
+end
+
+function blinded(keys)
+	local playerID = keys.target:GetPlayerID()
+	PlayerResource:SetCustomTeamAssignment(playerID, 6)
+	print(PlayerResource:GetTeam(playerID))
+end
+
+function unBlinded(keys)
+	local playerID = keys.target:GetPlayerID()
+	PlayerResource:SetCustomTeamAssignment(playerID, keys.target:GetTeamNumber())
 end
