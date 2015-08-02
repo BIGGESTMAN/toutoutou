@@ -33,7 +33,7 @@
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"speed"					"1400"
+				"speed"					"2500"
 			}
 			"02"
 			{
@@ -73,7 +73,7 @@
 			"08"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"hanumans_dash_range"	"800"
+				"hanumans_dash_range"	"800 1400 2000"
 				"_value"				"DOTA_Tooltip_Ability_Virudhakas_Sword_Hanumans_Dash_Range"
 			}
 		}
