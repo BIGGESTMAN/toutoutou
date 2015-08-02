@@ -20,7 +20,7 @@
 		// Casting
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0"
-		"AbilityCastRange"				"500"
+		"AbilityCastRange"				"500" // Unused
 		"AbilityCooldown"				"0"
 		"AbilityManaCost"				"0"
 
@@ -32,11 +32,13 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"dash_range"			"125 150 175 200"
+				"_value"				"DOTA_Tooltip_Ability_Hanumans_Dance_Dash_Range"
 			}
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"radius"				"175"
+				"_value"				"DOTA_Tooltip_Ability_Hanumans_Dance_Radius"
 			}
 			"03"
 			{
@@ -47,13 +49,14 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"bonus_damage"			"20 35 50 65"
+				"_value"				"DOTA_Tooltip_Ability_Hanumans_Dance_Bonus_Damage"
 			}
 			"05"
 			{
 				"var_type"				"FIELD_FLOAT"
 				"damage_increase"		"0.5"
 			}
-			"06"
+			"06" // Unused
 			{
 				"var_type"				"FIELD_INTEGER"
 				"max_slashes"			"5"
@@ -67,6 +70,7 @@
 			{
 				"var_type"				"FIELD_FLOAT"
 				"recast_time"			"2.0"
+				"_value"				"DOTA_Tooltip_Ability_Hanumans_Dance_Recast_Time"
 			}
 		}
 	}

@@ -307,6 +307,10 @@ function GameMode:OnHeroInGame(hero)
 			end
 		end
 	end)
+
+	if hero:HasAbility("vajrapanis_incantation_channel") then
+		hero:FindAbilityByName("vajrapanis_incantation_channel"):SetLevel(1)
+	end
 end
 
 --[[

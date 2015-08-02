@@ -29,42 +29,39 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"duration"				"1"
-				"_value"				"DOTA_Tooltip_Ability_Deep_Vortex_Radius"
+				"_value"				"DOTA_Tooltip_Ability_Durgas_Soul_Duration"
 			}
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"range"					"300"
-				"_value"				"DOTA_Tooltip_Ability_Deep_Vortex_Radius"
+				"_value"				"DOTA_Tooltip_Ability_Durgas_Soul_Range"
 			}
 			"03"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"initial_radius"		"200"
-				"_value"				"DOTA_Tooltip_Ability_Deep_Vortex_Center_Radius"
 			}
 			"04"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"end_radius"			"300"
-				"_value"				"DOTA_Tooltip_Ability_Deep_Vortex_Total_Damage"
 			}
 			"05"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"damage"				"100 170 240 310"
-				"_value"				"DOTA_Tooltip_Ability_Deep_Vortex_Slow"
+				"_value"				"DOTA_Tooltip_Ability_Durgas_Soul_Damage"
 			}
 			"06"
 			{
 				"var_type"				"FIELD_FLOAT"
 				"damage_increase"		"0.2"
-				"_value"				"DOTA_Tooltip_Ability_Deep_Vortex_Stun_Duration"
 			}
 			"08"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"update_interval"	"0.03"
+				"update_interval"		"0.03"
 			}
 		}
 

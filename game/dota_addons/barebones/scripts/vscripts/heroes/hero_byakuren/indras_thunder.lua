@@ -13,14 +13,10 @@ function indrasThunderCast(keys)
 	end
 
 	--------------------------------------------- Dummy projectile ----------------------------------
-	if not caster.bead_dummy_projectiles then
-		caster.bead_dummy_projectiles = {}
-	end
 
 	local speed = ability:GetLevelSpecialValueFor("speed", ability_level)
 
 	local dummy_projectile = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeam())
-	caster.bead_dummy_projectiles[dummy_projectile] = true
 	ability:ApplyDataDrivenModifier(caster, dummy_projectile, keys.projectile_modifier, {})
 
 	local target_point = target:GetAbsOrigin()
@@ -29,8 +25,14 @@ function indrasThunderCast(keys)
 	local arrival_distance = 25
 	local total_degrees_rotated = 90
 	local bead_count_factor = 120 -- 120 = arbitrary number to make the number of beads reasonable
-
 	local radius = ability:GetLevelSpecialValueFor("radius", ability_level)
+
+	-- Virudhaka's Sword light fragments interaction -- remove delay
+	local delay = ability:GetLevelSpecialValueFor("delay", ability_level)
+	if target:HasModifier("modifier_light_fragment") then
+		delay = 0.03 -- Wait a frame so dummy can actually finish moving to the target
+		target:RemoveModifierByName("modifier_light_fragment")
+	end
 
 	Timers:CreateTimer(0, function()
 		if not target:IsNull() then target_point = target:GetAbsOrigin() end
@@ -44,7 +46,7 @@ function indrasThunderCast(keys)
 		else
 			dummy_projectile:SetAbsOrigin(target_point)
 			-- Trigger delayed bead activation
-			Timers:CreateTimer(ability:GetLevelSpecialValueFor("delay", ability_level),function()
+			Timers:CreateTimer(delay,function()
 				local team = caster:GetTeamNumber()
 				local origin = target_point
 				local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
@@ -86,7 +88,6 @@ function indrasThunderCast(keys)
 						dummy_projectile.elapsed_time = dummy_projectile.elapsed_time + update_interval
 						return update_interval
 					else
-						caster.bead_dummy_projectiles[dummy_projectile] = nil
 						dummy_projectile:RemoveSelf()
 						for k,bead in pairs(dummy_projectile.beads) do
 							bead:RemoveSelf()
@@ -98,9 +99,6 @@ function indrasThunderCast(keys)
 						end
 					end
 				end)
-				
-				
-
 			end)
 		end
 	end)

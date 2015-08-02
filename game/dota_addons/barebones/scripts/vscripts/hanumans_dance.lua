@@ -33,6 +33,7 @@ function hanumans_dance:OnSpellStart()
 		caster:AddNewModifier(caster, ability, "modifier_dance_recastable", {duration = ability:GetLevelSpecialValueFor("recast_time", ability_level)})
 		local recast_modifier = caster:FindModifierByName("modifier_dance_recastable")
 		recast_modifier:IncrementStackCount()
+
 		-- Max slashes per chain functionality, not currently used
 		-- if recast_modifier:GetStackCount() < ability:GetLevelSpecialValueFor("max_slashes", ability_level) - 1 then
 		-- 	recast_modifier:IncrementStackCount()
@@ -57,4 +58,16 @@ end
 
 function hanumans_dance:GetCooldown( nLevel )
 	return self:GetCaster():GetSecondsPerAttack()
+end
+
+function hanumans_dance:GetCastRange( vLocation, hTarget )
+	if hTarget ~= nil and hTarget:HasModifier("modifier_light_fragment") then
+		local virudhakas_ability = self:GetCaster():FindAbilityByName("virudhakas_sword")
+		local level = virudhakas_ability:GetLevel() - 1
+		return virudhakas_ability:GetLevelSpecialValueFor("hanumans_dash_range", level)
+	else
+		return 500
+	end
+	-- print(vLocation, hTarget)
+	-- return 500
 end

@@ -3,7 +3,7 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"vajrapanis_incantation_channel"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELED"
-		"AbilityTextureName"			"magnataur_reverse_polarity"
+		"AbilityTextureName"			"keeper_of_the_light_illuminate"
 		"MaxLevel" 						"1"
 
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
@@ -35,11 +35,13 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"max_charges"			"5"
+				"_value"				"DOTA_Tooltip_Ability_Vajrapanis_Incantation_Channel_Max_Charges"
 			}
 			"03"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"charges_duration"		"8"
+				"_value"				"DOTA_Tooltip_Ability_Vajrapanis_Incantation_Channel_Charges_Duration"
 			}
 			"04" // unused
 			{

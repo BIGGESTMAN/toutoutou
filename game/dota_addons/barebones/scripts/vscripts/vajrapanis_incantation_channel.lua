@@ -4,12 +4,37 @@ LinkLuaModifier("modifier_incantation_channeling", "heroes/hero_byakuren/modifie
 
 function vajrapanis_incantation_channel:OnSpellStart()
 	if IsServer() then
+		require("libraries/animations")
 		local caster = self:GetCaster()
 		if not caster:HasModifier("modifier_incantation_channeling") then
 			caster:RemoveModifierByName("modifier_vajrapanis_charges")
 		end
 
-		caster:AddNewModifier(caster, self, "modifier_incantation_channeling", {duration = self:GetChannelTime() * 2})
+		local duration = self:GetChannelTime()
+		caster:AddNewModifier(caster, self, "modifier_incantation_channeling", {duration = duration * 2}) -- 2 = arbitrary number to make sure it doesn't fall off before the next charge channel can begin
+
+		-- -- Animation nonsense
+		if not caster:HasModifier("modifier_incantation_channeling") then
+			local animation_properties = {duration = 17 / 30, activity=ACT_DOTA_CAST_ABILITY_2, rate=1}
+			StartAnimation(caster, animation_properties)
+			Timers:CreateTimer(17 / 30, function()
+				local animation_properties2 = {duration - 17 / 30, activity=ACT_DOTA_IDLE, rate=1, translate="meld"}
+				StartAnimation(caster, animation_properties2)
+			end)
+		else
+			StartAnimation(caster, {duration = duration, activity = ACT_DOTA_IDLE, rate=1, translate="meld"})
+		end
+
+		-- Animation nonsense
+		-- local animation_properties = {duration = duration, activity=ACT_DOTA_IDLE, rate=1, translate="meld"}
+		-- StartAnimation(caster, animation_properties)
+		-- -- Timers:CreateTimer(duration, function()
+		-- -- 	local animation_properties_attack = {25 / 30, activity=ACT_DOTA_ATTACK, rate=1, translate="meld"}
+		-- -- 	StartAnimation(caster, animation_properties_attack)
+		-- 	Timers:CreateTimer(25 / 30, function()
+		-- 		EndAnimation(caster)
+		-- 	end)
+		-- end)
 	end
 end
 

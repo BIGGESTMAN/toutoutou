@@ -1,31 +1,29 @@
-	"indras_thunder"
+	"virudhakas_sword"
 	{
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 
-		"AbilityTextureName"			"wisp_spirits"
-		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_5"
+		"AbilityTextureName"			"phoenix_sun_ray_toggle_move"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_4"
 
 		// Precache
 		//-------------------------------------------------------------------------------------------------------------
 		"precache"
 		{
-			"particle"					"particles/byakuren/bead_possibility_3.vpcf"
-			"particle"					"particles/byakuren/indras_thunder_lightning.vpcf"
-			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_zuus.vsndevts"
+			"particle"					"particles/byakuren/bead_possibility_3"
 		}
 
 		// Casting
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.3"
-		"AbilityCastRange"				"700"
-		"AbilityCooldown"				"7 6 5 4"
+		"AbilityCastPoint"				"0.75"
+		"AbilityCastRange"				"800 1000 1200"
+		"AbilityCooldown"				"120 110 100"
 		"AbilityManaCost"				"0"
 
 		// Special
@@ -35,35 +33,48 @@
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"speed"					"1500"
+				"speed"					"1400"
 			}
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"radius"				"250"
-				"_value"				"DOTA_Tooltip_Ability_Indras_Thunder_Radius"
+				"radius"				"150"
+				"_value"				"DOTA_Tooltip_Ability_Virudhakas_Sword_Radius"
 			}
 			"03"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"delay"					"1"
+				"damage"				"200 250 300"
+				"_value"				"DOTA_Tooltip_Ability_Virudhakas_Sword_Damage"
 			}
 			"04"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"damage"				"100 160 220 280"
-				"_value"				"DOTA_Tooltip_Ability_Indras_Thunder_Damage"
+				"slow"					"-60 -70 -80"
+				"_value"				"DOTA_Tooltip_Ability_Virudhakas_Sword_Slow"
 			}
 			"05"
 			{
-				"var_type"				"FIELD_FLOAT"
-				"pull_duration"			"0.3"
-				"_value"				"DOTA_Tooltip_Ability_Indras_Thunder_Pull_Duration"
+				"var_type"				"FIELD_INTEGER"
+				"slow_duration"			"4"
+				"_value"				"DOTA_Tooltip_Ability_Virudhakas_Sword_Slow_Duration"
 			}
 			"06"
 			{
+				"var_type"				"FIELD_INTEGER"
+				"light_fragments_duration"	"8"
+				"_value"				"DOTA_Tooltip_Ability_Virudhakas_Sword_Light_Fragments_Duration"
+			}
+			"07"
+			{
 				"var_type"				"FIELD_FLOAT"
 				"update_interval"		"0.03"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"hanumans_dash_range"	"800"
+				"_value"				"DOTA_Tooltip_Ability_Virudhakas_Sword_Hanumans_Dash_Range"
 			}
 		}
 
@@ -71,17 +82,16 @@
 	    {
 	    	"RunScript"
 	    	{
-	    		"ScriptFile"		"heroes/hero_byakuren/indras_thunder.lua"
-	    		"Function"			"indrasThunderCast"
+	    		"ScriptFile"			"heroes/hero_byakuren/virudhakas_sword.lua"
+	    		"Function"				"virudhakasSwordCast"
 	    		"projectile_modifier"	"modifier_projectile"
-	    		"bead_modifier"		"modifier_bead"
-	    		"pull_modifier"		"modifier_pulled"
+	    		"pull_modifier"			"modifier_pulled"
 	    	}
 	    }
 
 		"Modifiers"
 		{
-			"modifier_indras_thunder"
+			"modifier_virudhakas_sword"
 			{
 				"IsHidden"		"1"
 				"Passive"		"1"
@@ -92,7 +102,7 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile"	"heroes/hero_byakuren/indras_thunder"
+						"ScriptFile"	"heroes/hero_byakuren/virudhakas_sword"
 						"Function"		"updateAbilityActivated"
 					}
 				}
@@ -112,7 +122,7 @@
 			}
 
 			"modifier_projectile"
-			{	
+			{
 				"States"
 				{
 					"MODIFIER_STATE_INVULNERABLE"		"MODIFIER_STATE_VALUE_ENABLED"
@@ -120,29 +130,34 @@
 					"MODIFIER_STATE_NO_UNIT_COLLISION"	"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_NOT_ON_MINIMAP"		"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_UNSELECTABLE"		"MODIFIER_STATE_VALUE_ENABLED"
-				}
-
-				"ThinkInterval"			"%update_interval"
-
-				"OnIntervalThink"
-				{
-					"RunScript"
-					{
-						"ScriptFile"		"heroes/hero_byakuren/indras_thunder.lua"
-						"Function"			"updateBeads"
-					}
 				}
 			}
 
-			"modifier_bead"
-			{	
-				"States"
+			"modifier_impaled"
+			{
+				"IsHidden"		"0"
+				"IsDebuff"		"1"
+				"IsPurgable"	"1"
+
+				"Duration"		"%slow_duration"
+
+	    		"Properties"
 				{
-					"MODIFIER_STATE_INVULNERABLE"		"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_NO_HEALTH_BAR"		"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_NO_UNIT_COLLISION"	"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_NOT_ON_MINIMAP"		"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_UNSELECTABLE"		"MODIFIER_STATE_VALUE_ENABLED"
+				    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%slow"
+				}
+			}
+
+			"modifier_light_fragment"
+			{
+				"IsHidden"		"0"
+				"IsDebuff"		"1"
+				"IsPurgable"	"0"
+
+				"Duration"		"%light_fragments_duration"
+
+	    		"States"
+				{
+					"MODIFIER_STATE_PROVIDES_VISION"	"MODIFIER_STATE_VALUE_ENABLED"
 				}
 			}
 		}
