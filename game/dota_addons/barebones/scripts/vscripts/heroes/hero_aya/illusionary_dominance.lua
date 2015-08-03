@@ -1,20 +1,22 @@
 function illusionaryDominance( keys )
 	local caster = keys.caster
-	local caster_location = caster:GetAbsOrigin() 
-	local target_point = keys.target_points[1]
 	local ability = keys.ability
 	local ability_level = ability:GetLevel() - 1
+	local caster_location = caster:GetAbsOrigin()
+	local target_point = keys.target_points[1]
+	local direction = (target_point - caster_location):Normalized()
+	local distance = ability:GetLevelSpecialValueFor("range", ability_level)
 
-	local speed = ability:GetLevelSpecialValueFor("speed", ability_level)
-	if caster:HasModifier(keys.accelerating_modifier) then
-		local accelerating_stacks = (caster:FindModifierByName(keys.accelerating_modifier)):GetStackCount()
-		local speed = speed + ability:GetLevelSpecialValueFor("speed_increase", ability_level) * accelerating_stacks
-		local maximum_speed = ability:GetLevelSpecialValueFor("max_speed", ability_level)
-		if speed > maximum_speed then
-			speed = maximum_speed
-		end
+	if caster:HasScepter() then
+		ability:ApplyDataDrivenModifier(caster, caster, "modifier_peerless_wind_god_enabled", {})
+		caster:FindModifierByName("modifier_peerless_wind_god_enabled").origin = caster_location
+	end
 
+	dash(caster, ability, direction, distance)
+
+	if caster:HasModifier("modifier_illusionary_dominance_accelerating") then
 		ability:EndCooldown()
+		local accelerating_stacks = (caster:FindModifierByName("modifier_illusionary_dominance_accelerating")):GetStackCount()
 		local final_cooldown = ability:GetCooldown(ability_level) -
 								ability:GetLevelSpecialValueFor("cooldown_reduction", ability_level) * accelerating_stacks
 		local minimum_cooldown = ability:GetLevelSpecialValueFor("minimum_cooldown", ability_level)
@@ -23,30 +25,6 @@ function illusionaryDominance( keys )
 		end
 		ability:StartCooldown(final_cooldown)
 	end
-	local final_speed = speed * 0.03
-	local distance = ability:GetLevelSpecialValueFor("range", ability_level)
-	local direction = (target_point - caster_location):Normalized()
-	local traveled_distance = 0
-
-	ability.targetsHit = {}
-	ability.canAccelerate = true
-
-	local particle = ParticleManager:CreateParticle("particles/aya/illusionary_dominance_dash.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
-	ParticleManager:SetParticleControlEnt(particle, 0, caster, PATTACH_ABSORIGIN, "attach_origin", caster:GetAbsOrigin(), true)
-
-	-- Moving the caster
-	Timers:CreateTimer(0, function()
-		if traveled_distance < distance then
-			caster_location = caster_location + direction * final_speed
-			caster:SetAbsOrigin(caster_location)
-			traveled_distance = traveled_distance + final_speed
-			return 0.03
-		else
-			caster:RemoveModifierByName(keys.dashing_modifier)
-			FindClearSpaceForUnit(caster, caster:GetAbsOrigin(), false)
-			-- ParticleManager:DestroyParticle(particle, false)
-		end
-	end)
 end
 
 function illusionaryDominanceHit( keys )
@@ -87,4 +65,81 @@ function illusionaryDominanceHit( keys )
 		)
 		table.insert(ability.targetsHit, target)
 	end
+end
+
+function dash(caster, ability, direction, distance)
+	local ability_level = ability:GetLevel() - 1
+
+	local speed = ability:GetLevelSpecialValueFor("speed", ability_level)
+	if caster:HasModifier("modifier_illusionary_dominance_accelerating") then
+		local accelerating_stacks = (caster:FindModifierByName("modifier_illusionary_dominance_accelerating")):GetStackCount()
+		local speed = speed + ability:GetLevelSpecialValueFor("speed_increase", ability_level) * accelerating_stacks
+		local maximum_speed = ability:GetLevelSpecialValueFor("max_speed", ability_level)
+		if speed > maximum_speed then
+			speed = maximum_speed
+		end
+	end
+	local final_speed = speed * 0.03
+	local traveled_distance = 0
+
+	ability.targetsHit = {}
+	ability.canAccelerate = true
+
+	local particle = ParticleManager:CreateParticle("particles/aya/illusionary_dominance_dash.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+	ParticleManager:SetParticleControlEnt(particle, 0, caster, PATTACH_ABSORIGIN, "attach_origin", caster:GetAbsOrigin(), true)
+
+	ability:ApplyDataDrivenModifier(caster, caster, "modifier_illusionary_dominance_dashing", {})
+	local modifier = caster:FindModifierByName("modifier_illusionary_dominance_dashing")
+	modifier.traveled_distance = 0
+	modifier.distance = distance
+	modifier.direction = direction
+	modifier.speed = final_speed
+end
+
+function updateDashing(keys)
+	local caster = keys.caster
+	local modifier = caster:FindModifierByName("modifier_illusionary_dominance_dashing")
+
+	-- I have no literally no idea how modifier can be nil here, but whatever
+	if modifier and modifier.traveled_distance < modifier.distance then
+		local caster_location = caster:GetAbsOrigin() + modifier.direction * modifier.speed
+		caster:SetAbsOrigin(caster_location)
+		modifier.traveled_distance = modifier.traveled_distance + modifier.speed
+	else
+		caster:RemoveModifierByName("modifier_illusionary_dominance_dashing")
+		FindClearSpaceForUnit(caster, caster:GetAbsOrigin(), false)
+	end
+end
+
+-- Peerless Wind God --
+
+function peerlessWindGod(keys)
+	local caster = keys.caster
+	local ability = caster:FindAbilityByName("illusionary_dominance")
+	local destination = caster:FindModifierByName("modifier_peerless_wind_god_enabled").origin
+	local direction = (destination - caster:GetAbsOrigin()):Normalized()
+	local distance = (destination - caster:GetAbsOrigin()):Length2D()
+
+	caster:RemoveModifierByName("modifier_peerless_wind_god_enabled")
+
+	dash(caster, ability, direction, distance)
+
+	if direction:Length2D() > 0 then caster:SetForwardVector(direction) end
+end
+
+function updateAbilityEnabled(keys)
+	if keys.caster:HasModifier("modifier_peerless_wind_god_enabled") then
+		keys.ability:SetActivated(true)
+	else
+		keys.ability:SetActivated(false)
+	end
+end
+
+function peerlessWindGodLearned(keys)
+	local ability = keys.caster:FindAbilityByName("peerless_wind_god")
+	ability:SetLevel(1)
+	-- local opening_wind = keys.caster:FindAbilityByName("opening_wind")
+	-- ability:SetAbilityIndex(4)
+	-- opening_wind:SetAbilityIndex(5)
+	keys.caster:SwapAbilities("opening_wind", "peerless_wind_god", true, true)
 end

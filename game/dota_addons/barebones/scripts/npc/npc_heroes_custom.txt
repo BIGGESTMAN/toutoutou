@@ -75,7 +75,7 @@
 		"Ability3"				"wind_gods_fan" 
 		"Ability4"				"illusionary_dominance"
 		"Ability5"				"opening_wind"
-		"Ability6"				"reflex_empty3"
+		"Ability6"				"peerless_wind_god"
 		"Ability7"				"attribute_bonus"
 		"Ability8"				""
 		"Ability9"				""

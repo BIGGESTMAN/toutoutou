@@ -9,9 +9,9 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 		"FightRecapLevel"				"2"
-		"AbilityTextureName"			"faceless_void_time_walk"
 		"MaxLevel" 						"3"
 
+		"AbilityTextureName"			"faceless_void_time_walk"
 		"AbilityCastAnimation"			"ACT_DOTA_FLAIL"
 
 		// Precache
@@ -27,14 +27,7 @@
 		// Casting
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.0"
-		"AbilityCastRange"				"800 950 1100"
-		
-		// Time		
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCooldown"				"3.0 2.5 2.0"
-
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"40"
 
 		// Special
@@ -81,23 +74,22 @@
 				"range"					"700 850 1000"
 				"_value"				"DOTA_Tooltip_Ability_illusionary_dominance_Range"
 			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"peerless_cast_window"	"1"
+			}
 		}
 
 		"OnSpellStart"
 		{
 			"RunScript"
 			{
-				"ScriptFile"			"scripts/vscripts/heroes/hero_aya/illusionary_dominance.lua"
+				"ScriptFile"			"heroes/hero_aya/illusionary_dominance.lua"
 				"Function"				"illusionaryDominance"
 				"Target"				"POINT"
 				"dashing_modifier"		"modifier_illusionary_dominance_dashing"
 				"accelerating_modifier"	"modifier_illusionary_dominance_accelerating"
-			}
-
-			"ApplyModifier"
-			{
-				"Target" 		"CASTER"
-				"ModifierName"	"modifier_illusionary_dominance_dashing"
 			}
 
 			"FireSound"
@@ -123,6 +115,16 @@
 				"Aura_Radius" 	"%radius"
 				"Aura_Teams"  	"DOTA_UNIT_TARGET_TEAM_ENEMY"
 				"Aura_Types"  	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+
+				"ThinkInterval"  "0.03"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_aya/illusionary_dominance"
+						"Function"		"updateDashing"
+					}
+				}
 			}
 
 			"modifier_illusionary_dominance_hit"
@@ -132,11 +134,12 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile"			"scripts/vscripts/heroes/hero_aya/illusionary_dominance.lua"
+						"ScriptFile"			"heroes/hero_aya/illusionary_dominance.lua"
 						"Function"				"illusionaryDominanceHit"
 						"particle"				"particles/units/heroes/hero_ember_spirit/ember_spirit_sleightoffist_tgt.vpcf"
 						"accelerating_modifier"	"modifier_illusionary_dominance_accelerating"
 					}
+
 					"FireSound"
 					{
 						"EffectName"	"Hero_EmberSpirit.SleightOfFist.Damage"
@@ -148,6 +151,13 @@
 			"modifier_illusionary_dominance_accelerating"
 			{
 				"IsHidden"	"0"
+			}
+
+			"modifier_peerless_wind_god_enabled"
+			{
+				"IsHidden"	"0"
+
+				"Duration"	"%peerless_cast_window"
 			}
 		}
 	}

@@ -5,10 +5,11 @@
 		"BaseClass"						"ability_datadriven"
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityTextureName"			"night_stalker_void"
-		"AbilityCastAnimation"			"ACT_DOTA_MIDNIGHT_PULSE"
 		
 		"MaxLevel"						"1"
+		
+		"AbilityTextureName"			"night_stalker_void"
+		"AbilityCastAnimation"			"ACT_DOTA_MIDNIGHT_PULSE"
 		
 		// Casting
 		//-------------------------------------------------------------------------------------------------------------

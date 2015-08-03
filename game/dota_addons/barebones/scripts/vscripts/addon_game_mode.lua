@@ -60,7 +60,7 @@ function updateAghsAbilities(eventInfo)
 	if eventInfo.itemname == "item_ultimate_scepter" then
 		local hero = EntIndexToHScript(eventInfo.HeroEntityIndex)
 		if hero:GetName() == "npc_dota_hero_skywrath_mage" then
-			-- hero:FindAbilityByName("peerless_wind_god"):ApplyDataDrivenModifier(hero, hero, "modifier_has_aghs", {})
+			hero:FindAbilityByName("peerless_wind_god"):ApplyDataDrivenModifier(hero, hero, "modifier_peerless_wind_god_learned", {})
 		end
 	end
 -- 	if eventInfo.itemname == "item_ultimate_scepter" and not eventInfo.HeroEntityIndex:HasAbility("fantasy_nature") then
