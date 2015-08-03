@@ -31,6 +31,9 @@ function illusionaryDominance( keys )
 	ability.targetsHit = {}
 	ability.canAccelerate = true
 
+	local particle = ParticleManager:CreateParticle("particles/aya/illusionary_dominance_dash.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+	ParticleManager:SetParticleControlEnt(particle, 0, caster, PATTACH_ABSORIGIN, "attach_origin", caster:GetAbsOrigin(), true)
+
 	-- Moving the caster
 	Timers:CreateTimer(0, function()
 		if traveled_distance < distance then
@@ -41,6 +44,7 @@ function illusionaryDominance( keys )
 		else
 			caster:RemoveModifierByName(keys.dashing_modifier)
 			FindClearSpaceForUnit(caster, caster:GetAbsOrigin(), false)
+			-- ParticleManager:DestroyParticle(particle, false)
 		end
 	end)
 end

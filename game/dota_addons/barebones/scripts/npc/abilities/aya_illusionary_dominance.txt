@@ -19,8 +19,9 @@
 		"precache"
 		{
 			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_ember_spirit.vsndevts"
-			"particle"					"particles/units/heroes/hero_ember_spirit/ember_spirit_sleightoffist_tgt.vpcf"
 			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_sniper.vsndevts"
+			"particle"					"particles/units/heroes/hero_ember_spirit/ember_spirit_sleightoffist_tgt.vpcf"
+			"particle"					"particles/aya/illusionary_dominance_dash.vpcf"
 		}
 
 		// Casting
@@ -102,7 +103,13 @@
 			"FireSound"
 			{
 				"EffectName"	"barebones.Hohohaha"
-				"Target" 		"TARGET"
+				"Target" 		"CASTER"
+			}
+
+			"FireSound"
+			{
+				"EffectName"	"Hero_Windrunner.ShackleshotCast"
+				"Target" 		"CASTER"
 			}
 		}
 

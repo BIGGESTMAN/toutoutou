@@ -65,7 +65,7 @@ function candidShot(keys)
 	Timers:CreateTimer(duration,function()
 		local team = caster:GetTeamNumber()
 		local iTeam = DOTA_UNIT_TARGET_TEAM_BOTH
-		local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
+		local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL
 		local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
 		local iOrder = FIND_ANY_ORDER
 		local radius = math.sqrt(math.pow(width / 2, 2) + math.pow(height / 2, 2))

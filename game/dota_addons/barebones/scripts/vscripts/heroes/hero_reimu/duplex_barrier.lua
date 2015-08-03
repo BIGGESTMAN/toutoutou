@@ -93,11 +93,6 @@ function duplexBarrier( keys )
 		local particle = ParticleManager:CreateParticle(wall_particle, PATTACH_POINT_FOLLOW, dummy)
 		ParticleManager:SetParticleControl(particle, 1, end_point_right)
 		table.insert(ability.outer_particles, particle)
-		
-		-- Set a timer to kill the sound and particle
-		Timers:CreateTimer(duration,function()
-			StopSoundOn(dummy_sound, dummy)
-		end)
 	end
 
 	-- Make inner barrier
@@ -176,11 +171,6 @@ function duplexBarrier( keys )
 		local particle = ParticleManager:CreateParticle(wall_particle, PATTACH_POINT_FOLLOW, dummy)
 		ParticleManager:SetParticleControl(particle, 1, end_point_right)
 		table.insert(ability.inner_particles, particle)
-		
-		-- Set a timer to kill the sound and particle
-		Timers:CreateTimer(duration,function()
-			StopSoundOn(dummy_sound, dummy)
-		end)
 	end
 end
 
@@ -367,6 +357,7 @@ end
 
 function killDummy(keys)
 	keys.target:RemoveSelf()
+	StopSoundOn("Hero_Dark_Seer.Wall_of_Replica_lp", dummy)
 end
 
 function pointIsInRectangle(point, rectanglePoints)

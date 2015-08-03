@@ -17,8 +17,8 @@
 		"precache"
 		{
 			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_windrunner.vsndevts"
-			"particle"					"particles/units/heroes/hero_skywrath_mage/skywrath_mage_arcane_bolt.vpcf"
-			"particle"					"particles/units/heroes/hero_wisp/wisp_overcharge.vpcf"
+			"particle"					"particles/aya/macroburst_wrapper.vpcf"
+			"particle"					"particles/aya/wisp_overcharge.vpcf"
 		}
 
 		// Casting
@@ -80,7 +80,6 @@
 			{
 				"ScriptFile"					"heroes/hero_aya/macroburst.lua"
 				"Function"						"fireGust"
-				"particle"						"particles/units/heroes/hero_skywrath_mage/skywrath_mage_arcane_bolt.vpcf"
 			}
 		}
 

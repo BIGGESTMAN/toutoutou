@@ -58,8 +58,9 @@ end
 function updateAghsAbilities(eventInfo)
 	print("item purchased or picked up")
 	if eventInfo.itemname == "item_ultimate_scepter" then
-		for k,v in pairs(eventInfo) do
-			print(k,v)
+		local hero = EntIndexToHScript(eventInfo.HeroEntityIndex)
+		if hero:GetName() == "npc_dota_hero_skywrath_mage" then
+			-- hero:FindAbilityByName("peerless_wind_god"):ApplyDataDrivenModifier(hero, hero, "modifier_has_aghs", {})
 		end
 	end
 -- 	if eventInfo.itemname == "item_ultimate_scepter" and not eventInfo.HeroEntityIndex:HasAbility("fantasy_nature") then

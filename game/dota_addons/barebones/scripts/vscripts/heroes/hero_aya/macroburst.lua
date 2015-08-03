@@ -4,7 +4,6 @@ distance_remaining_table = {}
 function fireGust( keys )
 	local caster = keys.caster
 	local ability = keys.ability
-	local particle = keys.particle
 	local ability_level = ability:GetLevel() - 1
 
 	local team = caster:GetTeamNumber()
@@ -19,7 +18,7 @@ function fireGust( keys )
 		local projectile_info = {
 	        Target = units[RandomInt(1, #units)],
 	        Source = caster,
-	        EffectName = particle,
+	        EffectName = "particles/aya/macroburst_wrapper.vpcf",
 	        Ability = ability,
 	        bDodgeable = false,
 	        bProvidesVision = true,
@@ -52,9 +51,14 @@ function macroburstUpdateCooldown( keys )
 		end
 		distance_remaining_table[caster] = distance_remaining_table[caster] - distance_traveled
 
+		local modifier = caster:FindModifierByName("modifier_macroburst")
 		if distance_remaining_table[caster] <= 0 then
 			ability:EndCooldown()
+			if not modifier.particle then modifier.particle = ParticleManager:CreateParticle("particles/aya/wisp_overcharge.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster) end
+			ParticleManager:SetParticleControlEnt(modifier.particle, 1, caster, PATTACH_ABSORIGIN_FOLLOW, "follow_origin", caster:GetAbsOrigin(), true)
 		else
+			if modifier.particle then ParticleManager:DestroyParticle(modifier.particle, false) end
+			modifier.particle = nil
 			ability:EndCooldown()
 			ability:StartCooldown(distance_remaining_table[caster])
 		end
