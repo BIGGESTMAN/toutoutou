@@ -9,7 +9,7 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 		"FightRecapLevel"				"2"
-		"AbilityTextureName"			"omniknight_guardian_angel"
+		"AbilityTextureName"			"lina_fiery_soul"
 		"MaxLevel" 						"3"
 		"RequiredLevel"					"6"
 		"LevelsBetweenUpgrades"			"5"
@@ -18,15 +18,17 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"precache"
 		{
-			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_omniknight.vsndevts"
-			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_phoenix.vsndevts"
+			"soundfile"		"soundevents/game_sounds_heroes/game_sounds_omniknight.vsndevts"
+			"soundfile"		"soundevents/game_sounds_heroes/game_sounds_phoenix.vsndevts"
+			"particle"		"particles/units/heroes/hero_phantom_assassin/phantom_assassin_blur.vpcf"
+			"particle"  	"particles/reimu/fantasy_nature_pulse.vpcf"
+			"particle"  	"particles/reimu/fantasy_nature_pulse_alt.vpcf"
+			"particle"  	"particles/reimu/fantasy_nature_explosion.vpcf"
+			"particle"		"particles/units/heroes/hero_phoenix/phoenix_supernova_reborn.vpcf"
+			"particle"  	"particles/units/heroes/hero_phoenix/phoenix_supernova_hit.vpcf"
+			"particle"  	"particles/status_fx/status_effect_guardian_angel.vpcf"
 			//"particle"	"particles/units/heroes/hero_omniknight/omniknight_guardian_angel_halo_buff.vpcf"
-			"particle"  "particles/status_fx/status_effect_guardian_angel.vpcf"
-			//"particle"  "particles/units/heroes/hero_omniknight/omniknight_guardian_angel_ally.vpcf"
-			"particle"	"particles/units/heroes/hero_phantom_assassin/phantom_assassin_blur.vpcf"
-			"particle"  "particles/units/heroes/hero_phoenix/phoenix_supernova_egg_ring_start.vpcf"
-			"particle"  "particles/units/heroes/hero_phoenix/phoenix_supernova_hit.vpcf"
-			"particle"	"particles/units/heroes/hero_phoenix/phoenix_supernova_reborn.vpcf"
+			//"particle"	"particles/units/heroes/hero_omniknight/omniknight_guardian_angel_ally.vpcf"
 		}
 
 		// Casting
@@ -65,8 +67,8 @@
 			}
 			"04"
 			{
-				"var_type"				"FIELD_INTEGER"
-				"damage_interval"		"1"
+				"var_type"				"FIELD_FLOAT"
+				"damage_interval"		"0.25"
 			}
 			"05"
 			{

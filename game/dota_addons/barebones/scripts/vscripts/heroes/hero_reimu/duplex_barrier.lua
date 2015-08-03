@@ -211,19 +211,19 @@ function duplexBarrierFollow( keys )
 	local caster_movement = (caster_location - ability.last_caster_location)
 
 	for k,v in pairs(ability.outer_dummies) do
-		v:SetAbsOrigin(v:GetAbsOrigin() + caster_movement)
+		if not v:IsNull() then v:SetAbsOrigin(v:GetAbsOrigin() + caster_movement) end
 	end
 
 	for k,v in pairs(ability.inner_dummies) do
-		v:SetAbsOrigin(v:GetAbsOrigin() + caster_movement)
+		if not v:IsNull() then v:SetAbsOrigin(v:GetAbsOrigin() + caster_movement) end
 	end
 
 	for k,v in pairs(ability.outer_secondary_dummies) do
-		v:SetAbsOrigin(v:GetAbsOrigin() + caster_movement)
+		if not v:IsNull() then v:SetAbsOrigin(v:GetAbsOrigin() + caster_movement) end
 	end
 
 	for k,v in pairs(ability.inner_secondary_dummies) do
-		v:SetAbsOrigin(v:GetAbsOrigin() + caster_movement)
+		if not v:IsNull() then v:SetAbsOrigin(v:GetAbsOrigin() + caster_movement) end
 	end
 
 	for wall_number=0, 3 do
@@ -341,11 +341,11 @@ function duplexBarrierSlow( keys )
 	local inner_dummy_locations = {}
 
 	for k,dummy in ipairs(ability.outer_dummies) do
-		table.insert(outer_dummy_locations, dummy:GetAbsOrigin())
+		if not dummy:IsNull() then table.insert(outer_dummy_locations, dummy:GetAbsOrigin()) end
 	end
 
 	for k,dummy in ipairs(ability.inner_dummies) do
-		table.insert(inner_dummy_locations, dummy:GetAbsOrigin())
+		if not dummy:IsNull() then table.insert(inner_dummy_locations, dummy:GetAbsOrigin()) end
 	end
 
 	local outer_targets = FindUnitsInRadius(caster:GetTeamNumber(), caster_location, nil, outer_radius,

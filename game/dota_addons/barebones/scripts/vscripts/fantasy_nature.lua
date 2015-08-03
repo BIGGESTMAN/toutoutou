@@ -11,7 +11,7 @@ function fantasy_nature:OnSpellStart()
 	local duration = self:GetLevelSpecialValueFor("duration", ability_level)
 	local damage_interval = self:GetLevelSpecialValueFor("damage_interval", ability_level)
 	local radius = self:GetLevelSpecialValueFor("radius", ability_level)
-	local damage = self:GetLevelSpecialValueFor("damage", ability_level)
+	local damage = self:GetLevelSpecialValueFor("damage", ability_level) * self:GetLevelSpecialValueFor("damage_interval", ability_level)
 	local explosion_radius = self:GetLevelSpecialValueFor("explosion_radius", ability_level)
 	local explosion_damage = self:GetLevelSpecialValueFor("explosion_damage", ability_level)
 	local damage_type = DAMAGE_TYPE_PHYSICAL

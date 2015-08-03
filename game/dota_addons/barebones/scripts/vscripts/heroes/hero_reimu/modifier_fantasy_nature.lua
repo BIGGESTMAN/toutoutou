@@ -19,30 +19,22 @@ function modifier_fantasy_nature:OnCreated( kv )
 	end
 end
 
-function modifier_fantasy_nature:GetEffectName()
-	return "particles/units/heroes/hero_phantom_assassin/phantom_assassin_blur.vpcf"
-end
+-- function modifier_fantasy_nature:GetEffectName()
+-- 	return "particles/units/heroes/hero_phantom_assassin/phantom_assassin_blur.vpcf"
+-- end
 
-function modifier_fantasy_nature:GetEffectAttachType()
-	return PATTACH_POINT_FOLLOW
-end
+-- function modifier_fantasy_nature:GetEffectAttachType()
+-- 	return PATTACH_POINT_FOLLOW
+-- end
 
 function modifier_fantasy_nature:IsHidden()
 	return false
 end
 
-function modifier_fantasy_nature:CheckState()
-	local state = {
-	[MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PHYSICAL] = true,
-	}
-
-	return state
-end
-
 function modifier_fantasy_nature:OnIntervalThink()
 	local caster = self:GetCaster()
 	if IsServer() then
-		local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_phoenix/phoenix_supernova_egg_ring_start.vpcf",
+		local particle = ParticleManager:CreateParticle("particles/reimu/fantasy_nature_pulse_alt.vpcf",
 														PATTACH_ABSORIGIN_FOLLOW, caster)
 		ParticleManager:SetParticleControl(particle, 0, caster:GetOrigin())
 		ParticleManager:SetParticleControl(particle, 1, caster:GetOrigin())
@@ -79,6 +71,10 @@ function modifier_fantasy_nature:DeclareFunctions()
 			MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PHYSICAL }
 end
 
+function modifier_fantasy_nature:GetAbsoluteNoDamagePhysical(params)
+	return 1
+end
+
 function modifier_fantasy_nature:OnAttacked()
 	local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_phoenix/phoenix_supernova_hit.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
 	ParticleManager:SetParticleControl(particle, 0, self:GetParent():GetAbsOrigin())
@@ -89,9 +85,8 @@ end
 function modifier_fantasy_nature:OnDestroy()
 	local caster = self:GetCaster()
 	if IsServer() and caster:HasScepter() and caster:IsAlive() then
-		local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_phoenix/phoenix_supernova_reborn.vpcf",
+		local particle = ParticleManager:CreateParticle("particles/reimu/fantasy_nature_explosion.vpcf",
 														PATTACH_ABSORIGIN_FOLLOW, caster)
-		ParticleManager:SetParticleControl(particle, 0, caster:GetOrigin())
 
 		local targets = FindUnitsInRadius(caster:GetTeamNumber(),
 		                            caster:GetAbsOrigin(),
