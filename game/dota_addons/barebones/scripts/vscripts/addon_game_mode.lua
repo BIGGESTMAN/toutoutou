@@ -58,6 +58,9 @@ end
 function updateAghsAbilities(eventInfo)
 	print("item purchased or picked up")
 	if eventInfo.itemname == "item_ultimate_scepter" then
+		for k,v in pairs(eventInfo) do
+			print(k,v)
+		end
 	end
 -- 	if eventInfo.itemname == "item_ultimate_scepter" and not eventInfo.HeroEntityIndex:HasAbility("fantasy_nature") then
 -- 		if eventInfo.HeroEntityIndex == "npc_dota_hero_reimu" then

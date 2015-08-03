@@ -69,10 +69,6 @@ function duplexBarrier( keys )
 			local dummy_secondary = CreateUnitByName("npc_dummy_blank", temporary_point, false, caster, caster, caster_team)
 			table.insert(ability.outer_secondary_dummies, dummy_secondary)
 			ability:ApplyDataDrivenModifier(dummy, dummy_secondary, outer_dummy_modifier, {})
-
-			Timers:CreateTimer(duration, function()
-				dummy_secondary:RemoveSelf()
-			end)
 		end
 
 		-- Create the secondary dummies for the right half of the wall
@@ -85,10 +81,6 @@ function duplexBarrier( keys )
 			local dummy_secondary = CreateUnitByName("npc_dummy_blank", temporary_point, false, caster, caster, caster_team)
 			table.insert(ability.outer_secondary_dummies, dummy_secondary)
 			ability:ApplyDataDrivenModifier(dummy, dummy_secondary, outer_dummy_modifier, {})
-
-			Timers:CreateTimer(duration, function()
-				dummy_secondary:RemoveSelf()
-			end)
 		end
 
 		-- Save the relevant data
@@ -105,7 +97,6 @@ function duplexBarrier( keys )
 		-- Set a timer to kill the sound and particle
 		Timers:CreateTimer(duration,function()
 			StopSoundOn(dummy_sound, dummy)
-			dummy:RemoveSelf()
 		end)
 	end
 
@@ -161,10 +152,6 @@ function duplexBarrier( keys )
 			local dummy_secondary = CreateUnitByName("npc_dummy_blank", temporary_point, false, caster, caster, caster_team)
 			table.insert(ability.inner_secondary_dummies, dummy_secondary)
 			ability:ApplyDataDrivenModifier(dummy, dummy_secondary, inner_dummy_modifier, {})
-
-			Timers:CreateTimer(duration, function()
-				dummy_secondary:RemoveSelf()
-			end)
 		end
 
 		-- Create the secondary dummies for the right half of the wall
@@ -177,10 +164,6 @@ function duplexBarrier( keys )
 			local dummy_secondary = CreateUnitByName("npc_dummy_blank", temporary_point, false, caster, caster, caster_team)
 			table.insert(ability.inner_secondary_dummies, dummy_secondary)
 			ability:ApplyDataDrivenModifier(dummy, dummy_secondary, inner_dummy_modifier, {})
-
-			Timers:CreateTimer(duration, function()
-				dummy_secondary:RemoveSelf()
-			end)
 		end
 
 		-- Save the relevant data
@@ -197,175 +180,193 @@ function duplexBarrier( keys )
 		-- Set a timer to kill the sound and particle
 		Timers:CreateTimer(duration,function()
 			StopSoundOn(dummy_sound, dummy)
-			dummy:RemoveSelf()
 		end)
 	end
 end
 
 function duplexBarrierFollow( keys )
-	
-	local ability = keys.ability
-	local ability_level = ability:GetLevel() - 1
-	local caster = ability.caster
-	local caster_location = caster:GetAbsOrigin()
-	local caster_movement = (caster_location - ability.last_caster_location)
+	if targets_hit_table[keys.caster] then
+		local ability = keys.ability
+		local ability_level = ability:GetLevel() - 1
+		local caster = ability.caster
+		local caster_location = caster:GetAbsOrigin()
+		local caster_movement = (caster_location - ability.last_caster_location)
 
-	for k,v in pairs(ability.outer_dummies) do
-		if not v:IsNull() then v:SetAbsOrigin(v:GetAbsOrigin() + caster_movement) end
+		for k,v in pairs(ability.outer_dummies) do
+			v:SetAbsOrigin(v:GetAbsOrigin() + caster_movement)
+		end
+
+		for k,v in pairs(ability.inner_dummies) do
+			v:SetAbsOrigin(v:GetAbsOrigin() + caster_movement)
+		end
+
+		for k,v in pairs(ability.outer_secondary_dummies) do
+			v:SetAbsOrigin(v:GetAbsOrigin() + caster_movement)
+		end
+
+		for k,v in pairs(ability.inner_secondary_dummies) do
+			v:SetAbsOrigin(v:GetAbsOrigin() + caster_movement)
+		end
+
+		for wall_number=0, 3 do
+			local radius = ability:GetLevelSpecialValueFor("outer_barrier_radius", ability_level)
+			local range = math.sqrt(radius * radius / 2)
+			local prototype_target_point = caster_location + ability.original_caster_facing * range
+			local target_point = RotatePosition(caster_location, QAngle(0, 90 * wall_number, 0), prototype_target_point)
+			local length = range * 2
+			local direction = (target_point - caster_location):Normalized()
+			local rotation_point = target_point + direction * length/2
+			local end_point_right = RotatePosition(target_point, QAngle(0,-90,0), rotation_point)
+			
+			local particle = ability.outer_particles[wall_number + 1]
+			ParticleManager:SetParticleControl(particle, 1, end_point_right)
+		end
+
+		for wall_number=0, 3 do
+			local radius = ability:GetLevelSpecialValueFor("inner_barrier_radius", ability_level)
+			local range = math.sqrt(radius * radius / 2)
+			local prototype_target_point = caster_location + ability.original_caster_facing * range
+			local target_point = RotatePosition(caster_location, QAngle(0, 90 * wall_number, 0), prototype_target_point)
+			local length = range * 2
+			local direction = (target_point - caster_location):Normalized()
+			local rotation_point = target_point + direction * length/2
+			local end_point_right = RotatePosition(target_point, QAngle(0,-90,0), rotation_point)
+			
+			local particle = ability.inner_particles[wall_number + 1]
+			ParticleManager:SetParticleControl(particle, 1, end_point_right)
+		end
+
+		ability.last_caster_location = caster_location
 	end
-
-	for k,v in pairs(ability.inner_dummies) do
-		if not v:IsNull() then v:SetAbsOrigin(v:GetAbsOrigin() + caster_movement) end
-	end
-
-	for k,v in pairs(ability.outer_secondary_dummies) do
-		if not v:IsNull() then v:SetAbsOrigin(v:GetAbsOrigin() + caster_movement) end
-	end
-
-	for k,v in pairs(ability.inner_secondary_dummies) do
-		if not v:IsNull() then v:SetAbsOrigin(v:GetAbsOrigin() + caster_movement) end
-	end
-
-	for wall_number=0, 3 do
-		local radius = ability:GetLevelSpecialValueFor("outer_barrier_radius", ability_level)
-		local range = math.sqrt(radius * radius / 2)
-		local prototype_target_point = caster_location + ability.original_caster_facing * range
-		local target_point = RotatePosition(caster_location, QAngle(0, 90 * wall_number, 0), prototype_target_point)
-		local length = range * 2
-		local direction = (target_point - caster_location):Normalized()
-		local rotation_point = target_point + direction * length/2
-		local end_point_right = RotatePosition(target_point, QAngle(0,-90,0), rotation_point)
-		
-		local particle = ability.outer_particles[wall_number + 1]
-		ParticleManager:SetParticleControl(particle, 1, end_point_right)
-	end
-
-	for wall_number=0, 3 do
-		local radius = ability:GetLevelSpecialValueFor("inner_barrier_radius", ability_level)
-		local range = math.sqrt(radius * radius / 2)
-		local prototype_target_point = caster_location + ability.original_caster_facing * range
-		local target_point = RotatePosition(caster_location, QAngle(0, 90 * wall_number, 0), prototype_target_point)
-		local length = range * 2
-		local direction = (target_point - caster_location):Normalized()
-		local rotation_point = target_point + direction * length/2
-		local end_point_right = RotatePosition(target_point, QAngle(0,-90,0), rotation_point)
-		
-		local particle = ability.inner_particles[wall_number + 1]
-		ParticleManager:SetParticleControl(particle, 1, end_point_right)
-	end
-
-	ability.last_caster_location = caster_location
 end
 
---[[Author: Pizzalol
-	Date: 05.04.2015.
-	Acts as an aura which checks if any hero passed the wall]]
+-- Acts as an aura which checks if any hero passed the wall
 function duplexOuterBarrierAura( keys )
-	local caster = keys.caster -- Main wall dummy
-	local target = keys.target -- Secondary dummies
-	local target_location = target:GetAbsOrigin()
 	local ability = keys.ability
-	local ability_level = ability:GetLevel() - 1
-	local outer_barrier_modifier = keys.outer_barrier_modifier
-	local inner_barrier_modifier = keys.inner_barrier_modifier
-	local stun_modifier = keys.stun_modifier
+	if targets_hit_table[ability.caster] then
+		local caster = keys.caster -- Main wall dummy
+		local target = keys.target -- Secondary dummies
+		local target_location = target:GetAbsOrigin()
+		local ability_level = ability:GetLevel() - 1
+		local outer_barrier_modifier = keys.outer_barrier_modifier
+		local inner_barrier_modifier = keys.inner_barrier_modifier
+		local stun_modifier = keys.stun_modifier
 
-	local radius = ability:GetLevelSpecialValueFor("width", ability_level)
+		local radius = ability:GetLevelSpecialValueFor("width", ability_level)
 
-	local target_teams = DOTA_UNIT_TARGET_TEAM_ENEMY
-	local target_types = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC
-	local target_flags = DOTA_UNIT_TARGET_FLAG_NONE
+		local target_teams = DOTA_UNIT_TARGET_TEAM_ENEMY
+		local target_types = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC
+		local target_flags = DOTA_UNIT_TARGET_FLAG_NONE
 
-	local units = FindUnitsInRadius(caster:GetTeamNumber(), target_location, nil, radius, target_teams, target_types, target_flags, FIND_CLOSEST, false)
+		local units = FindUnitsInRadius(caster:GetTeamNumber(), target_location, nil, radius, target_teams, target_types, target_flags, FIND_CLOSEST, false)
 
-	for _,unit in ipairs(units) do
-		if not unit:HasModifier(outer_barrier_modifier) then
-			ability:ApplyDataDrivenModifier(caster, unit, outer_barrier_modifier, {})
-			table.insert(targets_hit_table[ability.caster], unit)
-			if unit:HasModifier(inner_barrier_modifier) then
-				ability:ApplyDataDrivenModifier(caster, unit, stun_modifier, {})
+		for _,unit in ipairs(units) do
+			if not unit:HasModifier(outer_barrier_modifier) then
+				ability:ApplyDataDrivenModifier(caster, unit, outer_barrier_modifier, {})
+				targets_hit_table[ability.caster][unit] = true
+				if unit:HasModifier(inner_barrier_modifier) then
+					ability:ApplyDataDrivenModifier(caster, unit, stun_modifier, {})
+				end
 			end
 		end
 	end
 end
 
 function duplexInnerBarrierAura( keys )
-	local caster = keys.caster -- Main wall dummy
-	local target = keys.target -- Secondary dummies
-	local target_location = target:GetAbsOrigin()
 	local ability = keys.ability
-	local ability_level = ability:GetLevel() - 1
-	local outer_barrier_modifier = keys.outer_barrier_modifier
-	local inner_barrier_modifier = keys.inner_barrier_modifier
-	local stun_modifier = keys.stun_modifier
+	if targets_hit_table[ability.caster] then
+		local caster = keys.caster -- Main wall dummy
+		local target = keys.target -- Secondary dummies
+		local target_location = target:GetAbsOrigin()
+		local ability_level = ability:GetLevel() - 1
+		local outer_barrier_modifier = keys.outer_barrier_modifier
+		local inner_barrier_modifier = keys.inner_barrier_modifier
+		local stun_modifier = keys.stun_modifier
 
-	local radius = ability:GetLevelSpecialValueFor("width", ability_level)
+		local radius = ability:GetLevelSpecialValueFor("width", ability_level)
 
-	local target_teams = DOTA_UNIT_TARGET_TEAM_ENEMY
-	local target_types = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC
-	local target_flags = DOTA_UNIT_TARGET_FLAG_NONE
-	local units = FindUnitsInRadius(caster:GetTeamNumber(), target_location, nil, radius, target_teams, target_types, target_flags, FIND_CLOSEST, false)
-	for _,unit in ipairs(units) do
-		if not unit:HasModifier(inner_barrier_modifier) then
-			ability:ApplyDataDrivenModifier(caster, unit, inner_barrier_modifier, {})
-			table.insert(targets_hit_table[ability.caster], unit)
-			if unit:HasModifier(outer_barrier_modifier) then
-				ability:ApplyDataDrivenModifier(caster, unit, stun_modifier, {})
+		local target_teams = DOTA_UNIT_TARGET_TEAM_ENEMY
+		local target_types = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC
+		local target_flags = DOTA_UNIT_TARGET_FLAG_NONE
+
+		local units = FindUnitsInRadius(caster:GetTeamNumber(), target_location, nil, radius, target_teams, target_types, target_flags, FIND_CLOSEST, false)
+
+		for _,unit in ipairs(units) do
+			if not unit:HasModifier(inner_barrier_modifier) then
+				ability:ApplyDataDrivenModifier(caster, unit, inner_barrier_modifier, {})
+				targets_hit_table[ability.caster][unit] = true
+				if unit:HasModifier(outer_barrier_modifier) then
+					ability:ApplyDataDrivenModifier(caster, unit, stun_modifier, {})
+				end
 			end
 		end
 	end
 end
 
 function removeDebuffs( keys )
-	for k,unit in pairs(targets_hit_table[keys.ability.caster]) do
-		if unit and unit:HasModifier(keys.outer_barrier_modifier) then
+	local ability = keys.ability
+
+	for unit,v in pairs(targets_hit_table[ability.caster]) do
+		if not unit:IsNull() and unit:HasModifier(keys.outer_barrier_modifier) then
 			unit:RemoveModifierByName(keys.outer_barrier_modifier)
 		end
-		if unit and unit:HasModifier(keys.inner_barrier_modifier) then
+		if not unit:IsNull() and unit:HasModifier(keys.inner_barrier_modifier) then
 			unit:RemoveModifierByName(keys.inner_barrier_modifier)
 		end
 	end
-	targets_hit_table[keys.ability.caster] = nil
+
+	targets_hit_table[ability.caster] = nil
+
+	ability.outer_dummies = {}
+	ability.outer_secondary_dummies = {}
+	ability.inner_dummies = {}
+	ability.inner_secondary_dummies = {}
 end
 
 function duplexBarrierSlow( keys )
-	local caster = keys.caster
-	local caster_location = caster:GetAbsOrigin()
-	local ability = keys.ability
-	local ability_level = ability:GetLevel() - 1
-	local movespeed_modifier = keys.movespeed_modifier
-	local attackspeed_modifier = keys.attackspeed_modifier
-	local outer_radius = ability:GetLevelSpecialValueFor("outer_barrier_radius", ability_level)
-	local inner_radius = ability:GetLevelSpecialValueFor("inner_barrier_radius", ability_level)
-	local outer_dummy_locations = {}
-	local inner_dummy_locations = {}
+	if targets_hit_table[keys.caster] then
+		local caster = keys.caster
+		local caster_location = caster:GetAbsOrigin()
+		local ability = keys.ability
+		local ability_level = ability:GetLevel() - 1
+		local movespeed_modifier = keys.movespeed_modifier
+		local attackspeed_modifier = keys.attackspeed_modifier
+		local outer_radius = ability:GetLevelSpecialValueFor("outer_barrier_radius", ability_level)
+		local inner_radius = ability:GetLevelSpecialValueFor("inner_barrier_radius", ability_level)
+		local outer_dummy_locations = {}
+		local inner_dummy_locations = {}
 
-	for k,dummy in ipairs(ability.outer_dummies) do
-		if not dummy:IsNull() then table.insert(outer_dummy_locations, dummy:GetAbsOrigin()) end
-	end
+		for k,dummy in ipairs(ability.outer_dummies) do
+			table.insert(outer_dummy_locations, dummy:GetAbsOrigin())
+		end
 
-	for k,dummy in ipairs(ability.inner_dummies) do
-		if not dummy:IsNull() then table.insert(inner_dummy_locations, dummy:GetAbsOrigin()) end
-	end
+		for k,dummy in ipairs(ability.inner_dummies) do
+			table.insert(inner_dummy_locations, dummy:GetAbsOrigin())
+		end
 
-	local outer_targets = FindUnitsInRadius(caster:GetTeamNumber(), caster_location, nil, outer_radius,
-									DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-									DOTA_UNIT_TARGET_FLAG_NONE, FIND_CLOSEST, false)
-	for k,unit in pairs(outer_targets) do
-		if pointIsInRectangle(unit:GetAbsOrigin(), outer_dummy_locations) then
-			ability:ApplyDataDrivenModifier(caster, unit, movespeed_modifier, {})
+		local outer_targets = FindUnitsInRadius(caster:GetTeamNumber(), caster_location, nil, outer_radius,
+										DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+										DOTA_UNIT_TARGET_FLAG_NONE, FIND_CLOSEST, false)
+		for k,unit in pairs(outer_targets) do
+			if pointIsInRectangle(unit:GetAbsOrigin(), outer_dummy_locations) then
+				ability:ApplyDataDrivenModifier(caster, unit, movespeed_modifier, {})
+			end
+		end
+
+		local inner_targets = FindUnitsInRadius(caster:GetTeamNumber(), caster_location, nil, inner_radius,
+										DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+										DOTA_UNIT_TARGET_FLAG_NONE, FIND_CLOSEST, false)
+
+		for k,unit in pairs(inner_targets) do
+			if pointIsInRectangle(unit:GetAbsOrigin(), inner_dummy_locations) then
+				ability:ApplyDataDrivenModifier(caster, unit, attackspeed_modifier, {})
+			end
 		end
 	end
+end
 
-	local inner_targets = FindUnitsInRadius(caster:GetTeamNumber(), caster_location, nil, inner_radius,
-									DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
-									DOTA_UNIT_TARGET_FLAG_NONE, FIND_CLOSEST, false)
-
-	for k,unit in pairs(outer_targets) do
-		if pointIsInRectangle(unit:GetAbsOrigin(), inner_dummy_locations) then
-			ability:ApplyDataDrivenModifier(caster, unit, attackspeed_modifier, {})
-		end
-	end
+function killDummy(keys)
+	keys.target:RemoveSelf()
 end
 
 function pointIsInRectangle(point, rectanglePoints)

@@ -8,9 +8,9 @@
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"FightRecapLevel"				"1"
+
 		"AbilityTextureName"			"disruptor_kinetic_field"
-		"MaxLevel" 						"4"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 
 		// Precache
 		//-------------------------------------------------------------------------------------------------------------
@@ -62,7 +62,7 @@
 			"04"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"update_interval"		"0.2"
+				"update_interval"		"0.03"
 			}
 			"05"
 			{
@@ -133,7 +133,7 @@
 
 			"DelayedAction"
 			{
-				"Delay"     "%barrier_duration + 0.03"
+				"Delay"     "%barrier_duration"
 				"Action"    
 				{
 					"RunScript"
@@ -180,6 +180,8 @@
 				"IsHidden"		"1"
 				"IsPurgable"	"0"
 
+				"Duration"		"%barrier_duration"
+
 				"ThinkInterval"  "%update_interval"
 				"OnIntervalThink"
 				{
@@ -202,12 +204,22 @@
 					"MODIFIER_STATE_NO_UNIT_COLLISION"	"MODIFIER_STATE_VALUE_ENABLED"
 				}
 
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_reimu/duplex_barrier.lua"
+						"Function"		"killDummy"
+					}
+				}
 			}
 
 			"modifier_duplex_barrier_inner_dummy"
 			{
 				"IsHidden"		"1"
 				"IsPurgable"	"0"
+
+				"Duration"		"%barrier_duration"
 
 				"ThinkInterval"  "%update_interval"
 				"OnIntervalThink"
@@ -229,6 +241,15 @@
 					"MODIFIER_STATE_NOT_ON_MINIMAP" "MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_UNSELECTABLE" 	"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_NO_UNIT_COLLISION"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
+
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_reimu/duplex_barrier.lua"
+						"Function"		"killDummy"
+					}
 				}
 			}
 
