@@ -112,7 +112,7 @@
 			m_nInputMin = 10
 			m_nInputMax = 40
 			m_nFieldOutput = 7
-			m_flOutputMin = 1.000000
+			m_flOutputMin = 0.500000
 			m_flOutputMax = 0.000000
 		},
 		{

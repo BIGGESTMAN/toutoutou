@@ -337,7 +337,7 @@
 		"Ability5"				""
 		"Ability6"				""
 		"Ability7"				"attribute_bonus"
-		"Ability8"				""
+		"Ability8"				"midnight_bird_end"
 		"Ability9"				""
 		"Ability10"				""
 		"Ability11"				""
