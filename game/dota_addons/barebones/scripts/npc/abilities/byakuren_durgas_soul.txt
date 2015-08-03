@@ -75,6 +75,15 @@
 	    	}
 	    }
 
+		"OnUpgrade"
+		{
+			"RunScript"
+			{
+				"ScriptFile"					"heroes/hero_byakuren/durgas_soul.lua"
+				"Function"						"onUpgrade"
+			}
+		}
+
 		"Modifiers"
 		{
 	    	"modifier_casting"

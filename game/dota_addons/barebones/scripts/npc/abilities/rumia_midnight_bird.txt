@@ -52,6 +52,15 @@
 			}
 		}
 
+		"OnUpgrade"
+		{
+			"RunScript"
+			{
+				"ScriptFile"					"heroes/hero_rumia/midnight_bird.lua"
+				"Function"						"onUpgrade"
+			}
+		}
+
 		"OnSpellStart"
 	    {
 	    	"RunScript"

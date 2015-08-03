@@ -121,3 +121,10 @@ function updateAbilityActivated(keys)
 		keys.ability:SetActivated(false)
 	end
 end
+
+function onUpgrade(keys)
+	if keys.ability:GetLevel() == 1 then
+		local sub_ability = keys.caster:FindAbilityByName("durgas_soul_retarget")
+		sub_ability:SetLevel(1)
+	end
+end

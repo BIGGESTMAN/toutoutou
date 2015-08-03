@@ -64,3 +64,10 @@ end
 function cancel(keys)
 	keys.caster:RemoveModifierByName("modifier_midnight_bird")
 end
+
+function onUpgrade(keys)
+	if keys.ability:GetLevel() == 1 then
+		local sub_ability = keys.caster:FindAbilityByName("midnight_bird_end")
+		sub_ability:SetLevel(1)
+	end
+end
