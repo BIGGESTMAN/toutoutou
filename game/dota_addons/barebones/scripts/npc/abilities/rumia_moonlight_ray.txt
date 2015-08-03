@@ -56,12 +56,12 @@
 			"06"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"damage"				"70 110 150 190"
+				"damage"				"70 100 130 160"
 			}
 			"07"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"bonus_damage"			"40 80 120 160"
+				"bonus_damage"			"50 100 150 200"
 			}
 			"08"
 			{

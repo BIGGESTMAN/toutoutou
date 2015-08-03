@@ -10,7 +10,7 @@ function modifier_fantasy_nature:OnCreated( kv )
 		self.explosion_damage = kv.explosion_damage
 		self.damage_type = kv.damage_type
 
-		local blur_particle = ParticleManager:CreateParticle("particles/units/heroes/hero_phantom_assassin/phantom_assassin_blur.vpcf",
+		local blur_particle = ParticleManager:CreateParticle("particles/reimu/fantasy_nature_blur.vpcf",
 															PATTACH_ABSORIGIN_FOLLOW, caster)
 		ParticleManager:SetParticleControl(blur_particle, 0, caster:GetOrigin())
 		self:AddParticle(blur_particle, false, false, -1, false, false)
@@ -47,7 +47,7 @@ function modifier_fantasy_nature:OnIntervalThink()
 		                            nil,
 		                            self.radius,
 		                            DOTA_UNIT_TARGET_TEAM_ENEMY,
-		                            DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO,
+		                            DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL,
 		                            DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
 		                            FIND_CLOSEST,
 		                            false)
@@ -93,7 +93,7 @@ function modifier_fantasy_nature:OnDestroy()
 		                            nil,
 		                        	self.explosion_radius,
 		                            DOTA_UNIT_TARGET_TEAM_ENEMY,
-		                            DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO,
+		                            DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL,
 		                            DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
 		                            FIND_CLOSEST,
 		                            false)

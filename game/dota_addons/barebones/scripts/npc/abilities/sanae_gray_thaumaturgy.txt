@@ -24,18 +24,21 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"agility_gain"			"2 3 4 5"
+				"_value"				"DOTA_Tooltip_Ability_Gray_Thaumaturgy_Agility_Gain"
 			}
 			"02"
 			{
 				"var_type"				"FIELD_FLOAT"
 				"agility_loss"			"0.4 0.6 0.8 1.0"
+				"_value"				"DOTA_Tooltip_Ability_Gray_Thaumaturgy_Agility_Loss"
 			}
 			"03"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"radius"				"550 600 650 700"
+				"_value"				"DOTA_Tooltip_Ability_Gray_Thaumaturgy_Radius"
 			}
-			"04"
+			"04" // unused
 			{
 				"var_type"				"FIELD_INTEGER"
 				"agility_loss_scaling"	"0"

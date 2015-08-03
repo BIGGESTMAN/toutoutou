@@ -45,6 +45,7 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"knockback_range"		"575"
+				"_value"				"DOTA_Tooltip_Ability_Yasakas_Divine_Wind_Knockback_Range"
 			}
 			"02"
 			{
@@ -55,26 +56,31 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"duration"				"12"
+				"_value"				"DOTA_Tooltip_Ability_Yasakas_Divine_Wind_Duration"
 			}
 			"04"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"movespeed_bonus"		"10 15 20"
+				"_value"				"DOTA_Tooltip_Ability_Yasakas_Divine_Wind_Movespeed_Bonus"
 			}
 			"05"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"slow"					"-30 -45 -60"
+				"_value"				"DOTA_Tooltip_Ability_Yasakas_Divine_Wind_Slow"
 			}
 			"06"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"slow_radius"			"550"
+				"_value"				"DOTA_Tooltip_Ability_Yasakas_Divine_Wind_Slow_Radius"
 			}
 			"07"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"damage"				"100 150 200"
+				"_value"				"DOTA_Tooltip_Ability_Yasakas_Divine_Wind_Damage"
 			}
 			"08"
 			{

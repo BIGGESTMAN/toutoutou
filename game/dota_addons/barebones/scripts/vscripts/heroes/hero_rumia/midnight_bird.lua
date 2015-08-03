@@ -29,6 +29,8 @@ end
 
 function midnightBirdEnd(keys)
 	local caster = keys.target
+	local ability = keys.ability
+	local ability_level = ability:GetLevel() - 1
 
 	local playerID = caster:GetPlayerID()
 	PlayerResource:SetCustomTeamAssignment(playerID, caster:GetTeamNumber())
@@ -43,7 +45,7 @@ function midnightBirdEnd(keys)
 		unit:RemoveModifierByName("modifier_midnight_bird_eaten")
 		FindClearSpaceForUnit(unit, caster:GetAbsOrigin(), false)
 		if unit:GetTeamNumber() ~= caster:GetTeamNumber() then
-			ApplyDamage({ victim = unit, attacker = caster, damage = 250, damage_type = DAMAGE_TYPE_MAGICAL})
+			ApplyDamage({ victim = unit, attacker = caster, damage = ability:GetLevelSpecialValueFor("damage", ability_level), damage_type = DAMAGE_TYPE_MAGICAL})
 		end
 		unit:RemoveNoDraw()
 

@@ -55,6 +55,7 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"knockback_distance"	"300"
+				"_value"				"DOTA_Tooltip_Ability_Sea_Split_Knockback_Distance"
 			}
 			"05"
 			{
@@ -70,6 +71,7 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"damage"				"80 150 220 290"
+				"_value"				"DOTA_Tooltip_Ability_Sea_Split_Damage"
 			}
 		}
 

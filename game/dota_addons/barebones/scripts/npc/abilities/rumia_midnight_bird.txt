@@ -5,6 +5,7 @@
 		"BaseClass"						"ability_datadriven"
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 		"FightRecapLevel"				"2"
 		"MaxLevel" 						"3"
@@ -20,15 +21,15 @@
 		}
 
 		"AbilityCastPoint"				"0"
-		"AbilityCooldown"				"30 20 10"
-		"AbilityManaCost"				"60 30 0"
+		"AbilityCooldown"				"20 16 12"
+		"AbilityManaCost"				"75"
 
 		"AbilitySpecial"
 		{
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"duration"				"5"
+				"duration"				"4 5 6"
 			}
 			"02"
 			{
@@ -38,17 +39,17 @@
 			"03"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"damage_reduction"		"35 50 65"
+				"damage"				"150 200 250"
 			}
 			"04"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"scepter_duration"		"6"
+				"pull_range"			"200"
 			}
 			"05"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"scepter_damage_bonus"	"50"
+				"scepter_damage_increase"	"20"
 			}
 		}
 
@@ -103,9 +104,11 @@
 
 				"Properties"
 				{
-					"MODIFIER_PROPERTY_BONUS_DAY_VISION"		"-925"
-				    "MODIFIER_PROPERTY_BONUS_NIGHT_VISION"		"-525"
-				    "MODIFIER_PROPERTY_TURN_RATE_PERCENTAGE"	"100"
+					//"MODIFIER_PROPERTY_BONUS_DAY_VISION"		"-925"
+				    //"MODIFIER_PROPERTY_BONUS_NIGHT_VISION"		"-525"
+				    "MODIFIER_PROPERTY_FIXED_DAY_VISION"		"%radius"
+				    "MODIFIER_PROPERTY_FIXED_NIGHT_VISION"		"%radius"
+				    "MODIFIER_PROPERTY_TURN_RATE_PERCENTAGE"	"1000"
 				}
 
 				"OnDestroy"

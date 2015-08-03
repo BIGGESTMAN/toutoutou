@@ -36,11 +36,13 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"line_duration"			"9"
+				"_value"				"DOTA_Tooltip_Ability_Nine_Character_Pierce_Line_Duration"
 			}
 			"02"
 			{
 				"var_type"				"FIELD_FLOAT"
 				"stun_duration"			"0.2 0.3 0.4 0.5"
+				"_value"				"DOTA_Tooltip_Ability_Nine_Character_Pierce_Stun_Duration"
 			}
 			"03"
 			{
@@ -56,6 +58,7 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"damage"				"55 80 105 130"
+				"_value"				"DOTA_Tooltip_Ability_Nine_Character_Pierce_Damage"
 			}
 			"06"
 			{

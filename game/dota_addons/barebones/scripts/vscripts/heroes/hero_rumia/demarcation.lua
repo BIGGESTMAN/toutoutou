@@ -5,7 +5,7 @@ function demarcationAffectedModifierCreated(keys)
 	local target = keys.target
 	local ability = keys.ability
 
-	if target:GetTeamNumber() ~= caster:GetTeamNumber() then
+	if target:GetTeamNumber() ~= caster:GetTeamNumber() and not target:IsOutOfGame() then
 		target:AddNewModifier(caster, ability, "modifier_demarcation_affected", {})
 	end
 	if target == caster then
