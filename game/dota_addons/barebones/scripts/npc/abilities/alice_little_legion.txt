@@ -26,6 +26,8 @@
 			"particle"					"particles/units/heroes/hero_sandking/sandking_caustic_finale_explode.vpcf"
 			"particle"					"particles/shanghai_doll_counter.vpcf"
 			"particle"					"particles/status_effect_red.vpcf"
+			"particle"					"particles/alice/hourai_doll_tether.vpcf"
+			"particle"					"particles/alice/shanghai_doll_tether.vpcf"
 		}
 
 		// Casting

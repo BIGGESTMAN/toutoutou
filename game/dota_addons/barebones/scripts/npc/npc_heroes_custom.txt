@@ -132,14 +132,14 @@
 
 	"npc_dota_hero_marisa"
 	{
-		"AbilityLayout" 		"4"
+		"AbilityLayout" 		"5"
 		"override_hero"			"npc_dota_hero_rubick"
 		"SoundSet"				"0"	
 		"Ability1"				"master_spark" 
 		"Ability2"				"blazing_star" 
 		"Ability3"				"orrerys_sun" 
 		"Ability4"				"final_spark"
-		"Ability5"				""
+		"Ability5"				"double_spark"
 		"Ability6"				""
 		"Ability7"				"attribute_bonus"
 		"Ability8"				"blazing_star_reverse"

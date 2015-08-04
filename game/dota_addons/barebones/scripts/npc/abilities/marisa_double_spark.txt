@@ -1,46 +1,81 @@
-	"master_spark"
+	"double_spark"
 	{
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"FightRecapLevel"				"1"
-		"AbilityTextureName"			"wisp_tether"
-		"MaxLevel" 						"4"
-		"RequiredLevel"					"1"
-		"LevelsBetweenUpgrades"			"2"
 
-		// Precache
+		"AbilityTextureName"			"wisp_tether_break"
+		"AbilityCastAnimation"			"ACT_DOTA_TELEPORT_END"
+		
+		// Casting
 		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.4"
+		"AbilityCooldown"				"10 9 8 7"
+		"AbilityManaCost"				"100 120 140 160"
+		"AbilityChannelTime" 			"2.0 2.0 2.0 2.0"
+
 		"precache"
 		{
 			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_phoenix.vsndevts"
 			"particle"					"particles/units/heroes/hero_phoenix/phoenix_sunray.vpcf"
 			"particle"					"particles/units/heroes/hero_phoenix/phoenix_sunray_beam_enemy.vpcf"
 		}
-
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0"
-		"AbilityCastRange"				"700 800 900 1000"
 		
-		// Time		
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"10 9 8 7"
+		"OnSpellStart"
+	    {
+			"RunScript"
+			{
+				"ScriptFile"			"heroes/hero_marisa/master_spark.lua"
+				"Function"				"masterSparkStart"
+				"sound_dummy_modifier"	"modifier_master_spark_dummy"
+				"blazing_star_modifier"	"modifier_blazing_star"
+			}
 
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"100 120 140 160"
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/hero_marisa/master_spark.lua"
+				"Function"		"masterSpark"
+				"slow_modifier"	"modifier_master_spark_slow"
+				"burn_particle"	"particles/units/heroes/hero_phoenix/phoenix_sunray_beam_enemy.vpcf"
+			}
 
-		"AbilityChannelTime" 			"2.0 2.0 2.0 2.0"
+	    	"ApplyModifier"
+	    	{
+	    		"ModifierName"			"modifier_master_spark"
+	    		"Target" 				"CASTER"
+	    	}
+	    }
 
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilitySpecial"
+	   "OnChannelFinish"
+	   {
+			"RemoveModifier"
+			{
+				"ModifierName"	"modifier_master_spark"
+				"Target" 		"CASTER"
+			}
+
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/hero_marisa/master_spark.lua"
+				"Function"		"masterSparkEnd"
+			}
+	   }
+
+	   "OnChannelInterrupted"
+	   {
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/hero_marisa/master_spark.lua"
+				"Function"		"masterSparkCancelled"
+			}
+	   }
+
+	   "AbilitySpecial"
 		{
 			"01"
 			{
@@ -87,32 +122,7 @@
 			}
 		}
 
-		"OnSpellStart"
-	    {
-			"RunScript"
-			{
-				"ScriptFile"			"heroes/hero_marisa/master_spark.lua"
-				"Function"				"masterSparkStart"
-				"sound_dummy_modifier"	"modifier_master_spark_dummy"
-				"blazing_star_modifier"	"modifier_blazing_star"
-			}
-
-			"RunScript"
-			{
-				"ScriptFile"	"heroes/hero_marisa/master_spark.lua"
-				"Function"		"masterSpark"
-				"slow_modifier"	"modifier_master_spark_slow"
-				"burn_particle"	"particles/units/heroes/hero_phoenix/phoenix_sunray_beam_enemy.vpcf"
-			}
-
-	    	"ApplyModifier"
-	    	{
-	    		"ModifierName"			"modifier_master_spark"
-	    		"Target" 				"CASTER"
-	    	}
-	    }
-
-	    "Modifiers"
+		"Modifiers"
 	    {
 	    	"modifier_master_spark"
 	    	{
@@ -167,28 +177,4 @@
 				}
 	    	}
 	    }
-
-	   "OnChannelFinish"
-	   {
-			"RemoveModifier"
-			{
-				"ModifierName"	"modifier_master_spark"
-				"Target" 		"CASTER"
-			}
-
-			"RunScript"
-			{
-				"ScriptFile"	"heroes/hero_marisa/master_spark.lua"
-				"Function"		"masterSparkEnd"
-			}
-	   }
-
-	   "OnChannelInterrupted"
-	   {
-			"RunScript"
-			{
-				"ScriptFile"	"heroes/hero_marisa/master_spark.lua"
-				"Function"		"masterSparkCancelled"
-			}
-	   }
 	}

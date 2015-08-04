@@ -28,7 +28,6 @@ function spawnDoll(keys)
 	ability:ApplyDataDrivenModifier(caster, doll, "modifier_kill", {duration = ability:GetLevelSpecialValueFor("doll_duration", ability_level)})
 	local speed = ability:GetLevelSpecialValueFor("dash_speed", ability_level) * 0.03
 
-
 	-- Dash towards target
 	Timers:CreateTimer(0, function()
 		doll.target = target
@@ -60,6 +59,11 @@ function spawnDoll(keys)
 			end
 		end
 	end)
+
+	doll.tether_particle = ParticleManager:CreateParticle("particles/alice/"..doll_type.."_tether.vpcf", PATTACH_ABSORIGIN_FOLLOW, doll)
+	ParticleManager:SetParticleControlEnt(doll.tether_particle, 0, doll, PATTACH_ABSORIGIN, "attach_origin", doll:GetAbsOrigin(), true)
+	ParticleManager:SetParticleControlEnt(doll.tether_particle, 1, target, PATTACH_ABSORIGIN, "attach_origin", target:GetAbsOrigin(), true)
+
 end
 
 function killDoll(keys)
@@ -87,6 +91,8 @@ function killDoll(keys)
 
 		ParticleManager:CreateParticle(keys.explosion_particle, PATTACH_ABSORIGIN, doll)
 	end
+
+	ParticleManager:DestroyParticle(doll.tether_particle, false)
 end
 
 function deathCheck(keys)

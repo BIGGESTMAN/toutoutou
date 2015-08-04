@@ -1,5 +1,7 @@
 particles_table = {}
 
+LinkLuaModifier("modifier_master_spark_test", "heroes/hero_marisa/modifier_master_spark_test.lua", LUA_MODIFIER_MOTION_NONE)
+
 function masterSparkStart(event)
 	local caster = event.caster
 	local ability = event.ability
@@ -35,6 +37,8 @@ function masterSparkStart(event)
 			ParticleManager:SetParticleControl( secondarypfx, 1, secondaryLaserPoint )
 		end
 	end
+
+	caster:AddNewModifier(caster, ability, "modifier_master_spark_test", {duration = 5})
 end
 
 function masterSparkEnd(event)

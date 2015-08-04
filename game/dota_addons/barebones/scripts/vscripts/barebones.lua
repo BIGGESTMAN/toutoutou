@@ -79,7 +79,7 @@ function GameMode:InitGameMode()
 	if CHEATY_STUFF then
 		GameRules:SetPreGameTime(0)
 	else
-		GameRules:SetPreGameTime( PRE_GAME_TIME)
+		GameRules:SetPreGameTime(PRE_GAME_TIME)
 	end
 	GameRules:SetPostGameTime( POST_GAME_TIME )
 	GameRules:SetTreeRegrowTime( TREE_REGROW_TIME )
@@ -291,7 +291,7 @@ function GameMode:OnHeroInGame(hero)
 			if STARTING_ITEMS then
 				hero:AddItem(CreateItem("item_blink", hero, hero))
 				hero:AddItem(CreateItem("item_force_staff", hero, hero))
-				hero:AddItem(CreateItem("item_ultimate_scepter", hero, hero))
+				hero:AddItem(CreateItem("item_heart", hero, hero))
 				hero:AddItem(CreateItem("item_silver_edge", hero, hero))
 				hero:AddItem(CreateItem("item_gem", hero, hero))
 				hero:AddItem(CreateItem("item_dagon", hero, hero))
