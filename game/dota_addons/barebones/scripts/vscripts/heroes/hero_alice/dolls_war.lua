@@ -71,15 +71,32 @@ function fireLaser(keys, doll)
 	StartAnimation(doll, {duration=24 * 0.03, activity=ACT_DOTA_RATTLETRAP_HOOKSHOT_START, rate=1})
 	StartSoundEvent(keys.laser_sound, doll)
 
-	local particle = ParticleManager:CreateParticle(keys.laser_particle, PATTACH_ABSORIGIN_FOLLOW, doll)
-	ParticleManager:SetParticleControlEnt( particle, 0, doll, PATTACH_POINT, "attach_hitloc", doll:GetAbsOrigin(), true )
+	-- local particle = ParticleManager:CreateParticle(keys.laser_particle, PATTACH_ABSORIGIN_FOLLOW, doll)
+	-- ParticleManager:SetParticleControlEnt( particle, 0, doll, PATTACH_POINT, "attach_hitloc", doll:GetAbsOrigin(), true )
 
-	local particleRange = range + radius
-	local endcapPos = doll:GetAbsOrigin() + direction * range
-	ParticleManager:SetParticleControl( particle, 1, endcapPos )
+	-- local particleRange = range + radius
+	-- local endcapPos = doll:GetAbsOrigin() + direction * range
+	-- ParticleManager:SetParticleControl( particle, 1, endcapPos )
 
-	Timers:CreateTimer(0.03, function()
-		ParticleManager:DestroyParticle(particle, false)
+	-- Timers:CreateTimer(0.03, function()
+	-- 	ParticleManager:DestroyParticle(particle, false)
+	-- end)
+
+	local dummy_unit = CreateUnitByName("npc_dota_invisible_vision_source", doll:GetAbsOrigin(), false, caster, caster, caster:GetTeam())
+	ability:ApplyDataDrivenModifier(caster, dummy_unit, thinker_modifier, {})
+
+	local vertical_distance = 75
+	dummy_unit:SetAbsOrigin(doll:GetAbsOrigin() + Vector(0,0,vertical_distance))
+	local angle = VectorToAngles(doll:GetForwardVector())
+	dummy_unit:SetAngles(90,angle.y,0)
+
+	local particle = ParticleManager:CreateParticle("particles/alice/shanghai_laser.vpcf", PATTACH_ABSORIGIN, caster)
+	ParticleManager:SetParticleControlEnt(particle, 1, dummy_unit, PATTACH_POINT_FOLLOW, "attach_hitloc", dummy_unit:GetAbsOrigin(), true)
+	ParticleManager:SetParticleControlEnt(particle, 5, dummy_unit, PATTACH_POINT_FOLLOW, "attach_hitloc", dummy_unit:GetAbsOrigin(), true)
+	ParticleManager:SetParticleControlEnt(particle, 6, dummy_unit, PATTACH_POINT_FOLLOW, "attach_hitloc", dummy_unit:GetAbsOrigin(), true)
+	-- time out particle dummy after a while
+	Timers:CreateTimer(5, function()
+		dummy_unit:RemoveSelf()
 	end)
 end
 

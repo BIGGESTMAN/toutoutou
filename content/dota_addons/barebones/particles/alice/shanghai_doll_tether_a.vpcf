@@ -3,12 +3,12 @@
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
 	m_nMaxParticles = 32
-	m_flConstantRadius = 96.000000
+	m_flConstantRadius = 48.000000
 	m_ConstantColor =
 	[
-		130,
-		101,
+		124,
 		255,
+		101,
 		255,
 	]
 	m_Renderers =
@@ -18,7 +18,7 @@
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
 			m_bAdditive = true
 			m_flOverbrightFactor = 8.000000
-			m_hTexture = resource:"materials/particle/beam_hotblue2.vtex"
+			m_hTexture = resource:"materials/particle/beam_hotwhite.vtex"
 			m_flRadiusScale = 0.500000
 			m_flFinalTextureScaleU = -1.000000
 			m_flFinalTextureOffsetU = 1.000000
@@ -86,6 +86,11 @@
 			m_nInputMax = 1
 			m_nFieldOutput = 7
 			m_bActiveRange = true
+		},
+		{
+			_class = "C_INIT_RandomAlpha"
+			m_nAlphaMin = 128
+			m_nAlphaMax = 128
 		},
 	]
 	m_Emitters =

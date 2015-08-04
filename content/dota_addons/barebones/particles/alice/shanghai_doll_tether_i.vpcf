@@ -6,9 +6,9 @@
 	m_flConstantRadius = 24.000000
 	m_ConstantColor =
 	[
-		82,
-		86,
+		107,
 		251,
+		82,
 		255,
 	]
 	m_Renderers =

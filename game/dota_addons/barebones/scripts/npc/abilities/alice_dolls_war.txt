@@ -22,6 +22,7 @@
 			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_rattletrap.vsndevts"
 			"particle"					"particles/units/heroes/hero_shredder/shredder_whirling_death.vpcf"
 			"particle"					"particles/shanghai_doll_laser.vpcf"
+			"particle"					"particles/alice/shanghai_laser.vpcf"
 		}
 
 		// Casting
@@ -157,18 +158,8 @@
 
 			"modifier_dolls_war_dummy"
 			{
-				"OnCreated"
-				{
-					"ApplyModifier"
-					{
-						"Target"		"TARGET"
-						"ModifierName"	"modifier_phased"
-					}
-				}
-				
 				"States"
 				{
-					"MODIFIER_STATE_PROVIDES_VISION"		"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_INVULNERABLE"			"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_NO_HEALTH_BAR"			"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_NO_UNIT_COLLISION"		"MODIFIER_STATE_VALUE_ENABLED"
