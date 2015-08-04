@@ -3,7 +3,7 @@
 	_class = "CParticleSystemDefinition"
 	m_bShouldHitboxesFallbackToRenderBounds = false
 	m_nMaxParticles = 32
-	m_flConstantRadius = 96.000000
+	m_flConstantRadius = 192.000000
 	m_flConstantLifespan = 0.350000
 	m_ConstantColor =
 	[

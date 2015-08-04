@@ -24,7 +24,7 @@ function unitsInLine(caster, ability, thinker_modifier, origin, range, radius, d
 		local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
 		local iOrder = FIND_CLOSEST
 
-		DebugDrawCircle(thinker:GetAbsOrigin(), Vector(255,0,0), 1, thinkerRadius, true, 2)
+		-- DebugDrawCircle(thinker:GetAbsOrigin(), Vector(255,0,0), 1, thinkerRadius, true, 2)
 		local possible_targets = FindUnitsInRadius(team, thinker:GetAbsOrigin(), nil, thinkerRadius, iTeam, iType, iFlag, iOrder, false)
 		for k,possible_target in pairs(possible_targets) do
 			-- Calculate distance

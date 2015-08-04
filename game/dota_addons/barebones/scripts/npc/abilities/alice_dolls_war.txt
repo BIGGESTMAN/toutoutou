@@ -21,7 +21,6 @@
 			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_shredder.vsndevts"
 			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_rattletrap.vsndevts"
 			"particle"					"particles/units/heroes/hero_shredder/shredder_whirling_death.vpcf"
-			"particle"					"particles/shanghai_doll_laser.vpcf"
 			"particle"					"particles/alice/shanghai_laser.vpcf"
 		}
 

@@ -13,9 +13,11 @@
 		},
 		{
 			m_ChildRef = resource:"particles/alice/shanghai_laser_a0c.vpcf"
+			m_bDisableChild = true
 		},
 		{
 			m_ChildRef = resource:"particles/alice/shanghai_laser_a0d.vpcf"
+			m_bDisableChild = true
 		},
 		{
 			m_ChildRef = resource:"particles/alice/shanghai_laser_a0e.vpcf"
@@ -28,9 +30,11 @@
 		},
 		{
 			m_ChildRef = resource:"particles/alice/shanghai_laser_a0h.vpcf"
+			m_bDisableChild = true
 		},
 		{
 			m_ChildRef = resource:"particles/alice/shanghai_laser_a0i.vpcf"
+			m_bDisableChild = true
 		},
 		{
 			m_ChildRef = resource:"particles/alice/shanghai_laser_a0j.vpcf"

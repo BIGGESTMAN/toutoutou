@@ -107,8 +107,8 @@
 		},
 		{
 			_class = "C_INIT_RandomRadius"
-			m_flRadiusMin = 40.000000
-			m_flRadiusMax = 90.000000
+			m_flRadiusMin = 160.000000
+			m_flRadiusMax = 360.000000
 		},
 		{
 			_class = "C_INIT_RemapParticleCountToScalar"

@@ -71,17 +71,6 @@ function fireLaser(keys, doll)
 	StartAnimation(doll, {duration=24 * 0.03, activity=ACT_DOTA_RATTLETRAP_HOOKSHOT_START, rate=1})
 	StartSoundEvent(keys.laser_sound, doll)
 
-	-- local particle = ParticleManager:CreateParticle(keys.laser_particle, PATTACH_ABSORIGIN_FOLLOW, doll)
-	-- ParticleManager:SetParticleControlEnt( particle, 0, doll, PATTACH_POINT, "attach_hitloc", doll:GetAbsOrigin(), true )
-
-	-- local particleRange = range + radius
-	-- local endcapPos = doll:GetAbsOrigin() + direction * range
-	-- ParticleManager:SetParticleControl( particle, 1, endcapPos )
-
-	-- Timers:CreateTimer(0.03, function()
-	-- 	ParticleManager:DestroyParticle(particle, false)
-	-- end)
-
 	local dummy_unit = CreateUnitByName("npc_dota_invisible_vision_source", doll:GetAbsOrigin(), false, caster, caster, caster:GetTeam())
 	ability:ApplyDataDrivenModifier(caster, dummy_unit, thinker_modifier, {})
 
