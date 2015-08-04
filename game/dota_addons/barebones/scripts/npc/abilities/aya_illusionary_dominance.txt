@@ -110,12 +110,7 @@
 			"modifier_illusionary_dominance_dashing"
 			{
 				"IsHidden"	"1"
-
-				"Aura"        	"modifier_illusionary_dominance_hit"
-				"Aura_Radius" 	"%radius"
-				"Aura_Teams"  	"DOTA_UNIT_TARGET_TEAM_ENEMY"
-				"Aura_Types"  	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-
+				
 				"ThinkInterval"  "0.03"
 				"OnIntervalThink"
 				{

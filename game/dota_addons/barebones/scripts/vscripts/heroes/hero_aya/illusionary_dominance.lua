@@ -27,46 +27,6 @@ function illusionaryDominance( keys )
 	end
 end
 
-function illusionaryDominanceHit( keys )
-	local caster = keys.caster
-	local target = keys.target
-	local ability = keys.ability
-	local hit = false
-	local particleSlashName = keys.particle
-	local accelerating_modifier = keys.accelerating_modifier
-
-	-- Ignore the target if its already on the table
-	local targetsHit = ability.targetsHit
-	for k,v in pairs(targetsHit) do
-		if v == target then
-			hit = true
-		end
-	end
-
-	if not hit then
-		caster:PerformAttack(target, true, true, true, true )
-		if ability.canAccelerate and target:IsHero() then
-			if not caster:HasModifier(keys.accelerating_modifier) then
-				ability:ApplyDataDrivenModifier(caster, caster, accelerating_modifier, {})
-			end
-			(caster:FindModifierByName(accelerating_modifier)):IncrementStackCount()
-			ability.canAccelerate = false
-		end
-
-		-- Slash particles
-		local slashFxIndex = ParticleManager:CreateParticle( particleSlashName, PATTACH_ABSORIGIN_FOLLOW, target )
-		--StartSoundEvent( slashSound, caster )
-		Timers:CreateTimer( 0.1, function()
-				ParticleManager:DestroyParticle( slashFxIndex, false )
-				ParticleManager:ReleaseParticleIndex( slashFxIndex )
-				--StopSoundEvent( slashSound, caster )
-				return nil
-			end
-		)
-		table.insert(ability.targetsHit, target)
-	end
-end
-
 function dash(caster, ability, direction, distance)
 	local ability_level = ability:GetLevel() - 1
 
@@ -82,7 +42,7 @@ function dash(caster, ability, direction, distance)
 	local final_speed = speed * 0.03
 	local traveled_distance = 0
 
-	ability.targetsHit = {}
+	ability.units_hit = {}
 	ability.canAccelerate = true
 
 	local particle = ParticleManager:CreateParticle("particles/aya/illusionary_dominance_dash.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
@@ -98,6 +58,8 @@ end
 
 function updateDashing(keys)
 	local caster = keys.caster
+	local ability = keys.ability
+	local ability_level = ability:GetLevel() - 1
 	local modifier = caster:FindModifierByName("modifier_illusionary_dominance_dashing")
 
 	-- I have no literally no idea how modifier can be nil here, but whatever
@@ -108,6 +70,42 @@ function updateDashing(keys)
 	else
 		caster:RemoveModifierByName("modifier_illusionary_dominance_dashing")
 		FindClearSpaceForUnit(caster, caster:GetAbsOrigin(), false)
+	end
+
+	-- Check for units hit
+	local team = caster:GetTeamNumber()
+	local origin = caster:GetAbsOrigin()
+	local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
+	local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
+	local iFlag = DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES
+	local iOrder = FIND_ANY_ORDER
+	local radius = ability:GetLevelSpecialValueFor("radius", ability_level)
+	-- DebugDrawCircle(origin, Vector(180,40,40), 1, radius, true, 0.5)
+
+	local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
+
+	for k,unit in pairs(targets) do
+		if not ability.units_hit[unit] then
+			ability.units_hit[unit] = true
+			caster:PerformAttack(unit, true, true, true, true )
+			if ability.canAccelerate and unit:IsHero() then
+				if not caster:HasModifier("modifier_illusionary_dominance_accelerating") then
+					ability:ApplyDataDrivenModifier(caster, caster, "modifier_illusionary_dominance_accelerating", {})
+				end
+				(caster:FindModifierByName("modifier_illusionary_dominance_accelerating")):IncrementStackCount()
+				ability.canAccelerate = false
+			end
+
+			-- Slash particles
+			local slashFxIndex = ParticleManager:CreateParticle("particles/units/heroes/hero_ember_spirit/ember_spirit_sleightoffist_tgt.vpcf", PATTACH_ABSORIGIN_FOLLOW, unit)
+			--StartSoundEvent( slashSound, caster )
+			Timers:CreateTimer( 0.1, function()
+				ParticleManager:DestroyParticle( slashFxIndex, false )
+				ParticleManager:ReleaseParticleIndex( slashFxIndex )
+				--StopSoundEvent( slashSound, caster )
+				return nil
+			end)
+		end
 	end
 end
 
@@ -124,7 +122,10 @@ function peerlessWindGod(keys)
 
 	dash(caster, ability, direction, distance)
 
-	if direction:Length2D() > 0 then caster:SetForwardVector(direction) end
+	if direction:Length2D() > 0 then
+		direction.z = 0
+		caster:SetForwardVector(direction)
+	end
 end
 
 function updateAbilityEnabled(keys)
