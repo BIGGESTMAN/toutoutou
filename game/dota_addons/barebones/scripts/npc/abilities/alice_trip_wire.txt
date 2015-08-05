@@ -22,6 +22,7 @@
 			"particle"					"particles/units/heroes/hero_oracle/oracle_fortune_purge.vpcf"
 			"model"						"models/development/invisiblebox.vmdl"
 			"particle"					"particles/alice/trip_wire.vpcf"
+			"particle"					"particles/alice/trip_wire_dolls_stored_indicator.vpcf"
 		}
 
 		// Special
@@ -65,7 +66,7 @@
 			"07"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"update_interval"		"0.1"
+				"update_interval"		"0.03"
 			}
 			"08"
 			{
@@ -109,26 +110,6 @@
 
 		"Modifiers"
 		{
-			"modifier_trip_wire_caster"
-			{
-				"IsHidden"					"1"
-				"IsPurgable"				"0"
-
-				"Duration"					"%duration"
-
-				"ThinkInterval"				"%update_interval"
-				"OnIntervalThink"
-				{
-					"RunScript"
-					{
-						"ScriptFile"		"heroes/hero_alice/trip_wire.lua"
-						"Function"			"updateWire"
-						"thinker_modifier"	"modifier_dummy"
-						"root_modifier"		"modifier_trip_wire_root"
-					}
-				}
-			}
-
 			"modifier_trip_wire_root"
 			{
 				"IsDebuff"					"1"
@@ -180,6 +161,26 @@
 					//"MODIFIER_PROPERTY_MODEL_CHANGE" 			"models/development/invisiblebox.vmdl"
 				    "MODIFIER_PROPERTY_FIXED_DAY_VISION"		"%vision"
 				    "MODIFIER_PROPERTY_FIXED_NIGHT_VISION"		"%vision"
+				}
+
+				"ThinkInterval"				"%update_interval"
+
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"		"heroes/hero_alice/trip_wire.lua"
+						"Function"			"updateWire"
+					}
+				}
+
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_alice/trip_wire.lua"
+						"Function"		"onWireDeath"
+					}
 				}
 			}
 
