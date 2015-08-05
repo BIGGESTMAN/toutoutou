@@ -63,9 +63,9 @@ function spawnDoll(ability, target, caster, origin)
 		end
 	end)
 
-	doll.tether_particle = ParticleManager:CreateParticle("particles/alice/"..doll_type.."_tether.vpcf", PATTACH_ABSORIGIN_FOLLOW, doll)
-	ParticleManager:SetParticleControlEnt(doll.tether_particle, 0, doll, PATTACH_ABSORIGIN, "attach_origin", doll:GetAbsOrigin(), true)
-	ParticleManager:SetParticleControlEnt(doll.tether_particle, 1, target, PATTACH_ABSORIGIN, "attach_origin", target:GetAbsOrigin(), true)
+	doll.tether_particle = ParticleManager:CreateParticle("particles/alice/"..doll_type.."_tether.vpcf", PATTACH_POINT_FOLLOW, doll)
+	ParticleManager:SetParticleControlEnt(doll.tether_particle, 0, doll, PATTACH_POINT_FOLLOW, "attach_hitloc", doll:GetAbsOrigin(), true)
+	ParticleManager:SetParticleControlEnt(doll.tether_particle, 1, target, PATTACH_POINT_FOLLOW, "attach_hitloc", target:GetAbsOrigin(), true)
 end
 
 function removeDoll(doll, caster)

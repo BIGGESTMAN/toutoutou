@@ -18,6 +18,8 @@ function createWire(keys)
 		if not caster.wires then caster.wires = {} end
 		caster.wires[wire] = true
 
+		wire_unit.ally_particle = ParticleManager:CreateParticleForTeam("particles/alice/trip_wire.vpcf", PATTACH_POINT_FOLLOW, wire[1], caster:GetTeamNumber())
+
 		wire[3]:SetOriginalModel("models/development/invisiblebox.vmdl")
 		wire[3]:SetModelScale(10) -- to make wire unit easier to click on
 		ability:ApplyDataDrivenModifier(caster, wire[3], "modifier_kill", {duration = ability:GetLevelSpecialValueFor("duration", ability_level)})
@@ -51,20 +53,27 @@ function updateWire(keys)
 			-- Update wire unit position
 			wire[3]:SetAbsOrigin((target1:GetAbsOrigin() + target2:GetAbsOrigin()) / 2 + Vector(0,0,50))
 
+			-- Particle shit
 			-- Check visibility of wire to enemy team
 			local dummy_enemy = CreateUnitByName("npc_dummy_unit", Vector(0,0,0), false, caster, caster, caster:GetOpposingTeamNumber())
 			local visibleToEnemies = dummy_enemy:CanEntityBeSeenByMyTeam(wire[3])
 			dummy_enemy:RemoveSelf()
 
-			-- Create particle
+			-- Update ally particle
+			ParticleManager:SetParticleControl(wire[3].ally_particle,0,Vector(target1:GetAbsOrigin().x,target1:GetAbsOrigin().y,target1:GetAbsOrigin().z + target1:GetBoundingMaxs().z ))	
+			ParticleManager:SetParticleControl(wire[3].ally_particle,1,Vector(target2:GetAbsOrigin().x,target2:GetAbsOrigin().y,target2:GetAbsOrigin().z + target2:GetBoundingMaxs().z ))
+
+			-- Create/destroy and update enemy particle
 			local particle = nil
-			if not visibleToEnemies then
-				particle = ParticleManager:CreateParticleForTeam("particles/econ/events/ti5/dagon_ti5.vpcf", PATTACH_WORLDORIGIN, target1, caster:GetTeamNumber())
-			else
-				particle = ParticleManager:CreateParticle("particles/econ/events/ti5/dagon_ti5.vpcf", PATTACH_WORLDORIGIN, target1)
+			if not visibleToEnemies and wire[3].enemy_particle then
+				ParticleManager:DestroyParticle(wire[3].enemy_particle, false)
+				wire[3].enemy_particle = nil
+			elseif visibleToEnemies and not wire[3].enemy_particle then
+				wire[3].enemy_particle = ParticleManager:CreateParticleForTeam("particles/alice/trip_wire.vpcf", PATTACH_POINT_FOLLOW, wire[1], caster:GetOpposingTeamNumber())
+				ParticleManager:SetParticleControl(wire[3].enemy_particle,0,Vector(target1:GetAbsOrigin().x,target1:GetAbsOrigin().y,target1:GetAbsOrigin().z + target1:GetBoundingMaxs().z ))	
+				ParticleManager:SetParticleControl(wire[3].enemy_particle,1,Vector(target2:GetAbsOrigin().x,target2:GetAbsOrigin().y,target2:GetAbsOrigin().z + target2:GetBoundingMaxs().z ))
 			end
-			ParticleManager:SetParticleControl(particle,0,Vector(target1:GetAbsOrigin().x,target1:GetAbsOrigin().y,target1:GetAbsOrigin().z + target1:GetBoundingMaxs().z ))	
-			ParticleManager:SetParticleControl(particle,1,Vector(target2:GetAbsOrigin().x,target2:GetAbsOrigin().y,target2:GetAbsOrigin().z + target2:GetBoundingMaxs().z ))
+
 
 			-- Check for enemy units in wire's path
 			local thinker_modifier = keys.thinker_modifier
@@ -87,9 +96,12 @@ function updateWire(keys)
 						ability:ApplyDataDrivenModifier(caster, unit, keys.root_modifier, {})
 					end
 
-					for k,doll in pairs(wire[3].stored_dolls) do
-						local little_legion_ability = caster:FindAbilityByName("little_legion")
-						spawnDoll(little_legion_ability, hit_units[RandomInt(1, #hit_units)], caster, wire[3]:GetAbsOrigin())
+					local wire_location = wire[3]:GetAbsOrigin()
+					local little_legion_ability = caster:FindAbilityByName("little_legion")
+					for i=1,#wire[3].stored_dolls do
+						Timers:CreateTimer(i * ability:GetLevelSpecialValueFor("delay_between_doll_spawns", ability_level), function()
+							spawnDoll(little_legion_ability, hit_units[RandomInt(1, #hit_units)], caster, wire_location)
+						end)
 					end
 
 					destroyWire(wire, caster)
@@ -113,6 +125,9 @@ function attach(keys)
 end
 
 function destroyWire(wire, caster)
+	ParticleManager:DestroyParticle(wire[3].ally_particle, false)
+	if wire[3].enemy_particle then ParticleManager:DestroyParticle(wire[3].enemy_particle, false) end
+
 	caster.wires[wire] = nil
 	if caster:FindAbilityByName("trip_wire"):IsHidden() and wire == caster.last_wire then
 		caster:SwapAbilities("trip_wire", "trip_wire_attach", true, false)

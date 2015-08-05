@@ -19,9 +19,9 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"precache"
 		{
-			"particle"					"particles/econ/events/ti5/dagon_ti5.vpcf"
 			"particle"					"particles/units/heroes/hero_oracle/oracle_fortune_purge.vpcf"
 			"model"						"models/development/invisiblebox.vmdl"
+			"particle"					"particles/alice/trip_wire.vpcf"
 		}
 
 		// Special
@@ -76,6 +76,11 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"vision"				"600"
+			}
+			"10"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"delay_between_doll_spawns"	"0.1"
 			}
 		}
 
