@@ -1,4 +1,4 @@
-Marisa - Radiant Intelligence
+Marisa - Radiant Intelligence (Rubick)
  
 Base Stats
  
@@ -37,7 +37,8 @@ Starting Radius : 300
 End Radius : 450
 Mana : 100/120/140/160
 Cooldown : 10/9/8/7
-[W] Blazing Star : Marisa flies at an enemy, casting a Master Spark of the current level behind her. On collision, she deals magical damage, and drags them behind her for the remaining distance. Can be recast once to immediately reverse her direction.
+
+[W] Blazing Star : Marisa flies at an enemy, casting a Master Spark of the current level behind her. On collision, she deals magical damage, and drags them behind her for the remaining distance. Can be recast once to immediately reverse direction.
 Spell Immunity - Target, damage, and drag blocked by spell immunity. If the unit becomes spell immune during the ability, Marisa will still fly in their direction, and continue straight forward after colliding. Linken’s Sphere blocks the ability on initial cast.
  
 Cast Point : 0.4
