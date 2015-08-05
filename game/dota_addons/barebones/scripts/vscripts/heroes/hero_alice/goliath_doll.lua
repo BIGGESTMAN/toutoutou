@@ -3,15 +3,14 @@ function spawnDoll(keys)
 	local ability = keys.ability
 	local ability_level = ability:GetLevel() - 1
 
-	local doll = CreateUnitByName("goliath_doll", keys.target_points[1], true, caster, caster, caster:GetTeamNumber())
+	local tree_destruction_radius = 250
+
+	local unit_name = "goliath_doll_" .. ability:GetLevel()
+	local doll = CreateUnitByName(unit_name, keys.target_points[1], true, caster, caster, caster:GetTeamNumber())
 	if not caster.goliath_dolls then caster.goliath_dolls = {} end
 	caster.goliath_dolls[doll] = true
 	doll:SetControllableByPlayer(caster:GetMainControllingPlayer(), true)
 	ability:ApplyDataDrivenModifier(caster, doll, keys.modifier, {})
-
-	if ability_level > 1 then
-		doll:CreatureLevelUp(ability_level - 1)
-	end
 
 	local bash_ability = doll:FindAbilityByName(keys.bash_ability)
 	bash_ability:SetLevel(ability_level + 1)
@@ -20,6 +19,8 @@ function spawnDoll(keys)
 	cleave_ability:SetLevel(ability_level + 1)
 
 	ability:ApplyDataDrivenModifier(caster, doll, "modifier_kill", {duration = ability:GetLevelSpecialValueFor("duration", ability_level)})
+
+	GridNav:DestroyTreesAroundPoint(keys.target_points[1], tree_destruction_radius, false)
 end
 
 function killDoll(keys)

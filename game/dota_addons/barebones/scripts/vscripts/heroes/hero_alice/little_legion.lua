@@ -33,11 +33,12 @@ function killDoll(keys)
 	ParticleManager:DestroyParticle(doll.tether_particle, false)
 end
 
-function deathCheck(keys)
+function updateDoll(keys)
 	local doll = keys.target
 	local target = doll.target
 	local doll_type = doll:GetUnitName()
 	if doll_type == "shanghai_doll" then
+		print("?")
 		doll:MoveToNPC(target)
 	end
 	if (target:IsNull() or not target:IsAlive()) or (target:IsInvisible() and not doll:CanEntityBeSeenByMyTeam(target)) or 

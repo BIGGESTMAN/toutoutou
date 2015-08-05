@@ -18,7 +18,15 @@ function candidShot(keys)
 	local target_points = {}
 	local angles = {}
 
-	--1,2,3,4 is forward,right,back,left
+	-- Create vision dummy
+	local vision_dummy = CreateUnitByName("npc_dummy_blank", target_location, false, caster, caster, caster_team)
+	ability:ApplyDataDrivenModifier(caster, vision_dummy, "modifier_vision_dummy", {})
+
+	Timers:CreateTimer(ability:GetLevelSpecialValueFor("vision_duration", ability_level),function()
+		vision_dummy:RemoveSelf()
+	end)
+
+	-- 1,2,3,4 is forward,right,back,left
 	angles[1] = caster:GetForwardVector()
 	for i=1,3 do
 		angles[i + 1] = (RotatePosition(target_location, QAngle(0,90 * i,0), target_location + angles[1]) - target_location)

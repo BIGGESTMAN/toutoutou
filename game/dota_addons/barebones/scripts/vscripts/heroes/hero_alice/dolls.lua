@@ -17,15 +17,14 @@ function spawnDoll(ability, target, caster, origin)
 			doll_type = "hourai_doll"
 		end
 		local doll = CreateUnitByName(doll_type, origin, true, caster, caster, caster:GetTeamNumber())
+		doll.target = target
 
 		-- Set doll stats based on skill rank
-		if ability_level > 1 then
-			doll:CreatureLevelUp(ability_level - 1)
+		if ability_level > 0 then
+			doll:CreatureLevelUp(ability_level)
 		end
 
-		if not caster.dolls then
-			caster.dolls = {}
-		end
+		if not caster.dolls then caster.dolls = {} end
 		caster.dolls[doll] = true
 
 		ability:ApplyDataDrivenModifier(caster, doll, "modifier_little_legion_doll", {})
@@ -34,7 +33,6 @@ function spawnDoll(ability, target, caster, origin)
 
 		-- Dash towards target
 		Timers:CreateTimer(0, function()
-			doll.target = target
 			local direction = (target:GetAbsOrigin() - doll:GetAbsOrigin()):Normalized()
 			local target_distance = (target:GetAbsOrigin() - doll:GetAbsOrigin()):Length2D()
 

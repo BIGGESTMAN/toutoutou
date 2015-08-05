@@ -79,7 +79,12 @@
 			"06"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"death_check_interval"	"0.1"
+				"update_interval"		"0.06"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"shanghai_armor_gain"	"2"
 			}
 		}
 
@@ -114,14 +119,14 @@
 					}
 				}
 
-				"ThinkInterval"			"%death_check_interval"
+				"ThinkInterval"			"%update_interval"
 
 				"OnIntervalThink"
 				{
 					"RunScript"
 					{
 						"ScriptFile"	"heroes/hero_alice/little_legion.lua"
-						"Function"		"deathCheck"
+						"Function"		"updateDoll"
 						"modifier"		"modifier_little_legion_doll"
 					}
 				}
