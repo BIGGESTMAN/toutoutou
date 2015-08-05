@@ -6,11 +6,19 @@ function spawnDoll(keys)
 	local tree_destruction_radius = 250
 
 	local unit_name = "goliath_doll_" .. ability:GetLevel()
+	if caster:HasScepter() then unit_name = "goliath_doll_aghs" end
+
 	local doll = CreateUnitByName(unit_name, keys.target_points[1], true, caster, caster, caster:GetTeamNumber())
 	if not caster.goliath_dolls then caster.goliath_dolls = {} end
 	caster.goliath_dolls[doll] = true
 	doll:SetControllableByPlayer(caster:GetMainControllingPlayer(), true)
 	ability:ApplyDataDrivenModifier(caster, doll, keys.modifier, {})
+	if caster:HasScepter() then
+		ability:ApplyDataDrivenModifier(caster, doll, "modifier_goliath_doll_spell_immune", {})
+		local particle = ParticleManager:CreateParticle("particles/alice/goliath_doll_spell_immunity.vpcf", PATTACH_POINT_FOLLOW, doll)
+		ParticleManager:SetParticleControlEnt(particle, 0, doll, PATTACH_POINT_FOLLOW, "attach_hitloc", doll:GetAbsOrigin(), true)
+		ParticleManager:SetParticleControlEnt(particle, 1, doll, PATTACH_POINT_FOLLOW, "attach_hitloc", doll:GetAbsOrigin(), true)
+	end
 
 	local bash_ability = doll:FindAbilityByName(keys.bash_ability)
 	bash_ability:SetLevel(ability_level + 1)

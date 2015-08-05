@@ -77,7 +77,6 @@ end
 function removeDoll(doll, caster)
 	doll:RemoveSelf()
 	caster.dolls[doll] = nil
-	ParticleManager:DestroyParticle(doll.tether_particle, false)
 end
 
 function storeDoll(wire, doll_level)

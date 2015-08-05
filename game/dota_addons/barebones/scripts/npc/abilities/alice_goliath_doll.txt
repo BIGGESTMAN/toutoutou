@@ -18,7 +18,7 @@
 			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_slardar.vsndevts"
 			"particle"					"particles/units/heroes/hero_ogre_magi/ogre_magi_bloodlust_buff.vpcf"
 			"particle"					"particles/generic_gameplay/generic_bashed.vpcf"
-			"particle"					"particles/units/heroes/hero_sven/sven_spell_great_cleave.vpcf"
+			"particle"					"particles/alice/goliath_doll_spell_immunity.vpcf"
 		}
 
 		// Casting
@@ -112,6 +112,17 @@
 						"ScriptFile"	"heroes/hero_alice/goliath_doll.lua"
 						"Function"		"onAttack"
 					}
+				}
+			}
+
+			"modifier_goliath_doll_spell_immune"
+			{
+				"IsHidden"				"0"
+				"IsPurgable"			"0"
+
+				"States"
+				{
+					"MODIFIER_STATE_MAGIC_IMMUNE"		"MODIFIER_STATE_VALUE_ENABLED"
 				}
 			}
 
