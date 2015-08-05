@@ -12,8 +12,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"precache"
 		{
-			"particle"					"particles/generic_gameplay/generic_bashed.vpcf"
-			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_slardar.vsndevts"
+
 		}
 
 		// Special
@@ -23,7 +22,7 @@
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"bash_chance"			"50"
+				"bash_chance"			"20"
 			}
 			"02"
 			{
@@ -34,62 +33,6 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"bash_damage"			"45 60 75"
-			}
-		}
-
-		"Modifiers"
-		{
-			"modifier_goliath_doll"
-			{
-				"Passive"	"1"
-				"IsHidden"	"1"
-
-				"OnAttackLanded"
-				{
-					"Random"
-					{
-						"Chance"	"%bash_chance"
-
-						"OnSuccess"
-						{
-							"Damage"
-							{
-								"Target"		"TARGET"
-								"Type"			"DAMAGE_TYPE_PHYSICAL"
-								"Damage"		"%bash_damage"
-							}
-
-							"ApplyModifier"
-							{
-								"ModifierName"	"modifier_goliath_doll_bashed"
-								"Target" 		"TARGET"
-								"Duration"		"%bash_duration"
-							}
-						}
-					}
-				}
-			}
-
-			"modifier_goliath_doll_bashed"
-			{
-				"IsHidden" "0"
-
-				"STATES"
-				{
-					"MODIFIER_STATE_STUNNED"	"MODIFIER_STATE_VALUE_ENABLED"
-				}
-
-				"EffectName"	"particles/generic_gameplay/generic_bashed.vpcf"
-				"EffectAttachType"	"follow_overhead"
-
-				"OnCreated"
-				{
-					"FireSound"
-					{
-						"EffectName"	"Hero_Slardar.Bash"
-						"Target" 		"TARGET"
-					}
-				}
 			}
 		}
 	}

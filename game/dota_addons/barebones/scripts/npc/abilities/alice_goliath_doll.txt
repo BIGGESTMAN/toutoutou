@@ -15,7 +15,10 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"precache"
 		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_slardar.vsndevts"
 			"particle"					"particles/units/heroes/hero_ogre_magi/ogre_magi_bloodlust_buff.vpcf"
+			"particle"					"particles/generic_gameplay/generic_bashed.vpcf"
+			"particle"					"particles/units/heroes/hero_sven/sven_spell_great_cleave.vpcf"
 		}
 
 		// Casting
@@ -63,12 +66,12 @@
 		{
 			"RunScript"
 	        {
-	        	"ScriptFile"	"heroes/hero_alice/goliath_doll.lua"
-	        	"Function"		"spawnDoll"
-	        	"Target"		"POINT"
-	        	"cleave_ability" "goliath_doll_cleave"
-	        	"bash_ability"	"goliath_doll_bash"
-	        	"modifier"		"modifier_goliath_doll"
+	        	"ScriptFile"		"heroes/hero_alice/goliath_doll.lua"
+	        	"Function"			"spawnDoll"
+	        	"Target"			"POINT"
+	        	"cleave_ability"	"goliath_doll_cleave"
+	        	"bash_ability"		"goliath_doll_bash"
+	        	"modifier"			"modifier_goliath_doll"
 	        }
 		}
 
@@ -99,6 +102,37 @@
 					{
 						"ScriptFile"	"heroes/hero_alice/goliath_doll.lua"
 						"Function"		"killDoll"
+					}
+				}
+
+				"OnAttackLanded"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_alice/goliath_doll.lua"
+						"Function"		"onAttack"
+					}
+				}
+			}
+
+			"modifier_goliath_doll_bashed"
+			{
+				"IsHidden" "0"
+
+				"STATES"
+				{
+					"MODIFIER_STATE_STUNNED"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
+
+				"EffectName"		"particles/generic_gameplay/generic_bashed.vpcf"
+				"EffectAttachType"	"follow_overhead"
+
+				"OnCreated"
+				{
+					"FireSound"
+					{
+						"EffectName"	"Hero_Slardar.Bash"
+						"Target" 		"TARGET"
 					}
 				}
 			}

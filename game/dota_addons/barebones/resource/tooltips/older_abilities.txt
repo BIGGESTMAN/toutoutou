@@ -181,7 +181,7 @@
 		"DOTA_Tooltip_Ability_Double_Spark_Range"  "Range:"
 
 		"DOTA_Tooltip_Ability_Little_Legion"  "Little Legion"
-		"DOTA_Tooltip_Ability_Little_Legion_Description"  "Sends a doll to a unit’s side. Enemies are struck by a Hourai Doll that deals physical damage then continues to attack them. A Shanghai Doll will give allies bonus armor and deal magical damage to attackers. Can be cast on structures."
+		"DOTA_Tooltip_Ability_Little_Legion_Description"  "Sends a doll to a unit\’s side. Enemies are struck by a Hourai Doll that deals physical damage then continues to attack them. A Shanghai Doll will give allies bonus armor and deal magical damage to attackers. Can be cast on structures."
 		"DOTA_Tooltip_Ability_Little_Legion_Note0"	"Dolls will chase their targets regardless of distance or fog of war."
 		"DOTA_Tooltip_Ability_Little_Legion_Note1"	"When a Hourai Doll's target turns invisible, they die. Shanghai Dolls will continue to follow them."
 		"DOTA_Tooltip_Ability_Little_Legion_Lore"  "Crafted by hand through day and night, the dolls repay their master's love with absolute loyalty."

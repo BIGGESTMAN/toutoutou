@@ -11,7 +11,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"precache"
 		{
-			"particle"			"particles/units/heroes/hero_sven/sven_spell_great_cleave.vpcf"
+			
 		}
 				
 		// Special
@@ -21,32 +21,13 @@
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"cleave_radius"			"400.0"
+				"cleave_radius"			"400"
 			}
 			
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"cleave_damage"			"40 40 40 40"
-			}
-		}
-
-		"Modifiers"
-		{
-			"modifier_great_cleave_datadriven"
-			{
-				"Passive"	"1"
-				"IsHidden"	"1"
-
-				"OnAttackLanded"
-				{
-					"CleaveAttack"
-					{
-						"CleavePercent"		"%cleave_damage"
-						"CleaveRadius"		"%cleave_radius"
-						"CleaveEffect"		"particles/units/heroes/hero_sven/sven_spell_great_cleave.vpcf"
-					}
-				}
+				"cleave_damage"			"40"
 			}
 		}
 	}
