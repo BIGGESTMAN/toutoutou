@@ -1,4 +1,5 @@
 require "libraries/util"
+require "heroes/hero_alice/dolls"
 
 function createWire(keys)
 	local caster = keys.caster
@@ -8,24 +9,24 @@ function createWire(keys)
 
 	if caster ~= target then
 		local location = (target:GetAbsOrigin() + caster:GetAbsOrigin()) / 2 + Vector(0,0,50)
-		local wire_unit = CreateUnitByName("trip_wire", location, false, caster, caster, caster:GetTeamNumber())
+		local wire_unit = CreateUnitByName("npc_dota_juggernaut_healing_ward", location, false, caster, caster, caster:GetTeamNumber())
 		ability:ApplyDataDrivenModifier(caster, wire_unit, keys.wire_unit_modifier, {})
+		wire_unit.stored_dolls = {}
 
 		-- Wire is table with three values--each of its two attachee units and the unit for itself
 		local wire = {keys.caster, keys.target, wire_unit}
 		if not caster.wires then caster.wires = {} end
 		caster.wires[wire] = true
 
-		Timers:CreateTimer(ability:GetLevelSpecialValueFor("duration", ability_level), function()
-			if caster.wires[wire] then destroyWire(wire, caster) end
-		end)
+		wire[3]:SetOriginalModel("models/development/invisiblebox.vmdl")
+		wire[3]:SetModelScale(10) -- to make wire unit easier to click on
+		ability:ApplyDataDrivenModifier(caster, wire[3], "modifier_kill", {duration = ability:GetLevelSpecialValueFor("duration", ability_level)})
 
 		caster.last_wire = wire
 		-- Enable attaching-secondary-target ability
 		local main_ability_name	= ability:GetAbilityName()
 		local sub_ability_name	= keys.attach_ability_name
 		caster:SwapAbilities(main_ability_name, sub_ability_name, false, true)
-
 		ability:ApplyDataDrivenModifier(caster, caster, keys.attach_window_modifier, {})
 
 		ability:ApplyDataDrivenModifier(caster, caster, keys.caster_modifier, {})
@@ -46,7 +47,7 @@ function updateWire(keys)
 		if not target1:IsNull() and not target2:IsNull() then -- make sure both wire attachees still exist
 			range = (target2:GetAbsOrigin() - target1:GetAbsOrigin()):Length2D()
 		end
-		if range and range <= ability:GetLevelSpecialValueFor("max_length", ability_level) and target1:IsAlive() and target2:IsAlive() and wire[3]:IsAlive() then
+		if range and range <= ability:GetLevelSpecialValueFor("max_length", ability_level) and target1:IsAlive() and target2:IsAlive() and not wire[3]:IsNull() and wire[3]:IsAlive() then
 			-- Update wire unit position
 			wire[3]:SetAbsOrigin((target1:GetAbsOrigin() + target2:GetAbsOrigin()) / 2 + Vector(0,0,50))
 
@@ -79,11 +80,18 @@ function updateWire(keys)
 						wire_triggered = true
 					end
 				end
+
 				if wire_triggered then
 					for k,unit in pairs(hit_units) do
 						ApplyDamage({victim = unit, attacker = caster, damage = ability:GetLevelSpecialValueFor("damage", ability_level), damage_type = DAMAGE_TYPE_MAGICAL})
 						ability:ApplyDataDrivenModifier(caster, unit, keys.root_modifier, {})
 					end
+
+					for k,doll in pairs(wire[3].stored_dolls) do
+						local little_legion_ability = caster:FindAbilityByName("little_legion")
+						spawnDoll(little_legion_ability, hit_units[RandomInt(1, #hit_units)], caster, wire[3]:GetAbsOrigin())
+					end
+
 					destroyWire(wire, caster)
 				end
 			end
@@ -109,7 +117,7 @@ function destroyWire(wire, caster)
 	if caster:FindAbilityByName("trip_wire"):IsHidden() and wire == caster.last_wire then
 		caster:SwapAbilities("trip_wire", "trip_wire_attach", true, false)
 	end
-	if wire[3] then wire[3]:RemoveSelf() end
+	if not wire[3]:IsNull() then wire[3]:RemoveSelf() end
 end
 
 function removeAttachAbility(keys)

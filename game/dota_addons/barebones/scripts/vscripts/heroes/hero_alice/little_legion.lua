@@ -1,69 +1,7 @@
-function spawnDoll(keys)
-	local movement_interval = 0.03
-	local ability = keys.ability
-	local ability_level = ability:GetLevel() - 1
-	local target = keys.target
-	local caster = keys.caster
+require "heroes/hero_alice/dolls"
 
-	local allied_target = target:GetTeamNumber() == caster:GetTeamNumber()
-	local doll_type = nil
-	if allied_target then
-		doll_type = "shanghai_doll"
-	else
-		doll_type = "hourai_doll"
-	end
-	local doll = CreateUnitByName(doll_type, caster:GetAbsOrigin(), true, caster, caster, caster:GetTeamNumber())
-
-	-- Set doll stats based on skill rank
-	if ability_level > 1 then
-		doll:CreatureLevelUp(ability_level - 1)
-	end
-
-	if not caster.dolls then
-		caster.dolls = {}
-	end
-	caster.dolls[doll] = true
-
-	ability:ApplyDataDrivenModifier(caster, doll, keys.modifier, {})
-	ability:ApplyDataDrivenModifier(caster, doll, "modifier_kill", {duration = ability:GetLevelSpecialValueFor("doll_duration", ability_level)})
-	local speed = ability:GetLevelSpecialValueFor("dash_speed", ability_level) * 0.03
-
-	-- Dash towards target
-	Timers:CreateTimer(0, function()
-		doll.target = target
-		local direction = (target:GetAbsOrigin() - doll:GetAbsOrigin()):Normalized()
-		local target_distance = (target:GetAbsOrigin() - doll:GetAbsOrigin()):Length2D()
-
-		if not allied_target then
-			doll:SetForceAttackTarget(target)
-
-			if target_distance < doll:GetAttackRange() then
-				-- Check if doll is in range
-				local damage = ability:GetLevelSpecialValueFor("hourai_damage", ability_level)
-				ApplyDamage({ victim = target, attacker = doll, damage = damage, damage_type = DAMAGE_TYPE_PHYSICAL})
-				FindClearSpaceForUnit(doll, doll:GetAbsOrigin(), false)
-			else
-				doll:SetAbsOrigin(doll:GetAbsOrigin() + direction * speed)
-				doll:SetForwardVector(direction)
-				return 0.03
-			end
-		else
-			if target_distance < doll:GetAttackRange() then
-				-- Check if doll is in range
-				ability:ApplyDataDrivenModifier(doll, target, keys.shanghai_buff, {})
-				FindClearSpaceForUnit(doll, doll:GetAbsOrigin(), false)
-			else
-				doll:SetAbsOrigin(doll:GetAbsOrigin() + direction * speed)
-				doll:SetForwardVector(direction)
-				return 0.03
-			end
-		end
-	end)
-
-	doll.tether_particle = ParticleManager:CreateParticle("particles/alice/"..doll_type.."_tether.vpcf", PATTACH_ABSORIGIN_FOLLOW, doll)
-	ParticleManager:SetParticleControlEnt(doll.tether_particle, 0, doll, PATTACH_ABSORIGIN, "attach_origin", doll:GetAbsOrigin(), true)
-	ParticleManager:SetParticleControlEnt(doll.tether_particle, 1, target, PATTACH_ABSORIGIN, "attach_origin", target:GetAbsOrigin(), true)
-
+function littleLegionCast(keys)
+	spawnDoll(keys.ability, keys.target, keys.caster, keys.caster:GetAbsOrigin())
 end
 
 function killDoll(keys)

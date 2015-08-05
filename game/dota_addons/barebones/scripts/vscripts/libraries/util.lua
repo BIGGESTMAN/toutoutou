@@ -1,4 +1,4 @@
-function unitsInLine(caster, ability, thinker_modifier, origin, range, radius, direction, grantVision)
+function unitsInLine(caster, ability, thinker_modifier, origin, range, radius, direction, grantVision, offset_forward)
 	local thinkerRadius = radius * 1.5
 
 	local targets = {}
@@ -15,7 +15,12 @@ function unitsInLine(caster, ability, thinker_modifier, origin, range, radius, d
 			thinker:SetNightTimeVisionRange( thinkerRadius )
 		end
 
-		thinker:SetAbsOrigin(origin + direction * (distance_per_thinker * (i-1) + thinkerRadius / 2))
+		offset_forward = offset_forward or false
+		if offset_forward then
+			thinker:SetAbsOrigin(origin + direction * (distance_per_thinker * (i) + thinkerRadius / 2))
+		else
+			thinker:SetAbsOrigin(origin + direction * (distance_per_thinker * (i - 1) + thinkerRadius / 2))
+		end
 		ability:ApplyDataDrivenModifier(caster, thinker, thinker_modifier, {})
 
 		local team = caster:GetTeamNumber()
@@ -24,7 +29,8 @@ function unitsInLine(caster, ability, thinker_modifier, origin, range, radius, d
 		local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
 		local iOrder = FIND_CLOSEST
 
-		-- DebugDrawCircle(thinker:GetAbsOrigin(), Vector(255,0,0), 1, thinkerRadius, true, 2)
+		-- DebugDrawCircle(thinker:GetAbsOrigin(), Vector(255,0,0), 1, thinkerRadius, true, 0.5)
+		
 		local possible_targets = FindUnitsInRadius(team, thinker:GetAbsOrigin(), nil, thinkerRadius, iTeam, iType, iFlag, iOrder, false)
 		for k,possible_target in pairs(possible_targets) do
 			-- Calculate distance

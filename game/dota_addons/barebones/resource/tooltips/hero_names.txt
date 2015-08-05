@@ -1,3 +1,5 @@
+		
+		// ******************** HEROES ********************
 		"npc_dota_hero_morphling"			"Sanae Kochiya"
 		"npc_dota_hero_enigma"				"Rumia"
 		"npc_dota_hero_templar_assassin"	"Byakuren Hijiri"

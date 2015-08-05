@@ -60,7 +60,7 @@ function fireLaser(keys, doll)
 	local radius = ability:GetLevelSpecialValueFor("laser_radius", ability_level)
 	local direction = doll.target:GetForwardVector()
 
-	local targets = unitsInLine(caster, ability, thinker_modifier, doll:GetAbsOrigin(), range, radius, direction, false)
+	local targets = unitsInLine(caster, ability, thinker_modifier, doll:GetAbsOrigin(), range, radius, direction, false, true)
 	local damage = ability:GetLevelSpecialValueFor("laser_damage", ability_level)
 
 	for k,unit in pairs(targets) do
