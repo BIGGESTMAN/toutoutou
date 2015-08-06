@@ -1,3 +1,5 @@
+require "heroes/hero_marisa/sparks"
+
 function blazingStarStart( keys )
 	local caster = keys.caster
 	local ability = keys.ability
@@ -9,15 +11,10 @@ function blazingStarStart( keys )
 	local direction = nil
 
 	ability:ApplyDataDrivenModifier(caster, caster, keys.dashing_modifier, {})
+	
 	local master_spark_ability = caster:FindAbilityByName("master_spark")
 	if master_spark_ability:GetLevel() > 0 then
-		local current_cooldown = master_spark_ability:GetCooldownTimeRemaining()
-		master_spark_ability:EndCooldown()
-		local refund_mana = caster:GetMana() > master_spark_ability:GetManaCost(master_spark_ability:GetLevel() - 1)
-		caster:CastAbilityImmediately(master_spark_ability, 1)
-		if refund_mana then master_spark_ability:RefundManaCost() end
-		master_spark_ability:EndCooldown()
-		master_spark_ability:StartCooldown(current_cooldown)
+		startSpark(caster, master_spark_ability, "modifier_master_spark", "modifier_master_spark_slow", caster:GetForwardVector() * -1)
 	end
 
 	-- Enable reverse-direction ability

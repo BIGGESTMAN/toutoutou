@@ -12,14 +12,11 @@ function startSpark(caster, ability, modifier, slow_modifier, direction)
 	local damage = spark_ability:GetLevelSpecialValueFor("damage", ability_level) * damage_interval / spark_ability:GetChannelTime()
 	local damage_type = spark_ability:GetAbilityDamageType()
 
-	ability:ApplyDataDrivenModifier(caster, caster, modifier, {})
-	local particles = {}
-
-	-- Reverse if cast by Blazing Star
-	local reverse = caster:HasModifier("modifier_blazing_star")
-
 	local spell_forward = direction
-	if reverse then spell_forward = spell_forward * -1 end
+	ability:ApplyDataDrivenModifier(caster, caster, modifier, {})
+
+	-- Particle stuff
+	local particles = {}
 
 	local pfx = ParticleManager:CreateParticle( particle_name, PATTACH_ABSORIGIN_FOLLOW, caster )
 	table.insert(particles, pfx)
@@ -28,8 +25,6 @@ function startSpark(caster, ability, modifier, slow_modifier, direction)
 	local range = end_distance + end_radius
 	local endcapPos = caster:GetAbsOrigin() + spell_forward * range
 	ParticleManager:SetParticleControl( pfx, 1, endcapPos )
-
-	StartSoundEvent("Touhou.Spark", caster)
 
 	local rotationPoint = caster:GetAbsOrigin() + spell_forward * end_distance
 	for i=1,3 do
@@ -43,8 +38,15 @@ function startSpark(caster, ability, modifier, slow_modifier, direction)
 		end
 	end
 
+	StartSoundEvent("Touhou.Spark", caster)
+
 	Timers:CreateTimer(0, function()
 		if not caster:IsNull() and caster:HasModifier(modifier) then
+			-- Adjust direction if Marisa is flying around
+			if caster:HasModifier("modifier_blazing_star") then
+				spell_forward = caster:GetForwardVector() * -1
+			end
+
 			local cone_units = GetEnemiesInCone(caster, start_radius, end_radius, end_distance, spell_forward, 3, true)
 			for k,unit in pairs(cone_units) do
 				-- Damage
@@ -63,6 +65,18 @@ function startSpark(caster, ability, modifier, slow_modifier, direction)
 				ParticleManager:ReleaseParticleIndex( pfx )
 			end
 
+			return damage_interval
+		end
+	end)
+
+	-- Update particles & sound
+	Timers:CreateTimer(0, function()
+		if not caster:IsNull() and caster:HasModifier(modifier) then
+			-- Adjust direction if Marisa is flying around
+			if caster:HasModifier("modifier_blazing_star") then
+				spell_forward = caster:GetForwardVector() * -1
+			end
+
 			-- Update particles for if Marisa is moved
 			local range = end_distance + end_radius
 			local rotationPoint = caster:GetAbsOrigin() + spell_forward * end_distance
@@ -79,7 +93,7 @@ function startSpark(caster, ability, modifier, slow_modifier, direction)
 				ParticleManager:SetParticleControl(particle, 1, laserPoints[k])
 			end
 
-			return damage_interval
+			return 0.03
 		else
 			for k,particle in pairs(particles) do
 				ParticleManager:DestroyParticle(particle, true)
