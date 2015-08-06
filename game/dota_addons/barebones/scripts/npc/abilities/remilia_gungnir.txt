@@ -67,12 +67,12 @@
 			"09"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"base_armor_reduction"	"120 150 180 210"
+				"base_armor_reduction"	"-100"
 			}
 			"10"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"bonus_armor_reduction"	"120 150 180 210"
+				"bonus_armor_reduction"	"-10"
 			}
 			"11"
 			{

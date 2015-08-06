@@ -15,7 +15,6 @@
 		"RequiredLevel"					"6"
 		"LevelsBetweenUpgrades"			"5"
 		"AbilityCastAnimation"			"ACT_DOTA_RUN"
-		"ActivityModifier"				"+haste"
 
 		// Precache
 		//-------------------------------------------------------------------------------------------------------------
@@ -81,11 +80,21 @@
 				"var_type"				"FIELD_INTEGER"
 				"duration"				"1 1 1 1"
 			}
-			"08"
+			"08" // only used for tooltip
 			{
 				"var_type"				"FIELD_FLOAT"
 				"cast_point"			"1.2 1.0 0.8"
 				"_value"				"DOTA_Tooltip_Ability_final_spark_Cast_Point"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"vulnerability_damage_amp"	"8"
+			}
+			"10"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"vulnerability_damage_amp_max"	"100"
 			}
 		}
 

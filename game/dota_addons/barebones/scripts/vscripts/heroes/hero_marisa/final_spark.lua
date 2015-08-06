@@ -56,14 +56,17 @@ function finalSpark(event)
 	local AbilityDamageType = ability:GetAbilityDamageType()
 	local cone_units = GetEnemiesInCone( caster, start_radius, end_radius, end_distance )
 	for _,unit in pairs(cone_units) do
-		-- Particle
-		-- local origin = unit:GetAbsOrigin()
-		-- local lightningBolt = ParticleManager:CreateParticle(particleName, PATTACH_WORLDORIGIN, caster)
-		-- ParticleManager:SetParticleControl(lightningBolt,0,Vector(caster:GetAbsOrigin().x,caster:GetAbsOrigin().y,caster:GetAbsOrigin().z + caster:GetBoundingMaxs().z ))	
-		-- ParticleManager:SetParticleControl(lightningBolt,1,Vector(origin.x,origin.y,origin.z + unit:GetBoundingMaxs().z ))
-	
+
+		local final_damage = damage
+		if unit:HasModifier("modifier_master_spark_vulnerability") then
+			local damage_amp = unit:GetModifierStackCount("modifier_master_spark_vulnerability", caster) * ability:GetLevelSpecialValueFor("vulnerability_damage_amp", level)
+			local damage_amp_max = ability:GetLevelSpecialValueFor("vulnerability_damage_amp_max", level)
+			if damage_amp > damage_amp_max then damage_amp = damage_amp_max end
+			final_damage = final_damage * (1 + damage_amp / 100)
+		end
+
 		-- Damage
-		ApplyDamage({ victim = unit, attacker = caster, damage = damage, damage_type = AbilityDamageType})
+		ApplyDamage({ victim = unit, attacker = caster, damage = final_damage, damage_type = AbilityDamageType})
 		ability:ApplyDataDrivenModifier(caster, unit, event.stun_modifier, {})
 
 		-- Particle

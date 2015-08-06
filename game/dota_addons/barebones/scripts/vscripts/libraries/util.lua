@@ -75,8 +75,8 @@ function DistancePointSegment( p, v, w )
 	end
 end
 
-function GetEnemiesInCone(unit, start_radius, end_radius, end_distance, caster_forward, circles)
-	local DEBUG = false
+function GetEnemiesInCone(unit, start_radius, end_radius, end_distance, caster_forward, circles, debug)
+	local DEBUG = debug or false
 	
 	-- Positions
 	local fv = caster_forward

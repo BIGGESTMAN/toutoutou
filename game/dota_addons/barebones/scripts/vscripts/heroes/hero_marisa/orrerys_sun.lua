@@ -104,26 +104,27 @@ end
 function spellCast( event )
 	local caster = event.caster
 	if not event.event_ability:IsItem() and event.event_ability ~= caster:FindAbilityByName("blazing_star_reverse") then
-		local ability = event.ability
-		local ability_level = ability:GetLevel() - 1
-
-		local team = caster:GetTeamNumber()
-		local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
-		local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
-		local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
-		local iOrder = FIND_CLOSEST
-
-		for i=1,ability:GetLevelSpecialValueFor("orbs", ability:GetLevel() - 1) do
-			Timers:CreateTimer(i * ability:GetLevelSpecialValueFor("delay_between_orb_attacks", ability:GetLevel() - 1), function()
-				fireLaser(event, caster.orbs[i])
-			end)
-		end
+		fireLasers(caster, event.ability)
 	end
 end
 
-function fireLaser(event, orb)
-	local caster = event.caster
-	local ability = event.ability
+function fireLasers(caster, ability)
+	local ability_level = ability:GetLevel() - 1
+
+	local team = caster:GetTeamNumber()
+	local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
+	local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
+	local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
+	local iOrder = FIND_CLOSEST
+
+	for i=1,ability:GetLevelSpecialValueFor("orbs", ability:GetLevel() - 1) do
+		Timers:CreateTimer(i * ability:GetLevelSpecialValueFor("delay_between_orb_attacks", ability:GetLevel() - 1), function()
+			fireLaser(caster, ability, caster.orbs[i])
+		end)
+	end
+end
+
+function fireLaser(caster, ability, orb)
 	local ability_level = ability:GetLevel() - 1
 	local search_radius = ability:GetLevelSpecialValueFor("search_radius", ability_level)
 
@@ -136,18 +137,17 @@ function fireLaser(event, orb)
 	local units = FindUnitsInRadius(team, orb:GetAbsOrigin(), nil, search_radius, iTeam, iType, iFlag, iOrder, false)
 	if #units > 0 then
 		local target = units[RandomInt(1, #units)]
-		fireLaserAt(event, orb, target)
+		fireLaserAt(caster, ability, orb, target)
 		orb:EmitSound("Hero_Tinker.Laser")
 	end
 end
 
-function fireLaserAt(event, orb, target)
-	local caster = event.caster
+function fireLaserAt(caster, ability, orb, target)
 	local orb_location = orb:GetAbsOrigin()
-	local ability = event.ability
 	local ability_level = ability:GetLevel() - 1
 	local range = ability:GetLevelSpecialValueFor("search_radius", ability_level)
 	local radius = ability:GetLevelSpecialValueFor("laser_radius", ability_level)
+	local particle_name = "particles/units/heroes/hero_tinker/tinker_laser.vpcf"
 	local thinkerRadius = radius * 1.5
 	local targetDirection = (target:GetAbsOrigin() - orb_location):Normalized()
 
@@ -164,7 +164,7 @@ function fireLaserAt(event, orb, target)
 		thinker:SetNightTimeVisionRange( thinkerRadius )
 
 		thinker:SetAbsOrigin(orb_location + targetDirection * (distance_per_thinker * (i-1) + thinkerRadius / 2))
-		ability:ApplyDataDrivenModifier(caster, thinker, event.thinker_modifier, {})
+		ability:ApplyDataDrivenModifier(caster, thinker, "modifier_orrerys_sun_dummy", {})
 
 		local team = caster:GetTeamNumber()
 		local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
@@ -197,7 +197,7 @@ function fireLaserAt(event, orb, target)
 	end
 
 	-- Particle
-	local particle = ParticleManager:CreateParticle(event.particleName, PATTACH_POINT_FOLLOW, orb)
+	local particle = ParticleManager:CreateParticle(particle_name, PATTACH_POINT_FOLLOW, orb)
 	ParticleManager:SetParticleControl(particle,9,orb_location)	
 	ParticleManager:SetParticleControl(particle,1,target:GetAbsOrigin())
 	ParticleManager:SetParticleControl(particle,0,orb_location)

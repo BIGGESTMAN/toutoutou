@@ -74,9 +74,6 @@ function throw(keys)
 	local particle = ParticleManager:CreateParticle("particles/remilia/spear_throw.vpcf", PATTACH_POINT_FOLLOW, dummy_unit)
 	ParticleManager:SetParticleControlEnt(particle, 1, dummy_unit, PATTACH_POINT_FOLLOW, "attach_hitloc", dummy_unit:GetAbsOrigin(), true)
 	ParticleManager:SetParticleControlEnt(particle, 2, dummy_endcap, PATTACH_POINT_FOLLOW, "attach_hitloc", dummy_endcap:GetAbsOrigin(), true)
-	-- ParticleManager:SetParticleControlEnt(particle, 3, dummy_endcap, PATTACH_POINT_FOLLOW, "attach_hitloc", dummy_endcap:GetAbsOrigin(), true)
-	-- ParticleManager:SetParticleControlEnt(particle, 4, dummy_endcap, PATTACH_POINT_FOLLOW, "attach_hitloc", dummy_endcap:GetAbsOrigin(), true)
-	-- ParticleManager:SetParticleControlEnt(particle, 5, dummy_endcap, PATTACH_POINT_FOLLOW, "attach_hitloc", dummy_endcap:GetAbsOrigin(), true)
 
 	Timers:CreateTimer(0, function()
 		dummy_location = dummy_unit:GetAbsOrigin()
@@ -88,10 +85,10 @@ function throw(keys)
 
 			-- Check for units hit
 			local team = caster:GetTeamNumber()
-			local origin = dummy_location
+			local origin = dummy_location - vertical_offset
 			local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
-			local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
-			local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
+			local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL
+			local iFlag = DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES
 			local iOrder = FIND_ANY_ORDER
 
 			local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)

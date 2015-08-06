@@ -61,30 +61,8 @@ function updateAghsAbilities(eventInfo)
 		local hero = EntIndexToHScript(eventInfo.HeroEntityIndex)
 		if hero:GetName() == "npc_dota_hero_skywrath_mage" then
 			hero:FindAbilityByName("peerless_wind_god"):ApplyDataDrivenModifier(hero, hero, "modifier_peerless_wind_god_learned", {})
+		elseif hero:GetName() == "npc_dota_hero_rubick" then
+			hero:FindAbilityByName("double_spark"):ApplyDataDrivenModifier(hero, hero, "modifier_double_spark_learned", {})
 		end
 	end
--- 	if eventInfo.itemname == "item_ultimate_scepter" and not eventInfo.HeroEntityIndex:HasAbility("fantasy_nature") then
--- 		if eventInfo.HeroEntityIndex == "npc_dota_hero_reimu" then
--- 			eventInfo.HeroEntityIndex:RemoveAbility("fantasy_nature")
--- 			eventInfo.HeroEntityIndex:AddAbility("fantasy_nature_aghs")
--- 		end
--- 	end
 end
-
--- dota_item_purchased( edit: not dota_item_purchase )
--- userid ( short )
--- itemid ( short )
-
--- dota_item_picked_up
--- itemname ( string )
--- PlayerID ( short )
--- ItemEntityIndex( short )
--- HeroEntityIndex( short )
-
--- [   VScript ]: [BAREBONES] OnItemPurchased
--- [   VScript ]: {
--- [   VScript ]:    itemcost                        	= 900 (number)
--- [   VScript ]:    itemname                        	= "item_recipe_mekansm" (string)
--- [   VScript ]:    PlayerID                        	= 0 (number)
--- [   VScript ]:    splitscreenplayer               	= -1 (number)
--- [   VScript ]: }

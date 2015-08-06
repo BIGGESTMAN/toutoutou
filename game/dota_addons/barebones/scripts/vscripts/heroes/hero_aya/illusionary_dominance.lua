@@ -139,8 +139,5 @@ end
 function peerlessWindGodLearned(keys)
 	local ability = keys.caster:FindAbilityByName("peerless_wind_god")
 	ability:SetLevel(1)
-	-- local opening_wind = keys.caster:FindAbilityByName("opening_wind")
-	-- ability:SetAbilityIndex(4)
-	-- opening_wind:SetAbilityIndex(5)
 	keys.caster:SwapAbilities("opening_wind", "peerless_wind_god", true, true)
 end
