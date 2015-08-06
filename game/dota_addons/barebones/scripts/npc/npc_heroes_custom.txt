@@ -606,7 +606,7 @@
 		"AttributeStrengthGain"		"2"										// Strength bonus per level.
 		"AttributeBaseAgility"		"20"										// Base agility
 		"AttributeAgilityGain"		"2.4"										// Agility bonus per level.
-		"AttributeBaseIntelligence"	"27"										// Base intelligence
+		"AttributeBaseIntelligence"	"17"										// Base intelligence
 		"AttributeIntelligenceGain"	"1.9"										// Intelligence bonus per level.
 
 		"BountyXP"					"0"										// Experience earn.
@@ -630,6 +630,65 @@
 		"AttackAnimationPoint"		"0.35"									// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"128"									// Range within a target can be acquired.
 		"AttackRange"				"128"									// Range within a target can be attacked.
+	}
 
+	"npc_dota_hero_remilia"
+	{
+		"AbilityLayout" 		"4"
+		"override_hero"			"npc_dota_hero_phantom_lancer"
+		"SoundSet"				"0"
+		"Ability1"				"gungnir"
+		"Ability2"				"vlad_tepes"
+		"Ability3"				"scarlet_destiny"
+		"Ability4"				"queen_of_midnight"
+		"Ability5"				""
+		"Ability6"				""
+		"Ability7"				"attribute_bonus"
+		"Ability8"				"gungnir_throw"
+		"Ability9"				""
+		"Ability10"				""
+		"Ability11"				""
+		"Ability12"				""
+		"Ability13"				""
+		"Ability14"				""
+		"Ability15"				""
+		"Ability16"				""
+
+		"ArmorPhysical"				"1"									// Physical protection.
+		"MagicalResistance"			"25"								// Magical protection (percentage).
+
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"			"26"										// Damage range min.
+		"AttackDamageMax"			"26"										// Damage range max.
+
+		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"20"										// Base strength
+		"AttributeStrengthGain"		"1.8"										// Strength bonus per level.
+		"AttributeBaseAgility"		"23"										// Base agility
+		"AttributeAgilityGain"		"2.8"										// Agility bonus per level.
+		"AttributeBaseIntelligence"	"16"										// Base intelligence
+		"AttributeIntelligenceGain"	"1.7"										// Intelligence bonus per level.
+
+		"BountyXP"					"0"										// Experience earn.
+		"BountyGoldMin"				"0"										// Gold earned min.
+		"BountyGoldMax"				"0"										// Gold earned max.
+
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"				"315"									// Speed.
+		"MovementTurnRate"			".6"									// Turning rate.
+
+		"StatusHealth"				"150"									// Base health.
+		"StatusHealthRegen"			"0"										// Health regeneration rate.
+		"StatusMana"				"0"										// Base mana.
+		"StatusManaRegen"			"0"										// Mana regeneration rate.
+
+		"VisionDaytimeRange"		"1800"									// Range of vision during day light.
+		"VisionNighttimeRange"		"1800"									// Range of vision at night time.
+
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"				// Type of damage dealt. 
+		"AttackRate"				"1.7"									// Speed of attack.
+		"AttackAnimationPoint"		"0.55"									// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"128"									// Range within a target can be acquired.
+		"AttackRange"				"128"									// Range within a target can be attacked.
 	}
 }

@@ -33,16 +33,19 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"duration"				"12"
+				"_value"				"DOTA_Tooltip_Ability_Invisible_Full_Moon_Duration"
 			}
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"radius"				"500 550 600 650"
+				"_value"				"DOTA_Tooltip_Ability_Invisible_Full_Moon_Radius"
 			}
 			"03"
 			{
 				"var_type"				"FIELD_FLOAT"
 				"fade_delay"			"2.1 1.8 1.5 1.2"
+				"_value"				"DOTA_Tooltip_Ability_Invisible_Full_Moon_Fade_Delay"
 			}
 			"04"
 			{

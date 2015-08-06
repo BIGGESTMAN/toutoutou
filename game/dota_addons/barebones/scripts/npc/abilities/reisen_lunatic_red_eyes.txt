@@ -39,11 +39,13 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"base_pulses"			"2 3 4"
+				"_value"				"DOTA_Tooltip_Ability_Lunatic_Red_Eyes_Base_Pulses"
 			}
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"agility_per_pulse"		"15"
+				"_value"				"DOTA_Tooltip_Ability_Lunatic_Red_Eyes_Agility_Per_Pulse"
 			}
 			"03"
 			{
@@ -54,21 +56,25 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"radius"				"650"
+				"_value"				"DOTA_Tooltip_Ability_Lunatic_Red_Eyes_Radius"
 			}
 			"05"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"damage"				"60 70 80"
+				"_value"				"DOTA_Tooltip_Ability_Lunatic_Red_Eyes_Damage"
 			}
 			"06"
 			{
 				"var_type"				"FIELD_FLOAT"
 				"disable_duration"		"0.5"
+				"_value"				"DOTA_Tooltip_Ability_Lunatic_Red_Eyes_Disable_Duration"
 			}
 			"07"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"slow_percent"			"-25 -35 -45"
+				"_value"				"DOTA_Tooltip_Ability_Lunatic_Red_Eyes_Slow_Percent"
 			}
 			"08"
 			{
@@ -84,6 +90,7 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"scepter_agility_per_pulse"	"10"
+				"_value"				"DOTA_Tooltip_Ability_Lunatic_Red_Eyes_Scepter_Agility_Per_Pulse"
 			}
 			"11"
 			{

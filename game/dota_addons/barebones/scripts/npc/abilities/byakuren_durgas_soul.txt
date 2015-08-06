@@ -58,7 +58,7 @@
 				"var_type"				"FIELD_FLOAT"
 				"damage_increase"		"0.2"
 			}
-			"08"
+			"07"
 			{
 				"var_type"				"FIELD_FLOAT"
 				"update_interval"		"0.03"

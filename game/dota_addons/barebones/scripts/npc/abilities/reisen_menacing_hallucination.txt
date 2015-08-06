@@ -30,31 +30,37 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"damage_dealt"			"12 18 24 30"
+				"_value"				"DOTA_Tooltip_Ability_Menacing_Hallucination_Damage_Dealt"
 			}
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"damage_dealt_increase"	"14"
+				"_value"				"DOTA_Tooltip_Ability_Menacing_Hallucination_Damage_Dealt_Increase"
 			}
 			"03"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"damage_taken"			"440 410 380 350"
+				"_value"				"DOTA_Tooltip_Ability_Menacing_Hallucination_Damage_Taken"
 			}
 			"04"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"damage_taken_reduction" "50"
+				"_value"				"DOTA_Tooltip_Ability_Menacing_Hallucination_Damage_Taken_Reduction"
 			}
 			"05"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"duration"				"40"
+				"_value"				"DOTA_Tooltip_Ability_Menacing_Hallucination_Duration"
 			}
 			"06"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"radius"				"900"
+				"_value"				"DOTA_Tooltip_Ability_Menacing_Hallucination_Radius"
 			}
 		}
 

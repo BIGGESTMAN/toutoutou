@@ -34,6 +34,7 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"attribute_bonus"		"12 13 14 15"
+				"_value"				"DOTA_Tooltip_Ability_Peerless_Patriots_Elixir_Attribute_Bonus"
 			}
 			"02"
 			{
@@ -44,16 +45,19 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"radius"				"300"
+				"_value"				"DOTA_Tooltip_Ability_Peerless_Patriots_Elixir_Radius"
 			}
 			"04"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"damage"				"110 200 290 380"
+				"_value"				"DOTA_Tooltip_Ability_Peerless_Patriots_Elixir_Damage"
 			}
 			"05"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"stun_duration"			"2"
+				"_value"				"DOTA_Tooltip_Ability_Peerless_Patriots_Elixir_Stun_Duration"
 			}
 		}
 
