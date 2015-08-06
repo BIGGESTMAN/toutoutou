@@ -6,9 +6,12 @@ function orrerysSunStart( event )
 		local unit_name = "orrerys_sun_orb"
 
 		-- Initialize the table to keep track of all orbs
-		if not caster.orbs then
-			caster.orbs = {}
+		if caster.orbs then
+			for k,orb in pairs(caster.orbs) do
+				orb:RemoveSelf()
+			end
 		end
+		caster.orbs = {}
 
 		local particles = {"particles/orrerys_sun_yellow.vpcf", "particles/orrerys_sun_green.vpcf", "particles/orrerys_sun_orange.vpcf",
 						   "particles/orrerys_sun_pink.vpcf", "particles/orrerys_sun_blue.vpcf", "particles/orrerys_sun_red.vpcf"}
