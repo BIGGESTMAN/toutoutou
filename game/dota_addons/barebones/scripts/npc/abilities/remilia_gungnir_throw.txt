@@ -12,7 +12,7 @@
 		
 		// Casting
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0"
+		"AbilityCastPoint"				"0.5"
 		"AbilityCooldown"				"0"
 		"AbilityManaCost"				"0"
 

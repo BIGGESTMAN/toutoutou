@@ -18,7 +18,7 @@
 			"particle"					"particles/remilia/spear_throw.vpcf"
 		}
 
-		"AbilityCastPoint"				"0"
+		"AbilityCastPoint"				"0.2"
 		"AbilityCooldown"				"10"
 		"AbilityManaCost"				"90"
 
@@ -66,13 +66,13 @@
 			}
 			"09"
 			{
-				"var_type"				"FIELD_INTEGER"
-				"base_armor_reduction"	"-100"
+				"var_type"				"FIELD_FLOAT"
+				"base_armor_reduction"	"0.9 1.2 1.5 1.8"
 			}
 			"10"
 			{
-				"var_type"				"FIELD_INTEGER"
-				"bonus_armor_reduction"	"-10"
+				"var_type"				"FIELD_FLOAT"
+				"bonus_armor_reduction"	"1.2"
 			}
 			"11"
 			{
@@ -121,6 +121,20 @@
 	    				"damage"		"%attack_damage"
 	    			}
 	    		}
+
+	    		"OnDestroy"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_remilia/gungnir.lua"
+	    				"Function"		"durationExpired"
+	    			}
+	    		}
+	    	}
+
+	    	"modifier_gungnir_hits"
+	    	{
+	    		"IsPurgable"	"1"
 	    	}
 
 	    	"modifier_gungnir_armor_reduction_base"
@@ -140,6 +154,7 @@
 			{
 	    		"IsPurgable"	"1"
 	    		"IsDebuff"		"1"
+	    		"IsHidden"		"1"
 
 	    		"Duration"		"%armor_reduction_duration"
 

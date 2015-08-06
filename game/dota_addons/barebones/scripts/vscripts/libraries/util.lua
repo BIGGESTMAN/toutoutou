@@ -1,5 +1,8 @@
-function unitsInLine(caster, ability, thinker_modifier, origin, range, radius, direction, grantVision, offset_forward)
+function unitsInLine(caster, ability, thinker_modifier, origin, range, radius, direction, grantVision, offset_forward, target_types, target_Flags)
 	local thinkerRadius = radius * 1.5
+	offset_forward = offset_forward or false
+	target_types = target_types or DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
+	target_flags = target_flags or DOTA_UNIT_TARGET_FLAG_NONE
 
 	local targets = {}
 
@@ -15,7 +18,6 @@ function unitsInLine(caster, ability, thinker_modifier, origin, range, radius, d
 			thinker:SetNightTimeVisionRange( thinkerRadius )
 		end
 
-		offset_forward = offset_forward or false
 		if offset_forward then
 			thinker:SetAbsOrigin(origin + direction * (distance_per_thinker * (i) + thinkerRadius / 2))
 		else
@@ -25,8 +27,8 @@ function unitsInLine(caster, ability, thinker_modifier, origin, range, radius, d
 
 		local team = caster:GetTeamNumber()
 		local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
-		local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
-		local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
+		local iType = target_types
+		local iFlag = target_flags
 		local iOrder = FIND_CLOSEST
 
 		-- DebugDrawCircle(thinker:GetAbsOrigin(), Vector(255,0,0), 1, thinkerRadius, true, 0.5)

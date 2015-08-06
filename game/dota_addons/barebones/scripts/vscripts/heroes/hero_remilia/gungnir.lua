@@ -1,3 +1,5 @@
+LinkLuaModifier("modifier_gungnir_armor_reduction", "heroes/hero_remilia/modifier_gungnir_armor_reduction.lua", LUA_MODIFIER_MOTION_NONE )
+
 function gungnirCast(keys)
 	local caster = keys.caster
 	local ability = keys.ability
@@ -26,14 +28,20 @@ function gungnirHit(keys)
 	local thinker_modifier = "modifier_gungnir_dummy"
 	local direction = caster:GetForwardVector()
 
-	local targets = unitsInLine(caster, ability, thinker_modifier, caster:GetAbsOrigin(), range, radius, direction, false, true)
+	local targets = unitsInLine(caster, ability, thinker_modifier, caster:GetAbsOrigin(), range, radius, direction, false, true, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES)
 	local damage = keys.damage
 
+	local targets_hit = 0
 	for k,unit in pairs(targets) do
 		if unit ~= target then
+			targets_hit = targets_hit + 1
 			ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = DAMAGE_TYPE_PHYSICAL})
 		end
 	end
+
+	ability:ApplyDataDrivenModifier(caster, caster, "modifier_gungnir_hits", {})
+	local modifier = caster:FindModifierByName("modifier_gungnir_hits")
+	modifier:SetStackCount(modifier:GetStackCount() + 1 + targets_hit)
 
 	local particle_name = "particles/remilia/spear_pierce_a0.vpcf"
 	local vertical_offset = Vector(0,0,100)
@@ -51,7 +59,9 @@ function throw(keys)
 	local ability_level = ability:GetLevel() - 1
 	local direction = (keys.target_points[1] - caster:GetAbsOrigin()):Normalized()
 
-	local range = ability:GetLevelSpecialValueFor("throw_base_range", ability_level)
+	local hits = caster:GetModifierStackCount("modifier_gungnir_hits", caster)
+	local base_range = ability:GetLevelSpecialValueFor("throw_base_range", ability_level)
+	local range = base_range + ability:GetLevelSpecialValueFor("throw_bonus_range", ability_level) * hits
 	local radius = ability:GetLevelSpecialValueFor("throw_radius", ability_level)
 	local speed = range / ability:GetLevelSpecialValueFor("travel_time", ability_level)
 	local damage = ability:GetLevelSpecialValueFor("damage", ability_level)
@@ -96,8 +106,10 @@ function throw(keys)
 
 			for k,unit in pairs(targets) do
 				if not dummy_unit.units_hit[unit] then
+					unit:AddNewModifier(caster, ability, "modifier_gungnir_armor_reduction", {duration = ability:GetLevelSpecialValueFor("armor_reduction_duration", ability_level)})
+					unit:SetModifierStackCount("modifier_gungnir_armor_reduction", caster, hits + 1)
+
 					ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
-					ability:ApplyDataDrivenModifier(caster, unit, "modifier_gungnir_armor_reduction_base", {})
 					dummy_unit.units_hit[unit] = true
 				end
 			end
@@ -109,11 +121,24 @@ function throw(keys)
 		end
 	end)
 
-	-- Disable retarget ability
-	local main_ability_name	= ability:GetAbilityName()
+	endGungnir(caster)
+end
+
+function durationExpired(keys)
+	endGungnir(keys.caster)
+end
+
+function endGungnir(caster)
+	-- Disable throw ability
+	local main_ability_name	= "gungnir"
 	local sub_ability_name	= "gungnir_throw"
 	caster:SwapAbilities(main_ability_name, sub_ability_name, true, false)
 
+	caster:RemoveModifierByName("modifier_gungnir")
+	caster:RemoveModifierByName("modifier_gungnir_hits")
+
+	local ability = caster:FindAbilityByName(main_ability_name)
+	local ability_level = ability:GetLevel() - 1
 	ability:EndCooldown()
-	-- ability:StartCooldown(ability:GetCooldown(ability_level))
+	ability:StartCooldown(ability:GetCooldown(ability_level))
 end
