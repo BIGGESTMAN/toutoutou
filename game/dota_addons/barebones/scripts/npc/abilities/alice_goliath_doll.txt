@@ -79,7 +79,7 @@
 		{
 			"modifier_goliath_doll_dolls_war_buff"
 			{
-				"IsHidden"		"0"
+				"IsPurgable"		"1"
 
 				"Duration"		"%dolls_war_buff_duration"
 				"Properties"
@@ -94,7 +94,6 @@
 			"modifier_goliath_doll"
 			{
 				"IsHidden"				"1"
-				"IsPurgable"			"0"
 
 				"OnDestroy"
 				{
@@ -117,9 +116,6 @@
 
 			"modifier_goliath_doll_spell_immune"
 			{
-				"IsHidden"				"0"
-				"IsPurgable"			"0"
-
 				"States"
 				{
 					"MODIFIER_STATE_MAGIC_IMMUNE"		"MODIFIER_STATE_VALUE_ENABLED"
@@ -128,7 +124,9 @@
 
 			"modifier_goliath_doll_bashed"
 			{
-				"IsHidden" "0"
+	    		"IsPurgable"	"1"
+	    		"IsDebuff"		"1"
+	    		"IsStunDebuff"	"1"
 
 				"STATES"
 				{

@@ -1,5 +1,7 @@
 LinkLuaModifier("modifier_gungnir_armor_reduction", "heroes/hero_remilia/modifier_gungnir_armor_reduction.lua", LUA_MODIFIER_MOTION_NONE )
 
+require "libraries/util"
+
 function gungnirCast(keys)
 	local caster = keys.caster
 	local ability = keys.ability
@@ -33,6 +35,9 @@ function gungnirHit(keys)
 		if unit ~= target then
 			targets_hit = targets_hit + 1
 			ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = DAMAGE_TYPE_PHYSICAL})
+			if caster:HasModifier("modifier_queen_of_midnight_swooping") then
+				caster:FindAbilityByName("queen_of_midnight"):ApplyDataDrivenModifier(caster, unit, "modifier_queen_of_midnight_stun", {})
+			end
 		end
 	end
 
@@ -118,7 +123,7 @@ function throw(keys)
 		end
 	end)
 
-	endGungnir(caster)
+	caster:RemoveModifierByName("modifier_gungnir")
 end
 
 function durationExpired(keys)
@@ -133,7 +138,6 @@ function endGungnir(caster)
 	local sub_ability_name	= "gungnir_throw"
 	caster:SwapAbilities(main_ability_name, sub_ability_name, true, false)
 
-	caster:RemoveModifierByName("modifier_gungnir")
 	caster:RemoveModifierByName("modifier_gungnir_hits")
 
 	local ability = caster:FindAbilityByName(main_ability_name)
