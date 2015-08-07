@@ -22,6 +22,7 @@
 			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_rattletrap.vsndevts"
 			"particle"					"particles/units/heroes/hero_shredder/shredder_whirling_death.vpcf"
 			"particle"					"particles/alice/shanghai_laser.vpcf"
+			"particle"					"particles/units/heroes/hero_ogre_magi/ogre_magi_bloodlust_cast.vpcf"
 		}
 
 		// Casting

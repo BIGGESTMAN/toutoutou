@@ -20,6 +20,11 @@ function dollsWarActivation(keys)
 	if caster.goliath_dolls then
 		for goliath_doll,v in pairs(caster.goliath_dolls) do
 			caster:FindAbilityByName("goliath_doll"):ApplyDataDrivenModifier(caster, goliath_doll, keys.goliath_doll_buff, {})
+			
+			local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_ogre_magi/ogre_magi_bloodlust_cast.vpcf", PATTACH_POINT_FOLLOW, goliath_doll)
+			ParticleManager:SetParticleControlEnt(particle, 0, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", caster:GetAbsOrigin(), true)
+			ParticleManager:SetParticleControlEnt(particle, 2, goliath_doll, PATTACH_POINT_FOLLOW, "attach_hitloc", goliath_doll:GetAbsOrigin(), true)
+			ParticleManager:SetParticleControlEnt(particle, 3, goliath_doll, PATTACH_POINT_FOLLOW, "attach_hitloc", goliath_doll:GetAbsOrigin(), true)
 		end
 	end
 end

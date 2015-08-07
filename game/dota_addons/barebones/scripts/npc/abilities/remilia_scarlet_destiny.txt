@@ -102,29 +102,18 @@
 
 	    	"modifier_scarlet_destiny_active"
 	    	{
-	    		"OnAttackLanded"
+	    		"OnAttackStart"
 	    		{
 	    			"RunScript"
 	    			{
 	    				"ScriptFile"	"heroes/hero_remilia/scarlet_destiny.lua"
-	    				"Function"		"crit"
+	    				"Function"		"checkCrit"
 	    			}
-
-					"FireSound"
-					{
-						"EffectName"	"Hero_PhantomAssassin.CoupDeGrace"
-						"Target"		"TARGET"
-					}
 	    		}
 
 	    		"States"
 	    		{
 	    			"MODIFIER_STATE_CANNOT_MISS"		"MODIFIER_STATE_VALUE_ENABLED"
-	    		}
-
-	    		"Properties"
-	    		{
-	    			"MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE" "%crit_damage"
 	    		}
 
 				"ThinkInterval"  "%update_interval"
@@ -147,6 +136,31 @@
 						"damage_taken"	"%attack_damage"
 					}
 				}
+	    	}
+
+	    	"modifier_scarlet_destiny_crit"
+	    	{
+	    		"IsHidden"	"1"
+	    		
+	    		"OnAttackLanded"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_remilia/scarlet_destiny.lua"
+	    				"Function"		"crit"
+	    			}
+
+					"FireSound"
+					{
+						"EffectName"	"Hero_PhantomAssassin.CoupDeGrace"
+						"Target"		"TARGET"
+					}
+	    		}
+
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE" "%crit_damage"
+	    		}
 	    	}
 		}
 	}

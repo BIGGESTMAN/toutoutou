@@ -16,9 +16,9 @@
 		"precache"
 		{
 			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_slardar.vsndevts"
-			"particle"					"particles/units/heroes/hero_ogre_magi/ogre_magi_bloodlust_buff.vpcf"
 			"particle"					"particles/generic_gameplay/generic_bashed.vpcf"
 			"particle"					"particles/alice/goliath_doll_spell_immunity.vpcf"
+			"particle"					"particles/units/heroes/hero_ogre_magi/ogre_magi_bloodlust_buff.vpcf"
 		}
 
 		// Casting

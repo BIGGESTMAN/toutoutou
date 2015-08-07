@@ -6,8 +6,19 @@ function createWire(keys)
 	local target = keys.target
 	local ability = keys.ability
 	local ability_level = ability:GetLevel() - 1
+	
+	if not caster.wires then caster.wires = {} end
 
-	if caster ~= target then
+	-- Make sure identical wires aren't created
+	local identical_wire = false
+	for k,existing_wire in pairs(caster.wires) do
+		if existing_wire[2] == target and existing_wire[1] == caster then
+			identical_wire = true
+			break
+		end
+	end
+
+	if caster ~= target and not identical_wire then
 		local location = (target:GetAbsOrigin() + caster:GetAbsOrigin()) / 2 + Vector(0,0,50)
 		local wire_unit = CreateUnitByName("npc_dota_juggernaut_healing_ward", location, false, caster, caster, caster:GetTeamNumber())
 		ability:ApplyDataDrivenModifier(caster, wire_unit, keys.wire_unit_modifier, {})
@@ -15,7 +26,6 @@ function createWire(keys)
 
 		-- Wire is table with three values--each of its two attachee units and the unit for itself
 		local wire = {keys.caster, keys.target, wire_unit}
-		if not caster.wires then caster.wires = {} end
 		caster.wires[wire_unit] = wire
 
 		wire_unit.ally_particle = ParticleManager:CreateParticleForTeam("particles/alice/trip_wire.vpcf", PATTACH_POINT_FOLLOW, wire[1], caster:GetTeamNumber())
@@ -47,10 +57,19 @@ function updateWire(keys)
 		local target1 = wire[1]
 		local target2 = wire[2]
 		local range = nil
+
+		-- I fucking despise trees
+		local tree_cut_down = false
+		local target1_is_tree = target1.IsStanding
+		local target2_is_tree = target2.IsStanding
+		if (target1_is_tree and not target1:IsStanding()) or (target2_is_tree and not target2:IsStanding()) then
+			tree_cut_down = true
+		end
+
 		if not target1:IsNull() and not target2:IsNull() then -- make sure both wire attachees still exist
 			range = (target2:GetAbsOrigin() - target1:GetAbsOrigin()):Length2D()
 		end
-		if range and range <= ability:GetLevelSpecialValueFor("max_length", ability_level) and target1:IsAlive() and target2:IsAlive() then
+		if range and range <= ability:GetLevelSpecialValueFor("max_length", ability_level) and target1:IsAlive() and target2:IsAlive() and not tree_cut_down then
 			-- Update wire unit position
 			wire[3]:SetAbsOrigin((target1:GetAbsOrigin() + target2:GetAbsOrigin()) / 2 + Vector(0,0,50))
 
@@ -133,7 +152,17 @@ function attach(keys)
 	local target = keys.target
 	local wire_distance = (caster.last_wire[2]:GetAbsOrigin() - target:GetAbsOrigin()):Length2D()
 	local wire_ability = caster:FindAbilityByName("trip_wire")
-	if caster.last_wire[2] ~= target and caster ~= target and wire_distance <= wire_ability:GetLevelSpecialValueFor("max_length", wire_ability:GetLevel() - 1) then
+
+	-- Make sure identical wires aren't created
+	local identical_wire = false
+	for k,existing_wire in pairs(caster.wires) do
+		if (existing_wire[2] == caster.last_wire[2] and existing_wire[1] == target) or (existing_wire[1] == caster.last_wire[2] and existing_wire[2] == target) then
+			identical_wire = true
+			break
+		end
+	end
+
+	if caster.last_wire[2] ~= target and caster ~= target and wire_distance <= wire_ability:GetLevelSpecialValueFor("max_length", wire_ability:GetLevel() - 1) and not identical_wire then
 		caster.last_wire[1] = target
 		local main_ability_name	= keys.main_ability_name
 		local sub_ability_name	= keys.ability:GetAbilityName()
@@ -153,7 +182,7 @@ function destroyWire(wire, caster)
 
 	caster.wires[wire[3]] = nil
 	if caster:FindAbilityByName("trip_wire"):IsHidden() and wire == caster.last_wire then
-		caster:SwapAbilities("trip_wire", "trip_wire_attach", true, false)
+		caster:RemoveModifierByName("modifier_trip_wire_attach_window")
 	end
 	if not wire[3]:IsNull() then wire[3]:RemoveSelf() end
 end

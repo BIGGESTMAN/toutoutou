@@ -50,6 +50,17 @@ function spendCharge(caster)
 	end
 end
 
+function checkCrit(keys)
+	local caster = keys.caster
+	local ability = keys.ability
+	local target = keys.target
+
+	caster:RemoveModifierByName("modifier_scarlet_destiny_crit")
+	if not target:IsBuilding() then
+		ability:ApplyDataDrivenModifier(caster, caster, "modifier_scarlet_destiny_crit", {})
+	end
+end
+
 function crit(keys)
 	local caster = keys.caster
 	local target = keys.target
@@ -62,6 +73,7 @@ function crit(keys)
 	ParticleManager:SetParticleControlForward(particle, 1, particle_forward)
 
 	spendCharge(caster)
+	caster:RemoveModifierByName("modifier_scarlet_destiny_crit")
 end
 
 function damageTaken(keys)

@@ -123,7 +123,7 @@ function throw(keys)
 		end
 	end)
 
-	caster:RemoveModifierByName("modifier_gungnir")
+	endGungnir(caster)
 end
 
 function durationExpired(keys)
@@ -136,8 +136,11 @@ function endGungnir(caster)
 	-- Disable throw ability
 	local main_ability_name	= "gungnir"
 	local sub_ability_name	= "gungnir_throw"
-	caster:SwapAbilities(main_ability_name, sub_ability_name, true, false)
+	if caster:FindAbilityByName(main_ability_name):IsHidden() then
+		caster:SwapAbilities(main_ability_name, sub_ability_name, true, false)
+	end
 
+	caster:RemoveModifierByName("modifier_gungnir")
 	caster:RemoveModifierByName("modifier_gungnir_hits")
 
 	local ability = caster:FindAbilityByName(main_ability_name)
