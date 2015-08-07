@@ -1,0 +1,152 @@
+	"scarlet_destiny"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE"
+
+		"AbilityTextureName"			"queenofpain_scream_of_pain"
+		//"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
+
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_phantom_assassin.vsndevts"
+			"particle"					"particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf"
+			"particle"					"particles/remilia/scarlet_destiny_deflect.vpcf"
+		}
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"crit_damage"			"150 180 210 240"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"health_threshold"		"8"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"max_charges"			"4 6 8 10"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"recharge_time"			"8"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"starting_charges"		"1"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"update_interval"		"0.03"
+			}
+		}
+
+		"OnToggleOn"
+		{
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_scarlet_destiny_active"
+				"Target" 		"CASTER"
+			}
+		}
+
+		"OnToggleOff"
+		{
+			"RemoveModifier"
+			{
+				"ModifierName"	"modifier_scarlet_destiny_active"
+				"Target" 		"CASTER"
+			}
+		}
+
+	    "OnUpgrade"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"	"heroes/hero_remilia/scarlet_destiny.lua"
+	    		"Function"		"checkRestoreCharges"
+	    	}
+	    }
+
+		"Modifiers"
+		{
+	    	"modifier_scarlet_destiny"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+
+	    		"ThinkInterval"	"0.03"
+
+	    		"OnIntervalThink"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_remilia/scarlet_destiny.lua"
+	    				"Function"		"updateCharges"
+	    			}
+	    		}
+	    	}
+
+	    	"modifier_scarlet_charges"
+	    	{
+
+	    	}
+
+	    	"modifier_scarlet_destiny_active"
+	    	{
+	    		"OnAttackLanded"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_remilia/scarlet_destiny.lua"
+	    				"Function"		"crit"
+	    			}
+
+					"FireSound"
+					{
+						"EffectName"	"Hero_PhantomAssassin.CoupDeGrace"
+						"Target"		"TARGET"
+					}
+	    		}
+
+	    		"States"
+	    		{
+	    			"MODIFIER_STATE_CANNOT_MISS"		"MODIFIER_STATE_VALUE_ENABLED"
+	    		}
+
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE" "%crit_damage"
+	    		}
+
+				"ThinkInterval"  "%update_interval"
+
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+	    				"ScriptFile"	"heroes/hero_remilia/scarlet_destiny.lua"
+						"Function"		"updateHealth"
+					}
+				}
+
+				"OnTakeDamage"
+				{
+					"RunScript"
+					{
+	    				"ScriptFile"	"heroes/hero_remilia/scarlet_destiny.lua"
+						"Function"		"damageTaken"
+						"damage_taken"	"%attack_damage"
+					}
+				}
+	    	}
+		}
+	}

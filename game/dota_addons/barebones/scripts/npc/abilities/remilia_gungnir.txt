@@ -103,15 +103,6 @@
 
 	    		"Duration"		"%duration"
 
-	    		"OnAttack"
-	    		{
-	    			"RunScript"
-	    			{
-	    				"ScriptFile"	"heroes/hero_remilia/gungnir.lua"
-	    				"Function"		"attackStarted"
-	    			}
-	    		}
-
 	    		"OnAttackLanded"
 	    		{
 	    			"RunScript"

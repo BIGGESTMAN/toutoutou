@@ -13,9 +13,6 @@ function gungnirCast(keys)
 	caster:SwapAbilities(main_ability_name, sub_ability_name, false, true)
 end
 
-function attackStarted(keys)
-end
-
 function gungnirHit(keys)
 	local caster = keys.caster
 	local ability = keys.ability
@@ -125,7 +122,9 @@ function throw(keys)
 end
 
 function durationExpired(keys)
-	endGungnir(keys.caster)
+	if not keys.caster:FindAbilityByName("gungnir_throw"):IsInAbilityPhase() then
+		endGungnir(keys.caster)
+	end
 end
 
 function endGungnir(caster)

@@ -99,9 +99,6 @@ function damageTaken(keys)
 	local newHealth = unit.old_health			
 	unit:SetHealth(newHealth)
 	ability.damage_absorbed = ability.damage_absorbed + damage
-
-	print("Damage Taken pre Absorb: "..damage)
-	print("Damage Absorbed: " .. ability.damage_absorbed)
 end
 
 function modifierApplied(keys)

@@ -58,7 +58,7 @@ function checkRestoreCharges(keys)
 	local ability = keys.ability
 	local ability_level = ability:GetLevel() - 1
 
-	if ability_level == 1 then caster.anchor_charges = ability:GetLevelSpecialValueFor("max_charges", ability_level) end
+	if ability_level == 0 then caster.anchor_charges = ability:GetLevelSpecialValueFor("max_charges", ability_level) end
 end
 
 function upgradeDraggingAnchor(keys)
@@ -66,8 +66,8 @@ function upgradeDraggingAnchor(keys)
 	local ability = keys.ability
 	local ability_level = ability:GetLevel() - 1
 
-	if ability_level == 1 then
-		caster:FindAbilityByName("dragging_anchor"):SetLevel(ability_level)
+	if ability_level == 0 then
+		caster:FindAbilityByName("dragging_anchor"):SetLevel(ability_level + 1)
 	end
 end
 
