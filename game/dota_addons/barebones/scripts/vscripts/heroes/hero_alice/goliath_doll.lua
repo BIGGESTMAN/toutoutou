@@ -73,3 +73,39 @@ function onAttack(keys)
 		end
 	end
 end
+
+function checkTripWireRegen(keys)
+	local caster = keys.caster
+	if caster.wires then
+		local ability = keys.ability
+		local doll = keys.target
+
+		local wire_attached = false
+		for wire_unit,wire in pairs(caster.wires) do
+			if wire[2] == doll and wire[1] == caster then
+				wire_attached = true
+				break
+			end
+		end
+
+		if wire_attached then
+			ability:ApplyDataDrivenModifier(caster, doll, "modifier_goliath_doll_regen", {})
+		else
+			doll:RemoveModifierByName("modifier_goliath_doll_regen")
+		end
+	end
+end
+
+function tripWireAttached(keys)
+	local caster = keys.caster
+	local ability = keys.ability
+	local doll = keys.target
+
+	doll.tether_particle = ParticleManager:CreateParticle("particles/alice/goliath_doll_regen_tether.vpcf", PATTACH_POINT_FOLLOW, doll)
+	ParticleManager:SetParticleControlEnt(doll.tether_particle, 0, caster, PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", caster:GetAbsOrigin(), true)
+	ParticleManager:SetParticleControlEnt(doll.tether_particle, 1, doll, PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", doll:GetAbsOrigin(), true)
+end
+
+function tripWireDetached(keys)
+	ParticleManager:DestroyParticle(keys.target.tether_particle, false)
+end

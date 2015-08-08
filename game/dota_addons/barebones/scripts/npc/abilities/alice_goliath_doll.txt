@@ -60,6 +60,16 @@
 				"var_type"				"FIELD_INTEGER"
 				"duration"				"60 70 80"
 			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"trip_wire_regen"		"20 50 80"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"update_interval"		"0.03"
+			}
 		}
 
 		"OnSpellStart"
@@ -112,6 +122,17 @@
 						"Function"		"onAttack"
 					}
 				}
+
+				"ThinkInterval"  "%update_interval"
+
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_alice/goliath_doll.lua"
+						"Function"		"checkTripWireRegen"
+					}
+				}
 			}
 
 			"modifier_goliath_doll_spell_immune"
@@ -144,6 +165,32 @@
 						"Target" 		"TARGET"
 					}
 				}
+			}
+
+			"modifier_goliath_doll_regen"
+			{
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%trip_wire_regen"
+	    		}
+
+	    		"OnCreated"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_alice/goliath_doll.lua"
+	    				"Function"		"tripWireAttached"
+	    			}
+	    		}
+
+	    		"OnDestroy"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_alice/goliath_doll.lua"
+	    				"Function"		"tripWireDetached"
+	    			}
+	    		}
 			}
 		}
 	}
