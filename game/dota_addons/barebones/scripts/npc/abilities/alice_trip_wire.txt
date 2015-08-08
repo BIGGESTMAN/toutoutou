@@ -22,6 +22,7 @@
 			"particle"					"particles/units/heroes/hero_oracle/oracle_fortune_purge.vpcf"
 			"model"						"models/development/invisiblebox.vmdl"
 			"particle"					"particles/alice/trip_wire.vpcf"
+			"particle"					"particles/alice/trip_wire_trigger.vpcf"
 			"particle"					"particles/alice/trip_wire_dolls_stored_indicator.vpcf"
 		}
 

@@ -49,7 +49,7 @@ function createWire(keys)
 end
 
 function updateWire(keys)
-	if not keys.target:IsNull() then -- as usual, no idea how this is possible, but whatever
+	if not keys.target:IsNull() and keys.caster.wires[keys.target] then -- as usual, no idea how this is possible, but whatever
 		local caster = keys.caster
 		local ability = keys.ability
 		local ability_level = ability:GetLevel() - 1
@@ -179,6 +179,11 @@ function destroyWire(wire, caster)
 	ParticleManager:DestroyParticle(wire[3].ally_particle, false)
 	if wire[3].enemy_particle then ParticleManager:DestroyParticle(wire[3].enemy_particle, false) end
 	if wire[3].indicator_particle then ParticleManager:DestroyParticle(wire[3].indicator_particle, false) end
+
+	-- Triggered particle
+	local trigger_particle = ParticleManager:CreateParticle("particles/alice/trip_wire_trigger.vpcf", PATTACH_POINT_FOLLOW, wire[1])
+	ParticleManager:SetParticleControl(trigger_particle,0,Vector(wire[1]:GetAbsOrigin().x,wire[1]:GetAbsOrigin().y,wire[1]:GetAbsOrigin().z + wire[1]:GetBoundingMaxs().z ))	
+	ParticleManager:SetParticleControl(trigger_particle,1,Vector(wire[2]:GetAbsOrigin().x,wire[2]:GetAbsOrigin().y,wire[2]:GetAbsOrigin().z + wire[2]:GetBoundingMaxs().z ))
 
 	caster.wires[wire[3]] = nil
 	if caster:FindAbilityByName("trip_wire"):IsHidden() and wire == caster.last_wire then
