@@ -72,6 +72,13 @@ function onAttack(keys)
 			ability:ApplyDataDrivenModifier(doll, unit, "modifier_goliath_doll_bashed", {duration = bash_duration})
 		end
 	end
+
+	local particle = ParticleManager:CreateParticle("particles/alice/goliath_doll_cleave.vpcf", PATTACH_POINT_FOLLOW, doll)
+	ParticleManager:SetParticleControl(particle, 0, target:GetAbsOrigin())
+	for i=1,16 do
+		ParticleManager:SetParticleControl(particle, i, doll:GetAbsOrigin())
+	end
+	-- ParticleManager:SetParticleControlEnt(particle, 0, doll, PATTACH_POINT_FOLLOW, "attach_hitloc", doll:GetAbsOrigin(), true)
 end
 
 function checkTripWireRegen(keys)
