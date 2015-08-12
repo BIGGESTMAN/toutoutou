@@ -1,3 +1,5 @@
+LinkLuaModifier("modifier_melancholy_poison_damagecheck", "heroes/hero_medicine/modifier_melancholy_poison_damagecheck.lua", LUA_MODIFIER_MOTION_NONE )
+
 function melancholyPoisonTick(keys)
 	local caster = keys.caster
 	local ability = keys.ability
@@ -48,17 +50,12 @@ function melancholyPoisonTick(keys)
 	caster:FindModifierByName(keys.display_modifier):SetStackCount(caster.venom)
 end
 
-function checkVenomRelease(keys)
-	local caster = keys.caster
-	local ability = keys.ability
-	local ability_level = ability:GetLevel() - 1
-
-	if ability:IsCooldownReady() and caster.venom > 0 then
-		ability:ApplyDataDrivenModifier(caster, caster, keys.release_charging_modifier, {})
-		ability:StartCooldown(ability:GetCooldown(ability_level))
-	end
-end
-
 function venomRelease(keys)
 	keys.caster.venom_triggered = true
+end
+
+function createDamageCheckModifier(keys)
+	local caster = keys.caster
+	local ability = keys.ability
+	caster:AddNewModifier(caster, ability, "modifier_melancholy_poison_damagecheck", {})
 end

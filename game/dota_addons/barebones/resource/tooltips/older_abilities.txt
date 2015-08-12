@@ -324,7 +324,7 @@
 		"DOTA_Tooltip_Ability_Durgas_Soul"	"Durga's Soul"
 		"DOTA_Tooltip_Ability_Durgas_Soul_Description"	"Byakuren consumes a charge to become shielded from all damage and immune to debuffs before releasing a shockwave which deals magic damage. The shockwave does more damage based on the amount of damage absorbed during the charge."
 		"DOTA_Tooltip_Ability_Durgas_Soul_Note0"  "The shockwave direction can be changed any number of times during the shield duration by recasting the ability."
-		"DOTA_Tooltip_Ability_Durgas_Soul_Note1"  "Shockwave damage is increased by 100% for every 500 damage absorbed."
+		"DOTA_Tooltip_Ability_Durgas_Soul_Note1"  "Shockwave damage is increased by 100% for every 200 damage absorbed."
 		"DOTA_Tooltip_Ability_Durgas_Soul_Note2"  "Hits units up to 600 away."
 		"DOTA_Tooltip_Ability_Durgas_Soul_Duration"	 "DURATION:"
 		"DOTA_Tooltip_Ability_Durgas_Soul_Damage"  "DAMAGE:"

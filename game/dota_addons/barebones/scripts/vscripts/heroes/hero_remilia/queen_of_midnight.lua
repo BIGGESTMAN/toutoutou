@@ -9,8 +9,8 @@ function swoop(keys)
 	local ability = keys.ability
 	local ability_level = ability:GetLevel() - 1
 
-	caster:Stop()
-	caster:Interrupt()
+	-- caster:Stop()
+	-- caster:Interrupt()
 	caster:RemoveModifierByName("modifier_queen_of_midnight")
 	ability:ApplyDataDrivenModifier(caster, caster, "modifier_queen_of_midnight_swooping", {})
 

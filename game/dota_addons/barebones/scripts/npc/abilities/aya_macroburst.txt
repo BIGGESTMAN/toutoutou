@@ -99,7 +99,6 @@
 				"Passive"			"1"
 				"IsHidden"			"1"
 				"IsPurgable"		"0"
-				"Permanent"			"1"
 
 				"ThinkInterval"		"%cooldown_check_interval"
 

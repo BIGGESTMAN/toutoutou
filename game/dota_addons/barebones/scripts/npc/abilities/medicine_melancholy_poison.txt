@@ -103,14 +103,12 @@
 					}
 				}
 
-				"OnTakeDamage"
+				"OnCreated"
 				{
 					"RunScript"
 					{
 						"ScriptFile"	"heroes/hero_medicine/melancholy_poison.lua"
-						"Function"		"checkVenomRelease"
-						"damage_taken"	"%attack_damage"
-						"release_charging_modifier"	"modifier_release_charging"
+						"Function"		"createDamageCheckModifier"
 					}
 				}
 			}
