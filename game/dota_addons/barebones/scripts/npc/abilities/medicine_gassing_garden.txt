@@ -73,6 +73,7 @@
 					{
 						"ScriptFile"	"heroes/hero_medicine/gassing_garden.lua"
 						"Function"		"createParticle"
+						"Target"		"TARGET"
 					}
 				}
 			}

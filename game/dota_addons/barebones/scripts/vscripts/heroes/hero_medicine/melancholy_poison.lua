@@ -48,6 +48,21 @@ function melancholyPoisonTick(keys)
 
 	ability:ApplyDataDrivenModifier(caster, caster, keys.display_modifier, {})
 	caster:FindModifierByName(keys.display_modifier):SetStackCount(caster.venom)
+
+	-- Update particle
+	if caster:IsAlive() and ability:IsCooldownReady() then
+		if not caster.melancholy_poison_particle then
+			caster.melancholy_poison_particle = ParticleManager:CreateParticle("particles/medicine/melancholy_poison.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+			ParticleManager:SetParticleControlEnt(caster.melancholy_poison_particle, 1, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", caster:GetAbsOrigin(), true)
+		end
+		local particle_radius = caster.venom / max_venom
+		ParticleManager:SetParticleControl(caster.melancholy_poison_particle, 2, Vector(particle_radius,0,0))
+	else
+		if caster.melancholy_poison_particle then
+			ParticleManager:DestroyParticle(caster.melancholy_poison_particle, false)
+			caster.melancholy_poison_particle = nil
+		end
+	end
 end
 
 function venomRelease(keys)

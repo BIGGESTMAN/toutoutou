@@ -15,9 +15,9 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"precache"
 		{
-			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_slardar.vsndevts"
 			"particle"					"particles/units/heroes/hero_pugna/pugna_netherblast.vpcf"
 			"particle"					"particles/generic_gameplay/generic_stunned.vpcf"
+			"particle"					"particles/medicine/melancholy_poison.vpcf"
 		}
 
 		// Special
@@ -78,7 +78,7 @@
 			"10"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"update_interval"		"0.1"
+				"update_interval"		"0.03"
 			}
 		}
 
@@ -142,15 +142,6 @@
 
 				"EffectName"	"particles/generic_gameplay/generic_stunned.vpcf"
 				"EffectAttachType"	"follow_overhead"
-
-				"OnCreated"
-				{
-					"FireSound"
-					{
-						"EffectName"	"Hero_Slarder.Bash"
-						"Target" 		"TARGET"
-					}
-				}
 			}
 
 			"modifier_venom_display"
