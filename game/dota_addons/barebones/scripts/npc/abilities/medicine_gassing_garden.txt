@@ -21,7 +21,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"precache"
 		{
-			"particle"					"particles/units/heroes/hero_alchemist/alchemist_acid_spray.vpcf"
+			"particle"					"particles/medicine/gassing_garden.vpcf"
 		}
 
 		// Special
@@ -69,11 +69,10 @@
 
 				"OnCreated"
 				{
-					"AttachEffect"
+					"RunScript"
 					{
-						"EffectName"		"particles/units/heroes/hero_alchemist/alchemist_acid_spray.vpcf"
-						"EffectAttachType"	"follow_origin"
-						"Target"			"TARGET"
+						"ScriptFile"	"heroes/hero_medicine/gassing_garden.lua"
+						"Function"		"createParticle"
 					}
 				}
 			}
