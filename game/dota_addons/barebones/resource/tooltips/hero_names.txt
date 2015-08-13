@@ -11,3 +11,4 @@
 		"npc_dota_hero_skywrath_mage"		"Aya"
 		"npc_dota_hero_kunkka"				"Murasa"
 		"npc_dota_hero_night_stalker"		"Remilia"
+		"npc_dota_hero_crystal_maiden"		"Letty"

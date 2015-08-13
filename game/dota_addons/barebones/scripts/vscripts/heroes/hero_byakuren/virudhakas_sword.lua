@@ -4,15 +4,18 @@ function virudhakasSwordCast(keys)
 	local ability = keys.ability
 	local ability_level = ability:GetLevel() - 1
 
-	-- -- Spend a charge
-	local charge_modifier = caster:FindModifierByName("modifier_vajrapanis_charges")
-	if charge_modifier:GetStackCount() > 1 then
-		charge_modifier:DecrementStackCount()
-	else
-		charge_modifier:Destroy()
+	-- Spend a charge, unless charges modifier has expired during cast animation
+	if caster:HasModifier("modifier_vajrapanis_charges") then
+		local charge_modifier = caster:FindModifierByName("modifier_vajrapanis_charges")
+		if charge_modifier:GetStackCount() > 1 then
+			charge_modifier:DecrementStackCount()
+		else
+			charge_modifier:Destroy()
+		end
 	end
 
 	--------------------------------------------- Dummy projectile ----------------------------------
+	
 	local speed = ability:GetLevelSpecialValueFor("speed", ability_level)
 
 	local dummy_projectile = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeam())

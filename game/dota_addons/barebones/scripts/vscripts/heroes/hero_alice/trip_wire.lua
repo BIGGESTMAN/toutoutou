@@ -167,6 +167,7 @@ function attach(keys)
 		local main_ability_name	= keys.main_ability_name
 		local sub_ability_name	= keys.ability:GetAbilityName()
 		caster:SwapAbilities(main_ability_name, sub_ability_name, true, false)
+		caster:RemoveModifierByName("modifier_trip_wire_attach_window")
 	end
 end
 
