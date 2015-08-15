@@ -692,13 +692,13 @@
 		"AttackAcquisitionRange"	"300"									// Range within a target can be acquired.
 	}
 
-	"npc_dota_hero_remilia"
+	"npc_dota_hero_letty"
 	{
 		"AbilityLayout" 		"4"
 		"override_hero"			"npc_dota_hero_crystal_maiden"
 		"SoundSet"				"0"
 		"Ability1"				"lingering_cold"
-		"Ability2"				""
+		"Ability2"				"flower_wither_away"
 		"Ability3"				""
 		"Ability4"				""
 		"Ability5"				""
