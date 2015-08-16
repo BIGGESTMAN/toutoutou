@@ -1,19 +1,11 @@
 function setRanged(keys)
 	local caster = keys.caster
-	print("?")
-	print(caster:GetAttackCapability())
 	keys.caster:SetAttackCapability(DOTA_UNIT_CAP_RANGED_ATTACK)
-	print(caster:GetAttackCapability())
-	print(caster:GetProjectileSpeed())
 end
 
 function setMelee(keys)
 	local caster = keys.caster
-	print("!")
-	print(caster:GetAttackCapability())
 	keys.caster:SetAttackCapability(DOTA_UNIT_CAP_MELEE_ATTACK)
-	print(caster:GetAttackCapability())
-	print(caster:GetProjectileSpeed())
 end
 
 function yinYangOrbsCreateDummy( keys )
@@ -53,11 +45,8 @@ function yinYangOrbsDummyCreated( keys )
 		ApplyDamage({victim = target, attacker = ability.caster, damage = damage, damage_type = DAMAGE_TYPE_PHYSICAL})
 
 		-- Silence target if they're slowed
-		for k,v in pairs(target:FindAllModifiers()) do
-			if target:GetMoveSpeedModifier(target:GetBaseMoveSpeed()) < target:GetBaseMoveSpeed() then
-				ability.unit_ability:ApplyDataDrivenModifier(caster, target, "modifier_yin_yang_orbs_silence", {})
-				break;
-			end
+		if target:IsMovementImpaired() then
+			ability.unit_ability:ApplyDataDrivenModifier(caster, target, "modifier_yin_yang_orbs_silence", {})
 		end
 
 		-- Play impact sound

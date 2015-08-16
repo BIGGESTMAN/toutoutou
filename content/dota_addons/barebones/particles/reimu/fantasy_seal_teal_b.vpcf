@@ -154,7 +154,7 @@
 	m_Children =
 	[
 		{
-			m_ChildRef = resource:"particles/reimu/fantasy_seal.vpcf"
+			m_ChildRef = resource:"particles/reimu/fantasy_seal_teal_b0.vpcf"
 		},
 	]
 }

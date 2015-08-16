@@ -141,3 +141,24 @@ function GetEnemiesInCone(unit, start_radius, end_radius, end_distance, caster_f
 
 	return cone_units
 end
+
+function randomIndexOfTable(table, excluded_indices)
+	local excluded = excluded_indices or {}
+
+	local indexes = {}
+	for k,v in pairs(table) do
+		if not tableContains(excluded_indices, k) then
+			indexes[#indexes + 1] = k
+		end
+	end
+	
+	return indexes[RandomInt(1, #indexes)]
+end
+
+function sizeOfTable(table)
+	local size = 0
+	for k,v in pairs(table) do
+		size = size + 1
+	end
+	return size
+end

@@ -17,8 +17,14 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"precache"
 		{
-			"soundfile"		"soundevents/game_sounds_heroes/game_sounds_chaos_knight.vsndevts"
-			"particle"		"particles/reimu/fantasy_seal2.vpcf"
+			"soundfile"		"soundevents/game_sounds_heroes/game_sounds_skywrath_mage.vsndevts"
+			"particle"		"particles/reimu/fantasy_seal_blue.vpcf"
+			"particle"		"particles/reimu/fantasy_seal_red.vpcf"
+			"particle"		"particles/reimu/fantasy_seal_orange.vpcf"
+			"particle"		"particles/reimu/fantasy_seal_purple.vpcf"
+			"particle"		"particles/reimu/fantasy_seal_green.vpcf"
+			"particle"		"particles/reimu/fantasy_seal_yellow.vpcf"
+			"particle"		"particles/reimu/fantasy_seal_teal.vpcf"
 		}
 
 		// Casting
@@ -65,12 +71,17 @@
 			"06"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"delay"					"0.25"
+				"duration"				"1"
 			}
 			"07"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"number_of_seals"		"5"
+				"primary_target_shots"	"5"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"secondary_target_shots" "3"
 			}
 		}
 

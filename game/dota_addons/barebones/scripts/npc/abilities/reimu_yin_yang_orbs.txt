@@ -14,8 +14,6 @@
 			"particle"					"particles/reimu/yin_yang_scattering.vpcf"
 		}
 
-		"AbilityManaCost"				"14"
-
 		"AbilitySpecial"
 		{
 			"01"
@@ -55,6 +53,11 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"projectile_speed"		"1000"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"mana_cost"				"14"
 			}
 		}
 
@@ -103,7 +106,7 @@
 				{
 					"SpendMana"
 					{
-						"Mana"		"%AbilityManaCost"
+						"Mana"		"%mana_cost"
 					}
 				}
 
