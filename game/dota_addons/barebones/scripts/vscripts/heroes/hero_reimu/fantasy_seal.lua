@@ -13,7 +13,7 @@ function fantasySealCast( keys )
 		        Source = caster,
 				EffectName = "particles/reimu/fantasy_seal2.vpcf",
 				Ability = ability,
-		        bDodgeable = true,
+		        bDodgeable = false,
 		        bProvidesVision = false,
 		        iMoveSpeed = ability:GetLevelSpecialValueFor("projectile_speed", ability_level),
 		        iVisionRadius = 0,

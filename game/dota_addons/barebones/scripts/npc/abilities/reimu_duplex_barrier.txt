@@ -16,7 +16,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"precache"
 		{
-			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dark_seer.vsndevts"
 			"particle"			"particles/units/heroes/hero_dark_seer/dark_seer_wall_of_replica.vpcf"
 			"particle"			"particles/dark_seer_wall_of_replica.vpcf"
 			"particle"			"particles/units/heroes/hero_wisp/wisp_overcharge.vpcf"
@@ -35,7 +34,7 @@
 
 		// Cost
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"100"
+		"AbilityManaCost"				"90"
 
 		// Special
 		//-------------------------------------------------------------------------------------------------------------
@@ -79,7 +78,7 @@
 			"07"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"stun_duration"			"1.5"
+				"stun_duration"			"2"
 				"_value"				"DOTA_Tooltip_Ability_duplex_barrier_Stun_Duration"
 			}
 			"08"
@@ -109,12 +108,6 @@
 
 		"OnSpellStart"
 		{
-			"FireSound"
-			{
-				"EffectName"			"Hero_Dark_Seer.Wall_of_Replica_Start"
-				"Target" 				"CASTER"
-			}
-
 			"RunScript"
 			{
 				"ScriptFile"			"heroes/hero_reimu/duplex_barrier.lua"
@@ -122,7 +115,6 @@
 				"wall_particle"			"particles/dark_seer_wall_smoke_edited.vpcf"
 				"outer_dummy_modifier"	"modifier_duplex_barrier_outer_dummy"
 				"inner_dummy_modifier"	"modifier_duplex_barrier_inner_dummy"
-				"dummy_sound"			"Hero_Dark_Seer.Wall_of_Replica_lp"
 			}
 
 			"ApplyModifier"
@@ -302,12 +294,6 @@
 					{
 						"EffectName"	"Hero_Wisp.Tether.Stun"
 						"Target" 		"TARGET"
-					}
-
-					"FireSound"
-					{
-						"EffectName"	"barebones.QopLaugh"
-						"Target"		"TARGET"
 					}
 				}
 			}

@@ -60,8 +60,8 @@
 		"AttackAnimationPoint"		"0.35"									// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"128"									// Range within a target can be acquired.
 		"AttackRange"				"128"									// Range within a target can be attacked.
-		"ProjectileModel"			"melee_hero"							// Particle system model for projectile.
-		//"ProjectileSpeed"			"900"									// Speed of projectile.
+		"ProjectileModel"			"particles/reimu/yin_yang_scattering.vpcf"							// Particle system model for projectile.
+		"ProjectileSpeed"			"1000"									// Speed of projectile.
 
 	}
 
@@ -699,8 +699,8 @@
 		"SoundSet"				"0"
 		"Ability1"				"lingering_cold"
 		"Ability2"				"flower_wither_away"
-		"Ability3"				""
-		"Ability4"				""
+		"Ability3"				"northern winner"
+		"Ability4"				"cold snap"
 		"Ability5"				""
 		"Ability6"				""
 		"Ability7"				"attribute_bonus"

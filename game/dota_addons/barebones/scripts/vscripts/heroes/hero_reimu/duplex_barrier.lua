@@ -29,7 +29,6 @@ function duplexBarrier( keys )
 		-- Cosmetic variables
 		local outer_dummy_modifier = keys.outer_dummy_modifier
 		local wall_particle = keys.wall_particle
-		local dummy_sound = keys.dummy_sound
 
 		-- Ability variables
 		local length = range * 2
@@ -57,7 +56,6 @@ function duplexBarrier( keys )
 		local dummy = CreateUnitByName("npc_dummy_blank", end_point_left, false, caster, caster, caster_team)
 		table.insert(ability.outer_dummies, dummy)
 		ability:ApplyDataDrivenModifier(dummy, dummy, outer_dummy_modifier, {})
-		EmitSoundOn(dummy_sound, dummy)	
 
 		-- Create the secondary dummies for the left half of the wall
 		for i=1,num_of_dummies + 2 do
@@ -107,7 +105,6 @@ function duplexBarrier( keys )
 		-- Cosmetic variables
 		local inner_dummy_modifier = keys.inner_dummy_modifier
 		local wall_particle = keys.wall_particle
-		local dummy_sound = keys.dummy_sound
 
 		-- Ability variables
 		local length = range * 2
@@ -135,7 +132,6 @@ function duplexBarrier( keys )
 		local dummy = CreateUnitByName("npc_dummy_blank", end_point_left, false, caster, caster, caster_team)
 		table.insert(ability.inner_dummies, dummy)
 		ability:ApplyDataDrivenModifier(dummy, dummy, inner_dummy_modifier, {})
-		EmitSoundOn(dummy_sound, dummy)	
 
 		-- Create the secondary dummies for the left half of the wall
 		for i=1,num_of_dummies + 2 do
@@ -252,10 +248,10 @@ function duplexOuterBarrierAura( keys )
 
 		for _,unit in ipairs(units) do
 			if not unit:HasModifier(outer_barrier_modifier) then
-				ability:ApplyDataDrivenModifier(caster, unit, outer_barrier_modifier, {})
+				ability:ApplyDataDrivenModifier(ability.caster, unit, outer_barrier_modifier, {})
 				targets_hit_table[ability.caster][unit] = true
 				if unit:HasModifier(inner_barrier_modifier) then
-					ability:ApplyDataDrivenModifier(caster, unit, stun_modifier, {})
+					ability:ApplyDataDrivenModifier(ability.caster, unit, stun_modifier, {})
 				end
 			end
 		end
@@ -283,10 +279,10 @@ function duplexInnerBarrierAura( keys )
 
 		for _,unit in ipairs(units) do
 			if not unit:HasModifier(inner_barrier_modifier) then
-				ability:ApplyDataDrivenModifier(caster, unit, inner_barrier_modifier, {})
+				ability:ApplyDataDrivenModifier(ability.caster, unit, inner_barrier_modifier, {})
 				targets_hit_table[ability.caster][unit] = true
 				if unit:HasModifier(outer_barrier_modifier) then
-					ability:ApplyDataDrivenModifier(caster, unit, stun_modifier, {})
+					ability:ApplyDataDrivenModifier(ability.caster, unit, stun_modifier, {})
 				end
 			end
 		end
@@ -357,7 +353,6 @@ end
 
 function killDummy(keys)
 	keys.target:RemoveSelf()
-	StopSoundOn("Hero_Dark_Seer.Wall_of_Replica_lp", dummy)
 end
 
 function pointIsInRectangle(point, rectanglePoints)

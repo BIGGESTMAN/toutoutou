@@ -1,3 +1,21 @@
+function setRanged(keys)
+	local caster = keys.caster
+	print("?")
+	print(caster:GetAttackCapability())
+	keys.caster:SetAttackCapability(DOTA_UNIT_CAP_RANGED_ATTACK)
+	print(caster:GetAttackCapability())
+	print(caster:GetProjectileSpeed())
+end
+
+function setMelee(keys)
+	local caster = keys.caster
+	print("!")
+	print(caster:GetAttackCapability())
+	keys.caster:SetAttackCapability(DOTA_UNIT_CAP_MELEE_ATTACK)
+	print(caster:GetAttackCapability())
+	print(caster:GetProjectileSpeed())
+end
+
 function yinYangOrbsCreateDummy( keys )
 	local caster = keys.caster
 	local target = keys.target
@@ -5,10 +23,8 @@ function yinYangOrbsCreateDummy( keys )
 
 	local dummy = CreateUnitByName( "npc_dummy_blank", target:GetAbsOrigin(), false, caster, caster, target:GetTeamNumber() )
 	dummy:AddAbility("yin_yang_orbs_dummy")
-	dummy:FindAbilityByName("yin_yang_orbs_dummy"):ApplyDataDrivenModifier( caster, dummy, "modifier_yin_yang_orbs_dummy_unit", {} )
+	dummy:FindAbilityByName("yin_yang_orbs_dummy"):ApplyDataDrivenModifier( caster, dummy, "modifier_yin_yang_orbs_dummy", {} )
 end
-
-
 
 function yinYangOrbsDummyCreated( keys )
 	local caster = keys.caster
@@ -17,39 +33,40 @@ function yinYangOrbsDummyCreated( keys )
 
 	-- if it's first bounce then we need to initialize the ability variables since we're dealing with a dummy unit
 	-- else we apply damage to the target since it'll be the second bounce
-	local first = false
 	if caster:GetOwner():GetClassname() == "player" then
-		local unit_ability = caster:FindAbilityByName("yin_yang_orbs")
+		ability.caster = caster
+		ability.unit_ability = caster:FindAbilityByName("yin_yang_orbs")
+		ability.level = ability.unit_ability:GetLevel() - 1
 
-		ability.bounceTable = {}
+		-- ability.bounceTable = {}
 		ability.bounceCount = 1
-		ability.maxBounces = unit_ability:GetLevelSpecialValueFor("bounces", unit_ability:GetLevel() - 1)
-		ability.bounceRange = unit_ability:GetLevelSpecialValueFor("bounce_range", unit_ability:GetLevel() - 1)
-
-		ability.particle_name = keys.particle
-		ability.projectile_speed = 900
-		first = true
+		ability.maxBounces = ability.unit_ability:GetLevelSpecialValueFor("bounces", ability.level)
+		ability.bounceRange = ability.unit_ability:GetLevelSpecialValueFor("bounce_range", ability.level)
+		ability.projectile_speed = ability.unit_ability:GetLevelSpecialValueFor("projectile_speed", ability.level)
+		ability.particle_name = "particles/reimu/yin_yang_scattering.vpcf"
+		ability.damage = caster:GetAverageTrueAttackDamage()
 	else
-		--target:RemoveModifierByName(keys.modifier_slow)
-		local alreadySlowed = false;
-		for k,v in pairs(target:FindAllModifiers()) do
-			print ("value: ", v, "; key: ", k)
-			print ("ms thingy: ", target:GetMoveSpeedModifier(target:GetBaseMoveSpeed()))
+		-- Deal damage
+		local damage_boost = 1 + ability.unit_ability:GetLevelSpecialValueFor("damage_increase", ability.level) / 100
+		local damage_percent = (ability.unit_ability:GetLevelSpecialValueFor("base_damage", ability.level) / 100) * math.pow(damage_boost, ability.bounceCount - 1)
+		local damage = ability.damage * damage_percent
+		ApplyDamage({victim = target, attacker = ability.caster, damage = damage, damage_type = DAMAGE_TYPE_PHYSICAL})
 
+		-- Silence target if they're slowed
+		for k,v in pairs(target:FindAllModifiers()) do
 			if target:GetMoveSpeedModifier(target:GetBaseMoveSpeed()) < target:GetBaseMoveSpeed() then
-				alreadySlowed = true;
-				print ("alreadyslowed")
+				ability.unit_ability:ApplyDataDrivenModifier(caster, target, "modifier_yin_yang_orbs_silence", {})
 				break;
 			end
 		end
-		ability:ApplyDataDrivenModifier(caster, target, keys.modifier_slow, {})
-		if alreadySlowed then
-			ability:ApplyDataDrivenModifier(caster, target, keys.modifier_silence, {})
-		end
+
+		-- Play impact sound
+		local volume = 0.0001 * ability.bounceCount
+		target:EmitSoundParams("Touhou.Yin_Yang_Impact", 0, volume, 0)
 	end
 
 	if ability.bounceCount > ability.maxBounces then
-		--killDummy(caster, target)
+		killDummy(caster, target)
 		return
 	end
 
@@ -90,7 +107,7 @@ function yinYangOrbsDummyCreated( keys )
 
 	-- increment the bounceTable which keeps track of which targets have been hit, i currently
 	-- don't use it but if someone wants to go back and fix the bounce logic then it's here
-	ability.bounceTable[ability.projectileTo] = ((ability.bounceTable[ability.projectileTo] or 0) + 1)
+	-- ability.bounceTable[ability.projectileTo] = ((ability.bounceTable[ability.projectileTo] or 0) + 1)
 	ability.bounceCount = ability.bounceCount + 1
 
     local info = {
