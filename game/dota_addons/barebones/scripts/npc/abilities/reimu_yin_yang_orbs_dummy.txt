@@ -5,23 +5,18 @@
 		"BaseClass"						"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
-		"AbilityTextureName"			"disruptor_thunder_strike"
+		
+		"AbilityTextureName"			"reimu_yin_yang_orbs"
 
 		"precache"
 		{
-			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_luna.vsndevts"	
+
 		}
 
 		"OnProjectileHitUnit"
 		{
 			"DeleteOnHit"	"1"
 
-			"FireSound"
-			{
-				"EffectName"	"Hero_Luna.MoonGlaive.Impact"
-				"Target" 		"TARGET"
-			}
-			
 			"RunScript"
 			{
 				"ScriptFile"		"scripts/vscripts/heroes/hero_reimu/yin_yang_orbs.lua"

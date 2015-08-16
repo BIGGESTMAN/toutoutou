@@ -8,6 +8,44 @@ function setMelee(keys)
 	keys.caster:SetAttackCapability(DOTA_UNIT_CAP_MELEE_ATTACK)
 end
 
+function checkMana(keys)
+	local caster = keys.caster
+	local ability = keys.ability
+	local ability_level = ability:GetLevel() - 1
+	if caster:GetMana() < ability:GetLevelSpecialValueFor("mana_cost", ability_level) then
+		if ability:GetToggleState() then
+			ability:ToggleAbility()
+			if caster:IsAttacking() then
+				caster:Interrupt()
+			end
+		end
+		ability:SetActivated(false)
+	else
+		ability:SetActivated(true)
+	end
+end
+
+function updateAbilityEnabled(keys)
+	local dolls_active = false
+
+	if keys.caster.dolls then
+		for k,doll in pairs(keys.caster.dolls) do
+			dolls_active = true
+		end
+	end
+	if keys.caster.goliath_dolls then
+		for k,doll in pairs(keys.caster.goliath_dolls) do
+			dolls_active = true
+		end
+	end
+
+	if dolls_active then
+		keys.ability:SetActivated(true)
+	else
+		keys.ability:SetActivated(false)
+	end
+end
+
 function yinYangOrbsCreateDummy( keys )
 	local caster = keys.caster
 	local target = keys.target
@@ -48,11 +86,11 @@ function yinYangOrbsDummyCreated( keys )
 		if target:IsMovementImpaired() then
 			ability.unit_ability:ApplyDataDrivenModifier(caster, target, "modifier_yin_yang_orbs_silence", {})
 		end
-
-		-- Play impact sound
-		local volume = 0.0001 * ability.bounceCount
-		target:EmitSoundParams("Touhou.Yin_Yang_Impact", 0, volume, 0)
 	end
+
+	-- Play impact sound
+	local volume = 0.0001 * ability.bounceCount -- this doesn't actually work
+	target:EmitSoundParams("Touhou.Yin_Yang_Impact", 0, volume, 0)
 
 	if ability.bounceCount > ability.maxBounces then
 		killDummy(caster, target)
@@ -92,6 +130,10 @@ function yinYangOrbsDummyCreated( keys )
 	if ability.projectileTo == nil then
 		killDummy(caster, target)
 		return
+	else
+		-- Play flight sound for new projectile
+		local volume = 0.0001 * ability.bounceCount -- this doesn't actually work
+		target:EmitSoundParams("Touhou.Yin_Yang_Flight", 0, volume, 0)
 	end
 
 	-- increment the bounceTable which keeps track of which targets have been hit, i currently

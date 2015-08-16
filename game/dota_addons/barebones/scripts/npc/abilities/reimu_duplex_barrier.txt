@@ -26,7 +26,7 @@
 		
 		// Casting
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.3"
+		"AbilityCastPoint"				"0.4"
 
 		// Time		
 		//-------------------------------------------------------------------------------------------------------------
@@ -136,6 +136,12 @@
 						"inner_barrier_modifier"	"modifier_duplex_barrier_inner_hit"
 					}
 				}
+			}
+
+			"FireSound"
+			{
+				"EffectName"	"Touhou.Duplex_Barrier_Cast"
+				"Target" 		"CASTER"
 			}
 		}
 
@@ -257,6 +263,12 @@
 	            		"Type"		"DAMAGE_TYPE_MAGICAL"
 	            		"Damage"	"%outer_barrier_damage"
 	            	}
+
+					"FireSound"
+					{
+						"EffectName"	"Touhou.Duplex_Barrier_Hit"
+						"Target" 		"TARGET"
+					}
 				}
 			}
 
@@ -272,6 +284,12 @@
 	            		"Type"		"DAMAGE_TYPE_MAGICAL"
 	            		"Damage"	"%inner_barrier_damage"
 	            	}
+
+					"FireSound"
+					{
+						"EffectName"	"Touhou.Duplex_Barrier_Hit"
+						"Target" 		"TARGET"
+					}
 				}
 			}
 

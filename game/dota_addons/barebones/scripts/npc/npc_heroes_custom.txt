@@ -8,7 +8,7 @@
 		"Ability1"				"fantasy_seal" 
 		"Ability2"				"duplex_barrier" 
 		"Ability3"				"yin_yang_orbs" 
-		"Ability4"				"fantasy_nature"
+		"Ability4"				"fantasy_nature_datadriven"
 		"Ability5"				""
 		"Ability6"				""
 		"Ability7"				"attribute_bonus"

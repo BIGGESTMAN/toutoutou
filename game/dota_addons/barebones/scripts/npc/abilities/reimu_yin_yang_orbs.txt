@@ -5,7 +5,7 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 
-		"AbilityTextureName"			"disruptor_thunder_strike"
+		"AbilityTextureName"			"reimu_yin_yang_orbs"
 
 		"precache"
 		{
@@ -93,6 +93,23 @@
 
 		"Modifiers"
 		{
+			"modifier_yin_yang_orbs_passive"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+
+				"ThinkInterval"  "0.03"
+
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_reimu/yin_yang_orbs.lua"
+						"Function"		"checkMana"
+					}
+				}
+			}
+			
 			"modifier_yin_yang_orbs"
 			{
 				"IsHidden"	"1"
@@ -107,6 +124,12 @@
 					"SpendMana"
 					{
 						"Mana"		"%mana_cost"
+					}
+
+					"FireSound"
+					{
+						"EffectName"	"Touhou.Yin_Yang_Flight"
+						"Target" 		"CASTER"
 					}
 				}
 

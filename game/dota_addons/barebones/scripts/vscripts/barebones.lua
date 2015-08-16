@@ -293,7 +293,7 @@ function GameMode:OnHeroInGame(hero)
 				hero:AddItem(CreateItem("item_force_staff", hero, hero))
 				hero:AddItem(CreateItem("item_heart", hero, hero))
 				hero:AddItem(CreateItem("item_silver_edge", hero, hero))
-				hero:AddItem(CreateItem("item_gem", hero, hero))
+				hero:AddItem(CreateItem("item_orchid", hero, hero))
 				hero:AddItem(CreateItem("item_dagon", hero, hero))
 			end
 
