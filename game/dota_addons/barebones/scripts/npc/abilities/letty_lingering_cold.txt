@@ -15,18 +15,18 @@
 			"particle"					"particles/letty/lingering_cold_alt2.vpcf"
 		}
 
-		"AbilityCastPoint"				"0.4"
+		"AbilityCastPoint"				"0.5"
 		"AbilityCooldown"				"0"
-		"AbilityManaCost"				"100 110 120 130"
-		"AbilityCastRange"				"900"
-		"AOERadius"						"300"
+		"AbilityManaCost"				"100 120 140 160"
+		"AbilityCastRange"				"800"
+		"AOERadius"						"200"
 
 		"AbilitySpecial"
 		{
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"duration"				"30"
+				"duration"				"20"
 			}
 			"02"
 			{
@@ -41,7 +41,7 @@
 			"04"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"movespeed_slow"		"-18 -22 -26 -30"
+				"movespeed_slow"		"-15 -18 -21 -24"
 			}
 			"05"
 			{
@@ -61,17 +61,17 @@
 			"08"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"charge_restore_time"	"50"
+				"charge_restore_time"	"60"
 			}
 			"09"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"initial_radius"		"300"
+				"initial_radius"		"200"
 			}
 			"10"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"end_radius"			"1000"
+				"end_radius"			"800"
 			}
 			"11"
 			{
@@ -81,7 +81,7 @@
 			"12"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"linger_duration"		"5"
+				"linger_duration"		"1"
 			}
 			"13"
 			{

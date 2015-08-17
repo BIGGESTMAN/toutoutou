@@ -53,7 +53,7 @@
 	    			"Heal"
 	    			{
 	    				"Target"        "CASTER"
-	    				"HealAmount"	"%attack_damage"
+	    				"HealAmount"	"%attack_damage * %lifesteal_percent / 100"
 	    			}
 
 	    			"FireEffect"
