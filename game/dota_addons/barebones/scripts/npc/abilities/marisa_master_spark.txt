@@ -15,9 +15,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"precache"
 		{
-			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_phoenix.vsndevts"
-			"particle"					"particles/units/heroes/hero_phoenix/phoenix_sunray.vpcf"
-			"particle"					"particles/units/heroes/hero_phoenix/phoenix_sunray_beam_enemy.vpcf"
+			"particle"					"particles/marisa/master_spark.vpcf"
 		}
 
 		// Casting

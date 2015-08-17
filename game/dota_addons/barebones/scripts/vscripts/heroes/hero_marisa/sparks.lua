@@ -1,8 +1,6 @@
 require "libraries/util"
 
 function startSpark(caster, ability, modifier, slow_modifier, direction)
-	local particle_name = "particles/units/heroes/hero_phoenix/phoenix_sunray.vpcf"
-
 	local spark_ability = caster:FindAbilityByName("master_spark")
 	local ability_level = spark_ability:GetLevel() - 1
 	local end_distance = spark_ability:GetLevelSpecialValueFor("range", ability_level)
@@ -16,27 +14,9 @@ function startSpark(caster, ability, modifier, slow_modifier, direction)
 	ability:ApplyDataDrivenModifier(caster, caster, modifier, {})
 
 	-- Particle stuff
-	local particles = {}
-
-	local pfx = ParticleManager:CreateParticle( particle_name, PATTACH_ABSORIGIN_FOLLOW, caster )
-	table.insert(particles, pfx)
-	ParticleManager:SetParticleControlEnt( pfx, 0, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", caster:GetAbsOrigin(), true )
-
-	local range = end_distance + end_radius
-	local endcapPos = caster:GetAbsOrigin() + spell_forward * range
-	ParticleManager:SetParticleControl( pfx, 1, endcapPos )
-
-	local rotationPoint = caster:GetAbsOrigin() + spell_forward * end_distance
-	for i=1,3 do
-		if i % 2 == 1 then
-			local secondarypfx = ParticleManager:CreateParticle( particle_name, PATTACH_ABSORIGIN_FOLLOW, caster )
-			table.insert(particles, secondarypfx)
-			ParticleManager:SetParticleControlEnt( secondarypfx, 0, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", caster:GetAbsOrigin(), true )
-
-			secondaryLaserPoint = RotatePosition(endcapPos, QAngle(0,i * 90,0), rotationPoint)
-			ParticleManager:SetParticleControl( secondarypfx, 1, secondaryLaserPoint )
-		end
-	end
+	local particle_offset = spell_forward * 1500 + Vector(0,0,80)
+	local particle = ParticleManager:CreateParticle("particles/marisa/master_spark.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+	ParticleManager:SetParticleControl(particle, 1, caster:GetAbsOrigin() + particle_offset)
 
 	StartSoundEvent("Touhou.Spark", caster)
 
@@ -58,11 +38,6 @@ function startSpark(caster, ability, modifier, slow_modifier, direction)
 					local vulnerability_modifier = unit:FindModifierByName("modifier_master_spark_vulnerability")
 					vulnerability_modifier:IncrementStackCount()
 				end
-
-				-- Particle
-				local pfx = ParticleManager:CreateParticle("particles/units/heroes/hero_phoenix/phoenix_sunray_beam_enemy.vpcf", PATTACH_ABSORIGIN, unit )
-				ParticleManager:SetParticleControlEnt( pfx, 1, unit, PATTACH_POINT_FOLLOW, "attach_hitloc", unit:GetAbsOrigin(), true )
-				ParticleManager:ReleaseParticleIndex( pfx )
 			end
 
 			return damage_interval
@@ -77,28 +52,13 @@ function startSpark(caster, ability, modifier, slow_modifier, direction)
 				spell_forward = caster:GetForwardVector() * -1
 			end
 
-			-- Update particles for if Marisa is moved
-			local range = end_distance + end_radius
-			local rotationPoint = caster:GetAbsOrigin() + spell_forward * end_distance
-			local laserPoints = {}
-			laserPoints[1] = caster:GetAbsOrigin() + spell_forward * range
-			
-			for i=1,3 do
-				if i % 2 == 1 then
-					table.insert(laserPoints, RotatePosition(laserPoints[1], QAngle(0,i * 90,0), rotationPoint))
-				end
-			end
-
-			for k,particle in pairs(particles) do
-				ParticleManager:SetParticleControl(particle, 1, laserPoints[k])
-			end
+			-- Update particle for if Marisa is moved
+			ParticleManager:SetParticleControl(particle, 1, caster:GetAbsOrigin() + particle_offset)
 
 			return 0.03
 		else
-			for k,particle in pairs(particles) do
-				ParticleManager:DestroyParticle(particle, true)
-				StopSoundEvent("Touhou.Spark", caster)
-			end
+			ParticleManager:DestroyParticle(particle, true)
+			StopSoundEvent("Touhou.Spark", caster)
 		end
 	end)
 end
