@@ -11,6 +11,7 @@
 		"precache"
 		{
 			"particle"					"particles/letty/lingering_cold.vpcf"
+			"particle"					"particles/letty/lingering_cold_alt.vpcf"
 		}
 
 		"AbilityCastPoint"				"0.4"

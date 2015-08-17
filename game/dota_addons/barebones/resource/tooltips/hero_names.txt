@@ -12,3 +12,4 @@
 		"npc_dota_hero_kunkka"				"Murasa"
 		"npc_dota_hero_night_stalker"		"Remilia"
 		"npc_dota_hero_crystal_maiden"		"Letty"
+		"npc_dota_hero_tinker"				"Kappashiro"

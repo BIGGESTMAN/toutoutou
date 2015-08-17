@@ -1,6 +1,6 @@
 require "libraries/util"
 
-DEBUG_TIMES = 1 -- change to higher values to shorten duration and charge restore time
+DEBUG_TIMES = 8 -- change to higher values to shorten duration and charge restore time
 
 function lingeringColdCast(keys)
 	local caster = keys.caster
@@ -16,6 +16,7 @@ function lingeringColdCast(keys)
 	local expansion_duration = ability:GetLevelSpecialValueFor("expansion_duration", ability_level)
 	local update_interval = ability:GetLevelSpecialValueFor("update_interval", ability_level)
 	local duration = ability:GetLevelSpecialValueFor("duration", ability_level) / DEBUG_TIMES
+	local radius_increment = ((end_radius - initial_radius) / expansion_duration) * update_interval
 
 	if not caster.ice_fields then caster.ice_fields = {} end
 	local thinker = CreateModifierThinker(caster, ability, "modifier_lingering_cold_thinker", {}, target_point, caster:GetTeamNumber(), false)
@@ -24,24 +25,26 @@ function lingeringColdCast(keys)
 	local connected_ice_fields = {}
 	thinker.radius = initial_radius
 
-	local particle = ParticleManager:CreateParticle("particles/letty/lingering_cold.vpcf", PATTACH_ABSORIGIN_FOLLOW, thinker)
-	ParticleManager:SetParticleControl(particle, 1, Vector(thinker.radius,0,0))
-	ParticleManager:SetParticleControl(particle, 2, Vector(1,end_radius,1))
-	ParticleManager:SetParticleControl(particle, 3, Vector(duration,1,1))
-	ParticleManager:SetParticleControl(particle, 4, Vector(thinker.radius,1,(end_radius - thinker.radius) / expansion_duration))
-
 	local elapsed_time = 0
+
+	for i=0, initial_radius / radius_increment do
+		local particle = ParticleManager:CreateParticle("particles/letty/lingering_cold_alt.vpcf", PATTACH_ABSORIGIN_FOLLOW, thinker)
+		ParticleManager:SetParticleControl(particle, 1, Vector(i * radius_increment,0,0))
+		ParticleManager:SetParticleControl(particle, 2, Vector(i * radius_increment / 10,0,0))
+	end
 
 	Timers:CreateTimer(0,function()
 		if thinker.radius < end_radius then
 			-- Update radius
-			thinker.radius = thinker.radius + ((end_radius - initial_radius) / expansion_duration) * update_interval
+			thinker.radius = thinker.radius + radius_increment
 			if thinker.radius > end_radius then thinker.radius = end_radius end
+			local particle = ParticleManager:CreateParticle("particles/letty/lingering_cold_alt.vpcf", PATTACH_ABSORIGIN_FOLLOW, thinker)
 			ParticleManager:SetParticleControl(particle, 1, Vector(thinker.radius,0,0))
+			ParticleManager:SetParticleControl(particle, 2, Vector(thinker.radius / 10,0,0))
 		end
 
 		-- Tick down duration unless caster is in radius
-		local caster_in_radius = (caster:GetAbsOrigin() - target_point):Length2D() < thinker.radius
+		local caster_in_radius = (caster:GetAbsOrigin() - target_point):Length2D() < thinker.radius and caster:IsAlive()
 		if not caster_in_radius then -- Don't need to check connected fields if already in this one
 			for ice_field,v in pairs(connected_ice_fields) do
 				if not ice_field:IsNull() then
