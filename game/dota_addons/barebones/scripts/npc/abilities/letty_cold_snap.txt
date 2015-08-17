@@ -17,7 +17,7 @@
 			"particle"					"particles/letty/cold_snap_circle.vpcf"
 		}
 
-		"AbilityCastPoint"				"0.2"
+		"AbilityCastPoint"				"0.5"
 		"AbilityCooldown"				"120 110 100"
 		"AbilityManaCost"				"200 325 450"
 		"AbilityCastRange"				"400"
