@@ -1,6 +1,6 @@
 require "libraries/util"
 
-DEBUG_TIMES = 8 -- change to higher values to shorten duration and charge restore time
+DEBUG_TIMES = 1 -- change to higher values to shorten duration and charge restore time
 
 function lingeringColdCast(keys)
 	local caster = keys.caster
@@ -27,23 +27,16 @@ function lingeringColdCast(keys)
 
 	local elapsed_time = 0
 
-	for i=0, initial_radius / radius_increment do
-		local particle = ParticleManager:CreateParticle("particles/letty/lingering_cold_alt.vpcf", PATTACH_ABSORIGIN_FOLLOW, thinker)
-		ParticleManager:SetParticleControl(particle, 1, Vector(i * radius_increment,0,0))
-		ParticleManager:SetParticleControl(particle, 2, Vector(i * radius_increment / 10,0,0))
-	end
+	local particle = ParticleManager:CreateParticle("particles/letty/lingering_cold_alt2.vpcf", PATTACH_ABSORIGIN_FOLLOW, thinker)
 
 	Timers:CreateTimer(0,function()
 		if thinker.radius < end_radius then
 			-- Update radius
 			thinker.radius = thinker.radius + radius_increment
 			if thinker.radius > end_radius then thinker.radius = end_radius end
-			local particle = ParticleManager:CreateParticle("particles/letty/lingering_cold_alt.vpcf", PATTACH_ABSORIGIN_FOLLOW, thinker)
-			ParticleManager:SetParticleControl(particle, 1, Vector(thinker.radius,0,0))
-			ParticleManager:SetParticleControl(particle, 2, Vector(thinker.radius / 10,0,0))
 		end
 
-		-- Tick down duration unless caster is in radius
+		-- Update duration based on caster inside/not inside radius
 		local caster_in_radius = (caster:GetAbsOrigin() - target_point):Length2D() < thinker.radius and caster:IsAlive()
 		if not caster_in_radius then -- Don't need to check connected fields if already in this one
 			for ice_field,v in pairs(connected_ice_fields) do
@@ -55,19 +48,23 @@ function lingeringColdCast(keys)
 				end
 			end
 		end
-		if not caster_in_radius then elapsed_time = elapsed_time + update_interval end
+		if not caster_in_radius then
+			elapsed_time = elapsed_time + update_interval
+		else
+			elapsed_time = 0
+		end
 
 		if elapsed_time < duration then
 			-- Check for overlapping ice fields
 			for ice_field,v in pairs(caster.ice_fields) do
-				if not ice_field:IsNull() then
+				if (ice_field ~= thinker) and (not ice_field:IsNull()) then
 					local overlapping = (ice_field:GetAbsOrigin() - thinker:GetAbsOrigin()):Length2D() < thinker.radius + ice_field.radius
 					if not connected_ice_fields[ice_field] and overlapping then
 						connected_ice_fields[ice_field] = true
 
-						-- local connected_particle = ParticleManager:CreateParticle("particles/letty/ice_field_connection", PATTACH_POINT_FOLLOW, thinker)
-						-- ParticleManager:SetParticleControlEnt(connected_particle, 0, thinker, PATTACH_POINT_FOLLOW, "attach_hitloc", thinker:GetAbsOrigin(), true)
-						-- ParticleManager:SetParticleControlEnt(connected_particle, 1, ice_field, PATTACH_POINT_FOLLOW, "attach_hitloc", ice_field:GetAbsOrigin(), true)
+						local connected_particle = ParticleManager:CreateParticle("particles/letty/lingering_cold_connection.vpcf", PATTACH_POINT_FOLLOW, thinker)
+						ParticleManager:SetParticleControlEnt(connected_particle, 0, thinker, PATTACH_POINT_FOLLOW, "attach_hitloc", thinker:GetAbsOrigin(), true)
+						ParticleManager:SetParticleControlEnt(connected_particle, 1, ice_field, PATTACH_POINT_FOLLOW, "attach_hitloc", ice_field:GetAbsOrigin(), true)
 					end
 				end
 			end

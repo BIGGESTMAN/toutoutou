@@ -12,6 +12,7 @@
 		{
 			"particle"					"particles/letty/lingering_cold.vpcf"
 			"particle"					"particles/letty/lingering_cold_alt.vpcf"
+			"particle"					"particles/letty/lingering_cold_alt2.vpcf"
 		}
 
 		"AbilityCastPoint"				"0.4"

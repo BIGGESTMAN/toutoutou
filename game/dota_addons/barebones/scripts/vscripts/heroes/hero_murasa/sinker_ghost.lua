@@ -7,5 +7,5 @@ function checkAttackSpeedRemoval(keys)
 end
 
 function sinkerGhostModifierCreated(keys)
-	keys.target:AddNewModifier(keys.caster, keys.ability, "modifier_sinker_ghost_enemies", {})
+	keys.caster:AddNewModifier(keys.caster, keys.ability, "modifier_sinker_ghost_enemies", {})
 end

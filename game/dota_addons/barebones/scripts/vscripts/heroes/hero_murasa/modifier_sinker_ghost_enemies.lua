@@ -6,10 +6,6 @@ function modifier_sinker_ghost_enemies:IsHidden()
 	return true
 end
 
-function modifier_sinker_ghost_enemies:IsPurgable()
-	return false
-end
-
 function modifier_sinker_ghost_enemies:DeclareFunctions()
 	return { MODIFIER_EVENT_ON_TAKEDAMAGE }
 end

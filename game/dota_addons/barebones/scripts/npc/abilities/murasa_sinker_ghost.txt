@@ -56,17 +56,6 @@
 
 				"Attributes"			"MODIFIER_ATTRIBUTE_PERMANENT"
 
-				"ThinkInterval"  "%update_interval"
-
-				"OnIntervalThink"
-				{
-					"RunScript"
-					{
-	    				"ScriptFile"	"heroes/hero_murasa/sinker_ghost.lua"
-						"Function"		"sinkerGhostModifierCreated"
-					}
-				}
-
 	    		"OnCreated"
 				{
 					"RunScript"
