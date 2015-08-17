@@ -1,6 +1,8 @@
 require "libraries/util"
 
 function lingeringColdCast(keys)
+	local debug = 1 -- change to higher values to shorten duration and charge restore time
+
 	local caster = keys.caster
 	local ability = keys.ability
 	local ability_level = ability:GetLevel() - 1
@@ -13,7 +15,7 @@ function lingeringColdCast(keys)
 	local end_radius = ability:GetLevelSpecialValueFor("end_radius", ability_level)
 	local expansion_duration = ability:GetLevelSpecialValueFor("expansion_duration", ability_level)
 	local update_interval = ability:GetLevelSpecialValueFor("update_interval", ability_level)
-	local duration = ability:GetLevelSpecialValueFor("duration", ability_level)
+	local duration = ability:GetLevelSpecialValueFor("duration", ability_level) / debug
 
 	if not caster.ice_fields then caster.ice_fields = {} end
 	local thinker = CreateModifierThinker(caster, ability, "modifier_lingering_cold_thinker", {}, target_point, caster:GetTeamNumber(), false)
@@ -114,20 +116,33 @@ function lingeringColdCast(keys)
 
 			local targets = FindUnitsInRadius(team, origin, nil, thinker.radius, iTeam, iType, iFlag, iOrder, false)
 
+			if not caster.lingering_cold_targets then caster.lingering_cold_targets = {} end
 			for k,unit in pairs(targets) do
+				local new_modifier = not unit:HasModifier("modifier_lingering_cold_debuff")
+
 				ability:ApplyDataDrivenModifier(caster, unit, "modifier_lingering_cold_debuff", {})
+				caster.lingering_cold_targets[unit] = true
+
 				local modifier = unit:FindModifierByName("modifier_lingering_cold_debuff")
 				modifier.northern_winner_allies = #northern_winner_allies
+
+				if new_modifier then modifier.time_created = GameRules:GetGameTime() end
 			end
 
 			return update_interval
 		else
-			-- print(#caster.ice_fields, caster.ice_fields[thinker]) -- I legit do not understand this at all
-			caster.ice_fields[thinker] = false
+			-- print(sizeOfTable(caster.ice_fields), caster.ice_fields[thinker])
+			caster.ice_fields[thinker] = nil
 			thinker:RemoveSelf()
-			-- print(#caster.ice_fields, caster.ice_fields[thinker])
+			-- print(sizeOfTable(caster.ice_fields), caster.ice_fields[thinker])
 		end
 	end)
+end
+
+function removeFromTargetList(keys)
+	local caster = keys.caster
+	local target = keys.target
+	caster.lingering_cold_targets[target] = nil
 end
 
 function updateCharges(keys)
@@ -135,7 +150,7 @@ function updateCharges(keys)
 	local ability = keys.ability
 	local ability_level = ability:GetLevel() - 1
 	local max_charges = ability:GetLevelSpecialValueFor("max_charges", ability_level)
-	local charge_restore_time = ability:GetLevelSpecialValueFor("charge_restore_time", ability_level) / 10
+	local charge_restore_time = ability:GetLevelSpecialValueFor("charge_restore_time", ability_level) / debug
 
 	if not caster.lingering_cold_charges then caster.lingering_cold_charges = 0 end
 	local remaining_time_for_charge = (1 - caster.lingering_cold_charges % 1) * charge_restore_time

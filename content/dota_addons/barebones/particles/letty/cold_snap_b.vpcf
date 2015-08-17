@@ -44,10 +44,12 @@
 			m_flStartTime_min = 0.000000
 			m_flStartTime_max = 0.000000
 			m_nControlPointNumber = 3
+			m_bDisableOperator = true
 		},
 		{
 			_class = "C_OP_FadeInSimple"
 			m_flFadeInTime = 0.100000
+			m_bDisableOperator = true
 		},
 	]
 	m_Initializers =
@@ -59,12 +61,11 @@
 		},
 		{
 			_class = "C_INIT_RandomRadius"
-			m_flRadiusMax = 160.000000
-			m_flRadiusMin = 160.000000
+			m_flRadiusMax = 200.000000
+			m_flRadiusMin = 200.000000
 		},
 		{
 			_class = "C_INIT_CreateWithinSphere"
-			m_nControlPointNumber = 3
 		},
 		{
 			_class = "C_INIT_RandomRotation"
@@ -97,6 +98,7 @@
 	[
 		{
 			_class = "C_OP_ContinuousEmitter"
+			m_flEmissionDuration = 0.250000
 		},
 	]
 }

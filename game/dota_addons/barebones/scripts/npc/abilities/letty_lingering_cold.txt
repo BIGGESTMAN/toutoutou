@@ -139,6 +139,15 @@
 	    				"Function"		"checkNorthernWinnerDamage"
 	    			}
 	    		}
+
+	    		"OnDestroy"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_letty/lingering_cold.lua"
+	    				"Function"		"removeFromTargetList"
+	    			}
+	    		}
 	    	}
 
 	    	"modifier_lingering_cold_charges"
