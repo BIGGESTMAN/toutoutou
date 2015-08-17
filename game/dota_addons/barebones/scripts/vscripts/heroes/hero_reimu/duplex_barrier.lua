@@ -7,6 +7,9 @@ function duplexBarrier( keys )
 	local ability = keys.ability
 	local ability_level = ability:GetLevel() - 1
 
+	local wall_particle = "particles/reimu/duplex_barrier.vpcf"
+	local particle_offset = Vector(0,0,50)
+
 	targets_hit_table[caster] = {}
 	ability.caster = caster
 	ability.last_caster_location = caster_location
@@ -28,7 +31,6 @@ function duplexBarrier( keys )
 
 		-- Cosmetic variables
 		local outer_dummy_modifier = keys.outer_dummy_modifier
-		local wall_particle = keys.wall_particle
 
 		-- Ability variables
 		local length = range * 2
@@ -89,7 +91,8 @@ function duplexBarrier( keys )
 
 		-- Create the wall particle
 		local particle = ParticleManager:CreateParticle(wall_particle, PATTACH_POINT_FOLLOW, dummy)
-		ParticleManager:SetParticleControl(particle, 1, end_point_right)
+		ParticleManager:SetParticleControl(particle, 0, dummy:GetAbsOrigin() + particle_offset)
+		ParticleManager:SetParticleControl(particle, 1, end_point_right + particle_offset)
 		table.insert(ability.outer_particles, particle)
 	end
 
@@ -104,7 +107,6 @@ function duplexBarrier( keys )
 
 		-- Cosmetic variables
 		local inner_dummy_modifier = keys.inner_dummy_modifier
-		local wall_particle = keys.wall_particle
 
 		-- Ability variables
 		local length = range * 2
@@ -165,7 +167,8 @@ function duplexBarrier( keys )
 
 		-- Create the wall particle
 		local particle = ParticleManager:CreateParticle(wall_particle, PATTACH_POINT_FOLLOW, dummy)
-		ParticleManager:SetParticleControl(particle, 1, end_point_right)
+		ParticleManager:SetParticleControl(particle, 0, dummy:GetAbsOrigin() + particle_offset)
+		ParticleManager:SetParticleControl(particle, 1, end_point_right + particle_offset)
 		table.insert(ability.inner_particles, particle)
 	end
 end
@@ -194,6 +197,8 @@ function duplexBarrierFollow( keys )
 			v:SetAbsOrigin(v:GetAbsOrigin() + caster_movement)
 		end
 
+		local particle_offset = Vector(0,0,50)
+
 		for wall_number=0, 3 do
 			local radius = ability:GetLevelSpecialValueFor("outer_barrier_radius", ability_level)
 			local range = math.sqrt(radius * radius / 2)
@@ -202,10 +207,13 @@ function duplexBarrierFollow( keys )
 			local length = range * 2
 			local direction = (target_point - caster_location):Normalized()
 			local rotation_point = target_point + direction * length/2
+			local end_point_left = RotatePosition(target_point, QAngle(0,90,0), rotation_point)
 			local end_point_right = RotatePosition(target_point, QAngle(0,-90,0), rotation_point)
+			print(end_point_right + particle_offset, end_point_left + particle_offset)
 			
 			local particle = ability.outer_particles[wall_number + 1]
-			ParticleManager:SetParticleControl(particle, 1, end_point_right)
+			ParticleManager:SetParticleControl(particle, 0, end_point_left + particle_offset)
+			ParticleManager:SetParticleControl(particle, 1, end_point_right + particle_offset)
 		end
 
 		for wall_number=0, 3 do
@@ -216,10 +224,12 @@ function duplexBarrierFollow( keys )
 			local length = range * 2
 			local direction = (target_point - caster_location):Normalized()
 			local rotation_point = target_point + direction * length/2
+			local end_point_left = RotatePosition(target_point, QAngle(0,90,0), rotation_point)
 			local end_point_right = RotatePosition(target_point, QAngle(0,-90,0), rotation_point)
 			
 			local particle = ability.inner_particles[wall_number + 1]
-			ParticleManager:SetParticleControl(particle, 1, end_point_right)
+			ParticleManager:SetParticleControl(particle, 0, end_point_left + particle_offset)
+			ParticleManager:SetParticleControl(particle, 1, end_point_right + particle_offset)
 		end
 
 		ability.last_caster_location = caster_location

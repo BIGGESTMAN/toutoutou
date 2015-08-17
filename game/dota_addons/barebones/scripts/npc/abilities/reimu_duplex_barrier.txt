@@ -16,12 +16,8 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"precache"
 		{
-			"particle"			"particles/units/heroes/hero_dark_seer/dark_seer_wall_of_replica.vpcf"
-			"particle"			"particles/dark_seer_wall_of_replica.vpcf"
-			"particle"			"particles/units/heroes/hero_wisp/wisp_overcharge.vpcf"
-			"particle"			"particles/dark_seer_wall_of_replica_scroll.vpcf"
-			"particle"			"particles/dark_seer_wall_smoke_edited.vpcf"
 			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_wisp.vsndevts"
+			"particle"			"particles/reimu/duplex_barrier.vpcf"
 		}
 		
 		// Casting
@@ -112,7 +108,6 @@
 			{
 				"ScriptFile"			"heroes/hero_reimu/duplex_barrier.lua"
 				"Function"				"duplexBarrier"
-				"wall_particle"			"particles/dark_seer_wall_smoke_edited.vpcf"
 				"outer_dummy_modifier"	"modifier_duplex_barrier_outer_dummy"
 				"inner_dummy_modifier"	"modifier_duplex_barrier_inner_dummy"
 			}

@@ -114,6 +114,24 @@
 	    				"Target" 		"ATTACKER"
 	    			}
 	    		}
+	    		
+	    		"OnCreated"
+	    		{
+	    			"ApplyModifier"
+	    			{
+	    				"ModifierName"	"modifier_invisible"
+	    				"Target" 		"TARGET"
+	    			}
+	    		}
+
+	    		"OnDestroy"
+	    		{
+	    			"RemoveModifier"
+	    			{
+	    				"ModifierName"	"modifier_invisible"
+	    				"Target" 		"TARGET"
+	    			}
+	    		}
 	    	}
 
 	    	"modifier_stealth_broken"

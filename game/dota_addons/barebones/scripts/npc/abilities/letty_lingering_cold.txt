@@ -128,6 +128,17 @@
 	    		    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"	"%movespeed_slow"
 	    		    "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"		"%armor_reduction"
 	    		}
+
+	    		"ThinkInterval"  "%update_interval"
+
+	    		"OnIntervalThink"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_letty/lingering_cold.lua"
+	    				"Function"		"checkNorthernWinnerDamage"
+	    			}
+	    		}
 	    	}
 
 	    	"modifier_lingering_cold_charges"

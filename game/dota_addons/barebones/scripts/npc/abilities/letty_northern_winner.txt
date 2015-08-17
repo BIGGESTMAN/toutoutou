@@ -2,22 +2,22 @@
 	{
 		"BaseClass"						"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 
-		"AbilityTextureName"			"crystal_maiden_frostbite"
+		"AbilityTextureName"			"lich_chain_frost"
 
 		"precache"
 		{
-			"particle"					"particles/letty/flower_wither_away.vpcf"
-			"particle"					"particles/letty/flower_wither_away_proc_alt.vpcf"
+			"particle"					"particles/letty/northern_winner.vpcf"
+			"particle"					"particles/letty/northern_winner_invis.vpcf"
 		}
 
 		"AbilityCastPoint"				"0.4"
-		"AbilityCooldown"				"11"
-		"AbilityManaCost"				"90"
+		"AbilityCooldown"				"10 8 6 4"
+		"AbilityManaCost"				"70 80 90 100"
 		"AbilityCastRange"				"600"
 
 		"AbilitySpecial"
@@ -25,62 +25,113 @@
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"damage"				"85 155 225 295"
+				"radius"				"500 450 400 350"
 			}
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"duration"				"9 11 13 15"
+				"duration"				"12"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_per_second"		"30 40 50 60"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"dodge_chance"			"35 40 45 50"
 			}
 		}
 
 		"OnSpellStart"
 	    {
-	    	"Damage"
-			{
-				"Target"		"TARGET"
-				"Type"			"DAMAGE_TYPE_PHYSICAL"
-				"Damage"		"%damage"
-			}
-	    			
-			"RunScript"
-			{
-				"ScriptFile"	"heroes/hero_letty/flower_wither_away.lua"
-				"Function"		"setMaxHealth"
-			}
+	    	"ApplyModifier"
+	    	{
+	    		"ModifierName"	"modifier_northern_winner"
+	    		"Target" 		"TARGET"
+	    	}
 	    }
 
 
 	    "Modifiers"
 	    {
-	    	"modifier_flower_wither_away_datadriven"
+	    	"modifier_northern_winner"
 	    	{
-	    		"IsDebuff"		"1"
 	    		"IsPurgable"	"1"
 
 	    		"Duration"		"%duration"
 
-	    		"OnTakeDamage"
+	    		"ThinkInterval"  "0.03"
+
+	    		"OnIntervalThink"
 	    		{
 	    			"RunScript"
 	    			{
-	    				"ScriptFile"	"heroes/hero_letty/flower_wither_away.lua"
-	    				"Function"		"damageTaken"
-	    				"damage"		"%attack_damage"
+	    				"ScriptFile"	"heroes/hero_letty/northern_winner"
+	    				"Function"		"checkInvis"
 	    			}
 	    		}
 
 	    		"OnDestroy"
 	    		{
-	    			"RunScript"
+	    			"RemoveModifier"
 	    			{
-	    				"ScriptFile"	"heroes/hero_letty/flower_wither_away.lua"
-	    				"Function"		"removeLuaModifier"
+	    				"ModifierName"	"modifier_northern_winner_invis"
+	    				"Target" 		"TARGET"
 	    			}
 	    		}
 
-	    		"EffectName"		"particles/letty/flower_wither_away.vpcf"
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_EVASION_CONSTANT" "%dodge_chance"
+	    		}
+
+	    		"OnCreated"
+	    		{
+	    			"AttachEffect"
+	    			{
+	    				"EffectName"        "particles/letty/northern_winner.vpcf"
+	    				"EffectAttachType"  "follow_origin"
+	    				"Target"            "TARGET"
+
+	    				"ControlPoints"
+	    				{
+	    					"01"	"%radius 0 0"
+	    				}
+	    			}
+	    		}
+	    	}
+
+	    	"modifier_northern_winner_invis"
+	    	{
+	    		"IsHidden"	"1"
+
+	    		"States"
+	    		{
+	    			"MODIFIER_STATE_INVISIBLE"		"MODIFIER_STATE_VALUE_ENABLED"
+	    		}
+
+	    		"EffectName"		"particles/letty/northern_winner_invis.vpcf"
 	    		"EffectAttachType"	"follow_origin"
+
+	    		"OnCreated"
+	    		{
+	    			"ApplyModifier"
+	    			{
+	    				"ModifierName"	"modifier_invisible"
+	    				"Target" 		"TARGET"
+	    			}
+	    		}
+
+	    		"OnDestroy"
+	    		{
+	    			"RemoveModifier"
+	    			{
+	    				"ModifierName"	"modifier_invisible"
+	    				"Target" 		"TARGET"
+	    			}
+	    		}
 	    	}
 	    }
 	}
