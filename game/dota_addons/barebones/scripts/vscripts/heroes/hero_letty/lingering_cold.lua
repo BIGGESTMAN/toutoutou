@@ -1,8 +1,8 @@
 require "libraries/util"
 
-function lingeringColdCast(keys)
-	local debug = 1 -- change to higher values to shorten duration and charge restore time
+DEBUG_TIMES = 1 -- change to higher values to shorten duration and charge restore time
 
+function lingeringColdCast(keys)
 	local caster = keys.caster
 	local ability = keys.ability
 	local ability_level = ability:GetLevel() - 1
@@ -15,7 +15,7 @@ function lingeringColdCast(keys)
 	local end_radius = ability:GetLevelSpecialValueFor("end_radius", ability_level)
 	local expansion_duration = ability:GetLevelSpecialValueFor("expansion_duration", ability_level)
 	local update_interval = ability:GetLevelSpecialValueFor("update_interval", ability_level)
-	local duration = ability:GetLevelSpecialValueFor("duration", ability_level) / debug
+	local duration = ability:GetLevelSpecialValueFor("duration", ability_level) / DEBUG_TIMES
 
 	if not caster.ice_fields then caster.ice_fields = {} end
 	local thinker = CreateModifierThinker(caster, ability, "modifier_lingering_cold_thinker", {}, target_point, caster:GetTeamNumber(), false)
@@ -150,7 +150,7 @@ function updateCharges(keys)
 	local ability = keys.ability
 	local ability_level = ability:GetLevel() - 1
 	local max_charges = ability:GetLevelSpecialValueFor("max_charges", ability_level)
-	local charge_restore_time = ability:GetLevelSpecialValueFor("charge_restore_time", ability_level) / debug
+	local charge_restore_time = ability:GetLevelSpecialValueFor("charge_restore_time", ability_level) / DEBUG_TIMES
 
 	if not caster.lingering_cold_charges then caster.lingering_cold_charges = 0 end
 	local remaining_time_for_charge = (1 - caster.lingering_cold_charges % 1) * charge_restore_time
