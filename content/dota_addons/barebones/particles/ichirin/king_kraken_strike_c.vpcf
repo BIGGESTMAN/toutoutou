@@ -48,8 +48,8 @@
 		},
 		{
 			_class = "C_INIT_RandomRadius"
-			m_flRadiusMin = 200.000000
-			m_flRadiusMax = 400.000000
+			m_flRadiusMin = 0.800000
+			m_flRadiusMax = 1.600000
 		},
 		{
 			_class = "C_INIT_RandomAlpha"
@@ -79,6 +79,13 @@
 		},
 		{
 			_class = "C_INIT_CreateWithinSphere"
+		},
+		{
+			_class = "C_INIT_RemapCPtoScalar"
+			m_nCPInput = 3
+			m_flInputMax = 1000.000000
+			m_flOutputMax = 1000.000000
+			m_bScaleInitialRange = true
 		},
 	]
 	m_Emitters =

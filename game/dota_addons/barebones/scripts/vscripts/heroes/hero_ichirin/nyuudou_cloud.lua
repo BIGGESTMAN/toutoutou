@@ -4,7 +4,9 @@ function attackLanded(keys)
 	local ability_level = ability:GetLevel() - 1
 
 	if ability:IsCooldownReady() then
-		punch(caster, ability, caster:GetForwardVector())
+		local punch_direction = caster:GetForwardVector()
+		local punch_origin = caster:GetAbsOrigin()
+		punch(caster, ability, punch_origin, punch_direction)
 
 		-- Check for traditional era active
 		if caster:HasModifier("modifier_traditional_era") then
@@ -12,7 +14,7 @@ function attackLanded(keys)
 			local traditional_era_level = traditional_era_ability:GetLevel() - 1
 			local punch_delay = traditional_era_ability:GetLevelSpecialValueFor("nyuudou_attack_delay", traditional_era_level)
 			Timers:CreateTimer(punch_delay, function()
-				punch(caster, ability, caster:GetForwardVector())
+				punch(caster, ability, punch_origin, punch_direction)
 			end)
 		end
 
@@ -23,7 +25,7 @@ function attackLanded(keys)
 	end
 end
 
-function punch(caster, ability, direction)
+function punch(caster, ability, origin, direction)
 	local ability_level = ability:GetLevel() - 1
 
 	local range = ability:GetLevelSpecialValueFor("range", ability_level)
@@ -33,8 +35,6 @@ function punch(caster, ability, direction)
 	local damage = ability:GetLevelSpecialValueFor("damage", ability_level)
 	local damage_type = ability:GetAbilityDamageType()
 
-	local direction = caster:GetForwardVector()
-
 	ability.offhand_punch = not ability.offhand_punch
 	local offset = 100 * direction
 	if ability.offhand_punch then
@@ -42,7 +42,7 @@ function punch(caster, ability, direction)
 	else
 		offset = RotatePosition(Vector(0,0,0), QAngle(0,90,0), offset)
 	end
-	local punch_origin = caster:GetAbsOrigin() + offset
+	local punch_origin = origin + offset
 	local particle_start_offset = direction * -400
 
 	local thinker_modifier = "modifier_nyuudou_cloud_dummy"

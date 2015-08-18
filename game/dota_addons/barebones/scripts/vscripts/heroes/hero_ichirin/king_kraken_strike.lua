@@ -37,6 +37,7 @@ function krakenStrikeCast(keys)
 		ParticleManager:SetParticleControl(particle, 0, target_point + Vector(0,0,particle_height)) -- Fist spawn position
 		ParticleManager:SetParticleControl(particle, 1, Vector(particle_delay,0,0)) -- Particle duration
 		ParticleManager:SetParticleControl(particle, 2, Vector(0,0,0)) -- Max fist velocity -- set to 0 to freeze for now
+		ParticleManager:SetParticleControl(particle, 3, Vector(radius,0,0)) -- Impact cracks radius
 		Timers:CreateTimer(particle_delay - particle_fall_time, function()
 			ParticleManager:SetParticleControl(particle, 2, Vector(100000,0,0))
 			Timers:CreateTimer(particle_fall_time, function()
@@ -55,6 +56,7 @@ function krakenStrikeCast(keys)
 					ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
 					ability:ApplyDataDrivenModifier(caster, unit, "modifier_king_kraken_strike_root", {duration = root_duration})
 				end
+				-- DebugDrawCircle(origin, Vector(150,255,150), 1, radius, true, 0.5)
 
 				ParticleManager:DestroyParticle(particle, false)
 			end)

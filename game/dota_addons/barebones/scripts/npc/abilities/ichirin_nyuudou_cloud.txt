@@ -13,7 +13,7 @@
 
 		"precache"
 		{
-
+			"particle"					"particles/ichirin/nyuudou_cloud.vpcf"
 		}
 
 		"AbilityCooldown"				"9 7 5 3"
