@@ -67,6 +67,11 @@
 				"var_type"				"FIELD_INTEGER"
 				"duration"				"2"
 			}
+			"11"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"particle_length"		"1800"
+			}
 			"08" // only used for tooltip
 			{
 				"var_type"				"FIELD_FLOAT"

@@ -20,7 +20,8 @@ function startSpark(caster, ability, modifier, debufF_modifier, direction, spark
 	ability:ApplyDataDrivenModifier(caster, caster, modifier, {})
 
 	-- Particle stuff
-	local particle_offset = spell_forward * 1500 + Vector(0,0,80)
+	local particle_length = spark_ability:GetLevelSpecialValueFor("particle_length", ability_level)
+	local particle_offset = spell_forward * particle_length + Vector(0,0,80)
 	local particle = ParticleManager:CreateParticle(particle, PATTACH_ABSORIGIN_FOLLOW, caster)
 	ParticleManager:SetParticleControl(particle, 1, caster:GetAbsOrigin() + particle_offset)
 
@@ -33,7 +34,7 @@ function startSpark(caster, ability, modifier, debufF_modifier, direction, spark
 				spell_forward = caster:GetForwardVector() * -1
 			end
 
-			local cone_units = GetEnemiesInCone(caster, start_radius, end_radius, end_distance, spell_forward, 3, true)
+			local cone_units = GetEnemiesInCone(caster, start_radius, end_radius, end_distance, spell_forward, 3, false)
 			for k,unit in pairs(cone_units) do
 				-- Damage
 				ApplyDamage({ victim = unit, attacker = caster, damage = damage, damage_type = damage_type})

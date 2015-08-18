@@ -67,6 +67,11 @@
 				"damage"				"175 250 325 400"
 				"_value"				"DOTA_Tooltip_Ability_master_spark_Damage"
 			}
+			"10"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"particle_length"		"1500"
+			}
 			"09"
 			{
 				"var_type"				"FIELD_INTEGER"
