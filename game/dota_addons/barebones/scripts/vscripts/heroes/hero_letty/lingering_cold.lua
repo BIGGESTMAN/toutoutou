@@ -163,7 +163,7 @@ function createConnectionParticle(field1, field2)
 	local connected_particle = ParticleManager:CreateParticle("particles/letty/lingering_cold_connection.vpcf", PATTACH_POINT_FOLLOW, thinker)
 	ParticleManager:SetParticleControlEnt(connected_particle, 0, field1, PATTACH_POINT_FOLLOW, "attach_hitloc", field1:GetAbsOrigin(), true)
 	ParticleManager:SetParticleControlEnt(connected_particle, 1, field2, PATTACH_POINT_FOLLOW, "attach_hitloc", field2:GetAbsOrigin(), true)
-	print(connected_particle)
+	-- print(connected_particle)
 end
 
 function removeFromTargetList(keys)

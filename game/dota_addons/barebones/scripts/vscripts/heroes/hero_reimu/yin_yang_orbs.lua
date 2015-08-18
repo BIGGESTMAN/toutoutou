@@ -102,7 +102,7 @@ function yinYangOrbsDummyCreated( keys )
                             nil,
                             ability.bounceRange,
                             DOTA_UNIT_TARGET_TEAM_FRIENDLY,
-                            DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL,
+                            DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL + DOTA_UNIT_TARGET_BUILDING,
                             DOTA_UNIT_TARGET_FLAG_NONE,
                             FIND_CLOSEST,
                             false)
@@ -118,10 +118,9 @@ function yinYangOrbsDummyCreated( keys )
 	for k,v in pairs(unitsNearTarget) do
 		if ability.projectileFrom == nil then
 			ability.projectileFrom = v
-		else
+		elseif not v:IsTower() then
 			ability.projectileTo = v
 			if v ~= lastTarget then
-				ability.projectileTo = v
 				break
 			end
 		end
