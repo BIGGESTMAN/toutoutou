@@ -88,8 +88,6 @@
 		{
 	    	"modifier_casting"
 	    	{
-	    		"IsPurgable"	"0"
-
 	    		"Duration"		"%duration"
 
 	    		"States"

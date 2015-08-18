@@ -1,0 +1,91 @@
+	"traditional_era"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+
+		"AbilityTextureName"			"ichirin_traditional_era"
+
+		"precache"
+		{
+			"particle"					"particles/ichirin/traditional_era_cast.vpcf"
+		}
+
+		"AbilityCastPoint"				"0.6"
+		"AbilityCooldown"				"65"
+		"AbilityManaCost"				"100"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"25"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"shield_amount"			"400 650 900"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"kraken_root_duration_increase"	"20 30 40"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"kraken_radius_increase"	"75 125 175"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"nyuudou_attack_delay"	"0.5"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"update_interval"		"0.03"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/hero_ichirin/traditional_era.lua"
+				"Function"		"traditionalEraCast"
+			}
+		}
+
+		"Modifiers"
+		{
+	    	"modifier_traditional_era"
+			{
+				"Duration"	"%duration"
+
+				"ThinkInterval"  "%update_interval"
+
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_ichirin/traditional_era.lua"
+						"Function"		"updateHealth"
+					}
+				}
+
+				"OnTakeDamage"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_ichirin/traditional_era.lua"
+						"Function"		"damageTaken"
+						"damage_taken"	"%attack_damage"
+					}
+				}
+	    	}
+		}
+	}

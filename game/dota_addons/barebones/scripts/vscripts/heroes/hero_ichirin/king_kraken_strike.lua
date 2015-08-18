@@ -24,6 +24,14 @@ function krakenStrikeCast(keys)
 	local damage = min_damage + (max_damage - min_damage) * effective_scaling_factor
 	local root_duration = min_root + (max_root - min_root) * effective_scaling_factor
 
+	-- Check for traditional era active
+	if caster:HasModifier("modifier_traditional_era") then
+		local traditional_era_ability = caster:FindAbilityByName("traditional_era")
+		local traditional_era_level = traditional_era_ability:GetLevel() - 1
+		radius = radius + traditional_era_ability:GetLevelSpecialValueFor("kraken_radius_increase", traditional_era_level)
+		root_duration = root_duration * (1 + traditional_era_ability:GetLevelSpecialValueFor("kraken_root_duration_increase", traditional_era_level) / 100)
+	end
+
 	Timers:CreateTimer(delay - particle_delay, function()
 		local particle = ParticleManager:CreateParticle("particles/ichirin/king_kraken_strike.vpcf", PATTACH_POINT_FOLLOW, caster)
 		ParticleManager:SetParticleControl(particle, 0, target_point + Vector(0,0,particle_height)) -- Fist spawn position
