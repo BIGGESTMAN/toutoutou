@@ -1,4 +1,5 @@
 require "libraries/util"
+require "libraries/animations"
 
 function startSpark(caster, ability, modifier, slow_modifier, direction)
 	local spark_ability = caster:FindAbilityByName("master_spark")
@@ -9,6 +10,9 @@ function startSpark(caster, ability, modifier, slow_modifier, direction)
 	local damage_interval = spark_ability:GetLevelSpecialValueFor("damage_interval", ability_level)
 	local damage = spark_ability:GetLevelSpecialValueFor("damage", ability_level) * damage_interval / spark_ability:GetChannelTime()
 	local damage_type = spark_ability:GetAbilityDamageType()
+
+	local channel_duration = spark_ability:GetChannelTime()
+	StartAnimation(caster, {duration=channel_duration, activity=ACT_DOTA_CAST_ABILITY_5, rate=(38/30) / channel_duration, translate = "lsa"})
 
 	local spell_forward = direction
 	ability:ApplyDataDrivenModifier(caster, caster, modifier, {})
@@ -59,6 +63,7 @@ function startSpark(caster, ability, modifier, slow_modifier, direction)
 		else
 			ParticleManager:DestroyParticle(particle, true)
 			StopSoundEvent("Touhou.Spark", caster)
+			EndAnimation(caster)
 		end
 	end)
 end

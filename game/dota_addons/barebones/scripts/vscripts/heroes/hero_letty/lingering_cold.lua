@@ -1,6 +1,6 @@
 require "libraries/util"
 
-DEBUG_TIMES = 1 -- change to higher values to shorten duration and charge restore time
+DEBUG_TIMES = 15 -- change to higher values to shorten duration and charge restore time
 
 function lingeringColdCast(keys)
 	local caster = keys.caster
@@ -22,7 +22,7 @@ function lingeringColdCast(keys)
 	local thinker = CreateModifierThinker(caster, ability, "modifier_lingering_cold_thinker", {}, target_point, caster:GetTeamNumber(), false)
 	caster.ice_fields[thinker] = true
 
-	local connected_ice_fields = {}
+	thinker.connected_ice_fields = {}
 	thinker.radius = initial_radius
 
 	local elapsed_time = 0
@@ -36,10 +36,44 @@ function lingeringColdCast(keys)
 			if thinker.radius > end_radius then thinker.radius = end_radius end
 		end
 
+		-- Update transitive list of connected fields
+		for ice_field,v in pairs(caster.ice_fields) do
+			if (ice_field ~= thinker) and (not ice_field:IsNull()) and not thinker.connected_ice_fields[ice_field] then
+				local overlapping = (ice_field:GetAbsOrigin() - thinker:GetAbsOrigin()):Length2D() < thinker.radius + ice_field.radius
+				if overlapping then
+					thinker.connected_ice_fields[ice_field] = true
+					createConnectionParticle(thinker, ice_field)
+				end
+			end
+		end
+
+		local unchecked_fields = {}
+		local checked_fields = {}
+		for k,v in pairs(thinker.connected_ice_fields) do
+			unchecked_fields[k] = v
+		end
+
+		local hangPreventer = 0 -- awwww yeah hacks
+		while sizeOfTable(unchecked_fields) > 0 and hangPreventer < 100 do
+			hangPreventer = hangPreventer + 1
+			for ice_field,v in pairs(unchecked_fields) do
+				if not ice_field:IsNull() then
+					checked_fields[ice_field] = true
+					for ice_field2,v in pairs(ice_field.connected_ice_fields) do
+						if not checked_fields[ice_field2] then
+							unchecked_fields[ice_field2] = true
+							thinker.connected_ice_fields[ice_field2] = true
+						end
+					end
+					unchecked_fields[ice_field] = nil
+				end
+			end
+		end
+
 		-- Update duration based on caster inside/not inside radius
 		local caster_in_radius = (caster:GetAbsOrigin() - target_point):Length2D() < thinker.radius and caster:IsAlive()
 		if not caster_in_radius then -- Don't need to check connected fields if already in this one
-			for ice_field,v in pairs(connected_ice_fields) do
+			for ice_field,v in pairs(thinker.connected_ice_fields) do
 				if not ice_field:IsNull() then
 					if (caster:GetAbsOrigin() - ice_field:GetAbsOrigin()):Length2D() < ice_field.radius then
 						caster_in_radius = true
@@ -55,20 +89,6 @@ function lingeringColdCast(keys)
 		end
 
 		if elapsed_time < duration then
-			-- Check for overlapping ice fields
-			for ice_field,v in pairs(caster.ice_fields) do
-				if (ice_field ~= thinker) and (not ice_field:IsNull()) then
-					local overlapping = (ice_field:GetAbsOrigin() - thinker:GetAbsOrigin()):Length2D() < thinker.radius + ice_field.radius
-					if not connected_ice_fields[ice_field] and overlapping then
-						connected_ice_fields[ice_field] = true
-
-						local connected_particle = ParticleManager:CreateParticle("particles/letty/lingering_cold_connection.vpcf", PATTACH_POINT_FOLLOW, thinker)
-						ParticleManager:SetParticleControlEnt(connected_particle, 0, thinker, PATTACH_POINT_FOLLOW, "attach_hitloc", thinker:GetAbsOrigin(), true)
-						ParticleManager:SetParticleControlEnt(connected_particle, 1, ice_field, PATTACH_POINT_FOLLOW, "attach_hitloc", ice_field:GetAbsOrigin(), true)
-					end
-				end
-			end
-
 			-- Find number of Northern Winner allies in the field and connected fields
 			local northern_winner_allies = {}
 
@@ -87,7 +107,7 @@ function lingeringColdCast(keys)
 				end
 			end
 
-			for ice_field,v in pairs(connected_ice_fields) do
+			for ice_field,v in pairs(thinker.connected_ice_fields) do
 				if not ice_field:IsNull() then
 					local team = caster:GetTeamNumber()
 					local origin = ice_field:GetAbsOrigin()
@@ -137,6 +157,13 @@ function lingeringColdCast(keys)
 			-- print(sizeOfTable(caster.ice_fields), caster.ice_fields[thinker])
 		end
 	end)
+end
+
+function createConnectionParticle(field1, field2)
+	local connected_particle = ParticleManager:CreateParticle("particles/letty/lingering_cold_connection.vpcf", PATTACH_POINT_FOLLOW, thinker)
+	ParticleManager:SetParticleControlEnt(connected_particle, 0, field1, PATTACH_POINT_FOLLOW, "attach_hitloc", field1:GetAbsOrigin(), true)
+	ParticleManager:SetParticleControlEnt(connected_particle, 1, field2, PATTACH_POINT_FOLLOW, "attach_hitloc", field2:GetAbsOrigin(), true)
+	print(connected_particle)
 end
 
 function removeFromTargetList(keys)

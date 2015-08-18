@@ -28,7 +28,7 @@
 			_class = "C_OP_InterpolateRadius"
 			m_flBias = 0.750000
 			m_flEndTime = 2.000000
-			m_flEndScale = 3.333333
+			m_flEndScale = 4.000000
 		},
 		{
 			_class = "C_OP_Decay"
@@ -61,8 +61,8 @@
 		},
 		{
 			_class = "C_INIT_RandomRadius"
-			m_flRadiusMax = 300.000000
-			m_flRadiusMin = 300.000000
+			m_flRadiusMax = 200.000000
+			m_flRadiusMin = 200.000000
 		},
 		{
 			_class = "C_INIT_RandomAlpha"

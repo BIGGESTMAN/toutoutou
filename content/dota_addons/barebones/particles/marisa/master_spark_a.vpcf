@@ -103,17 +103,17 @@
 				1.000000,
 				0.000000,
 			]
-			m_fSpeedMax = 2200.000000
-			m_fSpeedMin = 2200.000000
+			m_fSpeedMax = 1300.000000
+			m_fSpeedMin = 1300.000000
 			m_LocalCoordinateSystemSpeedMin =
 			[
-				-6000.000000,
+				-3000.000000,
 				0.000000,
 				0.000000,
 			]
 			m_LocalCoordinateSystemSpeedMax =
 			[
-				-5100.000000,
+				-2550.000000,
 				0.000000,
 				0.000000,
 			]
@@ -128,8 +128,8 @@
 		},
 		{
 			_class = "C_INIT_RandomTrailLength"
-			m_flMinLength = 20.000000
-			m_flMaxLength = 30.000000
+			m_flMinLength = 40.000000
+			m_flMaxLength = 60.000000
 		},
 		{
 			_class = "C_INIT_PositionOffset"
