@@ -14,7 +14,7 @@ function blazingStarStart( keys )
 	
 	local master_spark_ability = caster:FindAbilityByName("master_spark")
 	if master_spark_ability:GetLevel() > 0 then
-		startSpark(caster, master_spark_ability, "modifier_master_spark", "modifier_master_spark_slow", caster:GetForwardVector() * -1)
+		startSpark(caster, master_spark_ability, "modifier_master_spark", "modifier_master_spark_slow", caster:GetForwardVector() * -1, master_spark_ability, "particles/marisa/master_spark.vpcf")
 	end
 
 	-- Enable reverse-direction ability
