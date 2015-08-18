@@ -32,6 +32,8 @@ function krakenStrikeCast(keys)
 		root_duration = root_duration * (1 + traditional_era_ability:GetLevelSpecialValueFor("kraken_root_duration_increase", traditional_era_level) / 100)
 	end
 
+	AddFOWViewer(caster:GetTeamNumber(), target_point, radius, delay + 0.5, false)
+
 	Timers:CreateTimer(delay - particle_delay, function()
 		local particle = ParticleManager:CreateParticle("particles/ichirin/king_kraken_strike.vpcf", PATTACH_POINT_FOLLOW, caster)
 		ParticleManager:SetParticleControl(particle, 0, target_point + Vector(0,0,particle_height)) -- Fist spawn position
