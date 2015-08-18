@@ -209,7 +209,6 @@ function duplexBarrierFollow( keys )
 			local rotation_point = target_point + direction * length/2
 			local end_point_left = RotatePosition(target_point, QAngle(0,90,0), rotation_point)
 			local end_point_right = RotatePosition(target_point, QAngle(0,-90,0), rotation_point)
-			print(end_point_right + particle_offset, end_point_left + particle_offset)
 			
 			local particle = ability.outer_particles[wall_number + 1]
 			ParticleManager:SetParticleControl(particle, 0, end_point_left + particle_offset)

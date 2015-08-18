@@ -1,0 +1,131 @@
+	"storm_clouds"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+
+		"AbilityTextureName"			"razor_eye_of_the_storm"
+
+		"precache"
+		{
+
+		}
+
+		"AbilityCastPoint"				"0.2"
+		"AbilityCooldown"				"24"
+		"AbilityManaCost"				"50"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"stack_duration"		"10"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"attack_speed"			"12 16 20 24"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"move_speed"			"3 5 7 9"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"active_duration_base"	"5"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"active_duration_bonus"	"1.0 1.5 2.0 2.5"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"max_stacks"			"5"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"active_kraken_cooldown"	"2.5"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"active_nyuudou_cooldown"	"0"
+			}
+		}
+
+		"OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"	"heroes/hero_ichirin/storm_clouds.lua"
+	    		"Function"		"stormCloudsCast"
+	    	}
+	    }
+
+
+	    "Modifiers"
+	    {
+	    	"modifier_storm_clouds"
+	    	{
+	    		"Passive"	"1"
+	    		"IsHidden"	"1"
+
+	    		"OnCreated"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_ichirin/storm_clouds.lua"
+	    				"Function"		"modifierGained"
+	    			}
+	    		}
+
+	    		"OnRespawn"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_ichirin/storm_clouds.lua"
+	    				"Function"		"modifierGained"
+	    			}
+	    		}
+
+	    		"ThinkInterval"  "0.03"
+
+	    		"OnIntervalThink"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_ichirin/storm_clouds.lua"
+	    				"Function"		"updateStacks"
+	    			}
+	    		}
+
+	    		"OnDeath"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_ichirin/storm_clouds.lua"
+	    				"Function"		"removeStacks"
+	    			}
+	    		}
+	    	}
+
+	    	"modifier_storm_clouds_stacks"
+	    	{
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%attack_speed"
+	    		    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%move_speed" 
+	    		}
+	    	}
+
+	    	"modifier_storm_clouds_active"
+	    	{
+
+	    	}
+	    }
+	}

@@ -52,4 +52,12 @@ function krakenStrikeCast(keys)
 			end)
 		end)
 	end)
+
+	-- Check for autumn storm clouds active
+	if caster:HasModifier("modifier_storm_clouds_active") then
+		local storm_clouds_ability = caster:FindAbilityByName("storm_clouds")
+		local storm_clouds_level = storm_clouds_ability:GetLevel() - 1
+		ability:EndCooldown()
+		ability:StartCooldown(storm_clouds_ability:GetLevelSpecialValueFor("active_kraken_cooldown", storm_clouds_level))
+	end
 end
