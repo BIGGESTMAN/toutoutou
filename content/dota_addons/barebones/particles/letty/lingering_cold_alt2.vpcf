@@ -66,6 +66,8 @@
 		},
 		{
 			_class = "C_INIT_RandomAlpha"
+			m_nAlphaMin = 128
+			m_nAlphaMax = 128
 		},
 		{
 			_class = "C_INIT_RandomColor"

@@ -32,7 +32,7 @@
 			"03"	
 			{
 				"var_type"					"FIELD_FLOAT"
-				"orb_update_interval"		"0.05"
+				"orb_update_interval"		"0.03"
 			}
 			"04"
 			{

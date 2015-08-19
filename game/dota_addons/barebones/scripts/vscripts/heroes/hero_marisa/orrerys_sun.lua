@@ -1,8 +1,11 @@
+SPARK_MODIFIERS = {"modifier_master_spark", "modifier_final_spark"}
+
 function orrerysSunStart( event )
 	local caster = event.caster
 	if (caster:IsAlive()) then
 		local ability = event.ability
 		local orbs = ability:GetLevelSpecialValueFor( "orbs", ability:GetLevel() - 1 )
+		-- local orbs = 1
 		local unit_name = "orrerys_sun_orb"
 
 		-- Initialize the table to keep track of all orbs
@@ -31,22 +34,63 @@ function orrerysSunStart( event )
 	end
 end
 
--- Movement logic for each orb
+-- Movement logic for all orbs
 function updateOrbs( event )
 	local frozen = false
 
 	local caster = event.caster
 	local caster_location = caster:GetAbsOrigin()
 	local ability = event.ability
-	local radius = ability:GetLevelSpecialValueFor( "radius", ability:GetLevel() - 1 )
 	local vertical_distance_from_caster = ability:GetLevelSpecialValueFor( "vertical_distance_from_caster", ability:GetLevel() - 1 )
 	local number_of_orbs = #caster.orbs
+	local update_interval = ability:GetLevelSpecialValueFor("orb_update_interval", ability:GetLevel() - 1)
+
+	local spark_tilt_angle = 90
+	local total_spark_tilt_time = 1
+	local spark_velocity_factors = {3,5} -- Depending on which spark is used
+	local spark_tilt_increase_per_tick = spark_tilt_angle * update_interval / total_spark_tilt_time
+
+	-- Rapidly tilt backwards if firing Master or Final Spark
+	local firing_spark = nil
+	for k,modifier in pairs(SPARK_MODIFIERS) do
+		if caster:HasModifier(modifier) then
+			firing_spark = true
+			caster.spark_type = k
+			break
+		end
+	end
+
+	if firing_spark then
+		if not caster.spark_tilt_angle then caster.spark_tilt_angle = 0 end
+		caster.spark_tilt_angle = caster.spark_tilt_angle + spark_tilt_increase_per_tick
+		if caster.spark_tilt_angle > spark_tilt_angle then caster.spark_tilt_angle = spark_tilt_angle end
+	else -- Tilt back down after spark
+		if caster.spark_tilt_angle then
+			caster.spark_tilt_angle = caster.spark_tilt_angle - spark_tilt_increase_per_tick
+			if caster.spark_tilt_angle <= 0 then caster.spark_tilt_angle = nil end
+		end
+	end
+
+	local radius = ability:GetLevelSpecialValueFor( "radius", ability:GetLevel() - 1 )
+	if caster.spark_tilt_angle and caster.spark_type == 2 then -- Increase circle radius a little during Final Spark
+		radius = radius * (1 + 0.5 * caster.spark_tilt_angle / spark_tilt_angle)
+	end
 
 	local rotation_point = caster_location + Vector(0,0,1) * vertical_distance_from_caster
+	if caster.spark_tilt_angle and caster.spark_type == 2 then -- Move center of circle to Marisa during Final Spark if orbs are tilted
+		local offset_y = math.sin(caster.spark_tilt_angle * math.pi / 180) * radius * caster.spark_tilt_angle / spark_tilt_angle
+		local offset_x = math.sin(caster.spark_tilt_angle * math.pi / 180) * radius * caster.spark_tilt_angle / spark_tilt_angle
+		local circle_offset = offset_x * caster:GetForwardVector() + offset_y * Vector(0,0,-1)
+		rotation_point = rotation_point + circle_offset
+	end
 
 	-- Make orbs spin
 	local rotation_time = ability:GetLevelSpecialValueFor("rotation_time", ability:GetLevel() - 1)
-	caster.orbs_angle = caster.orbs_angle + (360 / rotation_time) * ability:GetLevelSpecialValueFor("orb_update_interval", ability:GetLevel() - 1)
+	local angle_increment = (360 / rotation_time) * update_interval
+	if caster.spark_tilt_angle then -- Increase speed as orbs tilt back during spark
+		angle_increment = angle_increment * (1 + (spark_velocity_factors[caster.spark_type] - 1) * caster.spark_tilt_angle / spark_tilt_angle)
+	end
+	caster.orbs_angle = caster.orbs_angle + angle_increment
 
 	local overallAngleInRadians = 0
 	if not frozen then
@@ -57,7 +101,83 @@ function updateOrbs( event )
 	for orb_number=1, number_of_orbs do
 		local angle = (360 / number_of_orbs) * (orb_number - 1)
 		local target_point = RotatePosition(rotation_point, QAngle(0,angle,0), prototype_target_point)
+
+		if firing_spark then
+			target_point = tiltOrb(rotation_point, target_point, caster.spark_tilt_angle, caster:GetForwardVector())
+		else -- Tilt back down after spark
+			if caster.spark_tilt_angle then
+				target_point = tiltOrb(rotation_point, target_point, caster.spark_tilt_angle, caster:GetForwardVector())
+			end
+		end
 		caster.orbs[orb_number]:SetAbsOrigin(target_point)
+	end
+end
+
+function tiltOrb(origin, orb_location, angle, forward)
+	local debug = false
+	if debug then DebugDrawCircle(orb_location, Vector(255,255,255), 1, 25, true, 0.5) end
+	local angle_vector = orb_location - origin
+	local forward_angle = vectorToAngle(forward, "degrees")
+	-- print("forward angle:",forward_angle)
+	local adjusted_orb_location = RotatePosition(origin, QAngle(0,forward_angle,0),orb_location)
+	local radians_angle = vectorToAngle(adjusted_orb_location - origin)
+	local radius = (orb_location - origin):Length2D()
+	-- print("angle in radians:", radians_angle)
+	local quadrant = math.ceil(radians_angle / (math.pi / 2))
+	-- print("quadrant:", quadrant)
+	local effective_angle = nil
+	local distance_to_back = nil
+	if quadrant == 1 then
+		effective_angle = radians_angle
+		distance_to_back = radius + math.sin(effective_angle) * radius
+	elseif quadrant == 2 then
+		effective_angle = math.pi - radians_angle
+		distance_to_back = radius + math.sin(effective_angle) * radius
+	elseif quadrant == 3 then
+		effective_angle = radians_angle - math.pi
+		distance_to_back = radius - math.sin(effective_angle) * radius
+	elseif quadrant == 4 then
+		effective_angle = math.pi * 2 - radians_angle
+		distance_to_back = radius - math.sin(effective_angle) * radius
+	end
+	-- print("distance:",distance_to_back)
+	local back_of_circle = origin + forward * -1 * radius
+	-- DebugDrawCircle(back_of_circle, Vector(255,255,255), 1, 25, true, 0.5)
+	local left = RotatePosition(Vector(0,0,0), QAngle(0,-90,0), forward)
+	if debug then DebugDrawLine(back_of_circle + left * -300, left * 300 + back_of_circle, 255, 0, 0, true, 0.25) end
+	local rotation_point = orb_location + forward * -1 * distance_to_back
+	if debug then DebugDrawLine(rotation_point, orb_location, 0, 255, 0, true, 0.25) end
+	-- DebugDrawCircle(rotation_point, Vector(255,0,0), 1, 50, true, 0.5)
+
+	local height = math.sin(angle * math.pi / 180) * distance_to_back
+	local width = math.cos(angle * math.pi / 180) * distance_to_back
+
+	local up = Vector(0,0,1)
+	local tilted_location = rotation_point + width * forward + height * up
+
+	-- DebugDrawLine(orb_location, origin, 0,0,255, true, 0.25)
+	-- print((rotation_point - orb_location):Normalized(), effective_angle * 180 / math.pi)
+	-- local facing_angle = vectorToAngle(forward)
+	-- print(math.sin(facing_angle), math.cos(facing_angle))
+
+	-- local tilted_location = RotatePosition(rotation_point, QAngle(-1 * (90 - angle) * math.cos(facing_angle), 0, (90 - angle) * math.sin(facing_angle)), orb_location)
+
+	-- local test_raised_position = distance_to_back * up + rotation_point
+	-- if debug then DebugDrawLine(rotation_point, test_raised_position, 0, 0, 255, true, 0.25) end
+	-- local height = tilted_location.z - orb_location.z
+	-- local test_lowered_position = tilted_location + up * -1 * height
+	-- if debug then DebugDrawLine(tilted_location, test_lowered_position, 0, 0, 255, true, 0.25) end
+	-- if debug then DebugDrawLine(tilted_location, orb_location, 0, 255, 0, true, 0.25) end
+	return tilted_location
+	-- return orb_location
+end
+
+function vectorToAngle(vector, angle_type)
+	angle_type = angle_type or "radians"
+	if angle_type == "degrees" then
+		return (90 - (math.atan2(vector.y, vector.x) * 180 / math.pi)) % 360
+	else
+		return (math.atan2(vector.y, vector.x)) % (math.pi * 2)
 	end
 end
 
