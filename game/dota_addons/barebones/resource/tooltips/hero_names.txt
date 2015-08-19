@@ -14,3 +14,4 @@
 		"npc_dota_hero_crystal_maiden"		"Letty"
 		"npc_dota_hero_tinker"				"Kappashiro"
 		"npc_dota_hero_warlock"				"Ichirin"
+		"npc_dota_hero_ancient_apparition"	"Cirno"

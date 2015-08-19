@@ -68,8 +68,10 @@ function addParticle(keys)
 end
 
 function removeThinker(keys)
-	keys.target.northern_winner_thinker:RemoveSelf()
-	keys.target.northern_winner_thinker = nil
+	if keys.northern_winner_thinker then
+		keys.target.northern_winner_thinker:RemoveSelf()
+		keys.target.northern_winner_thinker = nil
+	end
 end
 
 function removeParticle(keys)
