@@ -89,43 +89,6 @@ function lingeringColdCast(keys)
 		end
 
 		if elapsed_time < duration then
-			-- Find number of Northern Winner allies in the field and connected fields
-			local northern_winner_allies = {}
-
-			local team1 = caster:GetTeamNumber()
-			local origin1 = target_point
-			local iTeam1 = DOTA_UNIT_TARGET_TEAM_FRIENDLY
-			local iType1 = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
-			local iFlag1 = DOTA_UNIT_TARGET_FLAG_NONE
-			local iOrder1 = FIND_ANY_ORDER
-
-			local targets1 = FindUnitsInRadius(team1, origin1, nil, thinker.radius, iTeam1, iType1, iFlag1, iOrder1, false)
-
-			for k,unit in pairs(targets1) do
-				if unit:HasModifier("modifier_northern_winner") then
-					table.insert(northern_winner_allies, unit)
-				end
-			end
-
-			for ice_field,v in pairs(thinker.connected_ice_fields) do
-				if not ice_field:IsNull() then
-					local team = caster:GetTeamNumber()
-					local origin = ice_field:GetAbsOrigin()
-					local iTeam = DOTA_UNIT_TARGET_TEAM_FRIENDLY
-					local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
-					local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
-					local iOrder = FIND_ANY_ORDER
-
-					local targets = FindUnitsInRadius(team, origin, nil, ice_field.radius, iTeam, iType, iFlag, iOrder, false)
-
-					for k,unit in pairs(targets) do
-						if unit:HasModifier("modifier_northern_winner") and not tableContains(northern_winner_allies, unit) then
-							table.insert(northern_winner_allies, unit)
-						end
-					end
-				end
-			end
-
 			-- Apply debuff
 			local team = caster:GetTeamNumber()
 			local origin = target_point
@@ -144,7 +107,6 @@ function lingeringColdCast(keys)
 				caster.lingering_cold_targets[unit] = true
 
 				local modifier = unit:FindModifierByName("modifier_lingering_cold_debuff")
-				modifier.northern_winner_allies = #northern_winner_allies
 
 				if new_modifier then modifier.time_created = GameRules:GetGameTime() end
 			end
@@ -209,20 +171,4 @@ function checkRestoreCharges(keys)
 	local ability_level = ability:GetLevel() - 1
 
 	if ability_level == 0 then keys.caster.lingering_cold_charges = ability:GetLevelSpecialValueFor("max_charges", ability_level) end
-end
-
-function checkNorthernWinnerDamage(keys)
-	local caster = keys.caster
-	local ability = keys.ability
-	local ability_level = ability:GetLevel() - 1
-	local northern_winner_ability = caster:FindAbilityByName("northern_winner")
-	local northern_winner_ability_level = northern_winner_ability:GetLevel() - 1
-	local target = keys.target
-
-	if target:HasModifier("modifier_lingering_cold_debuff") then -- ............. ellipse
-		local modifier = target:FindModifierByName("modifier_lingering_cold_debuff")
-		local damage = northern_winner_ability:GetLevelSpecialValueFor("damage_per_second", northern_winner_ability_level) * ability:GetLevelSpecialValueFor("update_interval", ability_level) * modifier.northern_winner_allies
-		local damage_type = northern_winner_ability:GetAbilityDamageType()
-		ApplyDamage({victim = target, attacker = caster, damage = damage, damage_type = damage_type})
-	end
 end

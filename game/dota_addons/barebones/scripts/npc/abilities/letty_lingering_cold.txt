@@ -33,7 +33,7 @@
 				"var_type"				"FIELD_INTEGER"
 				"turn_rate_slow"		"-30 -40 -50 -60"
 			}
-			"03"
+			"03"	// Doesn't work
 			{
 				"var_type"				"FIELD_INTEGER"
 				"cast_time_slow"		"30 40 50 60"
@@ -125,21 +125,10 @@
 	    		"Properties"
 	    		{
 	    			"MODIFIER_PROPERTY_TURN_RATE_PERCENTAGE"		"%turn_rate_slow"
-	    		    "MODIFIER_PROPERTY_CASTTIME_PERCENTAGE"			"%cast_time_slow"
+	    		    "MODIFIER_PROPERTY_CASTTIME_PERCENTAGE"			"%cast_time_slow" // doesn't work :(
 	    		    "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%attackspeed_slow"
 	    		    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"	"%movespeed_slow"
 	    		    "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"		"%armor_reduction"
-	    		}
-
-	    		"ThinkInterval"  "%update_interval"
-
-	    		"OnIntervalThink"
-	    		{
-	    			"RunScript"
-	    			{
-	    				"ScriptFile"	"heroes/hero_letty/lingering_cold.lua"
-	    				"Function"		"checkNorthernWinnerDamage"
-	    			}
 	    		}
 
 	    		"OnDestroy"

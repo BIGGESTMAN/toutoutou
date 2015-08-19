@@ -13,6 +13,7 @@
 		{
 			"particle"					"particles/letty/northern_winner.vpcf"
 			"particle"					"particles/letty/northern_winner_invis.vpcf"
+			"particle"					"particles/letty/northern_winner_blizzard.vpcf"
 		}
 
 		"AbilityCastPoint"				"0.3"
@@ -69,7 +70,7 @@
 	    			"RunScript"
 	    			{
 	    				"ScriptFile"	"heroes/hero_letty/northern_winner"
-	    				"Function"		"checkInvis"
+	    				"Function"		"update"
 	    			}
 	    		}
 
@@ -80,6 +81,12 @@
 	    				"ModifierName"	"modifier_northern_winner_invis"
 	    				"Target" 		"TARGET"
 	    			}
+
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_letty/northern_winner"
+	    				"Function"		"removeParticle"
+	    			}
 	    		}
 
 	    		"Properties"
@@ -89,17 +96,11 @@
 
 	    		"OnCreated"
 	    		{
-	    			"AttachEffect"
-	    			{
-	    				"EffectName"        "particles/letty/northern_winner.vpcf"
-	    				"EffectAttachType"  "follow_origin"
-	    				"Target"            "TARGET"
-
-	    				"ControlPoints"
-	    				{
-	    					"01"	"%radius 0 0"
-	    				}
-	    			}
+			    	"RunScript"
+			    	{
+			    		"ScriptFile"	"heroes/hero_letty/northern_winner.lua"
+			    		"Function"		"addParticle"
+			    	}
 	    		}
 	    	}
 
@@ -131,7 +132,18 @@
 	    				"ModifierName"	"modifier_invisible"
 	    				"Target" 		"TARGET"
 	    			}
+
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_letty/northern_winner.lua"
+	    				"Function"		"removeThinker"
+	    			}
 	    		}
+	    	}
+
+	    	"modifier_northern_winner_thinker"
+	    	{
+
 	    	}
 	    }
 	}
