@@ -47,7 +47,7 @@ function updateOrbs( event )
 
 	local spark_tilt_angle = 90
 	local total_spark_tilt_time = 1
-	local spark_velocity_factors = {3,5} -- Depending on which spark is used
+	local spark_velocity_factors = {4,5} -- Depending on which spark is used
 	local spark_tilt_increase_per_tick = spark_tilt_angle * update_interval / total_spark_tilt_time
 
 	-- Rapidly tilt backwards if firing Master or Final Spark

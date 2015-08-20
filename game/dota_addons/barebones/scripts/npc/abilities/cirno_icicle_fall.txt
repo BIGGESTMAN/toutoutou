@@ -7,7 +7,7 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 
-		"AbilityTextureName"			"crystal_maiden_freezing_field"
+		"AbilityTextureName"			"cirno_icicle_fall"
 
 		"precache"
 		{
@@ -87,7 +87,7 @@
 	    	{
 	    		"Duration"	"%duration"
 
-	    		"ThinkInterval"  "0.03"
+	    		"ThinkInterval"  "%update_interval"
 
 	    		"OnIntervalThink"
 	    		{
