@@ -1,0 +1,135 @@
+	"cold_divinity"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+
+		"AbilityTextureName"			"crystal_maiden_brilliance_aura"
+
+		"precache"
+		{
+
+		}
+
+		"AbilityCastRange"				"400"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"400"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"4"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"application_time"		"3.5 3.0 2.5 2.0"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"max_stacks"			"5"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movespeed_slow"		"-8 -9 -10 -11"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"attackspeed_slow"		"-12 -14 -16 -18"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"update_interval"		"0.03"
+			}
+		}
+
+	    "Modifiers"
+	    {
+	    	"modifier_cold_divinity"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+
+	    		"ThinkInterval"  "%update_interval"
+
+	    		"OnIntervalThink"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_cirno/cold_divinity.lua"
+	    				"Function"		"chillAura"
+	    			}
+	    		}
+
+				"OnAttacked"
+				{
+					"RunScript"
+					{
+	    				"ScriptFile"	"heroes/hero_cirno/cold_divinity.lua"
+						"Function"		"applyChill"
+					}
+				}
+	    	}
+
+	    	"modifier_cold_divinity_chilling"
+	    	{
+	    		"IsHidden"	"1"
+
+	    		"Duration"	"%application_time"
+
+	    		"ThinkInterval"  "%update_interval"
+
+	    		"OnIntervalThink"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_cirno/cold_divinity.lua"
+	    				"Function"		"checkRemoveChilling"
+	    			}
+	    		}
+
+	    		"OnDestroy"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_cirno/cold_divinity.lua"
+	    				"Function"		"applyTickingChill"
+	    			}
+	    		}
+	    	}
+
+	    	"modifier_cold_divinity_chilled"
+	    	{
+	    		"IsPurgable"	"1"
+	    		"IsDebuff"		"1"
+
+	    		"Duration"		"%duration"
+
+	    		"Properties"
+	    		{
+	    		    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%movespeed_slow" 
+	    			"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%attackspeed_slow"
+	    		}
+
+	    		"OnDestroy"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_cirno/cold_divinity.lua"
+	    				"Function"		"shatterPerfectFreeze"
+	    			}
+	    		}
+	    	}
+	    }
+	}

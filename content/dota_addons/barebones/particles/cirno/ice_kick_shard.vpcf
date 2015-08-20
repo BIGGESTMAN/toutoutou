@@ -18,33 +18,15 @@
 	[
 		{
 			_class = "C_OP_PositionLock"
-			m_nControlPointNumber = 3
-		},
-		{
-			_class = "C_OP_EndCapTimedDecay"
-			m_flDecayTime = 1.000000
-			m_bDisableOperator = true
 		},
 		{
 			_class = "C_OP_LerpEndCapScalar"
 			m_flOutput = 0.000000
+			m_bDisableOperator = true
 		},
 		{
 			_class = "C_OP_BasicMovement"
 			m_nOpEndCapState = 0
-		},
-		{
-			_class = "C_OP_MovementRotateParticleAroundAxis"
-			m_nCP = 3
-			m_flRotRate = -180.000000
-			m_vecRotAxis =
-			[
-				1.000000,
-				-1.000000,
-				1.000000,
-			]
-			m_nOpEndCapState = 0
-			m_bDisableOperator = true
 		},
 		{
 			_class = "C_OP_RampScalarLinear"
@@ -57,14 +39,11 @@
 		},
 		{
 			_class = "C_OP_Decay"
+			m_bDisableOperator = true
 		},
 		{
 			_class = "C_OP_FadeOutSimple"
 			m_flFadeOutTime = 0.500000
-		},
-		{
-			_class = "C_OP_DistanceCull"
-			m_flDistance = 500.000000
 			m_bDisableOperator = true
 		},
 		{
@@ -72,6 +51,14 @@
 			m_flStartTime = 0.500000
 			m_flEndScale = 0.500000
 			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_EndCapTimedDecay"
+		},
+		{
+			_class = "C_OP_MovementPlaceOnGround"
+			m_flOffset = 40.000000
+			m_bIncludeWater = true
 		},
 	]
 	m_Initializers =
@@ -104,32 +91,22 @@
 		{
 			_class = "C_INIT_RandomRadius"
 			m_flRadiusMax = 15.000000
-			m_flRadiusMin = 10.000000
+			m_flRadiusMin = 15.000000
 		},
 		{
 			_class = "C_INIT_RandomLifeTime"
-			m_fLifetimeMin = 0.300000
-			m_fLifetimeMax = 0.400000
+			m_fLifetimeMin = -1.000000
+			m_fLifetimeMax = -1.000000
 		},
 		{
 			_class = "C_INIT_CreateWithinSphere"
-			m_fRadiusMax = 68.000000
-			m_fSpeedMin = 2000.000000
-			m_fSpeedMax = 500.000000
-			m_vecDistanceBias =
-			[
-				1.000000,
-				1.000000,
-				0.400000,
-			]
 		},
 	]
 	m_Emitters =
 	[
 		{
 			_class = "C_OP_InstantaneousEmitter"
-			m_nParticlesToEmit = 300
-			m_flStartTime = 0.250000
+			m_nParticlesToEmit = 1
 		},
 	]
 	m_ForceGenerators =

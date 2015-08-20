@@ -5,15 +5,15 @@ function extendingArmCast(keys)
 	local target_point = keys.target_points[1]
 
 	local range = ability:GetLevelSpecialValueFor("range", ability_level)
-	local speed = ability:GetLevelSpecialValueFor("travel_speed", ability_level) * 0.03
 	local hand_radius = ability:GetLevelSpecialValueFor("hand_radius", ability_level)
 	local damage_radius = ability:GetLevelSpecialValueFor("damage_radius", ability_level)
 	local damage = ability:GetLevelSpecialValueFor("damage", ability_level)
 	local damage_type = ability:GetAbilityDamageType()
 	local update_interval = ability:GetLevelSpecialValueFor("update_interval", ability_level)
+	local speed = ability:GetLevelSpecialValueFor("travel_speed", ability_level) * 0.03
 	local arrival_distance = 25
 
-	local arm = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeam())
+	local arm = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeamNumber())
 	ability:ApplyDataDrivenModifier(caster, arm, "modifier_extending_arm_dummy", {})
 
 	local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_shredder/shredder_timberchain_rope.vpcf", PATTACH_ABSORIGIN_FOLLOW, arm)

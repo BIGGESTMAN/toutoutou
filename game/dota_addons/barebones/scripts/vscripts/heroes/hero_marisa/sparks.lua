@@ -1,7 +1,7 @@
 require "libraries/util"
 require "libraries/animations"
 
-function startSpark(caster, ability, modifier, debufF_modifier, direction, spark_ability, particle)
+function startSpark(caster, ability, modifier, debuff_modifier, direction, spark_ability, particle)
 	local ability_level = spark_ability:GetLevel() - 1
 	local end_distance = spark_ability:GetLevelSpecialValueFor("range", ability_level)
 	local end_radius = spark_ability:GetLevelSpecialValueFor("end_radius", ability_level)
@@ -34,17 +34,17 @@ function startSpark(caster, ability, modifier, debufF_modifier, direction, spark
 				spell_forward = caster:GetForwardVector() * -1
 			end
 
-			local cone_units = GetEnemiesInCone(caster, start_radius, end_radius, end_distance, spell_forward, 3, false)
+			local cone_units = GetEnemiesInCone(caster, start_radius, end_radius, end_distance, spell_forward, 3, false, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES)
 			for k,unit in pairs(cone_units) do
 				-- Damage
 				ApplyDamage({ victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
-				ability:ApplyDataDrivenModifier(caster, unit, debufF_modifier, {})
+				ability:ApplyDataDrivenModifier(caster, unit, debuff_modifier, {})
 				
-				if caster:HasScepter() then
-					spark_ability:ApplyDataDrivenModifier(caster, unit, "modifier_master_spark_vulnerability", {})
-					local vulnerability_modifier = unit:FindModifierByName("modifier_master_spark_vulnerability")
-					vulnerability_modifier:IncrementStackCount()
-				end
+				-- if caster:HasScepter() then
+				-- 	spark_ability:ApplyDataDrivenModifier(caster, unit, "modifier_master_spark_vulnerability", {})
+				-- 	local vulnerability_modifier = unit:FindModifierByName("modifier_master_spark_vulnerability")
+				-- 	vulnerability_modifier:IncrementStackCount()
+				-- end
 			end
 
 			return damage_interval

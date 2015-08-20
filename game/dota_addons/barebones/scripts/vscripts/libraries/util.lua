@@ -77,7 +77,7 @@ function DistancePointSegment( p, v, w )
 	end
 end
 
-function GetEnemiesInCone(unit, start_radius, end_radius, end_distance, caster_forward, circles, debug)
+function GetEnemiesInCone(unit, start_radius, end_radius, end_distance, caster_forward, circles, debug, target_flags)
 	local DEBUG = debug or false
 	
 	-- Positions
@@ -111,7 +111,7 @@ function GetEnemiesInCone(unit, start_radius, end_radius, end_distance, caster_f
 	local team = unit:GetTeamNumber()
 	local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
 	local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
-	local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
+	local iFlag = target_flags or DOTA_UNIT_TARGET_FLAG_NONE
 	local iOrder = FIND_ANY_ORDER
 
 	local start_units = FindUnitsInRadius(team, start_point, nil, start_radius, iTeam, iType, iFlag, iOrder, false)

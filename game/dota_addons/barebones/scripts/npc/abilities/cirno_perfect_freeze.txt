@@ -11,7 +11,7 @@
 
 		"precache"
 		{
-			"particle"					"particles/cirno/perfect_freeze.vpcf"
+			
 		}
 
 		"AbilityCastPoint"				"0.4"
@@ -64,7 +64,7 @@
 	    		"States"
 	    		{
 	    			"MODIFIER_STATE_STUNNED"	"MODIFIER_STATE_VALUE_ENABLED"
-	    			"MODIFIER_STATE_FROZEN"	"MODIFIER_STATE_VALUE_ENABLED"
+	    			"MODIFIER_STATE_FROZEN"		"MODIFIER_STATE_VALUE_ENABLED"
 	    		}
 
 	    		"OnCreated"
