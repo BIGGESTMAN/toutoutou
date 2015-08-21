@@ -26,18 +26,17 @@ Mana : 793
 Damage : 140-150
 Armor : 13.18
 
-[Q] Icicle Fall (icicle_fall) : Traps an enemy in a hailstorm that deals magical damage each second and slows movement. The first time each enemy takes damage, they are chilled by Cold Divinity of the current level.
-DevNotes - The hailstorm doesn't follow the enemy. The safe zone is the area in the center around the targeted enemy, which is unaffected by the hailstorm. The slow lingers for 1 second. No initial damage.
+[Q] Icicle Fall (icicle_fall) : Traps an enemy in the eye of a hailstorm that deals magical damage each second and slows movement. The first time each enemy takes damage, they are chilled by Cold Divinity of the current level.
+DevNotes - The hailstorm doesn't follow the enemy. The eye is the area in the center around the targeted enemy, which is unaffected by the hailstorm. The slow lingers for 1 second. No initial damage.
 
 Cast Point : 0.4
 Magical Damage per Second (damage_per_second) : 50/60/70/80
 Move Speed Slow (slow) : 15/20/25/30%
 Area Duration (duration) : 3/4/5/6
 Range : 600
-Safe Zone Radius (center_radius) : 100
-Radius (radius) : 450
-Note0 (note0) : The damage and root has a cooldown of 0.5 seconds for each enemy.
-Lore (lore) : After dusk, Gensokyo's travelers often witness strange flashes of light, attracting the foolhardy and naive.
+Eye Radius (center_radius) : 100
+Radius (radius) : 450 
+Lore (lore) : Is Cirno is aware of the gaping flaw in this spell? Or is it all part of her plan?
 Mana : 80
 Cooldown : 16/14/12/10
 
@@ -49,6 +48,7 @@ Total Magical Damage (damage) : 105/170/235/300
 Max Duration (duration) : 2.5/3/3.5/4
 Damage Threshold (damage_threshold) : 90/140/190/240
 Cast Range : 425
+Lore (lore) : Cirno has spent ages of her immortality freezing and thawing live frogs for her own amusement. They still shatter, occasionally.
 Mana : 70/80/90/100
 Cooldown : 13
 
@@ -59,6 +59,8 @@ Move Speed Slow (movespeed_slow) : 8/9/10/11%
 Attack Speed Slow (attackspeed_slow) : 12/14/16/18
 Time to Chill (application_time) : 3.5/3/2.5/2
 Radius : 400
+Note0 (note0) : The stacks are not separate and are removed at once when the chill expires.
+Lore (lore) : Ice fairies must be handled with care, lest they freeze appendages found dear.
 
 [R] Super Ice Kick (super_ice_kick) : Cirno bores into an enemy with a flying drill kick for 2.5 seconds, stunning them and dealing physical damage based on her attack damage every 0.5 seconds. On impact and every 0.5 seconds, Cirno releases icy shrapnel around her that deals magical damage and mini-roots the first enemy they hit. Cirno gains spell immunity on cast that lasts until the kick ends.
 Scepter - Reduces mana cost to 100/150/150. The shards deal 45 damage, penetrate, and chill at the current level of Cold Divinity.
@@ -75,5 +77,7 @@ Kick Travel Speed (kick_speed) : 2000
 Shard Travel Distance (shard_range) : 450
 Shard Travel Speed (shard_speed) : 1600
 Shard Radius (shard_radius) : 50
+Note0 (note0) : The icy shrapnel doesn't hit the target of the kick.
+Lore (lore) : Never challenge a fool with a light heart, for their lack of brains entails a lack of fear.
 Mana : 120/180/240
 Cooldown : 100/85/70
