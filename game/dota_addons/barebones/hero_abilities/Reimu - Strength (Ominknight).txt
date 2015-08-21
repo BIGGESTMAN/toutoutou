@@ -37,8 +37,8 @@ Max Damage Travel Distance (max_damage_distance) : 350
 Min Damage Travel Distance (min_damage_distance) : 800
 Bullet Travel Speed (projectile_speed) : 850/1000/1150/1300
 Range : 800
-Note 0 (note0) : Can't be disjointed.
-Note 1 (note1) : It always takes 1 second to fire all the bullets.
+Note0 (note0) : Can't be disjointed.
+Note1 (note1) : It always takes 1 second to fire all the bullets.
 Lore (lore) : One of Reimu's signature moves, bullets of light defy the laws of nature to capture and exterminate Youkai.
 Mana : 70/80/90/100
 Cooldown : 8
@@ -67,7 +67,7 @@ Silence Duration (silence_duration) : 0.8
 Bounces (bounces) : 2/3/4/5
 Range (bonus_range) : 320/360/400/440
 Bounce Search Radius (bounce_range) : 500
-Note 0 (note0) : The orbs bounce on and off spell immune units, but don't silence.
+Note0 (note0) : The orbs bounce on and off spell immune units, but don't silence.
 Lore (lore) : With her trusty purification rod and a supply of blessed orbs, there is no incident that Hakurei's Shrine Maiden cannot solve.
 Mana : 15
 
