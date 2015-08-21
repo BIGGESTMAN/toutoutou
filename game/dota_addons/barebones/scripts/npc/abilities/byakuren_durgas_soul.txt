@@ -28,7 +28,7 @@
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"duration"				"1"
+				"duration"				"2"
 				"_value"				"DOTA_Tooltip_Ability_Durgas_Soul_Duration"
 			}
 			"02"

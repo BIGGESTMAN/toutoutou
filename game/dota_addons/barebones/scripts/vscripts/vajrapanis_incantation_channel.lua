@@ -6,9 +6,6 @@ function vajrapanis_incantation_channel:OnSpellStart()
 	if IsServer() then
 		require("libraries/animations")
 		local caster = self:GetCaster()
-		if not caster:HasModifier("modifier_incantation_channeling") then
-			caster:RemoveModifierByName("modifier_vajrapanis_charges")
-		end
 
 		local duration = self:GetChannelTime()
 		caster:AddNewModifier(caster, self, "modifier_incantation_channeling", {duration = duration * 2}) -- 2 = arbitrary number to make sure it doesn't fall off before the next charge channel can begin

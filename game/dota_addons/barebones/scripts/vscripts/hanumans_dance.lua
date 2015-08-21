@@ -14,13 +14,11 @@ function hanumans_dance:OnSpellStart()
 
 		ability:StartCooldown(caster:GetSecondsPerAttack())
 
-		caster:AddNewModifier(caster, ability, "modifier_dancing", {er_what = "pls", dancing_target = target, errrr_um = "game is hard"}) -- Debuggy shit
-		local modifier = caster:FindModifierByName("modifier_dancing")
-		modifier.target = target
-		modifier.prior_slashes = 0
+		local prior_slashes = 0
 		if caster:HasModifier("modifier_dance_recastable") then
-			modifier.prior_slashes = caster:GetModifierStackCount("modifier_dance_recastable", caster)
+			prior_slashes = caster:GetModifierStackCount("modifier_dance_recastable", caster)
 		end
+		caster:AddNewModifier(caster, ability, "modifier_dancing", {target = target:GetEntityIndex(), prior_slashes = prior_slashes})
 
 		-- Spend a charge
 		local charge_modifier = caster:FindModifierByName("modifier_vajrapanis_charges")
@@ -66,8 +64,6 @@ function hanumans_dance:GetCastRange( vLocation, hTarget )
 		local level = virudhakas_ability:GetLevel() - 1
 		return virudhakas_ability:GetLevelSpecialValueFor("hanumans_dash_range", level)
 	else
-		return 500
+		return self:GetSpecialValueFor("cast_range")
 	end
-	-- print(vLocation, hTarget)
-	-- return 500
 end

@@ -31,23 +31,13 @@ function modifier_hanumans_dance:IsPurgable()
 end
 
 function modifier_hanumans_dance:DeclareFunctions()
-	return { MODIFIER_EVENT_ON_ATTACK,
-			MODIFIER_EVENT_ON_ABILITY_EXECUTED }
+	return { MODIFIER_EVENT_ON_ATTACK }
 end
 
 function modifier_hanumans_dance:OnAttack( params )
 	if params.attacker == self:GetParent() then
 		if not self:GetCaster():HasModifier("modifier_dancing") then
-			self:GetCaster():RemoveModifierByName("modifier_dance_recastable")
 			self:GetAbility():StartCooldown(params.attacker:GetSecondsPerAttack())
-		end
-	end
-end
-
-function modifier_hanumans_dance:OnAbilityExecuted( params )
-	if params.unit == self:GetParent() then
-		if params.ability ~= self:GetAbility() then
-			self:GetCaster():RemoveModifierByName("modifier_dance_recastable")
 		end
 	end
 end

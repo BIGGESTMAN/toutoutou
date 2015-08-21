@@ -10,22 +10,11 @@
 
 		"AbilityTextureName"			"ember_spirit_activate_fire_remnant"
 
-		// Precache
-		//-------------------------------------------------------------------------------------------------------------
 		"precache"
 		{
 			"particle"					"particles/byakuren_sword.vpcf"
 		}
 
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0"
-		"AbilityCastRange"				"500" // Unused
-		"AbilityCooldown"				"0"
-		"AbilityManaCost"				"0"
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilitySpecial"
 		{
 			"01"
@@ -69,8 +58,13 @@
 			"08"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"recast_time"			"2.0"
+				"recast_time"			"2.5"
 				"_value"				"DOTA_Tooltip_Ability_Hanumans_Dance_Recast_Time"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"cast_range"			"390 415 440 465"
 			}
 		}
 	}

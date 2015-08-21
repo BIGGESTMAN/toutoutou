@@ -40,7 +40,7 @@
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"radius"				"250"
+				"radius"				"300"
 				"_value"				"DOTA_Tooltip_Ability_Indras_Thunder_Radius"
 			}
 			"03"

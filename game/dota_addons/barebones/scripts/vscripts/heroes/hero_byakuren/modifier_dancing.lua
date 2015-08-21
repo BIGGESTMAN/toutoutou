@@ -3,26 +3,30 @@ modifier_dancing = class({})
 function modifier_dancing:OnCreated( kv )
 	if IsServer() then
 		local caster = self:GetCaster()
-		-- for k,v in pairs(kv) do
-		-- 	print(k,v)
-		-- end
 		local ability = self:GetAbility()
 		local ability_level = ability:GetLevel() -1
-		local target = self.target
+		self.target = EntIndexToHScript(kv.target)
+		self.target_point = self.target:GetAbsOrigin()
+		self.prior_slashes = kv.prior_slashes
+
+		self.direction = (self.target_point - caster:GetAbsOrigin()):Normalized()
+		caster:SetForwardVector(self.direction)
 
 		self.minimum_range = 75
 		self.distance_traveled = 0
-		self.total_dash_duration = caster:GetSecondsPerAttack()
 		self.dash_range = ability:GetLevelSpecialValueFor("dash_range", ability_level)
-		self.speed = self.dash_range / self.total_dash_duration
+		local distance = (self.target_point - caster:GetAbsOrigin()):Length2D()
+		if distance < self.minimum_range then
+			self.dash_range = distance
+		end
 
-		self.target_point = nil
-		self.direction = nil
+		local total_dash_duration = caster:GetSecondsPerAttack()
+		self.speed = self.dash_range / total_dash_duration
 
 		-- Place autoattack on cooldown afterward
 		caster:AttackNoEarlierThan(caster:GetSecondsPerAttack())
 
-		local animation_properties = {duration=self.total_dash_duration, activity=ACT_DOTA_ATTACK, rate=(25 / 30) / self.total_dash_duration, translate="meld"}
+		local animation_properties = {duration=total_dash_duration, activity=ACT_DOTA_ATTACK, rate=(25 / 30) / total_dash_duration, translate="meld"}
 		StartAnimation(caster, animation_properties)
 		
 		self:StartIntervalThink(ability:GetLevelSpecialValueFor("update_interval", ability_level))
@@ -35,6 +39,7 @@ function modifier_dancing:OnIntervalThink()
 		local ability = self:GetAbility()
 		local ability_level = ability:GetLevel() -1 
 		local target = self.target
+		local target_point = self.target_point
 
 		-- Virudhaka's Sword light fragments interaction -- dash instantly
 		if target:HasModifier("modifier_light_fragment") then
@@ -43,17 +48,11 @@ function modifier_dancing:OnIntervalThink()
 			slash(caster, ability, self)
 			target:RemoveModifierByName("modifier_light_fragment")
 		else
-			if not self.target_point then
-				self.target_point = self.target:GetAbsOrigin()
-				self.direction = (self.target_point - caster:GetAbsOrigin()):Normalized()
-
-				caster:SetForwardVector(self.direction)
-			end
-
-			local distance = (self.target_point - caster:GetAbsOrigin()):Length2D()
-
-			if distance > self.minimum_range and self.distance_traveled < self.dash_range then
-				caster:SetAbsOrigin(caster:GetAbsOrigin() + self.direction * self.speed * 0.03)
+			local distance = (target_point - caster:GetAbsOrigin()):Length2D()
+			if self.distance_traveled < self.dash_range then
+				if distance > self.minimum_range then
+					caster:SetAbsOrigin(caster:GetAbsOrigin() + self.direction * self.speed * 0.03)
+				end
 				self.distance_traveled = self.distance_traveled + self.speed * 0.03
 			else
 				slash(caster, ability, self)
@@ -72,7 +71,7 @@ end
 
 function modifier_dancing:CheckState()
 	local state = {
-	[MODIFIER_STATE_STUNNED] = true,
+	[MODIFIER_STATE_COMMAND_RESTRICTED] = true,
 	}
 
 	return state
