@@ -39,11 +39,6 @@ function superIceKickCast(keys)
 					arrived = true
 					FindClearSpaceForUnit(caster, caster:GetAbsOrigin(), true)
 					ability:ApplyDataDrivenModifier(caster, target, "modifier_super_ice_kick_stun", {})
-
-					-- Deal initial damage
-					local damage = ability:GetLevelSpecialValueFor("physical_damage_scaling", ability_level) * caster:GetAverageTrueAttackDamage() / 100
-					local damage_type = DAMAGE_TYPE_PHYSICAL
-					ApplyDamage({victim = target, attacker = caster, damage = damage, damage_type = damage_type})
 				end
 			end
 			return 0.03
@@ -110,6 +105,7 @@ function dealDamage(keys)
 					for k,unit in ipairs(targets) do
 						if unit ~= target then
 							ApplyDamage({victim = unit, attacker = caster, damage = shard_damage, damage_type = shard_damage_type})
+							ability:ApplyDataDrivenModifier(caster, unit, "modifier_super_ice_kick_root", {})
 							shard:RemoveSelf()
 							break
 						end
@@ -131,6 +127,8 @@ end
 function kickEnded(keys)
 	local caster = keys.caster
 	local target = caster.ice_kick_target
+	local ability = keys.ability
+	ability:EndChannel(false)
 	target:RemoveModifierByName("modifier_super_ice_kick_stun")
 	caster:SetForwardVector(RotatePosition(Vector(0,0,0), QAngle(0,0,90), caster:GetForwardVector()))
 

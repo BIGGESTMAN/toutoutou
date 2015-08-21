@@ -28,6 +28,7 @@
 		{
 			_class = "C_OP_LerpEndCapScalar"
 			m_flOutput = 0.000000
+			m_bDisableOperator = true
 		},
 		{
 			_class = "C_OP_BasicMovement"

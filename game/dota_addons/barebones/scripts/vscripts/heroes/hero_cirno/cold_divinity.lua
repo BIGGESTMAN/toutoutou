@@ -45,7 +45,7 @@ function applyTickingChill(keys)
 	if distance <= ability:GetLevelSpecialValueFor("radius", ability_level) then
 		ability:ApplyDataDrivenModifier(caster, target, "modifier_cold_divinity_chilled", {})
 		local modifier = target:FindModifierByName("modifier_cold_divinity_chilled")
-		if modifier:GetStackCount() < ability:GetLevelSpecialValueFor("max_stacks", ability_level) then
+		if modifier and modifier:GetStackCount() < ability:GetLevelSpecialValueFor("max_stacks", ability_level) then -- check if they have modifier cause weird shit seems to happen with dead units and ticking stacks
 			modifier:IncrementStackCount()
 		end
 	end

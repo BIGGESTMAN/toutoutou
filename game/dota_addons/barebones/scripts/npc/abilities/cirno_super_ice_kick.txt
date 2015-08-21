@@ -104,6 +104,7 @@
 	    	{
 	    		"States"
 	    		{
+	    			"MODIFIER_STATE_COMMAND_RESTRICTED"	"MODIFIER_STATE_VALUE_ENABLED"
 	    			"MODIFIER_STATE_MAGIC_IMMUNE"		"MODIFIER_STATE_VALUE_ENABLED"
 	    		}
 
@@ -130,6 +131,15 @@
 	    			"MODIFIER_STATE_STUNNED"	"MODIFIER_STATE_VALUE_ENABLED"
 	    		}
 
+	    		"OnCreated"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_cirno/super_ice_kick.lua"
+	    				"Function"		"dealDamage"
+	    			}
+	    		}
+
 	    		"ThinkInterval"  "%damage_interval"
 
 	    		"OnIntervalThink"
@@ -148,6 +158,24 @@
 	    				"ScriptFile"	"heroes/hero_cirno/super_ice_kick.lua"
 	    				"Function"		"endKick"
 	    			}
+	    		}
+
+				"EffectName"		"particles/generic_gameplay/generic_stunned.vpcf"
+				"EffectAttachType"	"follow_overhead"
+
+				"OverrideAnimation"		"ACT_DOTA_DISABLED"
+	    	}
+
+	    	"modifier_super_ice_kick_root"
+	    	{
+	    		"IsDebuff"		"1"
+	    		"IsPurgable"	"1"
+
+	    		"Duration"		"%root_duration"
+
+	    		"States"
+	    		{
+	    			"MODIFIER_STATE_ROOTED"	"MODIFIER_STATE_VALUE_ENABLED"
 	    		}
 	    	}
 
