@@ -42,7 +42,7 @@
 			"05"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"base_damage"			"50"
+				"base_damage"			"50 55 60 65"
 			}
 			"06"
 			{
@@ -57,7 +57,7 @@
 			"08"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"mana_cost"				"14"
+				"mana_cost"				"15"
 			}
 		}
 
