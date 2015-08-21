@@ -19,25 +19,25 @@ MINIMAP_CREEP_ICON_SIZE = 1             -- What icon size should we use for cree
 MINIMAP_RUNE_ICON_SIZE = 1              -- What icon size should we use for runes?
 
 RUNE_SPAWN_TIME = 120                    -- How long in seconds should we wait between rune spawns?
-CUSTOM_BUYBACK_COST_ENABLED = true      -- Should we use a custom buyback cost setting?
-CUSTOM_BUYBACK_COOLDOWN_ENABLED = true  -- Should we use a custom buyback time?
+CUSTOM_BUYBACK_COST_ENABLED = false      -- Should we use a custom buyback cost setting?
+CUSTOM_BUYBACK_COOLDOWN_ENABLED = false  -- Should we use a custom buyback time?
 BUYBACK_ENABLED = true                 -- Should we allow people to buyback when they die?
 
 DISABLE_FOG_OF_WAR_ENTIRELY = false      -- Should we disable fog of war entirely for both teams?
 USE_STANDARD_HERO_GOLD_BOUNTY = true    -- Should we give gold for hero kills the same as in Dota, or allow those values to be changed?
 
-USE_CUSTOM_TOP_BAR_VALUES = true        -- Should we do customized top bar values or use the default kill count per team?
+USE_CUSTOM_TOP_BAR_VALUES = false        -- Should we do customized top bar values or use the default kill count per team?
 TOP_BAR_VISIBLE = true                  -- Should we display the top bar score/count at all?
 SHOW_KILLS_ON_TOPBAR = true             -- Should we display kills only on the top bar? (No denies, suicides, kills by neutrals)  Requires USE_CUSTOM_TOP_BAR_VALUES
 
-ENABLE_TOWER_BACKDOOR_PROTECTION = false  -- Should we enable backdoor protection for our towers?
+ENABLE_TOWER_BACKDOOR_PROTECTION = true  -- Should we enable backdoor protection for our towers?
 REMOVE_ILLUSIONS_ON_DEATH = false       -- Should we remove all illusions if the main hero dies?
 DISABLE_GOLD_SOUNDS = false             -- Should we disable the gold sound when players get gold?
 
 END_GAME_ON_KILLS = false                -- Should the game end after a certain number of kills?
 KILLS_TO_END_GAME_FOR_TEAM = 50         -- How many kills for a team should signify an end of game?
 
-USE_CUSTOM_HERO_LEVELS = true           -- Should we allow heroes to have custom levels?
+USE_CUSTOM_HERO_LEVELS = false           -- Should we allow heroes to have custom levels?
 MAX_LEVEL = 25                          -- What level should we let heroes get to?
 
 CHEATY_STUFF = GetMapName() ~= "dota"
@@ -54,9 +54,11 @@ MUSIC = false
 
 
 -- Fill this table up with the required XP per level if you want to change it
-XP_PER_LEVEL_TABLE = {}
-for i=1,MAX_LEVEL do
-	XP_PER_LEVEL_TABLE[i] = i * 100
+if CHEATY_STUFF then
+	XP_PER_LEVEL_TABLE = {}
+	for i=1,MAX_LEVEL do
+		XP_PER_LEVEL_TABLE[i] = i * 100
+	end
 end
 
 -- Generated from template
@@ -542,6 +544,9 @@ function GameMode:OnTeamKillCredit(keys)
 	local victimPlayer = PlayerResource:GetPlayer(keys.victim_userid)
 	local numKills = keys.herokills
 	local killerTeamNumber = keys.teamnumber
+	if numKills >= 10 and not CHEATY_STUFF then
+		GameRules:SetGameWinner(killerTeamNumber)
+	end
 end
 
 -- An entity died
