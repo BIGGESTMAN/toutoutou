@@ -1,0 +1,81 @@
+Reimu - Radiant Strength (Omniknight)
+
+Base Stats
+
+STR : 23 (+2.5)
+AGI : 18 (+1.9)
+INT : 16 (+1.7)
+Damage : 26-32
+Armor : 2
+Attacks / Second : 0.58
+Movement Speed : 290
+Turn Rate : 0.5
+Sight Range : 1800/800
+Attack Range : Melee
+Missile Speed : Instant
+Attack Duration : 0.35/0.65
+Base Attack Time : 1.7
+
+Lv. 25
+
+STR : 103
+AGI : 83
+INT : 76
+HP : 2107
+Mana : 988
+Damage : 129-135
+Armor : 13.62
+
+[Q] Fantasy Seal (fantasy_seal) : Launches 5 spirit bullets at an enemy that deal pure damage that decreases with distance traveled. If there are enemy heroes that are silenced or stunned in range, Reimu will fire 3 additional bullets at each of them.
+Spell Immunity - Pierces Spell Immunity. Linken’s Sphere blocks the first bullet.
+DevNotes - Can’t be disjointed. Reimu can act freely while the bullets are being fired, and it always takes 1 second to fire them all. If there are additional bullets, they are fired in a random order at all targets.
+
+Cast Point : 0.4
+Max Physical Damage per Bullet (max_damage) : 24/36/48/60
+Min Physical Damage per Bullet (min_damage) : 12/18/24/30
+Max Damage Travel Distance (max_damage_distance) : 350
+Min Damage Travel Distance (min_damage_distance) : 800
+Bullet Travel Speed (projectile_speed) : 850/1000/1150/1300
+Range : 800
+Mana : 70/80/90/100
+Cooldown : 8
+
+[W] Duplex Barrier (duplex_barrier) : Summons two barriers around Reimu that follow her. The outer barrier deals magical damage to all enemies the first time they pass through it, and slows the movement of enemies inside. The inner barrier deals a greater amount of magical damage and slows attack speed. Enemies that pass through both are stunned.
+
+Cast Point : 0.4
+Outer Magical Damage (outer_barrier_damage) : 40/60/80/100
+Inner Magical Damage (inner_barrier_damage) : 80/120/160/200
+Move Speed Slow (movespeed_slow) : 25%
+Attack Speed Slow (attackspeed_slow) : 60
+Slow Linger Duration (linger_duration) : 0.5
+Stun Duration (stun_duration) : 2
+Barrier Duration (barrier_duration) : 5/6/7/8
+Inner Radius (inner_barrier_radius) : 275
+Outer Radius (outer_barrier_radius) : 550
+Mana : 90
+Cooldown : 25/22/19/16
+
+[E] Yin Yang Scattering (yin_yang_orbs) : Toggle. Reimu’s attacks become ranged, launching an orb that deals reduced damage but bounces between enemies, the damage increasing by 25% on each bounce. Enemies with slowed movement are silenced as well.
+Spell Immunity - The orbs bounce on and off spell immune units, but don’t silence.
+DevNotes - The orbs have a travel speed of 1000. Works like Moon Glaive, doesn’t apply attack modifiers on bounces etc.
+
+Initial Damage (base_damage) : 50/55/60/65%
+Silence Duration (silence_duration) : 0.8
+Bounces (bounces) : 2/3/4/5
+Range (bonus_range) : 320/360/400/440
+Bounce Search Radius (bounce_range) : 500
+Mana : 15
+
+[R] Fantasy Nature (fantasy_nature) : Reimu becomes immune to physical damage. At the end of the duration, she deals physical damage over 1 second around her, based on a percentage of all damage she dealt, received and would have received during that time.
+Scepter - During Fantasy Nature, all damage from Reimu gains a chance to mini-stun.
+DevNotes - The damage is split into five intervals, per 0.2 seconds. The scepter mini-stun applies to all items and Yin Yang Orb bounces, as long as they successfully dealt damage.
+
+Cast Point : 0.4
+Base Physical Damage (base_damage) : 100
+Damage Dealt/Received/Avoided As Physical Damage (bonus_damage_percent) : 60/80/100%
+Scepter Stun Chance : 50%
+Scepter Stun Duration : 0.1
+Duration (duration) : 6/8/10
+Radius (radius) : 450
+Mana : 150/200/250
+Cooldown : 120/105/90
