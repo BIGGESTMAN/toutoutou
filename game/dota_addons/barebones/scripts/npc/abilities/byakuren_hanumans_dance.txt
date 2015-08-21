@@ -13,6 +13,7 @@
 		"precache"
 		{
 			"particle"					"particles/byakuren_sword.vpcf"
+			"particle"					"particles/byakuren/hanumans_dash_instant.vpcf"
 		}
 
 		"AbilitySpecial"

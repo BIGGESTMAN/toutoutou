@@ -47,6 +47,17 @@ function indrasThunderCast(keys)
 			return 0.03
 		else
 			dummy_projectile:SetAbsOrigin(target_point)
+
+			-- Start vortex particle -- wait a frame so dummy can actually finish moving
+			local vortex_particle = nil
+			Timers:CreateTimer(0.03, function()
+				-- local particles = {"particles/byakuren/indras_thunder_vortex.vpcf", "particles/byakuren/indras_thunder_vortex_alt.vpcf", "particles/byakuren/indras_thunder_vortex_alt2.vpcf"}
+				-- local vortex_particle_name = particles[RandomInt(1, #particles)]
+				local vortex_particle_name = "particles/byakuren/indras_thunder_vortex_alt2.vpcf"
+				vortex_particle = ParticleManager:CreateParticle(vortex_particle_name, PATTACH_ABSORIGIN, dummy_projectile)
+				ParticleManager:SetParticleControl(vortex_particle, 1, Vector(radius,0,0))
+			end)
+
 			-- Trigger delayed bead activation
 			Timers:CreateTimer(delay,function()
 				local team = caster:GetTeamNumber()
@@ -74,6 +85,11 @@ function indrasThunderCast(keys)
 				EmitSoundOn("Hero_Zuus.LightningBolt", dummy_projectile)
 				for i=3,15 do
 					ParticleManager:SetParticleControl(lightning_particle, i, Vector(radius * .8, 0, 0))
+				end
+
+				-- End vortex particle
+				if delay > 0.03 then
+					ParticleManager:DestroyParticle(vortex_particle, false)
 				end
 
 				-- Spin/vacuum hit units

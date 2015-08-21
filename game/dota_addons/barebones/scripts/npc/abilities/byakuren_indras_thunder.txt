@@ -19,6 +19,9 @@
 			"particle"					"particles/byakuren/bead_possibility_3.vpcf"
 			"particle"					"particles/byakuren/indras_thunder_lightning.vpcf"
 			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_zuus.vsndevts"
+			"particle"					"particles/byakuren/indras_thunder_vortex.vpcf"
+			"particle"					"particles/byakuren/indras_thunder_vortex_alt.vpcf"
+			"particle"					"particles/byakuren/indras_thunder_vortex_alt2.vpcf"
 		}
 
 		// Casting
