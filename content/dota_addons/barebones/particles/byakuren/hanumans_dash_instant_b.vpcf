@@ -55,6 +55,10 @@
 			m_nFieldOutput = 4
 			m_bDisableOperator = true
 		},
+		{
+			_class = "C_OP_StopAfterCPDuration"
+			m_flDuration = 0.250000
+		},
 	]
 	m_Initializers =
 	[

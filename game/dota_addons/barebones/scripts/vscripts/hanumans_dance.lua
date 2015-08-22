@@ -21,12 +21,12 @@ function hanumans_dance:OnSpellStart()
 		caster:AddNewModifier(caster, ability, "modifier_dancing", {target = target:GetEntityIndex(), prior_slashes = prior_slashes})
 
 		-- Spend a charge
-		local charge_modifier = caster:FindModifierByName("modifier_vajrapanis_charges")
-		if charge_modifier:GetStackCount() > 1 then
-			charge_modifier:DecrementStackCount()
-		else
-			charge_modifier:Destroy()
-		end
+		-- local charge_modifier = caster:FindModifierByName("modifier_vajrapanis_charges")
+		-- if charge_modifier:GetStackCount() > 1 then
+		-- 	charge_modifier:DecrementStackCount()
+		-- else
+		-- 	charge_modifier:Destroy()
+		-- end
 
 		caster:AddNewModifier(caster, ability, "modifier_dance_recastable", {duration = ability:GetLevelSpecialValueFor("recast_time", ability_level)})
 		local recast_modifier = caster:FindModifierByName("modifier_dance_recastable")

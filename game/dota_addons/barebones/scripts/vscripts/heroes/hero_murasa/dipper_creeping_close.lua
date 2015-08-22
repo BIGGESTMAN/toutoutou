@@ -21,5 +21,5 @@ function blink(keys)
 	-- 	end
 	-- end
 
-	EmitSoundOn("Touhou.Dipper_Cast", caster)
+	caster:EmitSound("Touhou.Dipper_Cast")
 end

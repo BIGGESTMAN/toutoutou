@@ -31,6 +31,7 @@ for fname in filenames:
 
 			special = any((special_value in line) for special_value in special_values)
 
+			print(line)
 			effect, value = line.split(') :')
 			name, key = effect.split(" (")
 			# print(name)
@@ -40,6 +41,7 @@ for fname in filenames:
 				ability['effects'].append((name.upper() + ":", key.capitalize()))
 			else:
 				ability['effects'].append((value[1:], key.capitalize()))
+	ability = None
 
 with open('resource/tooltips/generated_tooltips.txt', mode='w', encoding='utf-8') as outfile:
 	outfile.write("\n")

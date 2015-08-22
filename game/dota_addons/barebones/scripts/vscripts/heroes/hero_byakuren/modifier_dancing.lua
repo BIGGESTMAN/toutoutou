@@ -50,7 +50,7 @@ function modifier_dancing:OnIntervalThink()
 			caster:SetAbsOrigin(target:GetAbsOrigin() + direction * self.minimum_range)
 			slash(caster, ability, self)
 			target:RemoveModifierByName("modifier_light_fragment")
-			
+
 			ParticleManager:SetParticleControl(dash_particle, 1, caster:GetAbsOrigin())
 		else
 			local distance = (target_point - caster:GetAbsOrigin()):Length2D()
@@ -103,10 +103,12 @@ function slash(caster, ability, modifier)
 	for k,unit in pairs(targets) do
 		caster:PerformAttack(unit, true, true, false, true)
 		ApplyDamage({victim = unit, attacker = caster, damage = bonus_damage, damage_type = damage_type})
+		local hit_particle = ParticleManager:CreateParticle("particles/byakuren/hanumans_dance_slash_hit.vpcf", PATTACH_ABSORIGIN, caster)
+		ParticleManager:SetParticleControl(hit_particle, 0, unit:GetAbsOrigin())
 	end
 
 	caster:RemoveModifierByName("modifier_dancing")
 
-	local particle = ParticleManager:CreateParticle("particles/byakuren_sword.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
-	ParticleManager:SetParticleControl(particle, 2, origin)
+	-- local particle = ParticleManager:CreateParticle("particles/byakuren/hanumans_dance_slash_b.vpcf", PATTACH_ABSORIGIN, caster)
+	-- ParticleManager:SetParticleControl(particle, 2, origin)
 end
