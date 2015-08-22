@@ -59,6 +59,11 @@
 				"var_type"				"FIELD_INTEGER"
 				"mana_cost"				"15"
 			}
+			"09"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_range_tooltip"			"320 360 400 440"
+			}
 		}
 
 		"OnToggleOn"
