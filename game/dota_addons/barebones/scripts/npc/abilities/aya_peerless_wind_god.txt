@@ -15,6 +15,8 @@
 		"AbilityCastPoint"				"0"
 		"AbilityCooldown"				"0"
 		"AbilityManaCost"				"0"
+
+		"AbilityProcsMagicStick" 		"1"
 		
 		"OnSpellStart"
 		{

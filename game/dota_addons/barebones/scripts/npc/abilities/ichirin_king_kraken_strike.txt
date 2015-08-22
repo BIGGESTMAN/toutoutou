@@ -20,6 +20,8 @@
 		"AbilityCastRange"				"1200"
 		"AOERadius"						"225"
 
+		"AbilityProcsMagicStick" 		"1"
+
 		"AbilitySpecial"
 		{
 			"01"

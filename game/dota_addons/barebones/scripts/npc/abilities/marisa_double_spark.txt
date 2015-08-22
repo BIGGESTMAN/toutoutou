@@ -19,6 +19,8 @@
 		"AbilityManaCost"				"300"
 		"AbilityChannelTime" 			"2.0 2.0 2.0 2.0"
 
+		"AbilityProcsMagicStick" 		"1"
+
 		"precache"
 		{
 			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_phoenix.vsndevts"

@@ -24,6 +24,8 @@
 			"particle"					"particles/moonlight_ray.vpcf"
 		}
 
+		"AbilityProcsMagicStick" 		"1"
+
 		// Special
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilitySpecial"

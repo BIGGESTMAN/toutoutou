@@ -24,6 +24,8 @@
 			"particle"					"particles/medicine/gassing_garden.vpcf"
 		}
 
+		"AbilityProcsMagicStick" 		"1"
+
 		// Special
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilitySpecial"

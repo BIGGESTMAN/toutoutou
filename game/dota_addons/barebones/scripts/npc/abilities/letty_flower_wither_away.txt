@@ -20,6 +20,8 @@
 		"AbilityManaCost"				"90 105 120 135"
 		"AbilityCastRange"				"600"
 
+		"AbilityProcsMagicStick" 		"1"
+
 		"AbilitySpecial"
 		{
 			"01"

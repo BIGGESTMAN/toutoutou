@@ -32,6 +32,8 @@
 		"AbilityCooldown"				"0"
 		"AbilityManaCost"				"60 65 70 75"
 
+		"AbilityProcsMagicStick" 		"1"
+
 		// Special
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilitySpecial"

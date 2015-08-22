@@ -25,6 +25,8 @@
 		"AbilityManaCost"				"100 120 140 160"
 		"AbilityChannelTime" 			"2.0 2.0 2.0 2.0"
 
+		"AbilityProcsMagicStick" 		"1"
+
 		// Special
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilitySpecial"

@@ -16,6 +16,8 @@
 		"AbilityCooldown"				"0"
 		"AbilityManaCost"				"0"
 
+		"AbilityProcsMagicStick" 		"1"
+
 		"precache"
 		{
 			"particle"					"particles/remilia/spear_throw.vpcf"

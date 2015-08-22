@@ -26,6 +26,8 @@
 			"particle"					"particles/alice/trip_wire_dolls_stored_indicator.vpcf"
 		}
 
+		"AbilityProcsMagicStick" 		"1"
+
 		// Special
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilitySpecial"

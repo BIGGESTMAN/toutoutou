@@ -16,12 +16,13 @@
 		{
 			"particle"					"particles/byakuren/durgas_soul_shockwave.vpcf"
 			"particle"					"particles/byakuren/durgas_soul_charging.vpcf"
-			"particle"					"particles/byakuren/durgas_soul_pop.vpcf"
 		}
 
 		"AbilityCastPoint"				"0"
 		"AbilityCooldown"				"12 10 8 6"
 		"AbilityManaCost"				"0"
+
+		"AbilityProcsMagicStick" 		"1"
 
 		"AbilitySpecial"
 		{

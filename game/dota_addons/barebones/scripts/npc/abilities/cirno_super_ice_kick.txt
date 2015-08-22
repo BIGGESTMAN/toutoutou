@@ -21,6 +21,8 @@
 		"AOERadius"						"450"
 		"AbilityChannelTime" 			"100"
 
+		"AbilityProcsMagicStick" 		"1"
+
 		"AbilitySpecial"
 		{
 			"01"

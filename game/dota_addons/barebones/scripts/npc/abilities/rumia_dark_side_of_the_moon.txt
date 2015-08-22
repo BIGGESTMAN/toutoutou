@@ -25,6 +25,8 @@
 			"particle"					"particles/units/heroes/hero_wisp/wisp_guardian_explosion.vpcf"
 		}
 
+		"AbilityProcsMagicStick" 		"1"
+
 		// Special
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilitySpecial"
