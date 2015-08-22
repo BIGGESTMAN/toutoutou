@@ -13,7 +13,7 @@
 		
 		"precache"
 		{
-			"particle"					"particles/units/heroes/hero_pudge/pudge_rot.vpcf"
+			"particle"					"particles/medicine/poison_breath.vpcf"
 		}
 		
 		"AbilityCastPoint"				"0.3"
@@ -95,15 +95,9 @@
 				{
 					"AttachEffect"
 					{
-						"EffectName"		"particles/units/heroes/hero_pudge/pudge_rot.vpcf"
+						"EffectName"		"particles/medicine/poison_breath.vpcf"
 						"EffectAttachType"	"follow_origin"
 						"Target"			"TARGET"
-
-						"ControlPoints"
-						{
-							"00"	"0 0 0"
-							"01"	"%radius 0 0"
-						}
 					}
 
 					"RunScript"
