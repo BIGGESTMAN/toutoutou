@@ -39,6 +39,10 @@ function startSpark(caster, ability, modifier, debuff_modifier, direction, spark
 				-- Damage
 				ApplyDamage({ victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
 				ability:ApplyDataDrivenModifier(caster, unit, debuff_modifier, {})
+
+				-- Provide vision of Marisa to targets hit
+				local vision_radius = 250
+				AddFOWViewer(caster:GetOpposingTeamNumber(), caster:GetAbsOrigin(), vision_radius, damage_interval, false)
 				
 				-- if caster:HasScepter() then
 				-- 	spark_ability:ApplyDataDrivenModifier(caster, unit, "modifier_master_spark_vulnerability", {})

@@ -60,7 +60,8 @@ function chargeTimeFinished(keys)
 	local caster_forward = ability.target_direction
 
 	local damage_type = ability:GetAbilityDamageType()
-	local damage = ability:GetLevelSpecialValueFor("damage", ability_level) * (1 + (ability.damage_absorbed * ability:GetLevelSpecialValueFor("damage_increase", ability_level) / 100))
+	local bonus_damage_percent = ability.damage_absorbed * ability:GetLevelSpecialValueFor("damage_increase", ability_level)
+	local damage = ability:GetLevelSpecialValueFor("damage", ability_level) * (1 + bonus_damage_percent / 100)
 
 	local cone_units = GetEnemiesInCone(caster, start_radius, end_radius, end_distance, caster_forward, 3)
 	for _,unit in pairs(cone_units) do
@@ -70,16 +71,11 @@ function chargeTimeFinished(keys)
 	-- Create particles
 	caster:SetForwardVector(ability.target_direction)
 
-	Timers:CreateTimer(0.12, function() -- A bit of a delay to make sure the shockwave particle actually goes in the right direction
+	Timers:CreateTimer(0.15, function() -- A bit of a delay to try to make sure the shockwave particle actually goes in the right direction
 		local particle_name = "particles/byakuren/durgas_soul_shockwave.vpcf"
 		local particle = ParticleManager:CreateParticle(particle_name, PATTACH_ABSORIGIN, caster)
 		ParticleManager:SetParticleControlEnt(particle, 4, caster, PATTACH_ABSORIGIN, "attach_origin", caster:GetAbsOrigin(), true)
 	end)
-
-	local particle_name_pop = "particles/byakuren/durgas_soul_pop.vpcf"
-	local particle_pop = ParticleManager:CreateParticle(particle_name, PATTACH_ABSORIGIN, caster)
-	ParticleManager:SetParticleControlEnt(particle_pop, 1, caster, PATTACH_ABSORIGIN, "attach_origin", caster:GetAbsOrigin(), true)
-	ParticleManager:SetParticleControlEnt(particle_pop, 3, caster, PATTACH_ABSORIGIN, "attach_origin", caster:GetAbsOrigin(), true)
 
 	-- Disable retarget ability
 	local main_ability_name	= ability:GetAbilityName()

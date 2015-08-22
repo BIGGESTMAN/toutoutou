@@ -110,5 +110,6 @@ function slash(caster, ability, modifier)
 	caster:RemoveModifierByName("modifier_dancing")
 
 	-- local particle = ParticleManager:CreateParticle("particles/byakuren/hanumans_dance_slash_b.vpcf", PATTACH_ABSORIGIN, caster)
-	-- ParticleManager:SetParticleControl(particle, 2, origin)
+	local particle = ParticleManager:CreateParticle("particles/byakuren/hanumans_dance_slash_alt.vpcf", PATTACH_ABSORIGIN, caster)
+	ParticleManager:SetParticleControl(particle, 2, origin)
 end

@@ -19,7 +19,6 @@
 		"precache"
 		{
 			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_ember_spirit.vsndevts"
-			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_sniper.vsndevts"
 			"particle"					"particles/units/heroes/hero_ember_spirit/ember_spirit_sleightoffist_tgt.vpcf"
 			"particle"					"particles/aya/illusionary_dominance_dash.vpcf"
 		}
@@ -90,12 +89,6 @@
 				"Target"				"POINT"
 				"dashing_modifier"		"modifier_illusionary_dominance_dashing"
 				"accelerating_modifier"	"modifier_illusionary_dominance_accelerating"
-			}
-
-			"FireSound"
-			{
-				"EffectName"	"barebones.Hohohaha"
-				"Target" 		"CASTER"
 			}
 
 			"FireSound"

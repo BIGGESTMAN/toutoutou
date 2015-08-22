@@ -19,6 +19,7 @@ for fname in filenames:
 			if line[0] == '[':
 				ability = {}
 				truncated_line = line[len('[x] '):]
+				# print(truncated_line)
 				ability['name'], rest_of_line = truncated_line.split(' (')
 				ability['internal_name'], ability['desc'] = rest_of_line.split(") : ")
 
@@ -31,7 +32,7 @@ for fname in filenames:
 
 			special = any((special_value in line) for special_value in special_values)
 
-			print(line)
+			# print(line)
 			effect, value = line.split(') :')
 			name, key = effect.split(" (")
 			# print(name)

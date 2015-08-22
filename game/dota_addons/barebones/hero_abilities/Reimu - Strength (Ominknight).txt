@@ -71,7 +71,7 @@ Note0 (note0) : The orbs bounce on and off spell immune units, but don't silence
 Lore (lore) : With her trusty purification rod and a supply of blessed orbs, there is no incident that Hakurei's Shrine Maiden cannot solve.
 Mana : 15
 
-[R] Fantasy Nature (fantasy_nature) : Reimu becomes immune to physical damage. At the end of the duration, she deals physical damage over 1 second around her, based on a percentage of all damage she dealt, received and would have received during that time.
+[R] Fantasy Nature (fantasy_nature_datadriven) : Reimu becomes immune to physical damage. At the end of the duration, she deals physical damage over 1 second around her, based on a percentage of all damage she dealt, received and would have received during that time.
 Scepter - During Fantasy Nature, all damage from Reimu gains a chance to mini-stun.
 DevNotes - The damage is split into five intervals, per 0.2 seconds. The scepter mini-stun applies to all items and Yin Yang Orb bounces, as long as they successfully dealt damage.
 

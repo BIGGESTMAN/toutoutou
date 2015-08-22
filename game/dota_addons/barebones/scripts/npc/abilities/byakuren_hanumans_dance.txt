@@ -15,6 +15,7 @@
 			"particle"					"particles/byakuren_sword.vpcf"
 			"particle"					"particles/byakuren/hanumans_dash_instant.vpcf"
 			"particle"					"particles/byakuren/hanumans_dance_slash_b.vpcf"
+			"particle"					"particles/byakuren/hanumans_dance_slash_alt.vpcf"
 			"particle"					"particles/byakuren/hanumans_dance_slash_hit.vpcf"
 		}
 

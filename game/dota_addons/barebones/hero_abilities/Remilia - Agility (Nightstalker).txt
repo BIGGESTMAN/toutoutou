@@ -71,7 +71,7 @@ Spell Immunity - Pierces Spell Immunity.
 Stun Duration (stun_duration) : 1.6/1.8/2
 Flight Duration (duration) : 12
 Swoop Speed : 3000
-Swoop Range (swoop_bonus_tooltip) : 350/425/500
+Swoop Range (swoop_range_tooltip) : 350/425/500
 Lore (lore) : Dropping all pretense of elegance and courtesy, Remilia begins the hunt.
 Mana : 150/220/290
 Cooldown : 80/70/60 {Scepter : 6}

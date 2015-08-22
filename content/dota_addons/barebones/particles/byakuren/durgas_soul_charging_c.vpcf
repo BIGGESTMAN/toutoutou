@@ -80,6 +80,14 @@
 		{
 			_class = "C_OP_RadiusDecay"
 		},
+		{
+			_class = "C_OP_RemapScalar"
+			m_nFieldInput = 8
+			m_nFieldOutput = 7
+			m_flInputMax = 2.150000
+			m_flOutputMin = 1.000000
+			m_flOutputMax = 0.000000
+		},
 	]
 	m_Initializers =
 	[

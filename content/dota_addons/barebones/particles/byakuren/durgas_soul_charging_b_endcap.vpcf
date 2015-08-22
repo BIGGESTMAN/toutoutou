@@ -31,7 +31,6 @@
 		},
 		{
 			_class = "C_OP_Decay"
-			m_nOpEndCapState = 1
 		},
 		{
 			_class = "C_OP_PositionLock"
@@ -53,8 +52,7 @@
 		},
 		{
 			_class = "C_OP_InterpolateRadius"
-			m_flEndScale = 0.000000
-			m_bDisableOperator = true
+			m_flStartScale = 0.000000
 		},
 		{
 			_class = "C_OP_InterpolateRadius"
@@ -67,15 +65,14 @@
 			_class = "C_OP_FadeOut"
 			m_flFadeOutTimeMin = 0.100000
 			m_flFadeOutTimeMax = 0.100000
-			m_bDisableOperator = true
 		},
 	]
 	m_Initializers =
 	[
 		{
 			_class = "C_INIT_RandomLifeTime"
-			m_fLifetimeMax = 2.150000
-			m_fLifetimeMin = 2.150000
+			m_fLifetimeMax = 0.200000
+			m_fLifetimeMin = 0.200000
 		},
 		{
 			_class = "C_INIT_CreateWithinSphere"
@@ -137,14 +134,7 @@
 		{
 			_class = "C_OP_InstantaneousEmitter"
 			m_nParticlesToEmit = 10
-		},
-	]
-	m_Children =
-	[
-		{
-			m_ChildRef = resource:"particles/byakuren/durgas_soul_charging_b_endcap.vpcf"
-			m_bEndCap = true
-			m_bDisableChild = true
+			m_flStartTime = 0.150000
 		},
 	]
 }
