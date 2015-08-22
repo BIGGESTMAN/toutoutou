@@ -46,6 +46,11 @@
 				"var_type"				"FIELD_FLOAT"
 				"update_interval"		"0.03"
 			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"swoop_range_tooltip"		"350 425 500"
+			}
 		}
 
 		"OnSpellStart"
