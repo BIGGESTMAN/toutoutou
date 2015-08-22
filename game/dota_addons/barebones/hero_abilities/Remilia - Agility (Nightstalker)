@@ -68,10 +68,10 @@ Lore (lore) : Fate crumples both sword and shield under Remilia's decree.
 Scepter - Reduces the cooldowns of Gungnir, Curse of Vlad Tepes, and Queen of Midnight to 6 seconds.
 Spell Immunity - Pierces Spell Immunity.
  
-Stun Duration : 1.6/1.8/2
-Flight Duration : 12
+Stun Duration (stun_duration) : 1.6/1.8/2
+Flight Duration (duration) : 12
 Swoop Speed : 3000
-Swoop Range : 350/425/500
+Swoop Range (swoop_bonus_range) : 350/425/500
 Lore (lore) : Dropping all pretense of elegance and courtesy, Remilia begins the hunt.
 Mana : 150/220/290
 Cooldown : 80/70/60 {Scepter : 6}
