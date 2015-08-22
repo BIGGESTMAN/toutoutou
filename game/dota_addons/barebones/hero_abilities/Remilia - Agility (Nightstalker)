@@ -45,7 +45,7 @@ Lore (lore) : The spear of blood is forged with murderous intent and never misse
 Mana : 90
 Cooldown : 10 {Scepter : 6}
  
-[W] Curse of Vlad Tepes : Remilia gives in to her thirst, healing herself for a portion of all damage she deals.
+[W] Curse of Vlad Tepes (vlad_tepes) : Remilia gives in to her thirst, healing herself for a portion of all damage she deals.
 
 Cast Point : 0.2
 Lifesteal (lifesteal_percent) : 55/70/85/100%
@@ -54,7 +54,7 @@ Lore (lore) : The Scarlet Devil feeds like an animal, bathing in the blood of he
 Mana : 75
 Cooldown : 19/16/13/10 {Scepter : 6}
  
-[E] Scarlet Destiny : Toggle. While active, Remilia consumes a charge with each attack, causing it to deal critical damage while never missing. She also consumes a charge whenever she would take physical or magical damage over a threshold based on her current health, evading it instead.
+[E] Scarlet Destiny (scarlet_destiny) : Toggle. While active, Remilia consumes a charge with each attack, causing it to deal critical damage while never missing. She also consumes a charge whenever she would take physical or magical damage over a threshold based on her current health, evading it instead.
 DevNotes - The evade works like Backtrack. The first time this ability is skilled, 1 charge is given.
  
 Critical Damage (crit_damage) : 150/180/210/240%
@@ -64,7 +64,7 @@ Recharge Time (recharge_time) : 8
 Note0 (note0) : Most debuffs and disables from evaded attacks and abilities are still applied.
 Lore (lore) : Fate crumples both sword and shield under Remilia's decree. 
  
-[R] Queen of Midnight : Remilia takes flight, gaining unobstructed movement and flying vision. Her next attack will cause her to swoop down at the target, stunning them as she lands.
+[R] Queen of Midnight (queen_of_midnight) : Remilia takes flight, gaining unobstructed movement and flying vision. Her next attack will cause her to swoop down at the target, stunning them as she lands.
 Scepter - Reduces the cooldowns of Gungnir, Curse of Vlad Tepes, and Queen of Midnight to 6 seconds.
 Spell Immunity - Pierces Spell Immunity.
  
