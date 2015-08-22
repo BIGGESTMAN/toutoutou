@@ -58,14 +58,14 @@ Lore (lore) : Turning space inside-out, Reimu traps her foes inside a world with
 Mana : 90
 Cooldown : 25/22/19/16
 
-[E] Yin Yang Scattering (yin_yang_orbs) : Toggle. Reimu’s attacks become ranged, launching an orb that deals reduced damage but bounces between enemies, the damage increasing by 25% on each bounce. Enemies with slowed movement are silenced as well.
+[E] Yin Yang Scattering (yin_yang_orbs) : Toggle. Reimu’s attacks become ranged, launching an orb that deals reduced damage but bounces between enemies, the damage increasing by 25\% on each bounce. Enemies with slowed movement are silenced as well.
 Spell Immunity - The orbs bounce on and off spell immune units, but don’t silence.
 DevNotes - The orbs have a travel speed of 1000. Works like Moon Glaive, doesn’t apply attack modifiers on bounces etc.
 
 Initial Damage (base_damage) : 50/55/60/65%
 Silence Duration (silence_duration) : 0.8
 Bounces (bounces) : 2/3/4/5
-Range (bonus_range) : 320/360/400/440
+Range (bonus_range_tooltip) : 320/360/400/440
 Bounce Search Radius (bounce_range) : 500
 Note0 (note0) : The orbs bounce on and off spell immune units, but don't silence.
 Lore (lore) : With her trusty purification rod and a supply of blessed orbs, there is no incident that Hakurei's Shrine Maiden cannot solve.
