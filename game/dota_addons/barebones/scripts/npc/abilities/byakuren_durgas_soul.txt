@@ -14,7 +14,7 @@
 
 		"precache"
 		{
-			"particle"					"particles/byakuren/durgas_soul.vpcf"
+			"particle"					"particles/byakuren/durgas_soul_shockwave.vpcf"
 			"particle"					"particles/byakuren/durgas_soul_charging.vpcf"
 			"particle"					"particles/byakuren/durgas_soul_pop.vpcf"
 		}

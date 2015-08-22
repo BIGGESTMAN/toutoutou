@@ -71,7 +71,7 @@ function chargeTimeFinished(keys)
 	caster:SetForwardVector(ability.target_direction)
 
 	Timers:CreateTimer(0.12, function() -- A bit of a delay to make sure the shockwave particle actually goes in the right direction
-		local particle_name = "particles/byakuren/durgas_soul_a.vpcf"
+		local particle_name = "particles/byakuren/durgas_soul_shockwave.vpcf"
 		local particle = ParticleManager:CreateParticle(particle_name, PATTACH_ABSORIGIN, caster)
 		ParticleManager:SetParticleControlEnt(particle, 4, caster, PATTACH_ABSORIGIN, "attach_origin", caster:GetAbsOrigin(), true)
 	end)

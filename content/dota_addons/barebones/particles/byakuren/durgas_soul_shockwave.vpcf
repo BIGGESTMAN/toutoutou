@@ -159,7 +159,7 @@
 	m_Children =
 	[
 		{
-			m_ChildRef = resource:"particles/reimu/fantasy_nature_pulse_alt_a.vpcf"
+			m_ChildRef = resource:"particles/byakuren/durgas_soul_shockwave_trail.vpcf"
 		},
 	]
 }

@@ -135,6 +135,7 @@
 		},
 		{
 			m_ChildRef = resource:"particles/reimu/fantasy_nature_pulse_alt_b.vpcf"
+			m_bDisableChild = true
 		},
 	]
 }
