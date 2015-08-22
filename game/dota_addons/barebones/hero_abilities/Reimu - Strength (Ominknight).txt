@@ -37,21 +37,24 @@ Max Damage Travel Distance (max_damage_distance) : 350
 Min Damage Travel Distance (min_damage_distance) : 800
 Bullet Travel Speed (projectile_speed) : 850/1000/1150/1300
 Range : 800
+Note0 (note0) : Can't be disjointed.
+Note1 (note1) : It always takes 1 second to fire all the bullets.
+Lore (lore) : One of Reimu's signature moves, bullets of light defy the laws of nature to capture and exterminate Youkai.
 Mana : 70/80/90/100
 Cooldown : 8
 
-[W] Duplex Barrier (duplex_barrier) : Summons two barriers around Reimu that follow her. The outer barrier deals magical damage to all enemies the first time they pass through it, and slows the movement of enemies inside. The inner barrier deals a greater amount of magical damage and slows attack speed. Enemies that pass through both are stunned.
+[W] Duplex Barrier (duplex_barrier) : Summons two barriers around Reimu that follow her. The outer barrier deals magical damage to all enemies the first time they pass through it, and slows the movement of enemies inside. The inner barrier deals a greater amount of magical damage and slows attack speed. Enemies that pass through both are stunned for 2 seconds.
 
 Cast Point : 0.4
 Outer Magical Damage (outer_barrier_damage) : 40/60/80/100
 Inner Magical Damage (inner_barrier_damage) : 80/120/160/200
 Move Speed Slow (movespeed_slow) : 25%
 Attack Speed Slow (attackspeed_slow) : 60
-Slow Linger Duration (linger_duration) : 0.5
-Stun Duration (stun_duration) : 2
+Slow Linger Duration : 0.5
 Barrier Duration (barrier_duration) : 5/6/7/8
 Inner Radius (inner_barrier_radius) : 275
 Outer Radius (outer_barrier_radius) : 550
+Lore (lore) : Turning space inside-out, Reimu traps her foes inside a world with no boundary.
 Mana : 90
 Cooldown : 25/22/19/16
 
@@ -64,6 +67,8 @@ Silence Duration (silence_duration) : 0.8
 Bounces (bounces) : 2/3/4/5
 Range (bonus_range) : 320/360/400/440
 Bounce Search Radius (bounce_range) : 500
+Note0 (note0) : The orbs bounce on and off spell immune units, but don't silence.
+Lore (lore) : With her trusty purification rod and a supply of blessed orbs, there is no incident that Hakurei's Shrine Maiden cannot solve.
 Mana : 15
 
 [R] Fantasy Nature (fantasy_nature) : Reimu becomes immune to physical damage. At the end of the duration, she deals physical damage over 1 second around her, based on a percentage of all damage she dealt, received and would have received during that time.
@@ -77,5 +82,6 @@ Scepter Stun Chance : 50%
 Scepter Stun Duration : 0.1
 Duration (duration) : 6/8/10
 Radius (radius) : 450
+Lore (lore) : The ultimate expression of her power to float, the Shrine Maiden becomes untouchable by reality.
 Mana : 150/200/250
 Cooldown : 120/105/90
