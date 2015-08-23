@@ -1,0 +1,62 @@
+	"persona_user"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"persona_user"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"minimum_damage"		"10"
+				"_value"				"DOTA_Tooltip_Ability_wind_gods_fan_Minimum_Damage"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"maximum_damage"		"60 130 200 270"
+				"_value"				"DOTA_Tooltip_Ability_wind_gods_fan_Maximum_Damage"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"max_damage_distance"	"1500"
+				"_value"				"DOTA_Tooltip_Ability_wind_gods_fan_Max_Damage_Distance"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movespeed"				"8 12 16 20"
+				"_value"				"DOTA_Tooltip_Ability_wind_gods_fan_Movespeed"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"cooldown_check_interval" "0.03"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_persona_user"
+			{
+				"Passive"	"1"
+				"IsHidden"	"0"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_TOOLTIP" "woooo"
+				}
+
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"persona_user.lua"
+						"Function"		"CreateLuaModifier"
+					}
+				}
+			}
+		}
+	}
