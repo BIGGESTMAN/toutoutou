@@ -36,7 +36,7 @@ function modifier_neurotoxin:OnIntervalThink()
 				for k,unit in ipairs(targets) do
 					if unit ~= target and not unit:HasModifier("modifier_neurotoxin") and not unit:HasModifier("modifier_neurotoxin_sleep") then
 						unit:AddNewModifier(caster, self:GetAbility(), "modifier_neurotoxin", {duration = self:GetDuration()})
-						EmitSoundOn("Hero_Bane.BrainSap", unit)
+						-- EmitSoundOn("Hero_Bane.BrainSap", unit)
 
 						local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_undying/undying_decay_strength_xfer.vpcf", PATTACH_POINT_FOLLOW, target)
 						ParticleManager:SetParticleControl(particle,2,target:GetAbsOrigin())

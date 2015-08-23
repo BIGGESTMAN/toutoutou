@@ -65,7 +65,7 @@ function deepVortexCast(keys)
 		end
 	end
 
-	EmitSoundOn("Touhou.Vortex_Cast", caster)
+	-- EmitSoundOn("Touhou.Vortex_Cast", caster)
 end
 
 function maelstromTick(keys)

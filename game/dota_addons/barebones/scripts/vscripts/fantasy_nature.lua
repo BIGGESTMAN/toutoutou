@@ -6,7 +6,7 @@ function fantasy_nature:OnSpellStart()
 	local ability = self
 	local ability_level = self:GetLevel() - 1
 
-	EmitSoundOn("Hero_Omniknight.GuardianAngel.Cast", caster)
+	-- EmitSoundOn("Hero_Omniknight.GuardianAngel.Cast", caster)
 
 	local duration = self:GetLevelSpecialValueFor("duration", ability_level)
 	local damage_interval = self:GetLevelSpecialValueFor("damage_interval", ability_level)

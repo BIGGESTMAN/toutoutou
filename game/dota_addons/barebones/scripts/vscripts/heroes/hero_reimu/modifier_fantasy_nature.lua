@@ -108,6 +108,6 @@ function modifier_fantasy_nature:OnDestroy()
 			ApplyDamage(damage_table)
 		end
 
-		EmitSoundOn("Hero_Phoenix.SuperNova.Explode", caster)
+		-- EmitSoundOn("Hero_Phoenix.SuperNova.Explode", caster)
 	end
 end

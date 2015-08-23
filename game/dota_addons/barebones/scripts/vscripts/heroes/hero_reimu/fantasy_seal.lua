@@ -62,7 +62,7 @@ function fantasySealCast( keys )
 		    }
 		    ProjectileManager:CreateTrackingProjectile(projectile_attributes)
 
-		    EmitSoundOn("Hero_SkywrathMage.ConcussiveShot.Cast", caster)
+		    -- EmitSoundOn("Hero_SkywrathMage.ConcussiveShot.Cast", caster)
 
 
 			valid_targets[next_target] = valid_targets[next_target] - 1
@@ -106,5 +106,5 @@ function fantasySealHit( keys )
 	local damage_type = ability:GetAbilityDamageType()
 	ApplyDamage({victim = target, attacker = caster, damage = seal_damage, damage_type = damage_type})
 
-	EmitSoundOn("Hero_SkywrathMage.ConcussiveShot.Target", target)
+	-- EmitSoundOn("Hero_SkywrathMage.ConcussiveShot.Target", target)
 end

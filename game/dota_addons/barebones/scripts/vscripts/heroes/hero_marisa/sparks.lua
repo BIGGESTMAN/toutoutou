@@ -25,8 +25,8 @@ function startSpark(caster, ability, modifier, debuff_modifier, direction, spark
 	local particle = ParticleManager:CreateParticle(particle, PATTACH_ABSORIGIN_FOLLOW, caster)
 	ParticleManager:SetParticleControl(particle, 1, caster:GetAbsOrigin() + particle_offset)
 
-	StartSoundEvent("Touhou.Spark", caster)
-
+	-- EmitSoundOn("Touhou.Spark", caster)
+	
 	Timers:CreateTimer(0, function()
 		if not caster:IsNull() and caster:HasModifier(modifier) then
 			-- Adjust direction if Marisa is flying around

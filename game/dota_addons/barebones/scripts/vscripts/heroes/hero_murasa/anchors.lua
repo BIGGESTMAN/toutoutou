@@ -139,7 +139,7 @@ function moveAnchor(caster, ability, anchor, target_point, pulling)
 						ability:ApplyDataDrivenModifier(anchor, unit, "modifier_root", {})
 					end
 
-					EmitSoundOn("Touhou.Anchor_Impact", anchor)
+					-- EmitSoundOn("Touhou.Anchor_Impact", anchor)
 
 					Timers:CreateTimer(ability:GetLevelSpecialValueFor("anchor_duration", ability_level), function()
 						if not anchor:IsNull() then anchor:RemoveSelf() end

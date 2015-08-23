@@ -21,5 +21,5 @@ function pullAnchors(keys)
 		end
 	end
 
-	if #targets > 0 then EmitSoundOn("Touhou.Anchor_Cast", caster) end
+	if #targets > 0 then -- EmitSoundOn("Touhou.Anchor_Cast", caster) end
 end

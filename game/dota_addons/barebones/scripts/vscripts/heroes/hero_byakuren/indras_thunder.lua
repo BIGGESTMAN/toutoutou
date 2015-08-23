@@ -82,7 +82,7 @@ function indrasThunderCast(keys)
 
 				-- Lightning strike particle and sound
 				local lightning_particle = ParticleManager:CreateParticle("particles/byakuren/indras_thunder_lightning.vpcf", PATTACH_ABSORIGIN, dummy_projectile)
-				EmitSoundOn("Hero_Zuus.LightningBolt", dummy_projectile)
+				-- EmitSoundOn("Hero_Zuus.LightningBolt", dummy_projectile)
 				for i=3,15 do
 					ParticleManager:SetParticleControl(lightning_particle, i, Vector(radius * .8, 0, 0))
 				end

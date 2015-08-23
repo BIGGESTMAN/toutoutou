@@ -59,7 +59,7 @@ function modifier_fantasy_nature_alt:OnDestroy()
 		local particle = ParticleManager:CreateParticle("particles/reimu/fantasy_nature_explosion.vpcf",
 														PATTACH_ABSORIGIN_FOLLOW, caster)
 
-		EmitSoundOn("Hero_Phoenix.SuperNova.Explode", caster)
+		-- EmitSoundOn("Hero_Phoenix.SuperNova.Explode", caster)
 
 		local damage_duration = ability:GetLevelSpecialValueFor("damage_duration", ability_level)
 		local damage_interval = ability:GetLevelSpecialValueFor("damage_interval", ability_level)

@@ -6,7 +6,7 @@ function into_delirium:OnSpellStart()
 	local caster = self:GetCaster()
 	local ability_level = self:GetLevel() - 1
 
-	EmitSoundOn("Hero_Bane.Nightmare", caster)
+	-- EmitSoundOn("Hero_Bane.Nightmare", caster)
 
 	local duration = self:GetLevelSpecialValueFor("duration", ability_level)
 	self:GetCursorTarget():AddNewModifier(caster, self, "modifier_neurotoxin", {duration = duration})

@@ -11,7 +11,7 @@ function throwAnchor(keys)
 
 	anchor(caster, ability, keys.target_points[1])
 
-	EmitSoundOn("Touhou.Anchor_Cast", caster)
+	-- EmitSoundOn("Touhou.Anchor_Cast", caster)
 end
 
 function resistsReductionModifierCreated(keys)
@@ -107,6 +107,6 @@ function dealGhostDamage(keys)
 		ParticleManager:SetParticleControlEnt(particle, 0, anchor, PATTACH_POINT_FOLLOW, "attach_hitloc", origin, true) 
 		ParticleManager:SetParticleControlEnt(particle, 1, unit, PATTACH_POINT_FOLLOW, "attach_hitloc", unit:GetAbsOrigin(), true)
 		ParticleManager:ReleaseParticleIndex(particle)
-		EmitSoundOn("Hero_Pugna.NetherWard.Attack", anchor)
+		-- EmitSoundOn("Hero_Pugna.NetherWard.Attack", anchor)
 	end
 end
