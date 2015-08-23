@@ -1,0 +1,150 @@
+	"final_spark"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"FightRecapLevel"				"2"
+		"MaxLevel" 						"3"
+		"RequiredLevel"					"6"
+		"LevelsBetweenUpgrades"			"5"
+		
+		"AbilityTextureName"			"phoenix_sun_ray"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"particle"					"particles/marisa/final_spark.vpcf"
+		}
+
+		"AbilityCastPoint"				"1.2 1.0 0.8"
+		"AbilityCooldown"				"120 100 80"
+		"AbilityManaCost"				"220 340 460"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"stun_duration"			"1"
+				"_value"				"DOTA_Tooltip_Ability_final_spark_Stun_Duration"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"range"					"1000"
+				"_value"				"DOTA_Tooltip_Ability_final_spark_Range"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"start_radius"			"400"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"end_radius"			"550"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_interval"		"0.5"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"250 340 430"
+				"_value"				"DOTA_Tooltip_Ability_final_spark_Damage"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"2"
+			}
+			"11"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"particle_length"		"1800"
+			}
+			"08" // only used for tooltip
+			{
+				"var_type"				"FIELD_FLOAT"
+				"cast_point"			"1.2 1.0 0.8"
+				"_value"				"DOTA_Tooltip_Ability_final_spark_Cast_Point"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"vulnerability_damage_amp"	"8"
+			}
+			"10"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"vulnerability_damage_amp_max"	"100"
+			}
+		}
+
+		"OnSpellStart"
+	    {
+			"RunScript"
+			{
+				"ScriptFile"			"heroes/hero_marisa/final_spark.lua"
+				"Function"				"finalSparkStart"
+				"sound_dummy_modifier"	"modifier_final_spark_dummy"
+			}
+
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/hero_marisa/final_spark.lua"
+				"Function"		"finalSpark"
+				"stun_modifier"	"modifier_final_spark_stun"
+				"burn_particle"	"particles/units/heroes/hero_phoenix/phoenix_sunray_beam_enemy.vpcf"
+			}
+
+	    	"ApplyModifier"
+	    	{
+	    		"ModifierName"			"modifier_final_spark"
+	    		"Target" 				"CASTER"
+	    	}
+	    }
+
+	    "Modifiers"
+	    {
+	    	"modifier_final_spark"
+	    	{
+	    		"Duration"		"%duration"
+
+	    		"STATES"
+				{
+					"MODIFIER_STATE_COMMAND_RESTRICTED"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
+	    	}
+
+	    	"modifier_final_spark_stun"
+	    	{
+	    		"IsDebuff"		"1"
+	    		"IsStunDebuff"	"1"
+	    		"IsPurgable"	"1"
+
+				"Duration"		"%stun_duration"
+
+				"STATES"
+				{
+					"MODIFIER_STATE_STUNNED"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
+
+				"EffectName"		"particles/generic_gameplay/generic_stunned.vpcf"
+				"EffectAttachType"	"follow_overhead"
+
+				"OverrideAnimation"		"ACT_DOTA_DISABLED"
+	    	}
+	    }
+	}

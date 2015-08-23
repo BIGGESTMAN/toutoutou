@@ -1,0 +1,106 @@
+	"extending_arm"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_TREE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+
+		"AbilityTextureName"			"shredder_timber_chain"
+
+		"precache"
+		{
+			"particle"					"particles/units/heroes/hero_shredder/shredder_timberchain.vpcf"
+		}
+
+		"AbilityCastPoint"				"0.3"
+		"AbilityCooldown"				"16 14 12 10"
+		"AbilityManaCost"				"90 110 130 150"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"range"					"1050 1200 1350 1500"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"hand_radius"			"125"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_radius"			"150"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"travel_speed"			"1500"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"100 170 240 310"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"stun_duration"			"1.5"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"update_interval"		"0.03"
+			}
+		}
+
+		"OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"	"heroes/hero_nitori/extending_arm.lua"
+	    		"Function"		"extendingArmCast"
+	    		"Target"		"POINT"
+	    	}
+	    }
+
+
+	    "Modifiers"
+	    {
+	    	"modifier_extending_arm_stun"
+	    	{
+	    		"IsPurgable"	"1"
+	    		"IsDebuff"		"1"
+	    		"IsStunDebuff"	"1"
+
+	    		"Duration"		"%stun_duration"
+
+	    		"States"
+	    		{
+	    			"MODIFIER_STATE_STUNNED"	"MODIFIER_STATE_VALUE_ENABLED"
+	    		}
+
+				"EffectName"		"particles/generic_gameplay/generic_bashed.vpcf"
+				"EffectAttachType"	"follow_overhead"
+
+				"OverrideAnimation"     "ACT_DOTA_DISABLED"
+	    	}
+
+			"modifier_extending_arm_dummy"
+			{
+				"States"
+				{
+					"MODIFIER_STATE_INVULNERABLE"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_HEALTH_BAR"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_UNIT_COLLISION"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NOT_ON_MINIMAP"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_UNSELECTABLE"			"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+	    }
+	}

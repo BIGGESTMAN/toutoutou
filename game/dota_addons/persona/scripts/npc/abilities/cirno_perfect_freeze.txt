@@ -1,0 +1,103 @@
+	"perfect_freeze"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+
+		"AbilityTextureName"			"winter_wyvern_cold_embrace"
+
+		"precache"
+		{
+			
+		}
+
+		"AbilityCastPoint"				"0.4"
+		"AbilityCooldown"				"13"
+		"AbilityManaCost"				"70 80 90 100"
+		"AbilityCastRange"				"425"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"105 170 235 300"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"2.5 3 3.5 4"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_threshold"		"90 140 190 240"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_interval"		"0.5"
+			}
+		}
+
+		"OnSpellStart"
+	    {
+	    	"ApplyModifier"
+	    	{
+	    		"ModifierName"	"modifier_perfect_freeze"
+	    		"Target" 		"TARGET"
+	    	}
+	    }
+
+
+	    "Modifiers"
+	    {
+	    	"modifier_perfect_freeze"
+	    	{
+	    		"IsDebuff"		"1"
+
+	    		"Duration"		"%duration"
+
+	    		"States"
+	    		{
+	    			"MODIFIER_STATE_STUNNED"	"MODIFIER_STATE_VALUE_ENABLED"
+	    			"MODIFIER_STATE_FROZEN"		"MODIFIER_STATE_VALUE_ENABLED"
+	    		}
+
+	    		"OnCreated"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_cirno/perfect_freeze.lua"
+	    				"Function"		"modifierCreated"
+	    			}
+	    		}
+
+	    		"ThinkInterval"  "%damage_interval"
+
+	    		"OnIntervalThink"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_cirno/perfect_freeze.lua"
+	    				"Function"		"dealDamage"
+	    			}
+	    		}
+
+				"OnTakeDamage"
+				{
+					"RunScript"
+					{
+	    				"ScriptFile"	"heroes/hero_cirno/perfect_freeze.lua"
+						"Function"		"damageTaken"
+						"damage_taken"	"%attack_damage"
+					}
+				}
+	    	}
+	    }
+	}

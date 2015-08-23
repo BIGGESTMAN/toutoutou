@@ -1,0 +1,17 @@
+		
+		// ******************** HEROES ********************
+		"npc_dota_hero_morphling"			"Sanae"
+		"npc_dota_hero_enigma"				"Rumia"
+		"npc_dota_hero_templar_assassin"	"Byakuren"
+		"npc_dota_hero_omniknight"			"Reimu"
+		"npc_dota_hero_weaver"				"Alice"
+		"npc_dota_hero_sniper"				"Reisen"
+		"npc_dota_hero_pugna"				"Medicine"
+		"npc_dota_hero_rubick"				"Marisa"
+		"npc_dota_hero_skywrath_mage"		"Aya"
+		"npc_dota_hero_kunkka"				"Murasa"
+		"npc_dota_hero_night_stalker"		"Remilia"
+		"npc_dota_hero_crystal_maiden"		"Letty"
+		"npc_dota_hero_tinker"				"Kappashiro"
+		"npc_dota_hero_warlock"				"Ichirin"
+		"npc_dota_hero_ancient_apparition"	"Cirno"

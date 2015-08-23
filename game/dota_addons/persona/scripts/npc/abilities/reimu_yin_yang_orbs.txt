@@ -1,0 +1,166 @@
+	"yin_yang_orbs"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+
+		"AbilityTextureName"			"reimu_yin_yang_orbs"
+
+		"precache"
+		{
+			"particle"					"particles/units/heroes/hero_ancient_apparition/ancient_apparition_base_attack.vpcf"
+			"particle"					"particles/generic_gameplay/generic_silence.vpcf"
+			"particle"					"particles/reimu/yin_yang_scattering.vpcf"
+		}
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_range"			"192 232 272 312"
+				"_value"				"DOTA_Tooltip_Ability_yin_yang_orbs_Cleave_Percent"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bounces"				"2 3 4 5"
+				"_value"				"DOTA_Tooltip_Ability_yin_yang_orbs_Bounces"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bounce_range"			"500"
+				"_value"				"DOTA_Tooltip_Ability_yin_yang_orbs_Bounce_Range"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"silence_duration"		"0.8"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"base_damage"			"50 55 60 65"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_increase"		"25"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"projectile_speed"		"1000"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"mana_cost"				"15"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_range_tooltip"			"320 360 400 440"
+			}
+		}
+
+		"OnToggleOn"
+		{
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_yin_yang_orbs"
+				"Target" 		"CASTER"
+			}
+
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/hero_reimu/yin_yang_orbs.lua"
+				"Function"		"setRanged"
+			}
+		}
+
+		"OnToggleOff"
+		{
+			"RemoveModifier"
+			{
+				"ModifierName"	"modifier_yin_yang_orbs"
+				"Target" 		"CASTER"
+			}
+
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/hero_reimu/yin_yang_orbs.lua"
+				"Function"		"setMelee"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_yin_yang_orbs_passive"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+
+				"ThinkInterval"  "0.03"
+
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_reimu/yin_yang_orbs.lua"
+						"Function"		"checkMana"
+					}
+				}
+			}
+			
+			"modifier_yin_yang_orbs"
+			{
+				"IsHidden"	"1"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ATTACK_RANGE_BONUS" "%bonus_range"
+				}
+				
+				"OnAttack"
+				{
+					"SpendMana"
+					{
+						"Mana"		"%mana_cost"
+					}
+
+					"FireSound"
+					{
+						"EffectName"	"Touhou.Yin_Yang_Flight"
+						"Target" 		"CASTER"
+					}
+				}
+
+				"OnAttackLanded"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_reimu/yin_yang_orbs.lua"
+						"Function"		"yinYangOrbsCreateDummy"
+					}
+				}
+			}
+
+			"modifier_yin_yang_orbs_silence"
+			{
+				"Duration"		"%silence_duration"
+				"IsDebuff"		"1"
+				"IsPurgable"	"1"
+
+				"States"
+				{
+					"MODIFIER_STATE_SILENCED" "MODIFIER_STATE_VALUE_ENABLED"
+				}
+
+				"EffectName"		"particles/generic_gameplay/generic_silence.vpcf"
+				"EffectAttachType"	"follow_overhead"
+			}
+		}
+	}

@@ -1,0 +1,95 @@
+	"gassing_garden"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityTextureName"			"pudge_rot"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
+
+		"AbilityCastPoint"				"0.3"
+		"AbilityCastRange"				"450"
+		"AbilityCooldown"				"18 14 10 6"
+		"AbilityManaCost"				"60"
+		"AOERadius"						"300"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"particle"					"particles/medicine/gassing_garden.vpcf"
+		}
+
+		"AbilityProcsMagicStick" 		"1"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"base_damage"			"30 50 70 90"
+				"_value"				"DOTA_Tooltip_Ability_Gassing_Garden_Base_Damage"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"20"
+				"_value"				"DOTA_Tooltip_Ability_Gassing_Garden_Duration"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"300"
+				"_value"				"DOTA_Tooltip_Ability_Gassing_Garden_Radius"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"CreateThinker"
+	        {
+	            "ModifierName"	"modifier_gassing_garden"
+	            "Target"		"POINT"
+	        }
+		}
+
+		"Modifiers"
+		{
+			"modifier_gassing_garden"
+			{
+				"Aura" 			"modifier_gassing_garden_hit"
+				"Aura_Radius" 	"%radius"
+				"Aura_Teams" 	"DOTA_UNIT_TARGET_TEAM_BOTH"
+				"Aura_Types" 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+				"Duration"		"%duration"
+
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_medicine/gassing_garden.lua"
+						"Function"		"createParticle"
+						"Target"		"TARGET"
+					}
+				}
+			}
+
+			"modifier_gassing_garden_hit"
+			{
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_medicine/gassing_garden.lua"
+						"Function"		"gassingGardenHit"
+					}
+				}
+			}
+		}
+	}

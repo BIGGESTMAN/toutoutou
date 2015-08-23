@@ -1,0 +1,31 @@
+	"blazing_star_reverse"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_UNRESTRICTED"
+		"AbilityTextureName"			"phoenix_icarus_dive"
+		
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0 0.0 0.0 0.0"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"heroes/hero_marisa/blazing_star.lua"
+				"Function"				"reverse"
+				"reverse_ability_name"	"blazing_star_reverse"
+				"reversed_modifier"		"modifier_blazing_star_reversed"
+			}
+		}
+
+		"Modifiers"
+		{
+	    	"modifier_blazing_star_reversed"
+	    	{
+	    		"IsHidden"		"0"
+	    	}
+		}
+	}

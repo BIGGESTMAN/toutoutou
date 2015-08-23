@@ -1,0 +1,172 @@
+	"demarcation"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityTextureName"			"warlock_shadow_word"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+
+		"AbilityCastAnimation"			"ACT_DOTA_DIE"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"particle"					"particles/demarcation.vpcf"
+			"particle"					"particles/demarcation_root.vpcf"
+		}
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.3"
+		"AbilityCooldown"				"26 22 18 14"
+		"AbilityManaCost"				"60"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"8"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"650"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movespeed_bonus"		"20 25 30 35"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"30 50 70 90"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"root_duration"			"0.5"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"internal_cooldown"		"0.5"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"max_triggers"			"4"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"update_interval"		"0.1"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"CreateThinker"
+			{
+				"ModifierName"	"modifier_demarcation"
+				"Target" 		"CASTER"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_demarcation"
+			{
+				"Duration"			"%duration"
+
+				"Aura"          	"modifier_demarcation_affected_datadriven"
+				"Aura_Radius"   	"%radius"
+				"Aura_Teams"    	"DOTA_UNIT_TARGET_TEAM_BOTH"
+				"Aura_Types"    	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+				"Aura_Flags"    	"DOTA_UNIT_TARGET_FLAG_INVULNERABLE | DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD"
+
+				"OnCreated"
+				{
+					"AttachEffect"
+					{
+						"EffectName"        "particles/demarcation.vpcf"
+						"EffectAttachType"  "follow_origin"
+						"Target"            "TARGET"
+
+						"ControlPoints"
+						{
+							"00"			"0 0 0"
+							"01"			"%radius 0 0"
+						}
+					}
+				}
+			}
+
+			"modifier_demarcation_affected_datadriven"
+			{
+				"IsHidden"				"1"
+				"IsPurgable"			"0"
+
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_rumia/demarcation.lua"
+						"Function"		"demarcationAffectedModifierCreated"
+					}
+				}
+
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_rumia/demarcation.lua"
+						"Function"		"demarcationAffectedModifierDestroyed"
+					}
+				}
+			}
+
+			"modifier_demarcation_speedboost"
+			{
+				"IsHidden"				"0"
+				"IsPurgable"			"0"
+
+				"Properties"
+				{
+				    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%movespeed_bonus"
+				}
+
+				"Attributes"			"MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+			}
+
+			"modifier_demarcation_root"
+			{
+				"IsHidden"				"0"
+				"IsPurgable"			"0"
+				"IsDebuff"				"1"
+
+				"Duration"				"%root_duration"
+
+				"States"
+				{
+					"MODIFIER_STATE_ROOTED"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+
+			"modifier_demarcation_cooldown"
+			{
+				"IsHidden"				"1"
+				"IsPurgable"			"0"
+
+				"Duration"				"%internal_cooldown"
+			}
+		}
+	}

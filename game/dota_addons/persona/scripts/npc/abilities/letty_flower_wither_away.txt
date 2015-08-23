@@ -1,0 +1,88 @@
+	"flower_wither_away"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+
+		"AbilityTextureName"			"crystal_maiden_frostbite"
+
+		"precache"
+		{
+			"particle"					"particles/letty/flower_wither_away.vpcf"
+			"particle"					"particles/letty/flower_wither_away_proc_alt.vpcf"
+		}
+
+		"AbilityCastPoint"				"0.5"
+		"AbilityCooldown"				"11"
+		"AbilityManaCost"				"90 105 120 135"
+		"AbilityCastRange"				"600"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"90 160 230 300"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"9 11 13 15"
+			}
+		}
+
+		"OnSpellStart"
+	    {
+	    	"Damage"
+			{
+				"Target"		"TARGET"
+				"Type"			"DAMAGE_TYPE_PHYSICAL"
+				"Damage"		"%damage"
+			}
+	    			
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/hero_letty/flower_wither_away.lua"
+				"Function"		"setMaxHealth"
+			}
+	    }
+
+
+	    "Modifiers"
+	    {
+	    	"modifier_flower_wither_away_datadriven"
+	    	{
+	    		"IsDebuff"		"1"
+	    		"IsPurgable"	"1"
+
+	    		"Duration"		"%duration"
+
+	    		"OnTakeDamage"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_letty/flower_wither_away.lua"
+	    				"Function"		"damageTaken"
+	    				"damage"		"%attack_damage"
+	    			}
+	    		}
+
+	    		"OnDestroy"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_letty/flower_wither_away.lua"
+	    				"Function"		"removeLuaModifier"
+	    			}
+	    		}
+
+	    		"EffectName"		"particles/letty/flower_wither_away.vpcf"
+	    		"EffectAttachType"	"follow_origin"
+	    	}
+	    }
+	}

@@ -1,0 +1,100 @@
+	"fantasy_nature"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"fantasy_nature"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"FightRecapLevel"				"2"
+		"AbilityTextureName"			"lina_fiery_soul"
+		"MaxLevel" 						"3"
+		"RequiredLevel"					"6"
+		"LevelsBetweenUpgrades"			"5"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"		"soundevents/game_sounds_heroes/game_sounds_omniknight.vsndevts"
+			"soundfile"		"soundevents/game_sounds_heroes/game_sounds_phoenix.vsndevts"
+			"particle"  	"particles/reimu/fantasy_nature_blur.vpcf"
+			"particle"  	"particles/reimu/fantasy_nature_pulse_alt.vpcf"
+			"particle"  	"particles/reimu/fantasy_nature_explosion.vpcf"
+			"particle"  	"particles/units/heroes/hero_phoenix/phoenix_supernova_hit.vpcf"
+			//"particle"  	"particles/status_fx/status_effect_guardian_angel.vpcf"
+			//"particle"	"particles/units/heroes/hero_omniknight/omniknight_guardian_angel_halo_buff.vpcf"
+			//"particle"	"particles/units/heroes/hero_omniknight/omniknight_guardian_angel_ally.vpcf"
+		}
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.3"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"120 110 100"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"150 200 250"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"6 8 10"
+				"_value"				"DOTA_Tooltip_Ability_fantasy_nature_Duration"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"60 85 110"
+				"_value"				"DOTA_Tooltip_Ability_fantasy_nature_Damage"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"350"
+				"_value"				"DOTA_Tooltip_Ability_fantasy_nature_Radius"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_interval"		"0.25"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"explosion_damage"		"300 425 550"
+				"_value"				"DOTA_Tooltip_Ability_fantasy_nature_Explosion_Damage_Scepter"
+
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"explosion_radius"		"550"
+				"_value"				"DOTA_Tooltip_Ability_fantasy_nature_Explosion_Radius_Scepter"
+
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"scepter_cooldown"		"90 80 70"
+				"_value"				"DOTA_Tooltip_Ability_fantasy_nature_Cooldown_Scepter"
+
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"scepter_manacost"		"130"
+				"_value"				"DOTA_Tooltip_Ability_fantasy_nature_Mana_Cost_Scepter"
+
+			}
+		}
+	}

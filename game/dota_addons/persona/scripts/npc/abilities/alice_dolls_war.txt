@@ -1,0 +1,173 @@
+	"dolls_war"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		//"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"FightRecapLevel"				"1"
+		"AbilityTextureName"			"shredder_chakram"
+		"MaxLevel" 						"4"
+		"RequiredLevel"					"1"
+		"LevelsBetweenUpgrades"			"2"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_shredder.vsndevts"
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_rattletrap.vsndevts"
+			"particle"					"particles/units/heroes/hero_shredder/shredder_whirling_death.vpcf"
+			"particle"					"particles/alice/shanghai_laser.vpcf"
+			"particle"					"particles/units/heroes/hero_ogre_magi/ogre_magi_bloodlust_cast.vpcf"
+		}
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"10"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"90 100 110 120"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"explosion_health_percent" "25"
+				"_value"				"DOTA_Tooltip_Ability_dolls_war_Explosion_Health_Percent"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"explosion_radius"		"275"
+				"_value"				"DOTA_Tooltip_Ability_Dolls_War_Explosion_Radius"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"spin_damage"			"120 150 180 210"
+				"_value"				"DOTA_Tooltip_Ability_Dolls_War_Spin_Damage"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"spin_slow"				"-30"
+				"_value"				"DOTA_Tooltip_Ability_Dolls_War_Spin_Slow"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"spin_slow_duration"	"2 2.5 3 3.5"
+				"_value"				"DOTA_Tooltip_Ability_Dolls_War_Spin_Slow_Duration"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"spin_radius"			"275"
+				"_value"				"DOTA_Tooltip_Ability_Dolls_War_Spin_Radius"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"laser_range"			"1000"
+				"_value"				"DOTA_Tooltip_Ability_Dolls_War_Laser_Range"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"laser_radius"			"200"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"laser_damage"			"115 160 205 250"
+				"_value"				"DOTA_Tooltip_Ability_Dolls_War_Laser_Damage"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"update_interval"		"0.1"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"		"heroes/hero_alice/dolls_war.lua"
+				"Function"			"dollsWarActivation"
+				"slow_modifier"		"modifier_dolls_war_slow"
+				"spin_particle"		"particles/units/heroes/hero_shredder/shredder_whirling_death.vpcf"
+				"spin_sound"		"Hero_Shredder.WhirlingDeath.Damage"
+				"laser_particle"	"particles/shanghai_doll_laser.vpcf"
+				"laser_sound"		"Hero_Rattletrap.Power_Cogs_Impact"
+				"thinker_modifier"	"modifier_dolls_war_dummy"
+				"goliath_doll_buff"	"modifier_goliath_doll_dolls_war_buff"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_dolls_war"
+			{
+				"IsHidden"		"1"
+				"Passive"		"1"
+	    		"IsPurgable"	"0"
+
+	    		"ThinkInterval"	"%update_interval"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"		"heroes/hero_alice/dolls_war.lua"
+						"Function"			"updateAbilityEnabled"
+					}
+				}
+
+				"OnUpgrade"
+				{
+					"RunScript"
+					{
+						"ScriptFile"		"heroes/hero_alice/dolls_war.lua"
+						"Function"			"updateAbilityEnabled"
+					}
+				}
+			}
+
+			"modifier_dolls_war_slow"
+			{
+				"IsHidden"		"0"
+	    		"IsDebuff"		"1"
+
+				"Duration"	"%spin_slow_duration"
+
+				"Properties"
+				{
+				    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%spin_slow"
+				}
+			}
+
+			"modifier_dolls_war_dummy"
+			{
+				"States"
+				{
+					"MODIFIER_STATE_INVULNERABLE"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_HEALTH_BAR"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_UNIT_COLLISION"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NOT_ON_MINIMAP"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_UNSELECTABLE"			"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+		}
+	}

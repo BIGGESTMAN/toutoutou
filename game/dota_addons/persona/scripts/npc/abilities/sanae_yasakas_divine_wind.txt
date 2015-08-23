@@ -1,0 +1,178 @@
+	"yasakas_divine_wind"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityTextureName"			"crystal_maiden_crystal_nova"
+		"FightRecapLevel"				"2"
+		"MaxLevel" 						"3"
+		"RequiredLevel"					"6"
+		"LevelsBetweenUpgrades"			"5"
+
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_6"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"particle"					"particles/econ/items/crystal_maiden/crystal_maiden_cowl_of_ice/maiden_crystal_nova_cowlofice.vpcf"
+			"particle"					"particles/yasakas_divine_wind.vpcf"
+		}
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.25"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"70"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"100"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"knockback_range"		"575"
+				"_value"				"DOTA_Tooltip_Ability_Yasakas_Divine_Wind_Knockback_Range"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"knockback_speed"		"1000"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"12"
+				"_value"				"DOTA_Tooltip_Ability_Yasakas_Divine_Wind_Duration"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movespeed_bonus"		"10 15 20"
+				"_value"				"DOTA_Tooltip_Ability_Yasakas_Divine_Wind_Movespeed_Bonus"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"slow"					"-30 -45 -60"
+				"_value"				"DOTA_Tooltip_Ability_Yasakas_Divine_Wind_Slow"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"slow_radius"			"550"
+				"_value"				"DOTA_Tooltip_Ability_Yasakas_Divine_Wind_Slow_Radius"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"100 150 200"
+				"_value"				"DOTA_Tooltip_Ability_Yasakas_Divine_Wind_Damage"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"update_interval"		"0.03"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"slow_linger_duration"	"0.5"
+			}
+		}
+
+		"OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"		"heroes/hero_sanae/yasakas_divine_wind.lua"
+	    		"Function"			"yasakasDivineWindCast"
+	    		"modifier"			"modifier_knocked_back"
+	    		"particle"			"particles/econ/items/crystal_maiden/crystal_maiden_cowl_of_ice/maiden_crystal_nova_cowlofice.vpcf"
+	    	}
+
+	    	"ApplyModifier"
+	    	{
+	    		"ModifierName"	"modifier_yasakas_divine_wind"
+	    		"Target" 		"CASTER"
+	    		"Duration"		"%duration"
+	    	}
+	    }
+
+		"Modifiers"
+		{
+	    	"modifier_knocked_back"
+	    	{
+	    		"IsHidden"				"0"
+	    		"IsPurgable"			"0"
+	    		"IsDebuff"				"1"
+
+	    		"STATES"
+				{
+					"MODIFIER_STATE_STUNNED"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
+
+				"OverrideAnimation"     "ACT_DOTA_FLAIL"
+
+				"ThinkInterval"			"%update_interval"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_sanae/yasakas_divine_wind.lua"
+						"Function"		"knockback"
+					}
+				}
+	    	}
+
+	    	"modifier_yasakas_divine_wind"
+	    	{
+	    		"IsHidden"				"0"
+	    		"IsPurgable"			"0"
+
+				"Properties"
+				{
+				    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%movespeed_bonus"
+				}
+
+				"ThinkInterval"			"%update_interval"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_sanae/yasakas_divine_wind.lua"
+						"Function"		"slowAura"
+						"slow_modifier"	"modifier_slow"
+					}
+				}
+	    	}
+
+	    	"modifier_slow"
+	    	{
+	    		"IsHidden"				"0"
+	    		"IsPurgable"			"0"
+	    		"IsDebuff"				"1"
+	    		"Duration"				"%slow_linger_duration"
+
+	    		"Properties"
+				{
+				    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%slow"
+				}
+	    	}
+		}
+	}

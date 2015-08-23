@@ -1,0 +1,153 @@
+	"illusionary_dominance"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"FightRecapLevel"				"2"
+		"MaxLevel" 						"3"
+
+		"AbilityTextureName"			"faceless_void_time_walk"
+		"AbilityCastAnimation"			"ACT_DOTA_FLAIL"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_ember_spirit.vsndevts"
+			"particle"					"particles/units/heroes/hero_ember_spirit/ember_spirit_sleightoffist_tgt.vpcf"
+			"particle"					"particles/aya/illusionary_dominance_dash.vpcf"
+		}
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+		"AbilityCooldown"				"3.0 2.5 2.0"
+		"AbilityManaCost"				"40"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"cooldown_reduction"	"0.5"
+				"_value"				"DOTA_Tooltip_Ability_illusionary_dominance_Cooldown_Reduction"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"minimum_cooldown"		"0.25"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"speed"					"2500"
+				"_value"				"DOTA_Tooltip_Ability_illusionary_dominance_Speed"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"speed_increase"		"300"
+				"_value"				"DOTA_Tooltip_Ability_illusionary_dominance_Speed_Increase"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"max_speed"				"4000"
+				"_value"				"DOTA_Tooltip_Ability_illusionary_dominance_Max_Speed"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"225"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"range"					"700 850 1000"
+				"_value"				"DOTA_Tooltip_Ability_illusionary_dominance_Range"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"peerless_cast_window"	"1"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"heroes/hero_aya/illusionary_dominance.lua"
+				"Function"				"illusionaryDominance"
+				"Target"				"POINT"
+				"dashing_modifier"		"modifier_illusionary_dominance_dashing"
+				"accelerating_modifier"	"modifier_illusionary_dominance_accelerating"
+			}
+
+			"FireSound"
+			{
+				"EffectName"	"Hero_Windrunner.ShackleshotCast"
+				"Target" 		"CASTER"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_illusionary_dominance_dashing"
+			{
+				"IsHidden"	"1"
+				
+				"ThinkInterval"  "0.03"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_aya/illusionary_dominance"
+						"Function"		"updateDashing"
+					}
+				}
+			}
+
+			"modifier_illusionary_dominance_hit"
+			{
+				"IsHidden"	"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"			"heroes/hero_aya/illusionary_dominance.lua"
+						"Function"				"illusionaryDominanceHit"
+						"particle"				"particles/units/heroes/hero_ember_spirit/ember_spirit_sleightoffist_tgt.vpcf"
+						"accelerating_modifier"	"modifier_illusionary_dominance_accelerating"
+					}
+
+					"FireSound"
+					{
+						"EffectName"	"Hero_EmberSpirit.SleightOfFist.Damage"
+						"Target"		"TARGET"
+					}
+				}
+			}
+
+			"modifier_illusionary_dominance_accelerating"
+			{
+				"IsHidden"	"0"
+			}
+
+			"modifier_peerless_wind_god_enabled"
+			{
+				"IsHidden"	"0"
+
+				"Duration"	"%peerless_cast_window"
+			}
+		}
+	}
