@@ -1,4 +1,4 @@
-print ('[BAREBONES] barebones.lua' )
+print ('[PERSONA] persona.lua' )
 
 -- GameRules Variables
 ENABLE_HERO_RESPAWN = true              -- Should the heroes automatically respawn on a timer or stay dead until manually respawned

@@ -4,7 +4,7 @@
 
 -- Required files to be visible from anywhere
 require( 'libraries/timers' )
-require( 'barebones' )
+require( 'persona' )
 
 function Precache( context )
 	-- NOTE: IT IS RECOMMENDED TO USE A MINIMAL AMOUNT OF LUA PRECACHING, AND A MAXIMAL AMOUNT OF DATADRIVEN PRECACHING.
@@ -18,7 +18,7 @@ function Precache( context )
 	See GameMode:PostLoadPrecache() in barebones.lua for more information
 	]]
 
-	print("[BAREBONES] Performing pre-load precache")
+	print("[PERSONA] Performing pre-load precache")
 
 	-- Particles can be precached individually or by folder
 	-- It it likely that precaching a single particle system will precache all of its children, but this may not be guaranteed
