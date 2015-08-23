@@ -51,8 +51,8 @@ function Activate()
 	GameRules.GameMode = GameMode()
 	GameRules.GameMode:InitGameMode()
 
-	ListenToGameEvent("dota_item_purchased", updateAghsAbilities, nil)
-	ListenToGameEvent("dota_item_picked_up", updateAghsAbilities, nil)
+	-- ListenToGameEvent("dota_item_purchased", updateAghsAbilities, nil)
+	-- ListenToGameEvent("dota_item_picked_up", updateAghsAbilities, nil)
 end
 
 function updateAghsAbilities(eventInfo)
