@@ -44,7 +44,7 @@ MAX_LEVEL = 25                          -- What level should we let heroes get t
 
 CHEATY_STUFF = GetMapName() ~= "dota"
 
-MAX_ABILITY_LEVELS = CHEATY_STUFF
+MAX_ABILITY_LEVELS = false
 STARTING_ITEMS = CHEATY_STUFF
 FREEEEEEEE_MONEY = CHEATY_STUFF
 UNIVERSAL_SHOP_MODE = CHEATY_STUFF             -- Should the main shop contain Secret Shop items as well as regular items
@@ -314,8 +314,14 @@ function GameMode:OnHeroInGame(hero)
 		end
 	end)
 
-	if hero:HasAbility("vajrapanis_incantation_channel") then
-		hero:FindAbilityByName("vajrapanis_incantation_channel"):SetLevel(1)
+	local persona_user_abilities = {
+		"persona_user_chie",
+	}
+
+	for k,ability in pairs(persona_user_abilities) do
+		if hero:HasAbility(ability) then
+			hero:FindAbilityByName(ability):SetLevel(1)
+		end
 	end
 end
 
@@ -422,7 +428,7 @@ end
 
 -- An item was purchased by a player
 function GameMode:OnItemPurchased( keys )
-	-- print ( '[PERSONA] OnItemPurchased' )
+	print ( '[PERSONA] OnItemPurchased' )
 	DeepPrintTable(keys)
 
 	-- The playerID of the hero who is buying something
@@ -434,8 +440,6 @@ function GameMode:OnItemPurchased( keys )
 
 	-- The cost of the item purchased
 	local itemcost = keys.itemcost
-
-	InitializePersona(keys)
 end
 
 -- An ability was used by a player

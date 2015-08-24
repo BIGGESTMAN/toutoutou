@@ -1,9 +1,9 @@
 "DOTAHeroes"
 {
-	"npc_dota_hero_yu"
+	"npc_dota_hero_chie"
 	{
 		"AbilityLayout" 		"6"
-		"override_hero"			"npc_dota_hero_ancient_apparition"
+		"override_hero"			"npc_dota_hero_legion_commander"
 		"SoundSet"				"0"
 		"Ability1"				""
 		"Ability2"				""
@@ -12,7 +12,7 @@
 		"Ability5"				""
 		"Ability6"				""
 		"Ability7"				""
-		"Ability8"				"persona_user"
+		"Ability8"				"persona_user_chie"
 		"Ability9"				""
 		"Ability10"				""
 		"Ability11"				""
@@ -22,20 +22,20 @@
 		"Ability15"				""
 		"Ability16"				""
 
-		"ArmorPhysical"				"1"									// Physical protection.
+		"ArmorPhysical"				"0"									// Physical protection.
 		"MagicalResistance"			"25"								// Magical protection (percentage).
 
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageMin"			"36"										// Damage range min.
-		"AttackDamageMax"			"36"										// Damage range max.
+		"AttackDamageMin"			"0"										// Damage range min.
+		"AttackDamageMax"			"0"										// Damage range max.
 
 		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
-		"AttributeBaseStrength"		"22"										// Base strength
-		"AttributeStrengthGain"		"2.8"										// Strength bonus per level.
-		"AttributeBaseAgility"		"17"										// Base agility
-		"AttributeAgilityGain"		"2.1"										// Agility bonus per level.
-		"AttributeBaseIntelligence"	"13"										// Base intelligence
-		"AttributeIntelligenceGain"	"1.2"										// Intelligence bonus per level.
+		"AttributeBaseStrength"		"0"										// Base strength
+		"AttributeStrengthGain"		"0"										// Strength bonus per level.
+		"AttributeBaseAgility"		"0"										// Base agility
+		"AttributeAgilityGain"		"0"										// Agility bonus per level.
+		"AttributeBaseIntelligence"	"0"										// Base intelligence
+		"AttributeIntelligenceGain"	"0"										// Intelligence bonus per level.
 
 		"BountyXP"					"0"										// Experience earn.
 		"BountyGoldMin"				"0"										// Gold earned min.

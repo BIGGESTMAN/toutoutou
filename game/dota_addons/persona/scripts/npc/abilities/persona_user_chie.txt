@@ -1,0 +1,24 @@
+	"persona_user_chie"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+
+		"Modifiers"
+		{
+			"modifier_persona_user_chie"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"persona_users.lua"
+						"Function"		"Spawn"
+						"persona"		"slime"
+					}
+				}
+			}
+		}
+	}

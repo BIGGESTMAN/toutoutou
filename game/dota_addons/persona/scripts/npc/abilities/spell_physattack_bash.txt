@@ -1,0 +1,51 @@
+	"bash"
+	{
+		"BaseClass"						"ability_datadriven"
+		
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"MaxLevel"						"1"
+
+		"AbilityTextureName"			"slardar_bash"
+
+		"precache"
+		{
+			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		}
+
+		"AbilityCastPoint"				"0"
+		"AbilityCooldown"				"8"
+		"AbilityManaCost"				"0"
+		"AbilityCastRange"				"150"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_percent"		"150"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"health_cost_percent"	"5"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"abilities/spells/physattack_bash"
+				"Function"		"SpellCast"
+			}
+
+			"FireSound"
+			{
+				"EffectName"	"Hero_DragonKnight.DragonTail.Target" // doesn't work, zzz
+				"Target" 		"TARGET"
+			}
+		}
+	}
