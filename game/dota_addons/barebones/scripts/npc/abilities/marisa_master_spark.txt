@@ -21,7 +21,7 @@
 		// Casting
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.4"
-		"AbilityCooldown"				"12"
+		"AbilityCooldown"				"13 12 11 10"
 		"AbilityManaCost"				"100 120 140 160"
 		"AbilityChannelTime" 			"3"
 
@@ -34,7 +34,7 @@
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"initial_slow"			"10"
+				"initial_slow"			"20"
 				"_value"				"DOTA_Tooltip_Ability_master_spark_Initial_Slow"
 			}
 			"02"
@@ -62,7 +62,7 @@
 			"06"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"end_radius"			"300"
+				"end_radius"			"350"
 			}
 			"07"
 			{

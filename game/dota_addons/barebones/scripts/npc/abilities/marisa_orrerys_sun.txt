@@ -37,7 +37,7 @@
 			"04"
 			{
 				"var_type"					"FIELD_FLOAT"
-				"delay_between_orb_attacks"	"0.1"
+				"orb_firing_time"			"1"
 			}
 			"05"
 			{
@@ -48,7 +48,7 @@
 			"06"
 			{
 				"var_type"					"FIELD_INTEGER"
-				"search_radius"				"1000"
+				"search_radius"				"800"
 				"_value"					"DOTA_Tooltip_Ability_orrerys_sun_Search_Radius"
 			}
 			"07"

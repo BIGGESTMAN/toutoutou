@@ -23,7 +23,7 @@
 			"particle"					"particles/marisa/final_spark.vpcf"
 		}
 
-		"AbilityCastPoint"				"1.2 1.0 0.8"
+		"AbilityCastPoint"				"1"
 		"AbilityCooldown"				"120 100 80"
 		"AbilityManaCost"				"220 340 460"
 
@@ -33,25 +33,25 @@
 		{
 			"01"
 			{
-				"var_type"				"FIELD_INTEGER"
-				"stun_duration"			"1"
+				"var_type"				"FIELD_FLOAT"
+				"stun_duration"			"0.5"
 				"_value"				"DOTA_Tooltip_Ability_final_spark_Stun_Duration"
 			}
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"range"					"1000"
+				"range"					"900"
 				"_value"				"DOTA_Tooltip_Ability_final_spark_Range"
 			}
 			"03"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"start_radius"			"400"
+				"start_radius"			"350"
 			}
 			"04"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"end_radius"			"550"
+				"end_radius"			"500"
 			}
 			"05"
 			{
@@ -61,7 +61,7 @@
 			"06"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"damage"				"250 340 430"
+				"damage"				"260 350 440"
 				"_value"				"DOTA_Tooltip_Ability_final_spark_Damage"
 			}
 			"07"
@@ -72,13 +72,7 @@
 			"08"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"particle_length"		"1800"
-			}
-			"09" // only used for tooltip
-			{
-				"var_type"				"FIELD_FLOAT"
-				"cast_point"			"1.2 1.0 0.8"
-				"_value"				"DOTA_Tooltip_Ability_final_spark_Cast_Point"
+				"particle_length"		"1650"
 			}
 			"10"
 			{

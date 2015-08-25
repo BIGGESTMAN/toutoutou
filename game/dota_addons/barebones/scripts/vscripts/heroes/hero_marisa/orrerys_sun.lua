@@ -186,9 +186,12 @@ function orrerysSunAttack( event )
 	local caster = event.caster
 	local target = event.target
 	local ability = event.ability
+	local orb_firing_time = ability:GetSpecialValueFor("orb_firing_time")
+	local delay = orb_firing_time / (#caster.orbs - 1)
+	print(delay)
 
-	for i=1,ability:GetLevelSpecialValueFor("orbs", ability:GetLevel() - 1) do
-		Timers:CreateTimer(i * ability:GetLevelSpecialValueFor("delay_between_orb_attacks", ability:GetLevel() - 1), function()
+	for i=1,#caster.orbs do
+		Timers:CreateTimer((i - 1) * delay, function()
 			caster.orbs[i]:PerformAttack(target, true, true, true, true )
 		end)
 	end
@@ -232,7 +235,8 @@ function spellCast( event )
 end
 
 function fireLasers(caster, ability)
-	local ability_level = ability:GetLevel() - 1
+	local orb_firing_time = ability:GetSpecialValueFor("orb_firing_time")
+	local delay = orb_firing_time / (#caster.orbs - 1)
 
 	local team = caster:GetTeamNumber()
 	local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
@@ -240,8 +244,8 @@ function fireLasers(caster, ability)
 	local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
 	local iOrder = FIND_CLOSEST
 
-	for i=1,ability:GetLevelSpecialValueFor("orbs", ability:GetLevel() - 1) do
-		Timers:CreateTimer(i * ability:GetLevelSpecialValueFor("delay_between_orb_attacks", ability:GetLevel() - 1), function()
+	for i=1,#caster.orbs do
+		Timers:CreateTimer((i - 1) * delay, function()
 			fireLaser(caster, ability, caster.orbs[i])
 		end)
 	end

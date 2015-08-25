@@ -125,7 +125,6 @@
 		},
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flStartTime = 0.400000
 		},
 	]
 	m_ForceGenerators =
@@ -151,6 +150,7 @@
 		},
 		{
 			m_ChildRef = resource:"particles/marisa/final_spark_tracer.vpcf"
+			m_bDisableChild = true
 		},
 		{
 			m_ChildRef = resource:"particles/marisa/final_spark_rings.vpcf"

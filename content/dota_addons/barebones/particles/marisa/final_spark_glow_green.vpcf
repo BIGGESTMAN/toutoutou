@@ -211,7 +211,7 @@
 		},
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flStartTime = 0.685714
+			m_flStartTime = 0.285714
 			m_flEmitRate = 200.000000
 			m_flEmissionDuration = 0.285714
 		},

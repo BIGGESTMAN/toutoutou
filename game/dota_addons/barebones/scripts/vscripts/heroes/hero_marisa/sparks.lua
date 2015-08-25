@@ -12,7 +12,7 @@ function startSpark(caster, ability, modifier, debuff_modifier, stacking_debuff,
 	end
 	local tracer_duration = spark_ability:GetSpecialValueFor("tracer_duration")
 	local damage_interval = spark_ability:GetLevelSpecialValueFor("damage_interval", ability_level)
-	local damage = spark_ability:GetLevelSpecialValueFor("damage", ability_level) * damage_interval / duration
+	local damage = spark_ability:GetLevelSpecialValueFor("damage", ability_level) * damage_interval / (duration + damage_interval - tracer_duration)
 	local damage_type = spark_ability:GetAbilityDamageType()
 
 	local initial_slow = spark_ability:GetSpecialValueFor("initial_slow")

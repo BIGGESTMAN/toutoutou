@@ -168,13 +168,13 @@
 	[
 		{
 			_class = "C_OP_ContinuousEmitter"
-			m_flStartTime = 0.400000
 		},
 	]
 	m_Children =
 	[
 		{
 			m_ChildRef = resource:"particles/marisa/final_spark_b_0.vpcf"
+			m_bDisableChild = true
 		},
 	]
 }
