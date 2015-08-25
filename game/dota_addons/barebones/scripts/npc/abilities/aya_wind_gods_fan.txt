@@ -14,7 +14,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"precache"
 		{
-			"particle"  "particles/econ/items/phantom_assassin/phantom_assassin_weapon_runed_scythe/phantom_assassin_ambient_blade_runed_scythe_c.vpcf"
+			"particle"  "particles/aya/wind_gods_fan_charged.vpcf"
 		}
 
 		// Special
@@ -25,25 +25,21 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"minimum_damage"		"10"
-				"_value"				"DOTA_Tooltip_Ability_wind_gods_fan_Minimum_Damage"
 			}
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"maximum_damage"		"60 130 200 270"
-				"_value"				"DOTA_Tooltip_Ability_wind_gods_fan_Maximum_Damage"
 			}
 			"03"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"max_damage_distance"	"1500"
-				"_value"				"DOTA_Tooltip_Ability_wind_gods_fan_Max_Damage_Distance"
 			}
 			"04"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"movespeed"				"8 12 16 20"
-				"_value"				"DOTA_Tooltip_Ability_wind_gods_fan_Movespeed"
 			}
 			"05"
 			{
@@ -98,14 +94,6 @@
 						"full_modifier"					"modifier_wind_gods_fan_full"
 					}
 				}
-			}
-
-			"modifier_wind_gods_fan_full"
-			{
-				"IsHidden"			"1"
-
-				"EffectName"		"particles/econ/items/phantom_assassin/phantom_assassin_weapon_runed_scythe/phantom_assassin_ambient_blade_runed_scythe_c.vpcf"
-				"EffectAttachType"	"follow_origin"
 			}
 		}
 	}

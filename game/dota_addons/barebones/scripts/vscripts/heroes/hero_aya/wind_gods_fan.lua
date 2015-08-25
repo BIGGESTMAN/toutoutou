@@ -25,8 +25,9 @@ function windGodsFanUpdateDamage( keys )
 
 		if bonus_damage_table[caster] >= maximum_damage then
 			bonus_damage_table[caster] = maximum_damage
-			if not caster:HasModifier(keys.full_modifier) then
-				ability:ApplyDataDrivenModifier(caster, caster, keys.full_modifier, {})
+			if not caster.charged_particle then
+				caster.charged_particle = ParticleManager:CreateParticle("particles/aya/wind_gods_fan_charged.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+				ParticleManager:SetParticleControlEnt(caster.charged_particle, 1, caster, PATTACH_POINT_FOLLOW, "attach_origin", caster:GetAbsOrigin(), true)
 			end
 		end
 
@@ -45,5 +46,9 @@ function windGodsFanResetDamage( keys )
 	bonus_damage_table[caster] = ability:GetLevelSpecialValueFor("minimum_damage", ability_level)
 	caster:FindModifierByName(keys.damage_modifier):SetStackCount(bonus_damage_table[caster])
 	previous_location_table[caster] = nil
-	caster:RemoveModifierByName(keys.full_modifier)
+
+	if caster.charged_particle then
+		ParticleManager:DestroyParticle(caster.charged_particle, false)
+		caster.charged_particle = nil
+	end
 end
