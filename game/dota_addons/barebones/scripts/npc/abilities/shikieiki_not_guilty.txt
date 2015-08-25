@@ -1,0 +1,108 @@
+	"not_guilty"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+
+		"AbilityTextureName"			"spectre_reality"
+
+		"precache"
+		{
+
+		}
+
+		"AbilityProcsMagicStick" 		"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"creep_kill_guilt"		"0.4 0.6 0.8 1.0"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"hero_assist_guilt"		"4 6 8 10"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"hero_kill_guilt"		"8 12 16 20"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"greater_guilt_radius"	"500 600 700 800"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"greater_guilt_multiplier"	"3"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_reduction"		"-0.5"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"health_reduction"		"-2"
+			}
+		}
+
+		"Modifiers"
+	    {
+	    	"modifier_not_guilty"
+	    	{
+	    		"Passive"	"1"
+	    		"IsHidden"	"1"
+				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT"
+
+	    		"Aura"          	"modifier_not_guilty_aura"
+	    		"Aura_Radius"   	"20100"
+	    		"Aura_Teams"    	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+	    		"Aura_Types"    	"DOTA_UNIT_TARGET_HERO"
+	    		"Aura_Flags"    	"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+	    	}
+
+	    	"modifier_not_guilty_aura"
+	    	{
+				"IsHidden"		"1"
+				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT"
+
+				"OnKill"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_shikieiki/not_guilty.lua"
+						"Function"		"unitKilled"
+					}
+				}
+
+				"OnDeath"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_shikieiki/not_guilty.lua"
+						"Function"		"onDeath"
+					}
+				}
+	    	}
+
+	    	"modifier_not_guilty_debuff"
+	    	{
+				"IsHidden"		"0"
+				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE" "%damage_reduction"
+				    "MODIFIER_PROPERTY_HEALTH_BONUS" "%health_reduction" 
+				}
+	    	}
+	    }
+	}

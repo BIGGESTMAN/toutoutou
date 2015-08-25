@@ -17,9 +17,8 @@ function spellCast(keys)
 
 	local total_guilt = 0
 	for k,unit in pairs(targets) do
-		if unit:HasModifier("modifier_not_guilty_debuff") then
-			total_guilt = total_guilt + unit:FindModifierByName("modifier_not_guilty_debuff"):GetStackCount()
-		end
+		if unit.guilt then total_guilt = total_guilt + unit.guilt end
+		print(unit.guilt)
 	end
 
 	local damage = ability:GetSpecialValueFor("base_damage") + total_guilt * ability:GetSpecialValueFor("bonus_damage")
