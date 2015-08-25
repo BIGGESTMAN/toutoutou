@@ -20,5 +20,16 @@
 					}
 				}
 			}
+
+			"modifier_persona_speed_bonus"
+			{
+				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT"
+				"IsHidden"		"0"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT" "1"
+				}
+			}
 		}
 	}

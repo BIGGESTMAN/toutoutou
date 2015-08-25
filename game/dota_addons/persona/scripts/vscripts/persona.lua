@@ -1,5 +1,3 @@
-require "personas"
-
 print ('[PERSONA] persona.lua' )
 
 -- GameRules Variables
@@ -296,20 +294,11 @@ function GameMode:OnHeroInGame(hero)
 		if not hero:IsIllusion() then
 			if STARTING_ITEMS then
 				hero:AddItem(CreateItem("item_blink", hero, hero))
-				hero:AddItem(CreateItem("item_force_staff", hero, hero))
-				hero:AddItem(CreateItem("item_heart", hero, hero))
-				hero:AddItem(CreateItem("item_silver_edge", hero, hero))
-				hero:AddItem(CreateItem("item_orchid", hero, hero))
-				hero:AddItem(CreateItem("item_dagon", hero, hero))
-			end
-
-			if MAX_ABILITY_LEVELS then
-				for i=0,15 do
-				    local ability = hero:GetAbilityByIndex(i)
-				    if ability then 
-				        ability:SetLevel(ability:GetMaxLevel())
-				    end
-				end
+				-- hero:AddItem(CreateItem("item_force_staff", hero, hero))
+				-- hero:AddItem(CreateItem("item_heart", hero, hero))
+				-- hero:AddItem(CreateItem("item_silver_edge", hero, hero))
+				-- hero:AddItem(CreateItem("item_orchid", hero, hero))
+				-- hero:AddItem(CreateItem("item_dagon", hero, hero))
 			end
 		end
 	end)

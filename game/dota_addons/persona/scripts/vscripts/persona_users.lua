@@ -1,6 +1,9 @@
 require "personas"
 
 LinkLuaModifier("modifier_persona_range_bonus", "modifier_persona_range_bonus", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier("modifier_persona_health_bonus", "modifier_persona_health_bonus", LUA_MODIFIER_MOTION_NONE )
+-- LinkLuaModifier("modifier_persona_speed_bonus", "modifier_persona_speed_bonus", LUA_MODIFIER_MOTION_NONE )
+
 
 function Spawn(keys)
 	local caster = keys.caster
@@ -12,5 +15,7 @@ function Spawn(keys)
 	personaItem = InitializePersona(personaItem)
 
 	caster:AddNewModifier(caster, ability, "modifier_persona_range_bonus", {})
+	caster:AddNewModifier(caster, ability, "modifier_persona_health_bonus", {})
+	-- caster:AddNewModifier(caster, ability, "modifier_persona_speed_bonus", {})
 	caster:CastAbilityImmediately(personaItem, caster:GetPlayerID())
 end

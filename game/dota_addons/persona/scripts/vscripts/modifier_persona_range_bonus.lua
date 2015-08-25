@@ -9,7 +9,5 @@ function modifier_persona_range_bonus:DeclareFunctions()
 end
 
 function modifier_persona_range_bonus:GetModifierAttackRangeBonus(params)
-	if IsServer() then
-		return self.range_bonus
-	end
+	return self.range_bonus
 end

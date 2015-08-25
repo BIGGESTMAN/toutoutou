@@ -1,0 +1,40 @@
+	"resist_physical"
+	{
+		"BaseClass"						"ability_datadriven"
+		
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"1"
+
+		"AbilityTextureName"			"antimage_spell_shield"
+
+		"precache"
+		{
+
+		}
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"physical_damage_reduction"	"-50"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_resist_physical"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+		
+				//"EffectName"		"particle_name"
+				//"EffectAttachType"	"follow_origin"
+		
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_INCOMING_PHYSICAL_DAMAGE_PERCENTAGE" "%physical_damage_reduction"
+				}
+			}
+		}
+	}
