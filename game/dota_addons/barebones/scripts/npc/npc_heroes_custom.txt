@@ -926,7 +926,7 @@
 		"Ability1"				"last_judgment"
 		"Ability2"				"ten_kings"
 		"Ability3"				"not_guilty"
-		"Ability4"				"cleansed_crystal_judgement"
+		"Ability4"				"cleansed_crystal_judgment"
 		"Ability5"				""
 		"Ability6"				""
 		"Ability7"				"attribute_bonus"

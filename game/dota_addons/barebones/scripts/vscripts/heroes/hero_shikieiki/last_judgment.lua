@@ -28,10 +28,10 @@ function spellCast(keys)
 		ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
 	end
 
-	DebugDrawCircle(origin, Vector(180,40,40), 0.5, radius, true, 0.2)
+	-- DebugDrawCircle(origin, Vector(180,40,40), 0.5, radius, true, 0.2)
 
 	local particle = ParticleManager:CreateParticle("particles/shikieiki/last_judgment.vpcf", PATTACH_ABSORIGIN, target)
 	-- ParticleManager:SetParticleControlEnt(particle, 0, target, PATTACH_POINT_FOLLOW, "attach_hitloc", target:GetAbsOrigin(), true)
-	ParticleManager:SetParticleControlEnt(particle, 1, target, PATTACH_POINT_FOLLOW, "attach_hitloc", target:GetAbsOrigin(), true)
-	ParticleManager:SetParticleControlEnt(particle, 3, target, PATTACH_POINT, "attach_hitloc", target:GetAbsOrigin(), true)
+	ParticleManager:SetParticleControlEnt(particle, 1, target, PATTACH_POINT_FOLLOW, "attach_origin", target:GetAbsOrigin(), true)
+	ParticleManager:SetParticleControlEnt(particle, 3, target, PATTACH_POINT, "attach_origin", target:GetAbsOrigin(), true)
 end
