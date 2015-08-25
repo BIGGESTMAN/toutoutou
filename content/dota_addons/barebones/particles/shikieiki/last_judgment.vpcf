@@ -130,8 +130,7 @@
 			m_bDisableChild = true
 		},
 		{
-			m_ChildRef = resource:"particles/shikieiki/last_judgment_b.vpcf"
-			m_bDisableChild = true
+			m_ChildRef = resource:"particles/shikieiki/last_judgment_ray_impact.vpcf"
 		},
 		{
 			m_ChildRef = resource:"particles/shikieiki/last_judgment_c.vpcf"

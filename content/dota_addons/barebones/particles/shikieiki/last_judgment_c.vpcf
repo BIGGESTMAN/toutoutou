@@ -44,7 +44,6 @@
 		},
 		{
 			_class = "C_OP_FadeOutSimple"
-			m_flFadeOutTime = 0.500000
 		},
 		{
 			_class = "C_OP_InterpolateRadius"
@@ -87,8 +86,8 @@
 		},
 		{
 			_class = "C_INIT_RandomRadius"
-			m_flRadiusMin = 150.000000
-			m_flRadiusMax = 300.000000
+			m_flRadiusMin = 375.000000
+			m_flRadiusMax = 375.000000
 		},
 		{
 			_class = "C_INIT_RandomAlpha"
@@ -112,6 +111,10 @@
 				204,
 				255,
 			]
+		},
+		{
+			_class = "C_INIT_PositionPlaceOnGround"
+			m_flOffset = 24.000000
 		},
 	]
 	m_Emitters =
