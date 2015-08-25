@@ -1,0 +1,52 @@
+	"last_judgment"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+
+		"AbilityTextureName"			"oracle_fortunes_end"
+
+		"precache"
+		{
+			"particle"					"particles/shikieiki/last_judgment.vpcf"
+		}
+
+		"AbilityCastPoint"				"0.4"
+		"AbilityCooldown"				"10"
+		"AbilityManaCost"				"110 130 150 170"
+		"AbilityCastRange"				"550"
+		"AOERadius"						"300"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"base_damage"			"90 120 150 180"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"bonus_damage"			"0.5 1.0 1.5 2.0"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"300"
+			}
+		}
+
+		"OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"	"heroes/hero_shikieiki/last_judgment.lua"
+	    		"Function"		"spellCast"
+	    	}
+	    }
+	}
