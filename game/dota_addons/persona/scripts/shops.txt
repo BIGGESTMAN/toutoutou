@@ -2,13 +2,9 @@
 {
     "consumables"
     {
-        "item"      "item_ability_reflex_haste"
-        "item"      "item_ability_reflex_power_cogs"
-        "item"      "item_ability_reflex_power_shot"
-        "item"      "item_ability_reflex_wisp_spirits"
-        "item"      "item_ability_reflex_rocket_flare"
-        "item"      "item_ability_reflex_flame_sword"
         "item"      "item_slime"
+        "item"      "item_angel"
+        "item"      "item_double_fusion"
     }
 
     "attributes"

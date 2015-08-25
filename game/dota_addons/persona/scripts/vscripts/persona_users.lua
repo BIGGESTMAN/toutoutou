@@ -8,7 +8,16 @@ LinkLuaModifier("modifier_persona_health_bonus", "modifier_persona_health_bonus"
 function Spawn(keys)
 	local caster = keys.caster
 	local ability = keys.ability
-	local startingPersona = keys.persona
+	local arcana = keys.arcana
+	caster.arcana = arcana
+
+	local startingPersona = nil
+	for personaName,persona in pairs(personas_table) do
+		if persona["arcana"] == arcana then
+			startingPersona = personaName
+			break
+		end
+	end
 
 	local personaItem = CreateItem("item_"..startingPersona, caster, caster)
 	caster:AddItem(personaItem)
@@ -18,4 +27,8 @@ function Spawn(keys)
 	caster:AddNewModifier(caster, ability, "modifier_persona_health_bonus", {})
 	-- caster:AddNewModifier(caster, ability, "modifier_persona_speed_bonus", {})
 	caster:CastAbilityImmediately(personaItem, caster:GetPlayerID())
+
+	local personaItemAngelTest = CreateItem("item_angel", caster, caster)
+	caster:AddItem(personaItemAngelTest)
+	personaItemAngelTest = InitializePersona(personaItemAngelTest)
 end

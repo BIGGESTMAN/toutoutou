@@ -5,6 +5,8 @@
 MOVE_SPEED_MODIFIER = "modifier_persona_speed_bonus"
 
 CHARIOT = 3
+JUSTICE = 4
+TEMPERANCE = 5
 
 personas_table = {
 	slime = {
@@ -20,7 +22,46 @@ personas_table = {
 
 		attackProjectile = "",
 		particle = "",
-	}
+	},
+	angel = {
+		arcana = JUSTICE,
+		str = 4,
+		mag = 5,
+		endr = 2,
+		swft = 7,
+		agi = 5,
+		abilities = {"garu", "regenerate_1"},
+		level = 4,
+		resists = {0,0,0,1,0,1,-1},
+
+		attackProjectile = "",
+		particle = "",
+	},
+	apsaras = {
+		arcana = TEMPERANCE,
+		str = 3,
+		mag = 5,
+		endr = 3,
+		swft = 5,
+		agi = 5,
+		abilities = {"dia", "bufu", "rakunda"},
+		level = 4,
+		resists = {0,-1,0,0,0,0,0},
+
+		attackProjectile = "",
+		particle = "",
+	},
+}
+
+ability_levels_table = {
+	tarunda = 1,
+	rakunda = 1,
+	bash = 2,
+	garu = 4,
+	bufu = 4,
+	dia = 4,
+	regenerate_1 = 3,
+	resist_physical = 5,
 }
 
 function InitializePersona(persona)
@@ -43,7 +84,7 @@ function Activate(keys)
 	caster:RemoveModifierByName("modifier_persona_speed_bonus")
 	if item.attributes["swft"] > 0 then -- This is insanely buggy in an insane way, fix this at some point
 		-- print(caster:HasModifier("modifier_persona_user_chie"))
-		caster:FindAbilityByName("persona_user_chie"):ApplyDataDrivenModifier(caster, caster, MOVE_SPEED_MODIFIER, {}) -- change this to be dynamic, or give all characters a base persona_user ability -- latter probably better
+		-- caster:FindAbilityByName("persona_user_chie"):ApplyDataDrivenModifier(caster, caster, MOVE_SPEED_MODIFIER, {}) -- change this to be dynamic, or give all characters a base persona_user ability -- latter probably better
 		-- caster:SetModifierStackCount("modifier_persona_speed_bonus", caster, item.attributes["swft"] * 10)
 		-- print(caster:HasModifier(MOVE_SPEED_MODIFIER))
 		-- print(caster:FindModifierByName("modifier_persona_speed_bonus"))
@@ -51,17 +92,103 @@ function Activate(keys)
 
 	for i=0,5 do
 		local ability = caster:GetAbilityByIndex(i)
-		if ability then caster:RemoveAbility(ability:GetAbilityName()) end
+		if ability then
+			if ability.passiveModifier then caster:RemoveModifierByName(ability.passiveModifier) end
+			caster:RemoveAbility(ability:GetAbilityName())
+		end
 	end
 	for k,ability in ipairs(item.attributes["abilities"]) do
 		caster:AddAbility(ability)
 		if caster:HasAbility(ability) then caster:FindAbilityByName(ability):SetLevel(1) end -- can remove this check once you actually implement all abilities personas have (tarunda, resist phys, and so on)
 	end
 
-	if caster.activePersona then caster.activePersona:SetActivated(true) end
+	if caster.activePersona and not caster.activePersona:IsNull() then caster.activePersona:SetActivated(true) end
 	caster.activePersona = item
 	item:SetActivated(false)
 
 	-- TODO: fire particle
 	-- TODO: start global persona-switch cooldown
+end
+
+function SetPassiveModifier(keys)
+	keys.ability.passiveModifier = keys.modifier
+end
+
+function SetLevel(keys)
+	keys.ability.level = keys.level
+end
+
+function DoubleFusion(keys)
+	local caster = keys.caster
+
+	local persona1 = caster:GetItemInSlot(0)
+	local persona2 = caster:GetItemInSlot(1)
+
+	if persona1 and persona2 then
+		PersonaResult(caster, caster.arcana, persona1, persona2)
+	end
+end
+
+function PersonaResult(caster, casterArcana, persona1, persona2)
+	local newPersonaArcana = GetResultingArcana(persona1, persona2)
+	local averageLevel = persona1.attributes["level"] + persona2.attributes["level"] / 2
+
+	local possiblePersonas = {}
+	for personaName,persona in pairs(personas_table) do
+		if persona["arcana"] == newPersonaArcana then
+			local possiblePersona = {}
+			table.insert(possiblePersonas, {persona, math.abs(persona["level"] - averageLevel), personaName})
+		end
+	end
+
+	local newPersona = nil
+	local newPersonaName = nil
+	if #possiblePersonas > 0 then
+		table.sort(possiblePersonas, function(a,b) return a[2] < b[2] end)
+		newPersona = possiblePersonas[1][1]
+		newPersonaName = possiblePersonas[1][3]
+	end
+
+	if newPersona then
+		if casterArcana == newPersona["arcana"] then
+			-- TODO: give bonus xp
+		end
+
+		local newPersonaAbilities = newPersona["abilities"]
+		local sortedPersona1Abilities = table.sort(persona1.attributes["abilities"], function(a,b) return ability_levels_table[a] > ability_levels_table[b] end)
+		local sortedPersona2Abilities = table.sort(persona2.attributes["abilities"], function(a,b) return ability_levels_table[a] > ability_levels_table[b] end)
+		local persona1Inheritance = persona1.attributes["abilities"][1]
+		local persona2Inheritance = persona2.attributes["abilities"][1]
+		table.insert(newPersonaAbilities, persona1Inheritance)
+		table.insert(newPersonaAbilities, persona2Inheritance)
+		for k,v in pairs(newPersonaAbilities) do
+			print(k,v)
+		end
+		
+		local newPersonaItem = CreateItem("item_"..newPersonaName, caster, caster)
+		-- print(newPersonaItem)
+		newPersonaItem = InitializePersona(newPersonaItem)
+		newPersonaItem.attributes["abilities"] = newPersonaAbilities
+
+		caster:RemoveItem(persona1)
+		caster:RemoveItem(persona2)
+		caster:AddItem(newPersonaItem)
+		if caster.activePersona == persona1 or caster.activePersona == persona2 then
+			caster:CastAbilityImmediately(newPersonaItem, caster:GetPlayerID())
+		end
+	end
+end
+
+function GetResultingArcana(persona1, persona2)
+	local persona1Arcana = persona1.attributes["arcana"]
+	local persona2Arcana = persona2.attributes["arcana"]
+	local resultingArcana = nil
+
+	if persona1Arcana == CHARIOT then
+		if persona2Arcana == JUSTICE then
+			resultingArcana = TEMPERANCE
+		end
+	end
+
+	return resultingArcana
 end

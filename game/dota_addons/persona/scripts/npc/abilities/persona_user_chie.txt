@@ -16,7 +16,7 @@
 					{
 						"ScriptFile"	"persona_users.lua"
 						"Function"		"Spawn"
-						"persona"		"slime"
+						"arcana"		"3"
 					}
 				}
 			}

@@ -1,4 +1,4 @@
-	"bash"
+	"garu"
 	{
 		"BaseClass"						"ability_datadriven"
 		
@@ -7,29 +7,24 @@
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"MaxLevel"						"1"
 
-		"AbilityTextureName"			"slardar_bash"
+		"AbilityTextureName"			"garu"
 
 		"precache"
 		{
-			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+			
 		}
 
 		"AbilityCastPoint"				"0"
 		"AbilityCooldown"				"8"
-		"AbilityManaCost"				"0"
-		"AbilityCastRange"				"150"
+		"AbilityManaCost"				"50"
+		"AbilityCastRange"				"500"
 
 		"AbilitySpecial"
 		{
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"damage_percent"		"150"
-			}
-			"03"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"health_cost_percent"	"5"
+				"magic_multiplier"		"8"
 			}
 		}
 
@@ -37,14 +32,14 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"	"abilities/spells/physattack_bash"
+				"ScriptFile"	"abilities/spells/magic_garu"
 				"Function"		"SpellCast"
 			}
 
 			"FireSound"
 			{
-				"EffectName"	"Hero_DragonKnight.DragonTail.Target" // doesn't work, zzz
-				"Target" 		"TARGET"
+				"EffectName"	"Hero_Windrunner.ShackleshotCast"
+				"Target" 		"CASTER"
 			}
 		}
 	}

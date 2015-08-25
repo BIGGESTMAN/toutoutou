@@ -1,0 +1,455 @@
+"DOTAAbilities"
+{
+	"Version"		"1"
+		"regenerate_1"
+	{
+		"BaseClass"						"ability_datadriven"
+		
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"1"
+
+		"AbilityTextureName"			"regenerate_1"
+
+		"precache"
+		{
+			
+		}
+
+		"AbilityCastPoint"				"0"
+		"AbilityCooldown"				"0"
+		"AbilityManaCost"				"0"
+		"AbilityCastRange"				"0"
+
+		"AbilitySpecial"
+		{
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"regeneration"			"4"
+			}
+		}
+
+		"OnCreated"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"personas.lua"
+				"Function"		"SetPassiveModifier"
+				"modifier"		"modifier_regenerate_1"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_regenerate_1"
+			{
+				"Passive"			"1"
+				"IsHidden"			"0"
+		
+				//"EffectName"		"particle_name"
+				//"EffectAttachType"	"follow_origin"
+		
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%regeneration"
+				}
+			}
+		}
+	}
+	"resist_physical"
+	{
+		"BaseClass"						"ability_datadriven"
+		
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"1"
+
+		"AbilityTextureName"			"antimage_spell_shield"
+
+		"precache"
+		{
+
+		}
+
+		"AbilitySpecial"
+		{
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"physical_damage_reduction"	"-50"
+			}
+		}
+
+		"OnCreated"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"personas.lua"
+				"Function"		"SetPassiveModifier"
+				"modifier"		"modifier_resist_physical"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_resist_physical"
+			{
+				"Passive"	"1"
+				"IsHidden"	"0"
+		
+				//"EffectName"		"particle_name"
+				//"EffectAttachType"	"follow_origin"
+		
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_INCOMING_PHYSICAL_DAMAGE_PERCENTAGE" "%physical_damage_reduction"
+				}
+			}
+		}
+	}
+	"persona_user_chie"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+
+		"Modifiers"
+		{
+			"modifier_persona_user_chie"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"persona_users.lua"
+						"Function"		"Spawn"
+						"arcana"		"3"
+					}
+				}
+			}
+
+			"modifier_persona_speed_bonus"
+			{
+				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT"
+				"IsHidden"		"0"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT" "1"
+				}
+			}
+		}
+	}
+	"rakunda"
+	{
+		"BaseClass"						"ability_datadriven"
+		
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"MaxLevel"						"1"
+
+		"AbilityTextureName"			"oracle_false_promise"
+
+		"precache"
+		{
+
+		}
+
+		"AbilityCastPoint"				"0.3"
+		"AbilityCooldown"				"8"
+		"AbilityManaCost"				"70"
+		"AbilityCastRange"				"550"
+
+		"AbilitySpecial"
+		{
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_taken_percent"	"25"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"5"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_tarunda"
+				"Target" 		"TARGET"
+			}
+
+			"FireSound"
+			{
+				"EffectName"	"DOTA_Item.RodOfAtos.Activate"
+				"Target"		"TARGET"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_tarunda"
+			{
+				"IsDebuff"			"1"
+
+				"Duration"			"%duration"
+		
+				//"EffectName"		"particle_name"
+				//"EffectAttachType"	"follow_origin"
+		
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE" "%damage_taken_percent"
+				}
+			}
+		}
+	}
+	"tarunda"
+	{
+		"BaseClass"						"ability_datadriven"
+		
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"MaxLevel"						"1"
+
+		"AbilityTextureName"			"brewmaster_earth_spell_immunity"
+
+		"precache"
+		{
+
+		}
+
+		"AbilityCastPoint"				"0.3"
+		"AbilityCooldown"				"8"
+		"AbilityManaCost"				"70"
+		"AbilityCastRange"				"550"
+
+		"AbilitySpecial"
+		{
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_reduction_percent"	"-25"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"5"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_tarunda"
+				"Target" 		"TARGET"
+			}
+
+			"FireSound"
+			{
+				"EffectName"	"DOTA_Item.RodOfAtos.Activate"
+				"Target"		"TARGET"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_tarunda"
+			{
+				"IsDebuff"			"1"
+
+				"Duration"			"%duration"
+		
+				//"EffectName"		"particle_name"
+				//"EffectAttachType"	"follow_origin"
+		
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_DAMAGEOUTGOING_PERCENTAGE" "%damage_reduction_percent"
+				}
+			}
+		}
+	}
+	"bufu"
+	{
+		"BaseClass"						"ability_datadriven"
+		
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"MaxLevel"						"1"
+
+		"AbilityTextureName"			"crystal_maiden_freezing_field_alt1"
+
+		"precache"
+		{
+			
+		}
+
+		"AbilityCastPoint"				"0"
+		"AbilityCooldown"				"8"
+		"AbilityManaCost"				"50"
+		"AbilityCastRange"				"500"
+
+		"AbilitySpecial"
+		{
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"magic_multiplier"		"8"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"abilities/spells/magic_bufu"
+				"Function"		"SpellCast"
+			}
+		}
+	}
+	"dia"
+	{
+		"BaseClass"						"ability_datadriven"
+		
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"MaxLevel"						"1"
+
+		"AbilityTextureName"			"dia"
+
+		"precache"
+		{
+			
+		}
+
+		"AbilityCastPoint"				"0"
+		"AbilityCooldown"				"8"
+		"AbilityManaCost"				"50"
+		"AbilityCastRange"				"500"
+
+		"AbilitySpecial"
+		{
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"magic_multiplier"		"10"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"abilities/spells/magic_dia"
+				"Function"		"SpellCast"
+			}
+		}
+	}
+	"garu"
+	{
+		"BaseClass"						"ability_datadriven"
+		
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"MaxLevel"						"1"
+
+		"AbilityTextureName"			"garu"
+
+		"precache"
+		{
+			
+		}
+
+		"AbilityCastPoint"				"0"
+		"AbilityCooldown"				"8"
+		"AbilityManaCost"				"50"
+		"AbilityCastRange"				"500"
+
+		"AbilitySpecial"
+		{
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"magic_multiplier"		"8"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"abilities/spells/magic_garu"
+				"Function"		"SpellCast"
+			}
+
+			"FireSound"
+			{
+				"EffectName"	"Hero_Windrunner.ShackleshotCast"
+				"Target" 		"CASTER"
+			}
+		}
+	}
+	"bash"
+	{
+		"BaseClass"						"ability_datadriven"
+		
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"MaxLevel"						"1"
+
+		"AbilityTextureName"			"slardar_bash"
+
+		"precache"
+		{
+			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+		}
+
+		"AbilityCastPoint"				"0"
+		"AbilityCooldown"				"8"
+		"AbilityManaCost"				"0"
+		"AbilityCastRange"				"150"
+
+		"AbilitySpecial"
+		{
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_percent"		"150"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"health_cost_percent"	"5"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"abilities/spells/physattack_bash"
+				"Function"		"SpellCast"
+			}
+
+			"FireSound"
+			{
+				"EffectName"	"Hero_DragonKnight.DragonTail.Target" // doesn't work, zzz
+				"Target" 		"TARGET"
+			}
+		}
+	}
+}

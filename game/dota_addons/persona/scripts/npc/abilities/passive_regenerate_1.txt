@@ -1,23 +1,28 @@
-	"resist_physical"
+	"regenerate_1"
 	{
 		"BaseClass"						"ability_datadriven"
 		
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"MaxLevel"						"1"
 
-		"AbilityTextureName"			"antimage_spell_shield"
+		"AbilityTextureName"			"regenerate_1"
 
 		"precache"
 		{
-
+			
 		}
+
+		"AbilityCastPoint"				"0"
+		"AbilityCooldown"				"0"
+		"AbilityManaCost"				"0"
+		"AbilityCastRange"				"0"
 
 		"AbilitySpecial"
 		{
 			"02"
 			{
-				"var_type"					"FIELD_INTEGER"
-				"physical_damage_reduction"	"-50"
+				"var_type"				"FIELD_INTEGER"
+				"regeneration"			"4"
 			}
 		}
 
@@ -27,23 +32,23 @@
 			{
 				"ScriptFile"	"personas.lua"
 				"Function"		"SetPassiveModifier"
-				"modifier"		"modifier_resist_physical"
+				"modifier"		"modifier_regenerate_1"
 			}
 		}
 
 		"Modifiers"
 		{
-			"modifier_resist_physical"
+			"modifier_regenerate_1"
 			{
-				"Passive"	"1"
-				"IsHidden"	"0"
+				"Passive"			"1"
+				"IsHidden"			"0"
 		
 				//"EffectName"		"particle_name"
 				//"EffectAttachType"	"follow_origin"
 		
 				"Properties"
 				{
-					"MODIFIER_PROPERTY_INCOMING_PHYSICAL_DAMAGE_PERCENTAGE" "%physical_damage_reduction"
+					"MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%regeneration"
 				}
 			}
 		}

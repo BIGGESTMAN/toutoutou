@@ -3,7 +3,6 @@
 	"item_slime"
 	{
 		"BaseClass"						"item_datadriven"
-		"ID"							"2001"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"Model"							"models/props_gameplay/red_box.vmdl" 
 		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
@@ -41,30 +40,120 @@
 				"persona"		"slime"
 			}
 		}
+	}
+
+	"item_angel"
+	{
+		"BaseClass"						"item_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"Model"							"models/props_gameplay/red_box.vmdl" 
+		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
+
+		"AbilityTextureName"			"item_angel"
+		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
+		"ItemAliases"					"angel"
 		
-		"Modifiers"
+		"AbilityCooldown"				"6"
+		"AbilityCastPoint"				"0.5"
+		"AbilityManaCost"				"0"
+		"ItemCost"						"0"
+		"ItemDroppable"					"0"
+		"ItemSellable"					"0"
+
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		
+		"MaxUpgradeLevel"				"1"
+		"ItemBaseLevel"					"1"
+		
+		"OnSpellStart"
 		{
-			"modifier_slime"
+			"FireSound"
 			{
-				"Passive"	"0"
-				"IsHidden"	"1"
-
-				"Attributes"		"MODIFIER_ATTRIBUTE_MULTIPLE"
-
-				"OnCreated"
-				{
-					"RunScript"
-					{
-						"ScriptFile"	"personas.lua"
-						"Function"		"InitializePersonaStats"
-						"persona"		"slime"
-					}
-				}
+				"EffectName"		"powerup_04"
+				"Target"			"CASTER"
 			}
-
-			"modifier_slime_active"
+				
+			"RunScript"
 			{
+				"ScriptFile"	"personas.lua"
+				"Function"		"Activate"
+				"persona"		"angel"
+			}
+		}
+	}
 
+	"item_apsaras"
+	{
+		"BaseClass"						"item_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"Model"							"models/props_gameplay/red_box.vmdl" 
+		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
+
+		"AbilityTextureName"			"item_angel"
+		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
+		"ItemAliases"					"apsaras"
+		
+		"AbilityCooldown"				"6"
+		"AbilityCastPoint"				"0.5"
+		"AbilityManaCost"				"0"
+		"ItemCost"						"0"
+		"ItemDroppable"					"0"
+		"ItemSellable"					"0"
+
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		
+		"MaxUpgradeLevel"				"1"
+		"ItemBaseLevel"					"1"
+		
+		"OnSpellStart"
+		{
+			"FireSound"
+			{
+				"EffectName"		"powerup_04"
+				"Target"			"CASTER"
+			}
+				
+			"RunScript"
+			{
+				"ScriptFile"	"personas.lua"
+				"Function"		"Activate"
+				"persona"		"apsaras"
+			}
+		}
+	}
+
+	"item_double_fusion"
+	{
+		"BaseClass"						"item_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"Model"							"models/props_gameplay/red_box.vmdl" 
+		"Effect"						"particles/generic_gameplay/dropped_item.vpcf"
+
+		"AbilityTextureName"			"item_double_fusion"
+		"AbilityCastAnimation"			"ACT_DOTA_DISABLED"
+		"ItemAliases"					"double fusion"
+		
+		"ItemCost"						"0"
+		"ItemDroppable"					"0"
+		"ItemSellable"					"0"
+
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
+
+		"ItemShareability"				"ITEM_NOT_SHAREABLE"
+		
+		"MaxUpgradeLevel"				"1"
+		"ItemBaseLevel"					"1"
+		
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"personas.lua"
+				"Function"		"DoubleFusion"
 			}
 		}
 	}
