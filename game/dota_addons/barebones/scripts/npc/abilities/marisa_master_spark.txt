@@ -21,9 +21,9 @@
 		// Casting
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.4"
-		"AbilityCooldown"				"10 9 8 7"
+		"AbilityCooldown"				"12"
 		"AbilityManaCost"				"100 120 140 160"
-		"AbilityChannelTime" 			"2.0 2.0 2.0 2.0"
+		"AbilityChannelTime" 			"3"
 
 		"AbilityProcsMagicStick" 		"1"
 
@@ -34,29 +34,35 @@
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"slow"					"-60"
-				"_value"				"DOTA_Tooltip_Ability_master_spark_Slow"
+				"initial_slow"			"10"
+				"_value"				"DOTA_Tooltip_Ability_master_spark_Initial_Slow"
 			}
 			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"ending_slow"			"50"
+				"_value"				"DOTA_Tooltip_Ability_master_spark_Ending_Slow"
+			}
+			"03"
 			{
 				"var_type"				"FIELD_FLOAT"
 				"linger_duration"		"0.5"
 			}
-			"03"
+			"04"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"range"					"600 700 800 900"
 				"_value"				"DOTA_Tooltip_Ability_master_spark_Range"
 			}
-			"04"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"start_radius"			"300"
-			}
 			"05"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"end_radius"			"450"
+				"start_radius"			"200"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"end_radius"			"300"
 			}
 			"07"
 			{
@@ -69,15 +75,20 @@
 				"damage"				"175 250 325 400"
 				"_value"				"DOTA_Tooltip_Ability_master_spark_Damage"
 			}
-			"10"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"particle_length"		"1500"
-			}
 			"09"
 			{
 				"var_type"				"FIELD_INTEGER"
+				"particle_length"		"1200"
+			}
+			"10"
+			{
+				"var_type"				"FIELD_INTEGER"
 				"vulnerability_duration"	"8"
+			}
+			"11"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"tracer_duration"		"0.5"
 			}
 		}
 
@@ -125,7 +136,7 @@
 				"Properties"
 				{
 
-				    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%slow"
+				    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "-1"
 				}
 	    	}
 

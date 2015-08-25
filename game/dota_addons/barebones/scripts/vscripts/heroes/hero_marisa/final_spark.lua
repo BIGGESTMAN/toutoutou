@@ -2,7 +2,7 @@ require "heroes/hero_marisa/sparks"
 
 function finalSparkStart(keys)
 	local caster = keys.caster
-	startSpark(caster, keys.ability, "modifier_final_spark", "modifier_final_spark_stun", caster:GetForwardVector(), caster:FindAbilityByName("final_spark"), "particles/marisa/final_spark.vpcf")
+	startSpark(caster, keys.ability, "modifier_final_spark", "modifier_final_spark_stun", false, caster:GetForwardVector(), caster:FindAbilityByName("final_spark"), "particles/marisa/final_spark.vpcf")
 end
 
 -- local final_damage = damage

@@ -69,26 +69,31 @@
 				"var_type"				"FIELD_INTEGER"
 				"duration"				"2"
 			}
-			"11"
+			"08"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"particle_length"		"1800"
 			}
-			"08" // only used for tooltip
+			"09" // only used for tooltip
 			{
 				"var_type"				"FIELD_FLOAT"
 				"cast_point"			"1.2 1.0 0.8"
 				"_value"				"DOTA_Tooltip_Ability_final_spark_Cast_Point"
 			}
-			"09"
+			"10"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"vulnerability_damage_amp"	"8"
 			}
-			"10"
+			"11"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"vulnerability_damage_amp_max"	"100"
+			}
+			"12"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"tracer_duration"		"0"
 			}
 		}
 

@@ -77,8 +77,9 @@ function DistancePointSegment( p, v, w )
 	end
 end
 
-function GetEnemiesInCone(unit, start_radius, end_radius, end_distance, caster_forward, circles, debug, target_flags)
+function GetEnemiesInCone(unit, start_radius, end_radius, end_distance, caster_forward, circles, debug, target_flags, vision_duration)
 	local DEBUG = debug or false
+	local VISION_DURATION = vision_duration or 0
 	
 	-- Positions
 	local fv = caster_forward
@@ -86,6 +87,11 @@ function GetEnemiesInCone(unit, start_radius, end_radius, end_distance, caster_f
 
 	local start_point = origin + fv * start_radius -- Position to find units with start_radius
 	local end_point = origin + fv * (start_radius + end_distance) -- Position to find units with end_radius
+
+	if VISION_DURATION > 0 then
+		AddFOWViewer(unit:GetTeamNumber(), start_point, start_radius, VISION_DURATION, false)
+		AddFOWViewer(unit:GetTeamNumber(), end_point, end_radius, VISION_DURATION, false)
+	end
 
 	if DEBUG then
 		DebugDrawCircle(start_point, Vector(255,0,0), 5, start_radius, true, 1)
@@ -98,6 +104,8 @@ function GetEnemiesInCone(unit, start_radius, end_radius, end_distance, caster_f
 		local radius = start_radius + (end_radius - start_radius) / (number_of_intermediate_circles + 1) * i
 		local point = origin + fv * (end_distance / (number_of_intermediate_circles + 1) * i + start_radius)
 		intermediate_circles[i] = {point = point, radius = radius}
+
+		if VISION_DURATION > 0 then AddFOWViewer(unit:GetTeamNumber(), point, radius, VISION_DURATION, false) end
 	end
 	
 	if DEBUG then

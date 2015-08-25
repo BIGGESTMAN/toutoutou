@@ -103,8 +103,8 @@
 				1.000000,
 				0.000000,
 			]
-			m_fSpeedMax = 1300.000000
-			m_fSpeedMin = 1300.000000
+			m_fSpeedMax = 900.000000
+			m_fSpeedMin = 900.000000
 			m_LocalCoordinateSystemSpeedMin =
 			[
 				-3000.000000,
@@ -135,16 +135,17 @@
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMin =
 			[
+				-200.000000,
 				-100.000000,
-				0.000000,
 				80.000000,
 			]
 			m_OffsetMax =
 			[
-				-100.000000,
-				0.000000,
+				-200.000000,
+				100.000000,
 				80.000000,
 			]
+			m_bLocalCoords = true
 		},
 		{
 			_class = "C_INIT_RandomColor"
