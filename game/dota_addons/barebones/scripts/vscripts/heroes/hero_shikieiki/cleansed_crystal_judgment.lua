@@ -91,7 +91,6 @@ function duelEnded(keys)
 	target.cleansed_crystal_duel_target = nil
 
 	target:SetForceAttackTarget(nil)
-	print(target.cleansed_crystal_illusion)
 	if target.cleansed_crystal_illusion then target:Kill(keys.ability, target) end
 end
 

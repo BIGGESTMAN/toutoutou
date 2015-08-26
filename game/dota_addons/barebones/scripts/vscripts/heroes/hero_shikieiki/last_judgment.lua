@@ -18,7 +18,7 @@ function spellCast(keys)
 	local total_guilt = 0
 	for k,unit in pairs(targets) do
 		if unit.guilt then total_guilt = total_guilt + unit.guilt end
-		print(unit.guilt)
+		-- print(unit.guilt)
 	end
 
 	local damage = ability:GetSpecialValueFor("base_damage") + total_guilt * ability:GetSpecialValueFor("bonus_damage")
@@ -30,7 +30,6 @@ function spellCast(keys)
 	-- DebugDrawCircle(origin, Vector(180,40,40), 0.5, radius, true, 0.2)
 
 	local particle = ParticleManager:CreateParticle("particles/shikieiki/last_judgment.vpcf", PATTACH_ABSORIGIN, target)
-	-- ParticleManager:SetParticleControlEnt(particle, 0, target, PATTACH_POINT_FOLLOW, "attach_hitloc", target:GetAbsOrigin(), true)
-	ParticleManager:SetParticleControlEnt(particle, 1, target, PATTACH_POINT_FOLLOW, "attach_origin", target:GetAbsOrigin(), true)
+	ParticleManager:SetParticleControlEnt(particle, 1, target, PATTACH_POINT, "attach_origin", target:GetAbsOrigin(), true)
 	ParticleManager:SetParticleControlEnt(particle, 3, target, PATTACH_POINT, "attach_origin", target:GetAbsOrigin(), true)
 end
