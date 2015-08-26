@@ -27,6 +27,8 @@ function spellCast(keys)
 		ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
 	end
 
+	if target:IsIllusion() then target:Kill(ability, caster) end
+
 	-- DebugDrawCircle(origin, Vector(180,40,40), 0.5, radius, true, 0.2)
 
 	local particle = ParticleManager:CreateParticle("particles/shikieiki/last_judgment.vpcf", PATTACH_ABSORIGIN, target)
