@@ -12,6 +12,7 @@ function spellCast(keys)
 
 	-- handle_UnitOwner needs to be nil, else it will crash the game.
 	local illusion = CreateUnitByName(unit_name, target_point, true, caster, nil, caster:GetTeamNumber())
+	illusion:SetForwardVector((target:GetAbsOrigin() - illusion:GetAbsOrigin()):Normalized())
 	illusion:SetPlayerID(caster:GetPlayerID())
 	--illusion:SetControllableByPlayer(player, true)
 	
@@ -79,6 +80,10 @@ function spellCast(keys)
 
 	ability:ApplyDataDrivenModifier(caster, target, modifier_duel, {})
 	target.cleansed_crystal_duel_target = illusion
+
+	illusion.duel_particle = ParticleManager:CreateParticle("particles/shikieiki/cleansed_crystal_judgment.vpcf", PATTACH_ABSORIGIN, illusion)
+	local center_point = illusion:GetAbsOrigin() + (target:GetAbsOrigin() - illusion:GetAbsOrigin()) / 2
+	ParticleManager:SetParticleControl(illusion.duel_particle, 0, center_point)
 end
 
 function duelEnded(keys)
@@ -92,6 +97,10 @@ function duelEnded(keys)
 
 	target:SetForceAttackTarget(nil)
 	if target.cleansed_crystal_illusion then target:Kill(keys.ability, target) end
+
+	if target.duel_particle then
+		ParticleManager:DestroyParticle(target.duel_particle, false)
+	end
 end
 
 function illusionAttackLanded(keys)

@@ -12,7 +12,7 @@
 
 		"precache"
 		{
-
+			"particle"					"particles/shikieiki/cleansed_crystal_judgment.vpcf"
 		}
 
 		"AbilityCastPoint"				"0.4"
