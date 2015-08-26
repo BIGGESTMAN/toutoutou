@@ -11,7 +11,9 @@
 
 		"precache"
 		{
-			"particle"					"particles/shikieiki/ten_kings.vpcf"
+			"particle"					"particles/shikieiki/ten_kings_damage.vpcf"
+			"particle"					"particles/shikieiki/ten_kings_healing.vpcf"
+			"particle"					"particles/shikieiki/ten_kings_ground.vpcf"
 		}
 
 		"AbilityCastPoint"				"0.4"

@@ -24,14 +24,20 @@ function spellCast(keys)
 
 	for k,unit in pairs(enemy_targets) do
 		ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
+		local damage_particle = ParticleManager:CreateParticle("particles/shikieiki/ten_kings_damage.vpcf", PATTACH_POINT, caster)
+		ParticleManager:SetParticleControlEnt(damage_particle, 0, caster, PATTACH_POINT, "attach_hitloc", caster:GetAbsOrigin(), true)
+		ParticleManager:SetParticleControlEnt(damage_particle, 1, unit, PATTACH_POINT, "attach_hitloc", unit:GetAbsOrigin(), true)
 	end
 	for k,unit in pairs(ally_targets) do
 		unit:Heal(healing, caster)
+		local healing_particle = ParticleManager:CreateParticle("particles/shikieiki/ten_kings_healing.vpcf", PATTACH_POINT, caster)
+		ParticleManager:SetParticleControlEnt(healing_particle, 0, caster, PATTACH_POINT, "attach_hitloc", caster:GetAbsOrigin(), true)
+		ParticleManager:SetParticleControlEnt(healing_particle, 1, unit, PATTACH_POINT, "attach_hitloc", unit:GetAbsOrigin(), true)
 	end
 
-	DebugDrawCircle(origin, Vector(180,40,40), 1, radius, true, 0.2)
+	-- DebugDrawCircle(origin, Vector(180,40,40), 1, radius, true, 0.2)
 
-	-- local particle = ParticleManager:CreateParticle("particles/shikieiki/last_judgment.vpcf", PATTACH_ABSORIGIN, target)
+	local particle = ParticleManager:CreateParticle("particles/shikieiki/ten_kings_ground.vpcf", PATTACH_ABSORIGIN, caster)
 	-- ParticleManager:SetParticleControlEnt(particle, 0, target, PATTACH_POINT_FOLLOW, "attach_hitloc", target:GetAbsOrigin(), true)
 	-- ParticleManager:SetParticleControlEnt(particle, 1, target, PATTACH_POINT_FOLLOW, "attach_origin", target:GetAbsOrigin(), true)
 	-- ParticleManager:SetParticleControlEnt(particle, 3, target, PATTACH_POINT, "attach_origin", target:GetAbsOrigin(), true)
