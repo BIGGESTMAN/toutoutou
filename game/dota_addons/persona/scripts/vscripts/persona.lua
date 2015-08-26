@@ -294,11 +294,6 @@ function GameMode:OnHeroInGame(hero)
 		if not hero:IsIllusion() then
 			if STARTING_ITEMS then
 				hero:AddItem(CreateItem("item_blink", hero, hero))
-				-- hero:AddItem(CreateItem("item_force_staff", hero, hero))
-				-- hero:AddItem(CreateItem("item_heart", hero, hero))
-				-- hero:AddItem(CreateItem("item_silver_edge", hero, hero))
-				-- hero:AddItem(CreateItem("item_orchid", hero, hero))
-				-- hero:AddItem(CreateItem("item_dagon", hero, hero))
 			end
 		end
 	end)
@@ -312,6 +307,57 @@ function GameMode:OnHeroInGame(hero)
 			hero:FindAbilityByName(ability):SetLevel(1)
 		end
 	end
+
+	Setup_Hero_Panel(hero)
+end
+
+-- Notify Panorama that the player spawned
+function Setup_Hero_Panel(hero)
+	print("?")
+	local playerid = hero:GetPlayerOwnerID()
+	local heroid = PlayerResource:GetSelectedHeroID(playerid)
+	local heroname = hero:GetUnitName()
+
+	-- get hero entindex and create hero panel
+	local HeroIndex = hero:GetEntityIndex()
+	Create_Hero_Panel(playerid, heroid, heroname, "landscape", HeroIndex)
+
+	local hero_health = hero:GetHealth()
+	local damagedbool = false
+	local grace_peroid = false
+	-- update hero panel
+	Timers:CreateTimer(function()
+		local player = PlayerResource:GetPlayer(playerid)
+		local unspentpoints = hero:GetAbilityPoints()
+		local current_hero_health = hero:GetHealth()
+		
+		-- if not grace peroid, check for health difference
+		if not grace_peroid then
+			if current_hero_health < hero_health and damagedbool == false then
+				damagedbool = true
+				
+				-- set delay for the red to stay
+				Timers:CreateTimer(1, function()
+					hero_health = current_hero_health
+					damagedbool = false
+					grace_peroid = true
+					-- set grace peroid
+					Timers:CreateTimer(1, function() grace_peroid = false end)
+				end)
+			else
+				hero_health = current_hero_health
+			end
+		end
+		
+		CustomGameEventManager:Send_ServerToPlayer(player, "update_hero", {playerid = playerid, heroname=heroname, hero=HeroIndex, damaged=damagedbool, unspent_points=unspentpoints})
+		return 0.1
+	end)
+end
+
+function Create_Hero_Panel(playerid, heroID, heroname, imagestyle, HeroIndex)
+	local player = PlayerResource:GetPlayer(playerid)
+
+	CustomGameEventManager:Send_ServerToPlayer(player, "create_persona", {heroid=heroID, heroname=heroname, imagestyle=imagestyle, playerid = playerid, hero=HeroIndex})
 end
 
 --[[

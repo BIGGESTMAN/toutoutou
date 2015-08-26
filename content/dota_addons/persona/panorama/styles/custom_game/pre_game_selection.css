@@ -1,0 +1,576 @@
+@define drop_down_width: 150px;
+@define drop_down_height: 41px;
+
+.PreGameSelectionRoot
+{
+	width: 100%;
+	height: 100%;
+	
+}
+
+#PlayerListContainer
+{	
+	flow-children: down;	
+
+	visibility: visible;
+	color: white;
+	
+	background-color: #444444; 
+	padding: 10px;
+	padding-top: 0px;
+	
+	margin-left: 50px;
+	margin-top: 50px;
+	
+	border: 2px solid black;
+	
+	horizontal-align: middle;
+	margin-top: 200px;
+
+	opacity: 1;
+	
+}
+
+@keyframes 'Slide_In_Animation'
+{
+	0%
+	{
+		transform: translateX(100%);
+	} 
+				
+	100%
+	{
+		transform: translateX(0%);
+	}
+}
+
+@keyframes 'Drop_In_Animation'
+{
+	0%
+	{
+		transform: rotateX( 90deg );
+	}
+				
+	100%
+	{
+		transform: rotateX( 0deg );
+	}
+}
+
+#CountDown{
+	font-size: 150px;
+	color: gold;
+	
+	transform: translateY(-40px);
+
+	transform: rotateX(90deg);
+	
+	animation-name: Drop_In_Animation;
+	animation-duration: 1s;
+	animation-delay: 0.1s;
+	animation-timing-function: ease-out;
+	
+	horizontal-align: middle;
+	margin-top: 50px;
+}
+
+#CountDownHeader{
+	font-size: 50px;
+	color: gold;
+	
+	margin-bottom: 50px;
+
+	horizontal-align: middle;
+}
+
+
+#HostPanel{
+	width: 200px;
+	height: 100%;
+	
+	flow-children: right;
+	
+	horizontal-align: left;
+	vertical-align: middle;
+	
+	visibility: collapse;
+}
+
+.HostContainer{
+	height: 100%;
+	width: 90%;
+	
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #191e1e ), to( #292e2e ) );
+	border-right: 2px solid #ffffff44;	
+}
+
+.Closed{
+	visibility: collapse;
+}
+
+#Host_Header{
+	margin-top: 20px;
+    font-size: 18px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    color: #d5d7d7;	
+	
+	horizontal-align: middle;
+}
+
+#ToggleHostButton{
+	height: 10%;
+	width: 10%;
+	
+	vertical-align: middle;
+	
+    background-color: gradient( linear, 0% 0%, 0% 100%, from( #5A615Ecc ), to( #879695cc ));
+	border: 1px solid #ffffff44;
+	border-left: 0px solid red;
+	
+	transition-property: background-color;
+	transition-duration: .2s;
+}
+
+#ToggleHostButton:hover{
+    background-color: gradient( linear, 0% 0%, 0% 100%, from( #5f6663 ), to( #b4c2c1 ));
+}
+
+#LockTeamButton{
+	height: 5%;
+	width: 80%; 
+	margin-top: 25px;
+	margin-bottom: 25px;
+	
+	vertical-align: middle;
+	horizontal-align: middle; 
+	
+    background-color: gradient( linear, 0% 0%, 0% 100%, from( #5A615Ecc ), to( #879695cc ));
+	box-shadow: fill #002a6644 -4px -4px 8px 9px;
+	border-top: 1px solid #ffffff44;
+	border-right: 1px solid #00000088;
+	border-left: 1px solid #ffffff44;
+	border-bottom: 1px solid #00000088;
+	
+	transition-property: background-color;
+	transition-duration: .2s;
+
+    wash-color: #99999922;
+}
+
+#LockTeamButtonText{
+    font-size: 18px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #d5d7d7;
+	
+    vertical-align: middle;
+	horizontal-align: middle;
+}
+
+#StartButton{
+	height: 50px;
+	width: 250px; 
+	margin-bottom: 25px;
+	
+	vertical-align: bottom;
+	horizontal-align: middle; 
+	
+    background-color: gradient( linear, 0% 0%, 0% 100%, from( #5A615Ecc ), to( #879695cc ));
+	box-shadow: fill #002a6644 -4px -4px 8px 9px;
+	border-top: 1px solid #ffffff44;
+	border-right: 1px solid #00000088;
+	border-left: 1px solid #ffffff44;
+	border-bottom: 1px solid #00000088;
+	
+	transition-property: background-color;
+	transition-duration: .2s;
+
+    wash-color: #99999922;
+    visibility: collapse;
+}
+
+#StartButton:enabled:hover, #LockTeamButton:hover{
+    background-color: gradient( linear, 0% 0%, 0% 100%, from( #5f6663 ), to( #b4c2c1 ));
+}
+
+#StartButton Label{
+    font-size: 25px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #d5d7d7;
+	
+    vertical-align: middle;
+	horizontal-align: middle;
+}
+
+#StartButton:enabled:hover Label{
+    color: white;
+}
+
+#StartButton:active, #LockTeamButton:active
+{
+    wash-color: #ffffff;
+}
+
+.Player{
+	margin-top: 10px;
+	flow-children: right;
+	height: 60px;
+	
+	padding: 10px;
+	
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #191e1e ), to( #292e2e ) );
+	border: 2px solid #5e686966;
+	
+}
+
+.Player:hover, .Local:hover{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #191e1e ), to( #333333 ) );
+
+	transition-property: background-color;
+	transition-duration: 0.2s;
+	transition-timing-function: ease-in-out;
+}
+
+.Ready, .Ready:hover{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #80a438 ), to( #597227 ));
+}
+
+.Local{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #191e1e ), to( #292e2e ) );
+	border: 1px solid #aea600;
+}
+
+.Host{
+	width: 50px;
+	height: 100%;
+	
+    background-image: url("s2r://panorama/images/status_icons/icon_star_png.vtex");
+
+	background-repeat: no-repeat;
+	background-position: right 38px 35%;
+	background-size: 32px 32px;
+	
+}
+#Left_Bar{
+	width: 80%;
+	height: 100%;
+	
+    background-image: url("s2r://panorama/images/backgrounds/gallery_background.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	
+	border-left: 3px solid #444444; 
+	/*
+		This border is used to give the impression it's for the loading_screens panel
+	*/
+}
+
+#Right_Bar {
+	flow-children: down;
+	height: 100%;
+	width: 400px;
+	 
+	background-image: url("file://{images}/selection/pattern.png");
+	background-size: 100px;
+	
+	border-left: 3px solid #444444; 
+	border-bottom: 3px solid #444444; 
+	
+	vertical-align: top;
+	horizontal-align: right;
+
+	
+	padding: 20px;
+	
+	animation-name: Slide_In_Animation;
+	animation-duration: 1.5s;
+	animation-timing-function: ease-out;
+}
+#Right_Bar:hover{
+	border-left: 3px solid #555555; 
+	border-bottom: 3px solid #555555; 
+}
+
+#Minimap{
+	height: 300px;
+	width: 300px;
+	
+	background-size: 100%;
+
+	border: 3px solid #444444;
+
+	horizontal-align: middle;
+	
+	background-repeat: no-repeat;
+
+}
+
+#Minimap:hover{
+	border: 3px solid #aea600;
+}
+
+#Minimap_Name{
+	horizontal-align: middle;
+	
+	border: 5px solid #444444;
+	border-top: 0px; 
+	
+	height: 35px;
+	padding: 5px;
+	color: #EEEEEE; 
+}
+
+#Addon_Name{
+	horizontal-align: middle;
+	
+	border: 5px solid #444444;
+	border-bottom: 0px; 
+	
+	height: 35px;
+	padding: 5px;
+	color: #EEEEEE; 
+}
+
+#Addon_Name:hover, #Minimap_Name:hover{
+	color: #DDDDDD;
+}
+
+#Map_Description, #Suggested_Players{
+	flow-children: down;
+	margin-top: 15px;
+	color: #EEEEEE;
+}
+
+#Description_Header{
+	color: gold;
+	font-size: 22px;
+}
+
+.Player:disabled{
+	margin-top: 10px;
+	flow-children: right;
+	height: 60px;
+	width: 1000px;
+	
+	padding: 5px;
+	
+	border: 2px solid #5e686966;
+	
+}
+
+#PlayerName{
+ 
+	flow-children: right;
+	margin-left: 5px;
+	margin-right: 5px;
+	
+	width: 200px;
+	height: 100%;
+
+	padding: 5px;
+}
+
+#PlayerName Label{
+	font-size: 20px;
+    font-weight: normal;
+    text-transform: uppercase;
+    color: #d5d7d7;
+	
+    vertical-align: middle;
+	margin-left: 2px; 
+}
+
+#PlayerAvatar{
+	height: 100%;
+	width: 65px;
+	vertical-align: middle; 
+}
+
+#HudButton{
+	height: drop_down_height;
+	width: 100px;
+	margin-right: 5px;
+	
+	vertical-align: middle;
+	horizontal-align: right; 
+	
+    background-color: gradient( linear, 0% 0%, 0% 100%, from( #5A615Ecc ), to( #879695cc ));
+	box-shadow: fill #002a6644 -4px -4px 8px 9px;
+	border-top: 1px solid #ffffff44;
+	border-right: 1px solid #00000088;
+	border-left: 1px solid #ffffff44;
+	border-bottom: 1px solid #00000088;
+	
+	transition-property: background-color;
+	transition-duration: .2s;
+
+    wash-color: #99999922;
+}
+
+.Small{
+	width: 75px;
+}
+
+.Small Label{
+	width: 75px;
+}
+
+#Hudbutton:enabled:hover
+{
+    background-color: gradient( linear, 0% 0%, 0% 100%, from( #5f6663 ), to( #b4c2c1 ));
+}
+
+#HudButton Label{
+    font-size: 24px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #d5d7d7;
+	
+    vertical-align: middle;
+	horizontal-align: middle;
+}
+
+#HudButton:enabled:hover Label{
+    color: white;
+}
+
+#HudButton:active 
+{
+    wash-color: #ffffff;
+}
+
+#HudButton:disabled
+{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #292e2e ), to( #191e1e ) );
+	border: 2px solid #3b414266;
+}
+
+/* ------------------------------------------------------------------------- */
+/*  DropDown                                                                 */
+/* ------------------------------------------------------------------------- */
+
+#RaceDropDown, #TeamDropDown, #ColorDropDown
+{
+	margin-left: 5px;
+	background-color: #292e2e;
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #292e2e ), to( #191e1e ) );
+
+	background-image: url("s2r://panorama/images/control_icons/arrow_dropdown_png.vtex");
+	
+	background-repeat: no-repeat;
+	background-position: right 38px 35%;
+	background-size: 32px 32px;
+	box-shadow: #00000055 -2px -2px 1px 4px;
+	
+	border: 2px solid #5e686966;
+	
+	font-size: 24px;
+	width: drop_down_width;
+	height: drop_down_height;
+	padding: 4px 8px;
+	z-index: 1;
+	vertical-align: center;
+	
+	transition-property: background-color, border;
+	transition-duration: 0.15s;
+	transition-timing-function: linear;
+}
+
+#RaceDropDown:enabled:hover, #TeamDropDown:enabled:hover, #ColorDropDown:enabled:hover
+{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #393e3e ), to( #292e2e ) );
+}
+
+#RaceDropDown:disabled, #TeamDropDown:disabled, #ColorDropDown:disabled
+{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #292e2e ), to( #191e1e ) );
+	border: 2px solid #3b414266;
+	background-size: 0px;
+	
+}
+
+#RaceDropDown:disabled Label, #TeamDropDown:disabled Label, #ColorDropDown:disabled Label
+{
+	color: #AAAAAA;
+}
+
+#RaceDropDown Label, #TeamDropDown Label, #ColorDropDown Label
+{
+	width: 100%;
+	margin: 3px 29px 0px 6px;
+	font-size: 18px;
+		
+	transition-property: color;
+	transition-duration: 0.15s;
+	transition-timing-function: linear;
+}
+
+#RaceDropDown:focus Label, #TeamDropDown:focus Label, #ColorDropDown:focus Label
+{
+	color: white;
+}
+
+#RaceDropDown.DropDownMenuVisible:focus Label, #TeamDropDown.DropDownMenuVisible:focus Label, #ColorDropDown.DropDownMenuVisible:focus Label
+{
+	color: white;
+}
+
+DropDownMenu
+{ 
+	width: drop_down_width;
+	flow-children: down;
+	background-color: #3d4448;
+	color: #e1e1e1;
+	font-size: 28px;
+	overflow: squish scroll;
+	z-index: 0;
+	transform: translateY(-40px);
+	opacity: 0.0;
+
+	transition-property: opacity, transform;
+	transition-duration: 0.15s;
+	transition-timing-function: ease-in;
+	
+	box-shadow: fill #00000066 -3px -3px 6px 6px;
+}
+
+DropDownMenu Label
+{
+	width: 100%;
+	padding: 8px;
+
+	color: #ffffff99;
+	background-color: #3d4448;
+
+	font-size: 18px;
+	font-weight: normal;
+	z-index: 0;
+	border-top: 1px solid #00000066;
+	border-bottom: 1px solid #00000066;
+
+	transition-property: background-color;
+	transition-duration: 0.2s;
+	transition-timing-function: ease-in-out;
+}
+
+DropDownMenu:disabled{
+}
+
+DropDownMenu Label:hover
+{
+	background-color: #585e62;
+}
+
+DropDownMenu.DropDownMenuVisible
+{
+	opacity: 1.0;
+
+	max-height: 444px;
+	transition-property: box-shadow;
+	transform: translateY(0px);
+}
