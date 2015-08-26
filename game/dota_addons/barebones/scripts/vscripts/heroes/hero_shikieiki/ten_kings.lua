@@ -18,6 +18,16 @@ function spellCast(keys)
 	iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
 	local ally_targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
 
+	for k,hero in pairs(ally_heroes) do
+		if hero:IsIllusion() and not hero.cleansed_crystal_illusion then
+			table.remove(ally_heroes, k)
+		end
+	end
+	for k,hero in pairs(enemy_heroes) do
+		if hero:IsIllusion() and not hero.cleansed_crystal_illusion then
+			table.remove(enemy_heroes, k)
+		end
+	end
 	local damage = ability:GetSpecialValueFor("damage_per_target") * #ally_heroes
 	local damage_type = ability:GetAbilityDamageType()
 	local healing = ability:GetSpecialValueFor("damage_per_target") * #enemy_heroes
