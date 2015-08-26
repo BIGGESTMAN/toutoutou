@@ -32,17 +32,21 @@ function spellCast(keys)
 	local damage_type = ability:GetAbilityDamageType()
 	local healing = ability:GetSpecialValueFor("damage_per_target") * #enemy_heroes
 
-	for k,unit in pairs(enemy_targets) do
-		ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
-		local damage_particle = ParticleManager:CreateParticle("particles/shikieiki/ten_kings_damage.vpcf", PATTACH_POINT, caster)
-		ParticleManager:SetParticleControlEnt(damage_particle, 0, caster, PATTACH_POINT, "attach_hitloc", caster:GetAbsOrigin(), true)
-		ParticleManager:SetParticleControlEnt(damage_particle, 1, unit, PATTACH_POINT, "attach_hitloc", unit:GetAbsOrigin(), true)
+	if damage > 0 then -- This will never come up as long as it counts the caster, but w/e
+		for k,unit in pairs(enemy_targets) do
+			ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
+			local damage_particle = ParticleManager:CreateParticle("particles/shikieiki/ten_kings_damage.vpcf", PATTACH_POINT, caster)
+			ParticleManager:SetParticleControlEnt(damage_particle, 0, caster, PATTACH_POINT, "attach_hitloc", caster:GetAbsOrigin(), true)
+			ParticleManager:SetParticleControlEnt(damage_particle, 1, unit, PATTACH_POINT, "attach_hitloc", unit:GetAbsOrigin(), true)
+		end
 	end
-	for k,unit in pairs(ally_targets) do
-		unit:Heal(healing, caster)
-		local healing_particle = ParticleManager:CreateParticle("particles/shikieiki/ten_kings_healing.vpcf", PATTACH_POINT, caster)
-		ParticleManager:SetParticleControlEnt(healing_particle, 0, caster, PATTACH_POINT, "attach_hitloc", caster:GetAbsOrigin(), true)
-		ParticleManager:SetParticleControlEnt(healing_particle, 1, unit, PATTACH_POINT, "attach_hitloc", unit:GetAbsOrigin(), true)
+	if healing > 0 then
+		for k,unit in pairs(ally_targets) do
+			unit:Heal(healing, caster)
+			local healing_particle = ParticleManager:CreateParticle("particles/shikieiki/ten_kings_healing.vpcf", PATTACH_POINT, caster)
+			ParticleManager:SetParticleControlEnt(healing_particle, 0, caster, PATTACH_POINT, "attach_hitloc", caster:GetAbsOrigin(), true)
+			ParticleManager:SetParticleControlEnt(healing_particle, 1, unit, PATTACH_POINT, "attach_hitloc", unit:GetAbsOrigin(), true)
+		end
 	end
 
 	-- DebugDrawCircle(origin, Vector(180,40,40), 1, radius, true, 0.2)
