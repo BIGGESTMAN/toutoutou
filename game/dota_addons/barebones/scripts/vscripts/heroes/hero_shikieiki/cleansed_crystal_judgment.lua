@@ -4,7 +4,7 @@ function spellCast(keys)
 	local target = keys.target
 
 	local player = caster:GetPlayerID()
-	local unit_name = caster:GetUnitName()
+	local unit_name = target:GetUnitName()
 	local target_point = target:GetAbsOrigin() + (caster:GetAbsOrigin() - target:GetAbsOrigin()):Normalized() * 128 -- duels must be manly and therefore melee range
 	local duration = ability:GetSpecialValueFor("duration")
 	local outgoingDamage = 0
@@ -16,15 +16,15 @@ function spellCast(keys)
 	--illusion:SetControllableByPlayer(player, true)
 	
 	-- Level up the unit to the casters level
-	local casterLevel = caster:GetLevel()
+	local casterLevel = target:GetLevel()
 	for i=1,casterLevel-1 do
 		illusion:HeroLevelUp(false)
 	end
 
-	-- Set the skill points to 0 and learn the skills of the caster
+	-- Set the skill points to 0 and learn the skills of the target
 	illusion:SetAbilityPoints(0)
 	for abilitySlot=0,15 do
-		local ability = caster:GetAbilityByIndex(abilitySlot)
+		local ability = target:GetAbilityByIndex(abilitySlot)
 		if ability ~= nil then 
 			local abilityLevel = ability:GetLevel()
 			local abilityName = ability:GetAbilityName()
@@ -33,9 +33,9 @@ function spellCast(keys)
 		end
 	end
 
-	-- Recreate the items of the caster
+	-- Recreate the items of the target
 	for itemSlot=0,5 do
-		local item = caster:GetItemInSlot(itemSlot)
+		local item = target:GetItemInSlot(itemSlot)
 		if item ~= nil then
 			local itemName = item:GetName()
 			local newItem = CreateItem(itemName, illusion, illusion)
