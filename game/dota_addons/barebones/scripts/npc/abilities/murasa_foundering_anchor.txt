@@ -93,7 +93,7 @@
 			"10"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"charge_restore_time"	"10"
+				"charge_restore_time"	"15"
 				"_value"				"DOTA_Tooltip_Ability_Foundering_Anchor_Charge_Restore_Time"
 			}
 			"11"
@@ -283,6 +283,16 @@
 	    				"Function"		"dealGhostDamage"
 	    			}
 	    		}
+			}
+
+			"modifier_foundering_anchor_throwing_anchor"
+			{
+				"IsHidden"	"1"
+
+				"States"
+				{
+					"MODIFIER_STATE_COMMAND_RESTRICTED"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
 			}
 		}
 	}

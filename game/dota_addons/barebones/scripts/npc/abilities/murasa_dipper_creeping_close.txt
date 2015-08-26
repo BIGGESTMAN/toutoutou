@@ -26,7 +26,7 @@
 		// Casting
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.4"
-		"AbilityCooldown"				"10 8 6 4"
+		"AbilityCooldown"				"11 9 7 5"
 		"AbilityManaCost"				"50"
 
 		"AbilityProcsMagicStick" 		"1"

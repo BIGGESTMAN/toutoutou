@@ -11,6 +11,10 @@ function anchor(caster, ability, target_point)
 
 	local particle = ParticleManager:CreateParticle("particles/foundering_anchor_aura.vpcf", PATTACH_ABSORIGIN_FOLLOW, anchor)
 	ParticleManager:SetParticleControl(particle, 1, Vector(ability:GetLevelSpecialValueFor("resists_reduction_radius", ability_level),0,0))
+
+	-- Prevent caster from acting while anchor is in flight
+	local anchor_flight_time = (target_point - caster:GetAbsOrigin()):Length2D() / ability:GetLevelSpecialValueFor("speed", ability_level)
+	ability:ApplyDataDrivenModifier(caster, caster, "modifier_foundering_anchor_throwing_anchor", {duration = anchor_flight_time})
 end
 
 function pullAnchor(caster, ability, pull_destination, anchor)
@@ -26,6 +30,10 @@ function pullAnchor(caster, ability, pull_destination, anchor)
 	anchor.units_dragging = {}
 
 	moveAnchor(caster, anchor_ability, anchor, caster:GetAbsOrigin(), true)
+
+	-- Prevent caster from acting while anchor is in flight
+	local anchor_flight_time = (anchor:GetAbsOrigin() - pull_destination):Length2D() / anchor_ability:GetSpecialValueFor("speed")
+	anchor_ability:ApplyDataDrivenModifier(caster, caster, "modifier_foundering_anchor_throwing_anchor", {duration = anchor_flight_time})
 end
 
 function moveAnchor(caster, ability, anchor, target_point, pulling)
