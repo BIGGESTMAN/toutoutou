@@ -5,13 +5,13 @@ function spellCast(keys)
 
 	local player = caster:GetPlayerID()
 	local unit_name = caster:GetUnitName()
-	local origin = target:GetAbsOrigin()
+	local target_point = target:GetAbsOrigin() + (caster:GetAbsOrigin() - target:GetAbsOrigin()):Normalized() * 128 -- duels must be manly and therefore melee range
 	local duration = ability:GetSpecialValueFor("duration")
 	local outgoingDamage = 0
 	local incomingDamage = ability:GetSpecialValueFor("damage_taken") - 100
 
 	-- handle_UnitOwner needs to be nil, else it will crash the game.
-	local illusion = CreateUnitByName(unit_name, origin, true, caster, nil, caster:GetTeamNumber())
+	local illusion = CreateUnitByName(unit_name, target_point, true, caster, nil, caster:GetTeamNumber())
 	illusion:SetPlayerID(caster:GetPlayerID())
 	--illusion:SetControllableByPlayer(player, true)
 	
@@ -86,10 +86,12 @@ function duelEnded(keys)
 
 	if not target.cleansed_crystal_duel_target:IsNull() then
 		target.cleansed_crystal_duel_target:SetForceAttackTarget(nil)
+		target.cleansed_crystal_duel_target:RemoveModifierByName("modifier_cleansed_crystal_judgment")
 	end
 	target.cleansed_crystal_duel_target = nil
 
 	target:SetForceAttackTarget(nil)
+	print(target.cleansed_crystal_illusion)
 	if target.cleansed_crystal_illusion then target:Kill(keys.ability, target) end
 end
 

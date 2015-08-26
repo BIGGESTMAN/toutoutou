@@ -89,6 +89,15 @@
 						"Function"		"onDeath"
 					}
 				}
+
+				"OnRespawn"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_shikieiki/not_guilty.lua"
+						"Function"		"resetGuiltModifier"
+					}
+				}
 	    	}
 
 	    	"modifier_not_guilty_debuff"
