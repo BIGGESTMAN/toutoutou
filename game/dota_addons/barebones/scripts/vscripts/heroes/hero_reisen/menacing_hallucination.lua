@@ -16,7 +16,7 @@ function createIllusion(keys)
 	illusion:SetPlayerID(caster:GetPlayerID())
 	illusion:SetControllableByPlayer(player, true)
 	
-	-- Level Up the unit to the casters level
+	-- Level up the unit to the casters level
 	local casterLevel = caster:GetLevel()
 	for i=1,casterLevel-1 do
 		illusion:HeroLevelUp(false)
@@ -44,18 +44,10 @@ function createIllusion(keys)
 		end
 	end
 
-	-- Add our datadriven Metamorphosis modifier if appropiate
-	-- You can add other buffs that want to be passed to illusions this way
-	if caster:HasModifier("modifier_metamorphosis") then
-		local meta_ability = caster:FindAbilityByName("terrorblade_metamorphosis_datadriven")
-		meta_ability:ApplyDataDrivenModifier(illusion, illusion, "modifier_metamorphosis", nil)
-	end
-
 	-- Set the unit as an illusion
 	-- modifier_illusion controls many illusion properties like +Green damage not adding to the unit damage, not being able to cast spells and the team-only blue particle
-	illusion:AddNewModifier(caster, ability, "modifier_illusion", { duration = duration, outgoing_damage = outgoingDamage, incoming_damage = incomingDamage })
-	illusion:AddNewModifier(caster, ability, "modifier_hallucination", {})
-	
 	-- Without MakeIllusion the unit counts as a hero, e.g. if it dies to neutrals it says killed by neutrals, it respawns, etc.
+	illusion:AddNewModifier(caster, ability, "modifier_illusion", { duration = duration, outgoing_damage = outgoingDamage, incoming_damage = incomingDamage })
 	illusion:MakeIllusion()
+	illusion:AddNewModifier(caster, ability, "modifier_hallucination", {})
 end

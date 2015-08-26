@@ -13,8 +13,6 @@
 
 		}
 
-		"AbilityProcsMagicStick" 		"1"
-
 		"AbilitySpecial"
 		{
 			"01"
