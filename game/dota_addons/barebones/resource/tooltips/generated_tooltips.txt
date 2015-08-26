@@ -151,3 +151,29 @@
 		"DOTA_Tooltip_Ability_queen_of_midnight_Swoop_range_tooltip" "SWOOP RANGE:"
 		"DOTA_Tooltip_Ability_queen_of_midnight_Lore" "Dropping all pretense of elegance and courtesy, Remilia begins the hunt."
 
+		"DOTA_Tooltip_Ability_last_judgment" "Last Judgment"
+		"DOTA_Tooltip_Ability_last_judgment_Description" "Shikieiki smites an enemy, dealing pure damage around them. The damage increases based on the total Guilt of enemies hit. Instantly kills illusions."
+		"DOTA_Tooltip_Ability_last_judgment_Base_damage" "BASE PURE DAMAGE:"
+		"DOTA_Tooltip_Ability_last_judgment_Bonus_damage" "PURE DAMAGE PER GUILT:"
+		"DOTA_Tooltip_Ability_last_judgment_Radius" "RADIUS:"
+
+		"DOTA_Tooltip_Ability_ten_kings" "Trial of the Ten Kings"
+		"DOTA_Tooltip_Ability_ten_kings_Description" "A flash of light deals magical damage to enemies for each friendly hero, and heals all friendly units for each enemy hero."
+		"DOTA_Tooltip_Ability_ten_kings_Damage_per_target" "DAMAGE/HEAL PER HERO:"
+		"DOTA_Tooltip_Ability_ten_kings_Radius" "RADIUS:"
+
+		"DOTA_Tooltip_Ability_not_guilty" "Guilty or Not Guilty"
+		"DOTA_Tooltip_Ability_not_guilty_Description" "Enemy heroes gain Guilt whenever they participate in killing friendly heroes, kill friendly creeps and destroy buildings, the amount tripled near Shikieiki. Guilt reduces attack damage and maximum health. Enemies lose half their guilt when killed by Shikieiki's team."
+		"DOTA_Tooltip_Ability_not_guilty_Creep_kill_guilt" "GUILT FROM CREEP KILLS:"
+		"DOTA_Tooltip_Ability_not_guilty_Hero_assist_guilt" "GUILT FROM HERO ASSISTS:"
+		"DOTA_Tooltip_Ability_not_guilty_Hero_kill_guilt" "GUILT FROM HERO KILLS & DESTROYING BUILDINGS:"
+		"DOTA_Tooltip_Ability_not_guilty_Damage_reduction" "ATTACK DAMAGE REDUCTION PER GUILT:"
+		"DOTA_Tooltip_Ability_not_guilty_Health_reduction" "MAX HEALTH REDUCTION PER GUILT:"
+		"DOTA_Tooltip_Ability_not_guilty_Greater_guilt_radius" "RADIUS:"
+
+		"DOTA_Tooltip_Ability_cleansed_crystal_judgment" "Cleansed Crystal Judgment"
+		"DOTA_Tooltip_Ability_cleansed_crystal_judgment_Description" "Reflects the past sins of an enemy hero to summon an illusion of them and forces them to attack each other. The hero can't use items or abilities and takes bonus physical damage from the illusion based on their Guilt."
+		"DOTA_Tooltip_Ability_cleansed_crystal_judgment_Bonus_damage" "BONUS PHYSICAL DAMAGE PER GUILT:"
+		"DOTA_Tooltip_Ability_cleansed_crystal_judgment_Damage_taken" "ILLUSION DAMAGE TAKEN:"
+		"DOTA_Tooltip_Ability_cleansed_crystal_judgment_Duration" "DURATION:"
+

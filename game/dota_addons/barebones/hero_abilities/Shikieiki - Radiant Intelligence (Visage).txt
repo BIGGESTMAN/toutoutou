@@ -1,0 +1,73 @@
+Shikieiki - Radiant Intelligence (Visage)
+
+Base Stats
+
+STR : 20  (+2)
+AGI : 15  (+1.6)
+INT : 26  (+2.7)
+Damage : 32-38 
+Armor : 1
+Attacks / Second : 0.58
+Movement Speed : 305
+Turn Rate : 0.5
+Sight Range : 1800/800
+Attack Range : Melee
+Missile Speed : Instant
+Attack Duration : 0.35/0.65
+Base Attack Time : 1.7
+
+Lv. 25
+
+STR : 88
+AGI : 73
+INT : 110
+HP : 1822
+Mana : 1430
+Damage : 142-148
+Armor : 11.22
+
+[Q] Last Judgment (last_judgment) : Shikieiki smites an enemy, dealing pure damage around them. The damage increases based on the total Guilt of enemies hit. Instantly kills illusions.
+Spell Immunity - Can't target Spell Immune units. Blocked by Linken's Sphere.
+DevNotes - Illusions are instantly killed when they are the main target. Doesn't damage mechanical units.
+
+Cast Point : 0.4
+Base Pure Damage (base_damage) : 90/120/150/180
+Pure Damage Per Guilt (bonus_damage) : 0.5/1/1.5/2
+Range : 550
+Radius (radius) : 300
+Mana : 110/130/150/170
+Cooldown : 10
+
+[W] Trial of the Ten Kings (ten_kings) : A flash of light deals magical damage to enemies for each friendly hero, and heals all friendly units for each enemy hero.
+Spell Immunity - Spell Immune enemies block the damage, but are still counted for the heal.
+DevNotes - Doesn't heal/damage mechanical units.
+
+Cast Point : 0.4
+Damage/Heal Per Hero (damage_per_target) : 35/50/65/80
+Radius (radius) : 550
+Mana : 100/130/160/190
+Cooldown : 21/18/15/12
+
+[E] Guilty or Not Guilty (not_guilty) : Enemy heroes gain Guilt whenever they participate in killing friendly heroes, kill friendly creeps and destroy buildings, the amount tripled near Shikieiki. Guilt reduces attack damage and maximum health. Enemies lose half their guilt when killed by Shikieiki's team.
+Spell Immunity - Pierces Spell Immunity.
+DevNotes - Guilt cannot reduce attack damage and max health below 1. Killers of Shikieiki will gain triple Guilt.
+
+Guilt From Creep Kills (creep_kill_guilt) : 0.4/0.6/0.8/1
+Guilt From Hero Assists (hero_assist_guilt) : 4/6/8/10
+Guilt From Hero Kills & Destroying Buildings (hero_kill_guilt) : 8/12/16/20
+Attack Damage Reduction Per Guilt (damage_reduction) : 0.5
+Max Health Reduction Per Guilt (health_reduction) : 2
+Radius (greater_guilt_radius) : 500/600/700/800
+
+[R] Cleansed Crystal Judgment (cleansed_crystal_judgment) : Reflects the past sins of an enemy hero to summon an illusion of them and forces them to attack each other. The hero can't use items or abilities and takes bonus physical damage from the illusion based on their Guilt.
+Scepter - Reduces cooldown. The illusion takes no damage from the target.
+Spell Immunity - Pierces Spell Immunity. Blocked by Linken's Sphere.
+DevNotes - The illusion is a Creep-hero, and thus cannot be purged. It is also treated as a hero for Trial of the Ten Kings. On the target's death, the illusion vanishes. Works like Legion Commander's Duel.
+
+Cast Point : 0.4
+Bonus Physical Damage Per Guilt (bonus_damage) : 1/1.3/1.6
+Illusion Damage Taken (damage_taken) : 180/160/140%
+Duration (duration) : 4/5/6
+Range : 400
+Mana : 220/370/520
+Cooldown : 100
