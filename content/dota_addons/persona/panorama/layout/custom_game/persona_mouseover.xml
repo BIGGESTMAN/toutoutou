@@ -4,5 +4,11 @@
   </styles>
   <scripts>
     <include src="file://{resources}/scripts/custom_game/personas_list.js" /> 
+    <include src="file://{resources}/layout/custom_game/personas_list.xml" /> 
   </scripts>
+  <Panel hittest="false" class="PersonaMouseoverRoot">
+    <Panel hittest="false" class="PersonaMouseoverImage" onmouseover="RemoveStyle(PersonaAttributesContainer, PersonaAttributesContainerInvisible)" onmouseout="AddStyle(PersonaAttributesContainer, PersonaAttributesContainerInvisible)">
+      <Image id="PersonaImage"  src="file://{images}/custom_game/slime.png"/>
+    </Panel>
+  </Panel>
 </root>

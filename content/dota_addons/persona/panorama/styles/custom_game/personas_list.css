@@ -22,14 +22,26 @@
 	visibility: collapse;
 }
 
+.PersonaMouseoverRoot
+{
+	width: 100%;
+	height: 100%;
+}
+
 .PersonaMouseover
 {	
-	height: 25%;
-	width: 25%;
+	width: 76px;
+	height: 50px;
 	/*visibility: visible;*/
 	
-	margin-top: 500px;
-	margin-left: 100px;
+	margin-left: 1258px;
+	margin-top: 941px;
+	background-color:green;
+}
+
+.PersonaMouseoverDummyImage
+{	
+	opacity: 1;
 }
  
 .PersonaAttributeBox{
@@ -65,11 +77,11 @@
 #PersonaImage
 {	
 	
-	margin-top: 50px;
+	/*margin-top: 50px;
 	margin-left: 10px;
 
 	border: 3px solid grey;
-	border-bottom: 0px;
+	border-bottom: 0px;*/
 }
 
 .PersonaImageDead{
