@@ -15,6 +15,25 @@
 	
 
 }
+ 
+.PersonaAttributeBox{
+	horizontal-align: left;
+	
+	width: 75px;
+	height: 25px;
+	
+	opacity: 0.9;
+	border: 1px solid white;
+	background-image: url("file://{images}/revive_bar.png");
+ }
+ 
+.PersonaAttribute{
+	vertical-align: middle;
+	horizontal-align: middle;
+	
+	color: white;
+	text-shadow: 1px 1px 1px black; 
+ }
 
 .PersonaSection{
 	flow-children: down;

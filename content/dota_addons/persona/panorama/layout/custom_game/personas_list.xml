@@ -8,7 +8,23 @@
 	<Panel hittest="false" class="PersonasListRoot">
   
 
-		<Panel hittest="false" id="PersonasListContainer"/>
+		<Panel hittest="false" id="PersonasListContainer">
+      <Panel hittest="false" class="PersonaAttributeBox">
+        <Label hittest="false"  class="PersonaAttribute" id="PersonaStrength"/>
+      </Panel>
+      <Panel hittest="false" class="PersonaAttributeBox">
+        <Label hittest="false"  class="PersonaAttribute" id="PersonaMagic"/>
+      </Panel>
+      <Panel hittest="false" class="PersonaAttributeBox">
+        <Label hittest="false"  class="PersonaAttribute" id="PersonaEndurance"/>
+      </Panel>
+      <Panel hittest="false" class="PersonaAttributeBox">
+        <Label hittest="false"  class="PersonaAttribute" id="PersonaSwiftness"/>
+      </Panel>
+      <Panel hittest="false" class="PersonaAttributeBox">
+        <Label hittest="false"  class="PersonaAttribute" id="PersonaAgility"/>
+      </Panel>
+    </Panel>
 	
 	</Panel>
 </root>

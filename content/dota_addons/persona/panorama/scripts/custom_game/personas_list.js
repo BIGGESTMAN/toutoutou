@@ -106,34 +106,27 @@ function Key_Bind_Pressed(key_pressed, playerid){
 }
 
 function update_persona(data){
-	var playerid = data.playerid
-	var heroname = data.heroname
 	var hero = data.hero
-	
-	// calculate percentages
-	var	heroHealthPercentage =  Entities.GetHealthPercent(hero)
-	var	heroManaPercentage = Entities.GetMana(hero) / Entities.GetMaxMana(hero) * 100
-	
-	// set to 0 if hero is dead
-	if (Entities.IsAlive(hero) == false) {	
-		heroHealthPercentage = 0
-		heroManaPercentage = 0
-	}
-	
-	// find health bar and change health width
-	var statusbar = $.FindChildInContext('#Hero_Health_'+data.playerid+'_'+data.heroname, 'Hero_Status_Container_'+data.playerid+'_'+data.heroname)
-	statusbar.style['width'] = heroHealthPercentage+'%'
-	
-	// find mana bar and change mana width
-	statusbar = $.FindChildInContext('#Hero_Mana_'+data.playerid+'_'+data.heroname, 'Hero_Status_Container_'+data.playerid+'_'+data.heroname)
-	statusbar.style['width'] = heroManaPercentage+'%'
-	
-	$.Msg(data.attributes)
-	var overlay = $.FindChildInContext('#Hero_levelup_'+data.playerid+'_'+data.heroname, hero)
-	$.Msg(overlay)
-	overlay.visible = true
-	var overlaytext = overlay.GetChild(0)
-	overlaytext.text = data.attributes["str"]
+
+	var strengthText = $.FindChildInContext('#PersonaStrength', hero)
+	strengthText.visible = true
+	strengthText.text = "Strength:" + data.attributes["str"]
+
+	var magicText = $.FindChildInContext('#PersonaMagic', hero)
+	magicText.visible = true
+	magicText.text = "Magic:" + data.attributes["mag"]
+
+	var enduranceText = $.FindChildInContext('#PersonaEndurance', hero)
+	enduranceText.visible = true
+	enduranceText.text = "Endurance:" + data.attributes["endr"]
+
+	var swiftnessText = $.FindChildInContext('#PersonaSwiftness', hero)
+	swiftnessText.visible = true
+	swiftnessText.text = "Swiftness:" + data.attributes["swft"]
+
+	var agilityText = $.FindChildInContext('#PersonaAgility', hero)
+	agilityText.visible = true
+	agilityText.text = "Agility:" + data.attributes["agi"]
 	
 	// check if any overlays need to be added
 	hero_overlay(data)
