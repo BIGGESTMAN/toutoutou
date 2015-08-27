@@ -6,9 +6,8 @@
     <include src="file://{resources}/scripts/custom_game/personas_list.js" /> 
   </scripts>
 	<Panel hittest="false" class="PersonasListRoot">
-  
-
-		<Panel hittest="false" id="PersonasListContainer">
+    <Image id="PersonaImage"  src="file://{images}/custom_game/slime.png"/>
+		<Panel hittest="false" id="PersonaAttributesContainer">
       <Panel hittest="false" class="PersonaAttributeBox">
         <Label hittest="false"  class="PersonaAttribute" id="PersonaStrength"/>
       </Panel>

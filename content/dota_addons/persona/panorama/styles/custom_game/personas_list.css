@@ -2,11 +2,12 @@
 {
 	width: 100%;
 	height: 100%;
+	flow-children: right;
 }
 
-#PersonasListContainer
+#PersonaAttributesContainer
 {	
-	flow-children: down;	
+	flow-children: down;
 
 	visibility: visible;
 	
@@ -46,11 +47,11 @@
 	
 }
 
-.PersonaImage
+#PersonaImage
 {	
-	margin-top: 10px;
-    vertical-align: center;
-    horizontal-align: center;
+	
+	margin-top: 50px;
+	margin-left: 10px;
 
 	border: 3px solid grey;
 	border-bottom: 0px;

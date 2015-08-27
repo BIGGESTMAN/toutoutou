@@ -10,6 +10,7 @@ TEMPERANCE = 5
 
 personas_table = {
 	slime = {
+		name = "slime",
 		arcana = CHARIOT,
 		str = 3,
 		mag = 2,
@@ -24,6 +25,7 @@ personas_table = {
 		particle = "",
 	},
 	angel = {
+		name = "angel",
 		arcana = JUSTICE,
 		str = 4,
 		mag = 5,
@@ -38,6 +40,7 @@ personas_table = {
 		particle = "",
 	},
 	apsaras = {
+		name = "apsaras",
 		arcana = TEMPERANCE,
 		str = 3,
 		mag = 5,
@@ -109,7 +112,7 @@ function Activate(keys)
 	-- TODO: fire particle
 	-- TODO: start global persona-switch cooldown
 
-	Setup_Hero_Panel(caster)
+	Setup_Persona_Tooltip(caster)
 end
 
 function SetPassiveModifier(keys)
@@ -199,15 +202,14 @@ end
 
 
 -- Notify Panorama that the player spawned
-function Setup_Hero_Panel(hero)
-	print("?")
+function Setup_Persona_Tooltip(hero)
 	local playerid = hero:GetPlayerOwnerID()
 	local heroid = PlayerResource:GetSelectedHeroID(playerid)
 	local heroname = hero:GetUnitName()
 
 	-- get hero entindex and create hero panel
 	local HeroIndex = hero:GetEntityIndex()
-	Create_Hero_Panel(playerid, heroid, heroname, "landscape", HeroIndex)
+	Create_Persona_Tooltip(playerid, heroid, heroname, "landscape", HeroIndex, hero.activePersona)
 
 	local hero_health = hero:GetHealth()
 	local damagedbool = false
@@ -241,8 +243,8 @@ function Setup_Hero_Panel(hero)
 	end)
 end
 
-function Create_Hero_Panel(playerid, heroID, heroname, imagestyle, HeroIndex)
+function Create_Persona_Tooltip(playerid, heroID, heroname, imagestyle, HeroIndex, activePersona)
 	local player = PlayerResource:GetPlayer(playerid)
 
-	CustomGameEventManager:Send_ServerToPlayer(player, "create_persona", {heroid=heroID, heroname=heroname, imagestyle=imagestyle, playerid = playerid, hero=HeroIndex})
+	CustomGameEventManager:Send_ServerToPlayer(player, "create_persona", {heroid=heroID, heroname=heroname, imagestyle=imagestyle, playerid = playerid, hero=HeroIndex, personaName=activePersona.attributes["name"]})
 end

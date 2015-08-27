@@ -5,7 +5,7 @@ var rootparentORG = $('#PersonasListRoot')
 var PersonaID = 1
 function create_persona(data){
 	// find the container inside the root
-	var parent = $.FindChildInContext('#PersonasListContainer', rootparentORG)
+	var parent = $.FindChildInContext('#PersonaAttributesContainer', rootparentORG)
 	
 	// create the Hero Image panel under the parent found above, assigning the panel name "hero_playerid_heroname"
 	var hero = $.CreatePanel ('DOTAHeroImage', parent, PersonaID)
@@ -39,14 +39,6 @@ function create_persona(data){
 	var levelupLBL = $.CreatePanel ('Label', levelup, 'Hero_levelup_label_'+data.playerid+'_'+data.heroname)
 	levelupLBL.AddClass('LevelUpText')
 	levelupLBL.hittest = false
-
-	// var magic = $.CreatePanel ('Panel', hero, 'Hero_magic_'+data.playerid+'_'+data.heroname)
-	// magic.AddClass('LevelUp')
-	// magic.visible = true
-	
-	// var magicLabel = $.CreatePanel ('Label', levelup, 'Hero_magic_label_'+data.playerid+'_'+data.heroname)
-	// magicLabel.AddClass('LevelUpText')
-	// magicLabel.hittest = false
 	
 	var selectionfocus = $.CreatePanel ('Panel', hero, 'Hero_selectionfocus_'+data.playerid+'_'+data.heroname)
 	selectionfocus.AddClass('Focus')
@@ -71,6 +63,12 @@ function create_persona(data){
 	abilitypoints.visible = false	
 
 	PersonaID = PersonaID + 1
+
+
+	// var image = $.FindChildInContext('#PersonasListRoot', rootparentORG).GetChild(0)
+	var image = parent.GetParent().GetChild(0)
+	image.src = "file://{images}/custom_game/" + data.personaName + ".png"
+	$.Msg(data.personaName)
 }
 
 function OnFirstHeroButtonPressed (args) {
