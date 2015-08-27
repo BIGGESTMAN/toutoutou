@@ -26,9 +26,9 @@
         <Label hittest="false"  class="PersonaAttribute" id="PersonaAgility"/>
       </Panel>
     </Panel>
-    <Panel hittest="false" class="PersonaMouseover" onmouseover="RemoveStyle(PersonaAttributesContainer, PersonaAttributesContainerInvisible)" onmouseout="AddStyle(PersonaAttributesContainer, PersonaAttributesContainerInvisible)">
-      <Image id="PersonaImage"  class="PersonaMouseoverDummyImage" src="file://{images}/custom_game/dummy_image.png"/>
+    <!-- <Panel hittest="false" class="PersonaMouseover" onmouseover="RemoveStyle(PersonaAttributesContainer, PersonaAttributesContainerInvisible)" onmouseout="AddStyle(PersonaAttributesContainer, PersonaAttributesContainerInvisible)"> -->
+      <!-- <Image id="PersonaImage"  class="PersonaMouseoverDummyImage" src="file://{images}/custom_game/dummy_image.png"/> -->
       <!-- <Button/> -->
-    </Panel>
+    <!-- </Panel> -->
 	</Panel>
 </root>

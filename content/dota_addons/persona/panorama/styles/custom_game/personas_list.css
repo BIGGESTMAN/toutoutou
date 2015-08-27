@@ -39,6 +39,11 @@
 	background-color:green;
 }
 
+.PersonaMouseover:hover
+{	
+	visibility: collapse;
+}
+
 .PersonaMouseoverDummyImage
 {	
 	opacity: 1;

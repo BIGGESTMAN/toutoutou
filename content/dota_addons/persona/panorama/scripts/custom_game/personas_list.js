@@ -111,6 +111,23 @@ function Key_Bind_Pressed(key_pressed, playerid){
 function update_persona_tooltip(data){
 	var hero = data.hero
 
+	var container = $('#PersonaAttributesContainer')
+	// $.Msg(container)
+	var cursorPosition = GameUI.GetCursorPosition()
+	var mousingOverItem1 = cursorPosition[0] >= 1400 & cursorPosition[0] < 1483 & cursorPosition[1] > 1045 & cursorPosition[1] < 1104
+	if (mousingOverItem1)
+	{
+		var persona = Entities.GetItemInSlot(hero, 0)
+		$.Msg(persona)
+		container.visible = true
+	}
+	else
+	{
+		container.visible = false
+	}
+	// $.Msg(cursorPosition)
+	// $.Msg(mousingOverItem1)
+
 	var strengthText = $.FindChildInContext('#PersonaStrength', hero)
 	strengthText.visible = true
 	strengthText.text = "Strength:" + data.attributes["str"]
@@ -132,70 +149,6 @@ function update_persona_tooltip(data){
 	agilityText.text = "Agility:" + data.attributes["agi"]
 	
 	// check if any overlays need to be added
-	hero_overlay(data)
-}
-
-// first true value is saved and then returned so that they don't overlap, meaning the order of importance
-function hero_overlay(data){	
-	var playerid = data.playerid
-	var heroname = data.heroname
-	var hero = data.hero
-	
-	// find panels
-	var overlay = $.FindChildInContext('#Hero_Overlay_'+data.playerid+'_'+data.heroname, 'Hero_'+data.playerid+'_'+data.heroname)
-	var button = $.FindChildInContext('#Hero_revive_'+data.playerid+'_'+data.heroname, 'Hero_'+data.playerid+'_'+data.heroname)
-	var statuscontainer = $.FindChildInContext('#Hero_Status_Container_'+data.playerid+'_'+data.heroname, 'Hero_'+data.playerid+'_'+data.heroname)
-	// if hero is dead, enable overlay
-	if (Entities.IsAlive(hero) == false) {			
-		// set panels visible
-		overlay.visible = true
-		button.visible = true
-		statuscontainer.visible = false		
-		return
-	}
-	else{
-		// set panels invisible
-		overlay.visible = false
-		button.visible = false
-		statuscontainer.visible = true
-	}
-	
-	// iterate through the GetSelectedEntities table and find the heroid, if true he is selected  and save that as boolean
-	var heroFound = false
-	for (i = 0; i < Players.GetSelectedEntities(playerid).length; i++) {
-		if(Players.GetSelectedEntities(playerid)[i] == null){
-			break
-		}
-		if (Players.GetSelectedEntities(playerid)[i] == hero){
-			heroFound = true
-			break;
-		}
-	}
-	
-	// if hero not found or not damaged, there's nothing below that has to be done, so return
-	var selectionfocus = $.FindChildInContext('#Hero_selectionfocus_'+data.playerid+'_'+data.heroname, 'Hero_Status_Container_'+data.playerid+'_'+data.heroname)
-	if (heroFound == false && data.damaged == false){
-		selectionfocus.visible = false
-		return
-	}
-	
-	// if damage, then hero was damaged, change style
-	if (data.damaged){
-		selectionfocus.visible = true
-		selectionfocus.style["box-shadow"] = "inset 1px 1px 50% red"
-		selectionfocus.style["opacity"] = 0.6
-		selectionfocus.style["background-color"] = "red"
-		return
-	}
-	
-	// if hero found, it has been selected, change style
-	if (heroFound){
-		selectionfocus.visible = true
-		selectionfocus.style["opacity"] = 0.2
-		selectionfocus.style["box-shadow"] = "inset 1px 1px 50% gold"
-		selectionfocus.style["background-color"] = null
-		return
-	}
 }
 
 // button click variable capture
