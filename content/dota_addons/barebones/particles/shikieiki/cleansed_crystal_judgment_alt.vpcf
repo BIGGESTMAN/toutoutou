@@ -37,6 +37,7 @@
 		},
 		{
 			_class = "C_OP_MovementRotateParticleAroundAxis"
+			m_bDisableOperator = true
 			m_flRotRate = 45.000000
 		},
 		{
@@ -140,8 +141,8 @@
 		},
 		{
 			_class = "C_INIT_RandomLifeTime"
-			m_fLifetimeMin = 0.500000
-			m_fLifetimeMax = 0.500000
+			m_fLifetimeMin = 0.200000
+			m_fLifetimeMax = 0.200000
 		},
 		{
 			_class = "C_INIT_RandomColor"
@@ -168,6 +169,7 @@
 				0.000000,
 				500.000000,
 			]
+			m_bDisableOperator = true
 		},
 		{
 			_class = "C_INIT_RandomRotation"
@@ -189,6 +191,7 @@
 				0.000000,
 				25.000000,
 			]
+			m_bDisableOperator = true
 		},
 		{
 			_class = "C_INIT_RandomAlpha"
@@ -210,6 +213,14 @@
 			m_fMinDistance = 125.000000
 			m_fMaxDistance = 475.000000
 			m_bDisableOperator = true
+		},
+	]
+	m_ForceGenerators =
+	[
+		{
+			_class = "C_OP_AttractToControlPoint"
+			m_fForceAmount = -2500.000000
+			m_fFalloffPower = 0.000000
 		},
 	]
 }
