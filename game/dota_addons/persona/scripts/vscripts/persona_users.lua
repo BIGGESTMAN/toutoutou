@@ -31,4 +31,57 @@ function Spawn(keys)
 	local personaItemAngelTest = CreateItem("item_angel", caster, caster)
 	caster:AddItem(personaItemAngelTest)
 	personaItemAngelTest = InitializePersona(personaItemAngelTest)
+
+	Setup_Persona_Tooltip(caster)
+end
+
+
+
+
+-- Notify Panorama that the player spawned
+function Setup_Persona_Tooltip(hero)
+	local playerid = hero:GetPlayerOwnerID()
+	local heroid = PlayerResource:GetSelectedHeroID(playerid)
+	local heroname = hero:GetUnitName()
+
+	-- get hero entindex and create hero panel
+	local HeroIndex = hero:GetEntityIndex()
+	Create_Persona_Tooltip(playerid, heroid, heroname, "landscape", HeroIndex, hero.activePersona)
+
+	local hero_health = hero:GetHealth()
+	local damagedbool = false
+	local grace_peroid = false
+	-- update hero panel
+	Timers:CreateTimer(function()
+		local player = PlayerResource:GetPlayer(playerid)
+		local unspentpoints = hero:GetAbilityPoints()
+		local current_hero_health = hero:GetHealth()
+		
+		-- if not grace peroid, check for health difference
+		if not grace_peroid then
+			if current_hero_health < hero_health and damagedbool == false then
+				damagedbool = true
+				
+				-- set delay for the red to stay
+				Timers:CreateTimer(1, function()
+					hero_health = current_hero_health
+					damagedbool = false
+					grace_peroid = true
+					-- set grace peroid
+					Timers:CreateTimer(1, function() grace_peroid = false end)
+				end)
+			else
+				hero_health = current_hero_health
+			end
+		end
+		
+		CustomGameEventManager:Send_ServerToPlayer(player, "update_persona_tooltip", {playerid = playerid, heroname=heroname, hero=HeroIndex, damaged=damagedbool, unspent_points=unspentpoints, attributes = hero.activePersona.attributes})
+		return 0.03
+	end)
+end
+
+function Create_Persona_Tooltip(playerid, heroID, heroname, imagestyle, HeroIndex, activePersona)
+	local player = PlayerResource:GetPlayer(playerid)
+
+	CustomGameEventManager:Send_ServerToPlayer(player, "create_persona_tooltip", {heroid=heroID, heroname=heroname, imagestyle=imagestyle, playerid = playerid, hero=HeroIndex, personaName=activePersona.attributes["name"]})
 end

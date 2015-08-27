@@ -1,9 +1,9 @@
 
 
-var rootparentORG = $('#PersonasListRoot')
+var rootparentORG = $('#PersonaTooltipRoot')
 
 var PersonaID = 1
-function create_persona(data){
+function create_persona_tooltip(data){
 	// find the container inside the root
 	var parent = $.FindChildInContext('#PersonaAttributesContainer', rootparentORG)
 	
@@ -65,10 +65,15 @@ function create_persona(data){
 	PersonaID = PersonaID + 1
 
 
+	// k so idk how to display dynamic images
 	// var image = $.FindChildInContext('#PersonasListRoot', rootparentORG).GetChild(0)
-	var image = parent.GetParent().GetChild(0)
-	image.src = "file://{images}/custom_game/" + data.personaName + ".png"
-	$.Msg(data.personaName)
+	// var image = parent.GetParent().GetChild(0)
+	// image.SetImage("file://{images}/custom_game/" + data.personaName + ".png")
+	// image.itemname = "item_" + data.personaName
+	// image.src = "file://{images}/custom_game/" + data.personaName + ".png"
+	// var image = $.CreatePanel('Image', parent.GetParent(), 1)
+	// var image = $.FindChildInContext('#PersonaImage', rootparentORG)
+	// $.Msg(image)
 }
 
 function OnFirstHeroButtonPressed (args) {
@@ -103,7 +108,7 @@ function Key_Bind_Pressed(key_pressed, playerid){
 	}
 }
 
-function update_persona(data){
+function update_persona_tooltip(data){
 	var hero = data.hero
 
 	var strengthText = $.FindChildInContext('#PersonaStrength', hero)
@@ -245,8 +250,8 @@ function reset_double_clicked(){
 }
 
 (function () {
-	GameEvents.Subscribe( "create_persona", create_persona );
-	GameEvents.Subscribe( "update_persona", update_persona );
+	GameEvents.Subscribe( "create_persona_tooltip", create_persona_tooltip );
+	GameEvents.Subscribe( "update_persona_tooltip", update_persona_tooltip );
 	
 	Game.AddCommand( "+FirstHero", OnFirstHeroButtonPressed, "", 0 );
 	Game.AddCommand( "+SecondHero", OnSecondHeroButtonPressed, "", 0 );

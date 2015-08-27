@@ -5,8 +5,10 @@
   <scripts>
     <include src="file://{resources}/scripts/custom_game/personas_list.js" /> 
   </scripts>
-	<Panel hittest="false" class="PersonasListRoot">
-    <Image id="PersonaImage"  src="file://{images}/custom_game/slime.png"/>
+	<Panel hittest="false" class="PersonaTooltipRoot">
+    <!-- <Image id="PersonaImage"  src="file://{images}/custom_game/slime.png"/> -->
+    <!-- <DOTAItemImage id="PersonaImage"  src="file://{images}/custom_game/slime.png"/> -->
+    <!-- <DOTAItemImage id="PersonaImage"/> -->
 		<Panel hittest="false" id="PersonaAttributesContainer">
       <Panel hittest="false" class="PersonaAttributeBox">
         <Label hittest="false"  class="PersonaAttribute" id="PersonaStrength"/>
