@@ -39,6 +39,14 @@ function create_persona(data){
 	var levelupLBL = $.CreatePanel ('Label', levelup, 'Hero_levelup_label_'+data.playerid+'_'+data.heroname)
 	levelupLBL.AddClass('LevelUpText')
 	levelupLBL.hittest = false
+
+	// var magic = $.CreatePanel ('Panel', hero, 'Hero_magic_'+data.playerid+'_'+data.heroname)
+	// magic.AddClass('LevelUp')
+	// magic.visible = true
+	
+	// var magicLabel = $.CreatePanel ('Label', levelup, 'Hero_magic_label_'+data.playerid+'_'+data.heroname)
+	// magicLabel.AddClass('LevelUpText')
+	// magicLabel.hittest = false
 	
 	var selectionfocus = $.CreatePanel ('Panel', hero, 'Hero_selectionfocus_'+data.playerid+'_'+data.heroname)
 	selectionfocus.AddClass('Focus')
@@ -97,7 +105,7 @@ function Key_Bind_Pressed(key_pressed, playerid){
 	}
 }
 
-function update_hero(data){
+function update_persona(data){
 	var playerid = data.playerid
 	var heroname = data.heroname
 	var hero = data.hero
@@ -120,16 +128,12 @@ function update_hero(data){
 	statusbar = $.FindChildInContext('#Hero_Mana_'+data.playerid+'_'+data.heroname, 'Hero_Status_Container_'+data.playerid+'_'+data.heroname)
 	statusbar.style['width'] = heroManaPercentage+'%'
 	
-	//$.Msg(Entities.HasUpgradeableAbilities(hero))
+	$.Msg(data.attributes)
 	var overlay = $.FindChildInContext('#Hero_levelup_'+data.playerid+'_'+data.heroname, hero)
-	if (data.unspent_points > 0){
-		overlay.visible = true
-		var overlaytext = overlay.GetChild(0)
-		overlaytext.text = data.unspent_points
-	}
-	else{
-		overlay.visible = false
-	}
+	$.Msg(overlay)
+	overlay.visible = true
+	var overlaytext = overlay.GetChild(0)
+	overlaytext.text = data.attributes["str"]
 	
 	// check if any overlays need to be added
 	hero_overlay(data)
@@ -251,7 +255,7 @@ function reset_double_clicked(){
 
 (function () {
 	GameEvents.Subscribe( "create_persona", create_persona );
-	GameEvents.Subscribe( "update_hero", update_hero );
+	GameEvents.Subscribe( "update_persona", update_persona );
 	
 	Game.AddCommand( "+FirstHero", OnFirstHeroButtonPressed, "", 0 );
 	Game.AddCommand( "+SecondHero", OnSecondHeroButtonPressed, "", 0 );
