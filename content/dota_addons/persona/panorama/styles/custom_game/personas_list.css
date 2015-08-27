@@ -2,19 +2,34 @@
 {
 	width: 100%;
 	height: 100%;
-	flow-children: right;
 }
 
 #PersonaAttributesContainer
 {	
 	flow-children: down;
-
-	visibility: visible;
 	
 	margin-top: 50px;
 	margin-left: 10px;
-	
+}
 
+.PersonaAttributesContainerVisible
+{	
+	visibility: visible;
+}
+
+.PersonaAttributesContainerInvisible
+{	
+	visibility: collapse;
+}
+
+.PersonaMouseover
+{	
+	height: 25%;
+	width: 25%;
+	/*visibility: visible;*/
+	
+	margin-top: 500px;
+	margin-left: 100px;
 }
  
 .PersonaAttributeBox{

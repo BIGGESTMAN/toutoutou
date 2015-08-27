@@ -9,7 +9,7 @@
     <!-- <Image id="PersonaImage"  src="file://{images}/custom_game/slime.png"/> -->
     <!-- <DOTAItemImage id="PersonaImage"  src="file://{images}/custom_game/slime.png"/> -->
     <!-- <DOTAItemImage id="PersonaImage"/> -->
-		<Panel hittest="false" id="PersonaAttributesContainer">
+		<Panel hittest="false" id="PersonaAttributesContainer" class="PersonaAttributesContainerInvisible">
       <Panel hittest="false" class="PersonaAttributeBox">
         <Label hittest="false"  class="PersonaAttribute" id="PersonaStrength"/>
       </Panel>
@@ -26,6 +26,8 @@
         <Label hittest="false"  class="PersonaAttribute" id="PersonaAgility"/>
       </Panel>
     </Panel>
-	
+    <Panel hittest="false" class="PersonaMouseover" onmouseover="RemoveStyle(PersonaAttributesContainer, PersonaAttributesContainerInvisible)" onmouseout="AddStyle(PersonaAttributesContainer, PersonaAttributesContainerInvisible)">
+      <Image id="PersonaImage"  src="file://{images}/custom_game/slime.png"/>
+    </Panel>
 	</Panel>
 </root>

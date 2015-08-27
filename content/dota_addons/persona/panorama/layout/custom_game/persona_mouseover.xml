@@ -1,0 +1,8 @@
+<root>
+  <styles>
+    <include src="file://{resources}/styles/custom_game/personas_list.css" />
+  </styles>
+  <scripts>
+    <include src="file://{resources}/scripts/custom_game/personas_list.js" /> 
+  </scripts>
+</root>
