@@ -1,0 +1,71 @@
+	"eternal_truth"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+
+		"AbilityTextureName"			"youmu_eternal_truth"
+
+		"precache"
+		{
+
+		}
+
+		"AbilityCastPoint"				"0.2"
+		"AbilityCooldown"				"6"
+		"AbilityManaCost"				"70 80 90 100"
+		"AbilityCastRange"				"500 575 650 725"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"90 140 190 240"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"echo_damage_percent"	"50"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"14"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"tear_length"			"500"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"tear_width"			"150"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"slow"					"-20 -25 -30 -35"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"slow_duration"			"2"
+			}
+		}
+
+		"OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"	"heroes/hero_youmu/eternal_truth.lua"
+	    		"Function"		"spellCast"
+	    	}
+	    }
+	}
