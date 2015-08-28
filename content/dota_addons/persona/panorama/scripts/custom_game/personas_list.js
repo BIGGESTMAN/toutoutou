@@ -63,49 +63,6 @@ function create_persona_tooltip(data){
 	abilitypoints.visible = false	
 
 	PersonaID = PersonaID + 1
-
-
-	// k so idk how to display dynamic images
-	// var image = $.FindChildInContext('#PersonasListRoot', rootparentORG).GetChild(0)
-	// var image = parent.GetParent().GetChild(0)
-	// image.SetImage("file://{images}/custom_game/" + data.personaName + ".png")
-	// image.itemname = "item_" + data.personaName
-	// image.src = "file://{images}/custom_game/" + data.personaName + ".png"
-	// var image = $.CreatePanel('Image', parent.GetParent(), 1)
-	// var image = $.FindChildInContext('#PersonaImage', rootparentORG)
-	// $.Msg(image)
-}
-
-function OnFirstHeroButtonPressed (args) {
-	var playerid = Players.GetLocalPlayer();
-
-	Key_Bind_Pressed(1, playerid)
-}
-
-function OnSecondHeroButtonPressed (args) {
-	var playerid = Players.GetLocalPlayer();
-
-	Key_Bind_Pressed(2, playerid)
-}
-
-function OnThirdHeroButtonPressed (args) {
-	var playerid = Players.GetLocalPlayer();
-
-	Key_Bind_Pressed(3, playerid)
-}
-
-function Key_Bind_Pressed(key_pressed, playerid){
-	
-	if ($('#'+key_pressed) != null){	
-		var persona = $('#'+key_pressed)
-		
-		// take values from the object and save them
-		var hero = persona.Inhero
-		var heroname = persona.Inheroname
-		var playerid = persona.Inplayerid
-		
-		clicked_portrait(hero, playerid, heroname) 
-	}
 }
 
 function update_persona_tooltip(data){
@@ -150,97 +107,58 @@ function update_persona_tooltip(data){
 
 	// $.Msg(cursorPosition)
 	// $.Msg(mousedOverItem)
-	
-	var container = $('#PersonaAttributesContainer')
+
+	var statsContainer = $('#PersonaAttributesContainer')
+	var abilitiesContainer = $('#PersonaSpellsContainer')
 	if (mousedOverItem != null && "attributes" in data.unitInventories[selectedUnit][mousedOverItem])
 	{
-		// $.Msg(data.unitInventories)
+		// Update stat tooltips
 		var personaAttributes = data.unitInventories[selectedUnit][mousedOverItem]["attributes"]
-		container.visible = true
+		statsContainer.visible = true
+		abilitiesContainer.visible = true
 
 		var strengthText = $.FindChildInContext('#PersonaStrength', hero)
-		strengthText.visible = true
 		strengthText.text = "Strength:" + personaAttributes["str"]
 
 		var magicText = $.FindChildInContext('#PersonaMagic', hero)
-		magicText.visible = true
 		magicText.text = "Magic:" + personaAttributes["mag"]
 
 		var enduranceText = $.FindChildInContext('#PersonaEndurance', hero)
-		enduranceText.visible = true
 		enduranceText.text = "Endurance:" + personaAttributes["endr"]
 
 		var swiftnessText = $.FindChildInContext('#PersonaSwiftness', hero)
-		swiftnessText.visible = true
 		swiftnessText.text = "Swiftness:" + personaAttributes["swft"]
 
 		var agilityText = $.FindChildInContext('#PersonaAgility', hero)
-		agilityText.visible = true
 		agilityText.text = "Agility:" + personaAttributes["agi"]
+
+
+		// Update ability tooltips
+		var personaAbilities = personaAttributes["abilities"]
+		for (var i = 0;i < 6; i++)
+		{
+			var spellBox = abilitiesContainer.GetChild(i)
+			if (i in personaAbilities)
+			{
+				spellBox.visible = true
+				var spellText = $.FindChildInContext('#Spell' + (i + 1), hero)
+				spellText.text = personaAbilities[i]
+			}
+			else
+			{
+				spellBox.visible = false
+			}
+		}
 	}
 	else
 	{
-		container.visible = false
+		statsContainer.visible = false
+		abilitiesContainer.visible = false
 	}
-}
-
-// button click variable capture
-var heroSelect = (
-	function(hero, playerid, heroname)  
-	{ 
-		return function() 
-		{
-			clicked_portrait(hero, playerid, heroname)
-		}
-	});
-	
-	// button click variable capture
-var heroRevive = (
-	function(hero, playerid, heroname)  
-	{ 
-		return function() 
-		{
-			revive_hero(hero, playerid, heroname)
-		}
-	});
-	
-function revive_hero(hero, playerid, heroname){	
-	GameEvents.SendCustomGameEventToServer( "revive_hero", { "heroname" : heroname, "playerid" : playerid, "heroindex" : hero} );
-}
-
-var double_clicked = []
-function clicked_portrait(hero, playerid, heroname){
-	// if shift is down, add unit to selection, otherwie focus select
-	if (GameUI.IsShiftDown() == true) {
-		GameUI.SelectUnit( hero, true )	
-	}
-	else{
-		GameUI.SelectUnit( hero, false )			
-	}
-	
-	// if equal to 2 then panel was double pressed
-	double_clicked[playerid] = double_clicked[playerid] + 1
-	if (double_clicked[playerid] == 2){
-		GameEvents.SendCustomGameEventToServer( "center_hero_camera", { "heroname" : heroname, "playerid" : playerid} );
-	}
-	
-	// reset counter every 0.5 sec
-	$.Schedule(0.5, reset_double_clicked)
-}
-//CustomGameEventManager:RegisterListener( "player_tp", TeleportPlayer )
-//function dotacraft:RepositionPlayerCamera( event )	
-
-function reset_double_clicked(){
-	var playerid = Game.GetLocalPlayerID()
-	double_clicked[playerid] = 0
 }
 
 (function () {
 	GameEvents.Subscribe( "create_persona_tooltip", create_persona_tooltip );
 	GameEvents.Subscribe( "update_persona_tooltip", update_persona_tooltip );
-	
-	Game.AddCommand( "+FirstHero", OnFirstHeroButtonPressed, "", 0 );
-	Game.AddCommand( "+SecondHero", OnSecondHeroButtonPressed, "", 0 );
-	Game.AddCommand( "+ThirdHero", OnThirdHeroButtonPressed, "", 0 );
 	
 })();

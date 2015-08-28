@@ -6,10 +6,7 @@
     <include src="file://{resources}/scripts/custom_game/personas_list.js" /> 
   </scripts>
 	<Panel hittest="false" class="PersonaTooltipRoot">
-    <!-- <Image id="PersonaImage"  src="file://{images}/custom_game/slime.png"/> -->
-    <!-- <DOTAItemImage id="PersonaImage"  src="file://{images}/custom_game/slime.png"/> -->
-    <!-- <DOTAItemImage id="PersonaImage"/> -->
-		<Panel hittest="false" id="PersonaAttributesContainer" class="PersonaAttributesContainerInvisible">
+		<Panel hittest="false" id="PersonaAttributesContainer">
       <Panel hittest="false" class="PersonaAttributeBox">
         <Label hittest="false"  class="PersonaAttribute" id="PersonaStrength"/>
       </Panel>
@@ -26,9 +23,25 @@
         <Label hittest="false"  class="PersonaAttribute" id="PersonaAgility"/>
       </Panel>
     </Panel>
-    <!-- <Panel hittest="false" class="PersonaMouseover" onmouseover="RemoveStyle(PersonaAttributesContainer, PersonaAttributesContainerInvisible)" onmouseout="AddStyle(PersonaAttributesContainer, PersonaAttributesContainerInvisible)"> -->
-      <!-- <Image id="PersonaImage"  class="PersonaMouseoverDummyImage" src="file://{images}/custom_game/dummy_image.png"/> -->
-      <!-- <Button/> -->
-    <!-- </Panel> -->
+    <Panel hittest="false"  id="PersonaSpellsContainer">
+      <Panel hittest="false" class="PersonaSpellBox" id="SpellBox1">
+        <Label hittest="false"  class="PersonaSpell" id="Spell1"/>
+      </Panel>
+      <Panel hittest="false" class="PersonaSpellBox" id="SpellBox2">
+        <Label hittest="false"  class="PersonaSpell" id="Spell2"/>
+      </Panel>
+      <Panel hittest="false" class="PersonaSpellBox" id="SpellBox3">
+        <Label hittest="false"  class="PersonaSpell" id="Spell3"/>
+      </Panel>
+      <Panel hittest="false" class="PersonaSpellBox" id="SpellBox4">
+        <Label hittest="false"  class="PersonaSpell" id="Spell4"/>
+      </Panel>
+      <Panel hittest="false" class="PersonaSpellBox" id="SpellBox5">
+        <Label hittest="false"  class="PersonaSpell" id="Spell5"/>
+      </Panel>
+      <Panel hittest="false" class="PersonaSpellBox" id="SpellBox6">
+        <Label hittest="false"  class="PersonaSpell" id="Spell6"/>
+      </Panel>
+    </Panel>
 	</Panel>
 </root>
