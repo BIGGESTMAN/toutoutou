@@ -123,16 +123,41 @@ function update_persona_tooltip(data){
 	{
 		selectedUnit = selectedControlledUnits[0]
 	}
-	$.Msg(selectedUnit)
+	// $.Msg(selectedUnit)
+
+	var cursorPosition = GameUI.GetCursorPosition()
+	// 1920 x 1200 hardcoded hacks, fuck yeah
+	var item1Location = [1400,1046]
+	var itemDimensions = [82,57]
+	var gapBetweenItems = [0,9]
+
+	var mousedOverItem = null
+	for (var i = 0; i < 6; i++)
+	{
+		var minX = item1Location[0] + (itemDimensions[0] + gapBetweenItems[0]) * (i % 3)
+		var maxX = item1Location[0] + (itemDimensions[0] + gapBetweenItems[0]) * (i % 3) + itemDimensions[0]
+		var minY = item1Location[1] + (itemDimensions[1] + gapBetweenItems[1]) * Math.floor(i / 3)
+		var maxY = item1Location[1] + (itemDimensions[1] + gapBetweenItems[1]) * Math.floor(i / 3) + itemDimensions[1]
+		$.Msg(i + " " + minX + " " + maxX + " "  + minY + " " + maxY)
+		if (cursorPosition[0] >= minX & cursorPosition[0] <= maxX
+			& cursorPosition[1] >= minY & cursorPosition[1] <= maxY)
+		{
+			mousedOverItem = i
+			$.Msg(mousedOverItem)
+			break
+		}
+	}
+	$.Msg(cursorPosition)
+	$.Msg(mousedOverItem)
+
+	// var mousingOverItem1 = cursorPosition[0] >= 1400 & cursorPosition[0] < 1483 & cursorPosition[1] > 1045 & cursorPosition[1] < 1104
+	var personaAttributes = null
 
 	var container = $('#PersonaAttributesContainer')
-	var cursorPosition = GameUI.GetCursorPosition()
-	var mousingOverItem1 = cursorPosition[0] >= 1400 & cursorPosition[0] < 1483 & cursorPosition[1] > 1045 & cursorPosition[1] < 1104
-	var personaAttributes = null
-	if (mousingOverItem1)
+	if (mousedOverItem != null)
 	{
 		// $.Msg(data.unitInventories)
-		personaAttributes = data.unitInventories[selectedUnit]["0"]["attributes"]
+		personaAttributes = data.unitInventories[selectedUnit][mousedOverItem]["attributes"]
 		container.visible = true
 
 		var strengthText = $.FindChildInContext('#PersonaStrength', hero)
@@ -159,8 +184,6 @@ function update_persona_tooltip(data){
 	{
 		container.visible = false
 	}
-	// $.Msg(cursorPosition)
-	// $.Msg(mousingOverItem1)
 }
 
 // button click variable capture
