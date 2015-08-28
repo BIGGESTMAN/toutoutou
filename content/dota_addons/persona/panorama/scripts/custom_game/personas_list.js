@@ -110,16 +110,50 @@ function Key_Bind_Pressed(key_pressed, playerid){
 
 function update_persona_tooltip(data){
 	var hero = data.hero
+	var selectedUnit = null
+	var selectedControlledUnits = Players.GetSelectedEntities(data.playerid)
+	var selectedUncontrolledUnit = Players.GetQueryUnit(data.playerid)
+	// $.Msg(selectedControlledUnits, selectedUncontrolledUnit)
+
+	if (selectedUncontrolledUnit != -1)
+	{
+		selectedUnit = selectedUncontrolledUnit
+	}
+	else
+	{
+		selectedUnit = selectedControlledUnits[0]
+	}
+	$.Msg(selectedUnit)
 
 	var container = $('#PersonaAttributesContainer')
-	// $.Msg(container)
 	var cursorPosition = GameUI.GetCursorPosition()
 	var mousingOverItem1 = cursorPosition[0] >= 1400 & cursorPosition[0] < 1483 & cursorPosition[1] > 1045 & cursorPosition[1] < 1104
+	var personaAttributes = null
 	if (mousingOverItem1)
 	{
-		var persona = Entities.GetItemInSlot(hero, 0)
-		$.Msg(persona)
+		// $.Msg(data.unitInventories)
+		personaAttributes = data.unitInventories[selectedUnit]["0"]["attributes"]
 		container.visible = true
+
+		var strengthText = $.FindChildInContext('#PersonaStrength', hero)
+		strengthText.visible = true
+		strengthText.text = "Strength:" + personaAttributes["str"]
+
+		var magicText = $.FindChildInContext('#PersonaMagic', hero)
+		magicText.visible = true
+		magicText.text = "Magic:" + personaAttributes["mag"]
+
+		var enduranceText = $.FindChildInContext('#PersonaEndurance', hero)
+		enduranceText.visible = true
+		enduranceText.text = "Endurance:" + personaAttributes["endr"]
+
+		var swiftnessText = $.FindChildInContext('#PersonaSwiftness', hero)
+		swiftnessText.visible = true
+		swiftnessText.text = "Swiftness:" + personaAttributes["swft"]
+
+		var agilityText = $.FindChildInContext('#PersonaAgility', hero)
+		agilityText.visible = true
+		agilityText.text = "Agility:" + personaAttributes["agi"]
 	}
 	else
 	{
@@ -127,28 +161,6 @@ function update_persona_tooltip(data){
 	}
 	// $.Msg(cursorPosition)
 	// $.Msg(mousingOverItem1)
-
-	var strengthText = $.FindChildInContext('#PersonaStrength', hero)
-	strengthText.visible = true
-	strengthText.text = "Strength:" + data.attributes["str"]
-
-	var magicText = $.FindChildInContext('#PersonaMagic', hero)
-	magicText.visible = true
-	magicText.text = "Magic:" + data.attributes["mag"]
-
-	var enduranceText = $.FindChildInContext('#PersonaEndurance', hero)
-	enduranceText.visible = true
-	enduranceText.text = "Endurance:" + data.attributes["endr"]
-
-	var swiftnessText = $.FindChildInContext('#PersonaSwiftness', hero)
-	swiftnessText.visible = true
-	swiftnessText.text = "Swiftness:" + data.attributes["swft"]
-
-	var agilityText = $.FindChildInContext('#PersonaAgility', hero)
-	agilityText.visible = true
-	agilityText.text = "Agility:" + data.attributes["agi"]
-	
-	// check if any overlays need to be added
 }
 
 // button click variable capture

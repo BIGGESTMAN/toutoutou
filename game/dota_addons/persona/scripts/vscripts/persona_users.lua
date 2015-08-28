@@ -74,8 +74,33 @@ function Setup_Persona_Tooltip(hero)
 				hero_health = current_hero_health
 			end
 		end
-		
-		CustomGameEventManager:Send_ServerToPlayer(player, "update_persona_tooltip", {playerid = playerid, heroname=heroname, hero=HeroIndex, damaged=damagedbool, unspent_points=unspentpoints, attributes = hero.activePersona.attributes})
+
+		-- Build inventories for tooltip to reference
+		local unitsWithInventories = {}
+		local allEntities = Entities:FindAllInSphere(hero:GetAbsOrigin(), 20100)
+		-- print(allEntities)
+		for k,v in pairs(allEntities) do
+			if v.HasInventory and v:HasInventory() then
+				-- print("inventory unit:", k, v)
+				-- print("entityindex:", v:GetEntityIndex())
+				local inventory = {}
+				for i=0,5 do
+					inventory[i] = v:GetItemInSlot(i)
+				end
+				unitsWithInventories[v:GetEntityIndex()] = inventory
+			end
+		end
+		-- for k,v in pairs(unitsWithInventories) do
+		-- 	print("unitWithInventory:", k,v)
+		-- -- 	for _,item in pairs(v) do
+		-- -- 		-- print(item)
+		-- -- 		print("attributes:", item.attributes)
+		-- -- 		if item.attributes then
+		-- -- 			print(item.attributes["str"])
+		-- -- 		end
+		-- -- 	end
+		-- end
+		CustomGameEventManager:Send_ServerToPlayer(player, "update_persona_tooltip", {playerid = playerid, heroname=heroname, hero=HeroIndex, damaged=damagedbool, unspent_points=unspentpoints, attributes = hero.activePersona.attributes, unitInventories = unitsWithInventories})
 		return 0.03
 	end)
 end
