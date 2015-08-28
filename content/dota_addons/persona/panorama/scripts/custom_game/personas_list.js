@@ -138,26 +138,24 @@ function update_persona_tooltip(data){
 		var maxX = item1Location[0] + (itemDimensions[0] + gapBetweenItems[0]) * (i % 3) + itemDimensions[0]
 		var minY = item1Location[1] + (itemDimensions[1] + gapBetweenItems[1]) * Math.floor(i / 3)
 		var maxY = item1Location[1] + (itemDimensions[1] + gapBetweenItems[1]) * Math.floor(i / 3) + itemDimensions[1]
-		$.Msg(i + " " + minX + " " + maxX + " "  + minY + " " + maxY)
-		if (cursorPosition[0] >= minX & cursorPosition[0] <= maxX
-			& cursorPosition[1] >= minY & cursorPosition[1] <= maxY)
+		// $.Msg(i + " " + minX + " " + maxX + " "  + minY + " " + maxY)
+		if (cursorPosition[0] >= minX && cursorPosition[0] <= maxX
+			&& cursorPosition[1] >= minY && cursorPosition[1] <= maxY)
 		{
 			mousedOverItem = i
-			$.Msg(mousedOverItem)
+			// $.Msg(mousedOverItem)
 			break
 		}
 	}
-	$.Msg(cursorPosition)
-	$.Msg(mousedOverItem)
 
-	// var mousingOverItem1 = cursorPosition[0] >= 1400 & cursorPosition[0] < 1483 & cursorPosition[1] > 1045 & cursorPosition[1] < 1104
-	var personaAttributes = null
-
+	// $.Msg(cursorPosition)
+	// $.Msg(mousedOverItem)
+	
 	var container = $('#PersonaAttributesContainer')
-	if (mousedOverItem != null)
+	if (mousedOverItem != null && "attributes" in data.unitInventories[selectedUnit][mousedOverItem])
 	{
 		// $.Msg(data.unitInventories)
-		personaAttributes = data.unitInventories[selectedUnit][mousedOverItem]["attributes"]
+		var personaAttributes = data.unitInventories[selectedUnit][mousedOverItem]["attributes"]
 		container.visible = true
 
 		var strengthText = $.FindChildInContext('#PersonaStrength', hero)
