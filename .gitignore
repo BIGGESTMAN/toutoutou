@@ -39,6 +39,9 @@ game/dota_addons/ui_example/*
 game/dota_addons/vpks/*
 game/dota_addons/dota2cfg.cfg
 
+game/dota_addons/persona/tools_asset_info.bin
+game/dota_addons/persona/tools_thumbnail_cache.bin
+
 content/_toolsautosave/*
 content/core/*
 content/dota/*

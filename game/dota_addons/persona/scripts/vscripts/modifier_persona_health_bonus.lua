@@ -11,3 +11,7 @@ end
 function modifier_persona_health_bonus:GetModifierHealthBonus(params)
 	return self.health_bonus
 end
+
+function modifier_persona_health_bonus:GetAttributes()
+	return MODIFIER_ATTRIBUTE_PERMANENT
+end
