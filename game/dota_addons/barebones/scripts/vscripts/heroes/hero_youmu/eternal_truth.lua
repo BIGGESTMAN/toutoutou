@@ -40,10 +40,13 @@ function spellCast(keys)
 	ParticleManager:SetParticleControl(particle, 0, line_start)
 	ParticleManager:SetParticleControl(particle, 1, line_end)
 
-	tear_dummy.tear_particle = ParticleManager:CreateParticle("particles/youmu/eternal_truth_tear.vpcf", PATTACH_ABSORIGIN, tear_dummy)
-	ParticleManager:SetParticleControl(tear_dummy.tear_particle, 1, line_end)
-	ParticleManager:SetParticleControl(tear_dummy.tear_particle, 2, line_start)
-	ParticleManager:SetParticleControl(tear_dummy.tear_particle, 3, line_end)
+	local tear_particle_delay = 0.15
+	Timers:CreateTimer(tear_particle_delay, function()
+		tear_dummy.tear_particle = ParticleManager:CreateParticle("particles/youmu/eternal_truth_tear.vpcf", PATTACH_ABSORIGIN, tear_dummy)
+		ParticleManager:SetParticleControl(tear_dummy.tear_particle, 1, line_end)
+		ParticleManager:SetParticleControl(tear_dummy.tear_particle, 2, line_start)
+		ParticleManager:SetParticleControl(tear_dummy.tear_particle, 3, line_end)
+	end)
 end
 
 function destroyTearDummy(keys)
@@ -64,12 +67,18 @@ function echoDamage(caster, damage, damage_type)
 			if not tear:IsNull() then
 				local right = RotatePosition(Vector(0,0,0), QAngle(0,-90,0), tear.forward)
 				local line_start = tear:GetAbsOrigin() + right * -1 * length / 2
+				local line_end = tear:GetAbsOrigin() + right * length / 2
 				local targets = unitsInLine(caster, ability, line_start, length, width, right, false, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL)
 				for _,unit in pairs(targets) do
 					if not tableContains(hit_units, unit) then
 						table.insert(hit_units, unit)
 					end
 				end
+
+				echo_particle = ParticleManager:CreateParticle("particles/youmu/eternal_truth_echo.vpcf", PATTACH_ABSORIGIN, tear)
+				ParticleManager:SetParticleControl(echo_particle, 1, line_end)
+				ParticleManager:SetParticleControl(echo_particle, 2, line_start)
+				ParticleManager:SetParticleControl(echo_particle, 3, line_end)
 			end
 		end
 
@@ -82,6 +91,5 @@ function echoDamage(caster, damage, damage_type)
 end
 
 function attackLanded(keys)
-	print(keys.caster, keys.damage_dealt)
 	echoDamage(keys.caster, keys.damage_dealt, DAMAGE_TYPE_PHYSICAL)
 end

@@ -13,6 +13,7 @@
 		{
 			"particle"					"particles/youmu/eternal_truth_slash.vpcf"
 			"particle"					"particles/youmu/eternal_truth_tear.vpcf"
+			"particle"					"particles/youmu/eternal_truth_echo.vpcf"
 		}
 
 		"AbilityCastPoint"				"0.2"
