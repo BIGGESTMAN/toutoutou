@@ -11,7 +11,7 @@ function spellCast(keys)
 	local damage_type = ability:GetAbilityDamageType()
 	echoDamage(caster, damage, damage_type)
 
-	local duration = ability:GetSpecialValueFor("duration") / 5
+	local duration = ability:GetSpecialValueFor("duration")
 	local length = ability:GetLevelSpecialValueFor("tear_length", ability_level)
 	local width = ability:GetLevelSpecialValueFor("tear_width", ability_level)
 
