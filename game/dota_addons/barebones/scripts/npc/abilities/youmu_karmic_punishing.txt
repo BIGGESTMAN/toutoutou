@@ -1,19 +1,19 @@
-	"wheel_of_pain"
+	"karmic_punishing"
 	{
 		"BaseClass"						"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 
-		"AbilityTextureName"			"abaddon_aphotic_shield"
+		"AbilityTextureName"			"juggernaut_blade_fury"
 
 		"precache"
 		{
-			"particle"					"particles/youmu/wheel_of_pain.vpcf"
-			"particle"					"particles/youmu/wheel_of_pain_activate.vpcf"
+
 		}
 
-		"AbilityCastPoint"				"0"
+		"AbilityCastPoint"				"0.5"
 		"AbilityCooldown"				"20"
-		"AbilityManaCost"				"70"
+		"AbilityManaCost"				""
+		"AbilityCastRange"				"500"
 
 		"AbilityProcsMagicStick" 		"1"
 
@@ -48,10 +48,10 @@
 
 		"OnUpgrade"
 		{
-			"ApplyModifier"
+			"RunScript"
 			{
-				"ModifierName"	"modifier_wheel_of_pain_passive"
-				"Target" 		"CASTER"
+				"ScriptFile"	"heroes/hero_youmu/eternal_truth.lua"
+				"Function"		"abilityLearned"
 			}
 		}
 
@@ -88,8 +88,6 @@
 	    	"modifier_wheel_of_pain_active"
 	    	{
 	    		"Duration"		"%duration"
-
-	    		"IsPurgable"	"1"
 
 	    		"OnDestroy"
 	    		{

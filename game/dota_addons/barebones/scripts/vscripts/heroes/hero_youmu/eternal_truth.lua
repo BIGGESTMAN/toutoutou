@@ -9,7 +9,6 @@ function spellCast(keys)
 
 	local damage = ability:GetSpecialValueFor("damage")
 	local damage_type = ability:GetAbilityDamageType()
-	echoDamage(caster, damage, damage_type)
 
 	local duration = ability:GetSpecialValueFor("duration")
 	local length = ability:GetLevelSpecialValueFor("tear_length", ability_level)
@@ -20,6 +19,11 @@ function spellCast(keys)
 	local line_start = target_point + right * -1 * length / 2
 	DebugDrawCircle(line_start, Vector(0,255,255), 1, 30, true, 0.5)
 
+	local targets = unitsInLine(caster, ability, line_start, length, width, right, false, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL)
+	if #targets > 0 then
+		echoDamage(caster, damage, damage_type)
+	end
+
 	local tear_dummy = CreateUnitByName("npc_dummy_unit", target_point, false, caster, caster, caster:GetTeam())
 	ability:ApplyDataDrivenModifier(caster, tear_dummy, "modifier_eternal_truth_dummy", {duration = duration})
 	tear_dummy.forward = forward
@@ -28,8 +32,6 @@ function spellCast(keys)
 	caster.eternal_truth_tears[tear_dummy] = true
 
 	ability:ApplyDataDrivenModifier(caster, caster, "modifier_eternal_truth_tear_tracker", {duration = duration})
-
-	local targets = unitsInLine(caster, ability, line_start, length, width, right, false, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL)
 
 	for k,unit in pairs(targets) do
 		ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
