@@ -41,12 +41,14 @@ function update_persona_tooltip(data){
 
 	var statsContainer = $('#PersonaAttributesContainer')
 	var abilitiesContainer = $('#PersonaSpellsContainer')
+	var resistsContainer = $('#PersonaResistsContainer')
 	if (mousedOverItem != null && mousedOverItem in data.unitInventories[selectedUnit] && "attributes" in data.unitInventories[selectedUnit][mousedOverItem])
 	{
 		// Update stat tooltips
 		var personaAttributes = data.unitInventories[selectedUnit][mousedOverItem]["attributes"]
 		statsContainer.visible = true
 		abilitiesContainer.visible = true
+		resistsContainer.visible = true
 
 		var strengthText = $.FindChildInContext('#PersonaStrength', hero)
 		strengthText.text = "Strength:" + personaAttributes["str"]
@@ -80,12 +82,49 @@ function update_persona_tooltip(data){
 				spellBox.visible = false
 			}
 		}
+
+		// Update resist tooltips
+		var resistNames = ["physical", "fire", "ice", "wind", "thunder", "light", "dark"]
+		var resists = personaAttributes["resists"]
+		for (var i = 0;i < 7; i++)
+		{
+			// var resistBox = resistsContainer.GetChild(i)
+			// if (i in resists)
+			// {
+				// resistBox.visible = true
+				$.Msg(i + 1, " ", resistNames[i])
+				var resistText = $.FindChildInContext('#Resist' + (i + 1), hero)
+				resistText.text = resistNames[i] + ": " + resistStringFromType(resists[i])
+			// }
+			// else
+			// {
+			// 	resistBox.visible = false
+			// }
+		}
 	}
 	else
 	{
 		statsContainer.visible = false
 		abilitiesContainer.visible = false
+		resistsContainer.visible = false
 	}
+}
+
+function resistStringFromType(resistType)
+{
+	if (resistType == -1) {
+		return "Wk"
+	}
+	else if (resistType == 1) {
+		return "Rst"
+	}
+	else if (resistType == 2) {
+		return "Blk"
+	}
+	else if (resistType == 3) {
+		return "Absb"
+	}
+	return "--"
 }
 
 (function () {

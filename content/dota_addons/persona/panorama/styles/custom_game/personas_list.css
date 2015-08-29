@@ -62,3 +62,33 @@
 	color: white;
 	text-shadow: 1px 1px 1px black; 
  }
+
+#PersonaResistsContainer
+{	
+	flow-children: down;
+	
+	margin-top: 50px;
+	margin-left: 10px;
+}
+ 
+.PersonaResistBox
+{
+	horizontal-align: left;
+	
+	width: 60px;
+	height: 15px;
+	
+	opacity: 0.9;
+	border: 1px solid white;
+	background-image: url("file://{images}/revive_bar.png");
+ }
+ 
+.PersonaResist
+{
+	vertical-align: middle;
+	horizontal-align: middle;
+	
+	color: white;
+	text-shadow: 1px 1px 1px black; 
+	font-size: 11px;
+ }

@@ -160,33 +160,33 @@ function DamageSystem:DamageFilter( event )
         if event.entindex_inflictor_const then --if there is no inflictor key then it was an auto attack
             ability = EntIndexToHScript(event.entindex_inflictor_const)
         end
-        print( '********damage event************' )
-        for k, v in pairs(event) do
-            print("DamageFilter: ",k, " ==> ", v)
-        end
+        -- print( '********damage event************' )
+        -- for k, v in pairs(event) do
+        --     print("DamageFilter: ",k, " ==> ", v)
+        -- end
 
         if DamageSystem.handle == event.entindex_inflictor_const then --damage directly dealt with ApplyCustomDamage
-           print('DamageFilter: Directly dealt from script')
+           -- print('DamageFilter: Directly dealt from script')
            return true 
         end
 
         if not DamageSystem:CreateAbility(ability) then --this means we have no kv values for this ability
-            print('DamageFilter: Couldnt find this ability')
+            -- print('DamageFilter: Couldnt find this ability')
             return true
         end
         
-        print('DamageFilter: attack ability type:')
-        print('>', ability:GetCustomDamageType(), '  - ', ability:GetCustomDamageModifier())
-        print('DamageFilter: victim resistances:')
-        for k,v in pairs(victim.resistances) do print('>', k,v) end
+        -- print('DamageFilter: attack ability type:')
+        -- print('>', ability:GetCustomDamageType(), '  - ', ability:GetCustomDamageModifier())
+        -- print('DamageFilter: victim resistances:')
+        -- for k,v in pairs(victim.resistances) do print('>', k,v) end
         -- local newdamage = event.damage * tonumber(ability:GetCustomDamageModifier())
         local newdamage = event.damage - event.damage / 100 * tonumber(victim:GetResistance("physical")) -- If damage was applied with autoattack, or applydamage instead of applycustomdamage, treat it as physical
         if newdamage <= 0 then
-            print('DamageFilter: Damage is below 0, healing instead')
+            -- print('DamageFilter: Damage is below 0, healing instead')
             victim:Heal(newdamage * -1, attacker)
             return false
         end
-        print('DamageFilter: Dealing damage ', newdamage)
+        -- print('DamageFilter: Dealing damage ', newdamage)
         event.damage = newdamage
         return true
     else
@@ -275,7 +275,7 @@ function ApplyCustomDamage(victim, attacker, damage, damagetype, customdamagetyp
         damage_type = damagetype  ,
         ability = EntIndexToHScript(DamageSystem.handle)
     }
-    print('[DamageSystem] Dealing ', customdamagetype, ' damage ', newdamage)
+    -- print('[DamageSystem] Dealing ', customdamagetype, ' damage ', newdamage)
     ApplyDamage(damageTable)   
 end
 
@@ -286,7 +286,7 @@ function AddResistance(event)
     --end
     local unit = event.target--= event.unit
     if unit.resistances then
-        print('[DamageSystem] changing ', event.resistance, ' | ', unit:GetResistance(event.resistance), ' ==> ', unit:GetResistance(event.resistance) + event.value)
+        -- print('[DamageSystem] changing ', event.resistance, ' | ', unit:GetResistance(event.resistance), ' ==> ', unit:GetResistance(event.resistance) + event.value)
         unit:AddResistance(event.resistance, event.value)
     end
 end

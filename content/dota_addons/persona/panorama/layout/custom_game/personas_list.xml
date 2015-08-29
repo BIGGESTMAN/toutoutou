@@ -43,5 +43,28 @@
         <Label hittest="false"  class="PersonaSpell" id="Spell6"/>
       </Panel>
     </Panel>
+    <Panel hittest="false"  id="PersonaResistsContainer">
+      <Panel hittest="false" class="PersonaResistBox" id="ResistBox1">
+        <Label hittest="false"  class="PersonaResist" id="Resist1"/>
+      </Panel>
+      <Panel hittest="false" class="PersonaResistBox" id="ResistBox2">
+        <Label hittest="false"  class="PersonaResist" id="Resist2"/>
+      </Panel>
+      <Panel hittest="false" class="PersonaResistBox" id="ResistBox3">
+        <Label hittest="false"  class="PersonaResist" id="Resist3"/>
+      </Panel>
+      <Panel hittest="false" class="PersonaResistBox" id="ResistBox4">
+        <Label hittest="false"  class="PersonaResist" id="Resist4"/>
+      </Panel>
+      <Panel hittest="false" class="PersonaResistBox" id="ResistBox5">
+        <Label hittest="false"  class="PersonaResist" id="Resist5"/>
+      </Panel>
+      <Panel hittest="false" class="PersonaResistBox" id="ResistBox6">
+        <Label hittest="false"  class="PersonaResist" id="Resist6"/>
+      </Panel>
+      <Panel hittest="false" class="PersonaResistBox" id="ResistBox7">
+        <Label hittest="false"  class="PersonaResist" id="Resist7"/>
+      </Panel>
+    </Panel>
 	</Panel>
 </root>
