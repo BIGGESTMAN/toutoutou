@@ -1,3 +1,5 @@
+require "libraries/util"
+
 SPARK_MODIFIERS = {"modifier_master_spark", "modifier_final_spark"}
 
 function orrerysSunStart( event )
@@ -275,46 +277,9 @@ function fireLaserAt(caster, ability, orb, target)
 	local range = ability:GetLevelSpecialValueFor("search_radius", ability_level)
 	local radius = ability:GetLevelSpecialValueFor("laser_radius", ability_level)
 	local particle_name = "particles/units/heroes/hero_tinker/tinker_laser.vpcf"
-	local thinkerRadius = radius * 1.5
 	local targetDirection = (target:GetAbsOrigin() - orb_location):Normalized()
 
-	local targets = {}
-
-	local number_of_thinkers = math.ceil(range / radius)
-	local distance_per_thinker = (range / number_of_thinkers)
-	local thinkers = {}
-	for i=1, number_of_thinkers do
-		local thinker = CreateUnitByName("npc_dota_invisible_vision_source", orb_location, false, caster, caster, caster:GetTeam() )
-		thinkers[i] = thinker
-
-		thinker:SetDayTimeVisionRange( thinkerRadius )
-		thinker:SetNightTimeVisionRange( thinkerRadius )
-
-		thinker:SetAbsOrigin(orb_location + targetDirection * (distance_per_thinker * (i-1) + thinkerRadius / 2))
-		ability:ApplyDataDrivenModifier(caster, thinker, "modifier_orrerys_sun_dummy", {})
-
-		local team = caster:GetTeamNumber()
-		local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
-		local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
-		local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
-		local iOrder = FIND_CLOSEST
-
-		local possible_targets = FindUnitsInRadius(team, thinker:GetAbsOrigin(), nil, thinkerRadius, iTeam, iType, iFlag, iOrder, false)
-		for k,unit in pairs(possible_targets) do
-			-- Calculate distance
-			local pathStartPos	= orb_location * Vector( 1, 1, 0 )
-			local pathEndPos	= pathStartPos + targetDirection * range
-
-			local distance = DistancePointSegment(unit:GetAbsOrigin() * Vector( 1, 1, 0 ), pathStartPos, pathEndPos )
-			if distance <= radius and not tableContains(targets, unit) then
-				table.insert(targets, unit)
-			end
-		end
-	end
-
-	for k,thinker in pairs(thinkers) do
-		thinker:RemoveSelf()
-	end
+	local targets = unitsInLine(caster, ability, orb_location, range, radius, targetDirection, true)
 
 	--print("laser hit target:", tableContains(targets, target))
 
@@ -331,28 +296,4 @@ function fireLaserAt(caster, ability, orb, target)
 
 	-- Sound
 	-- orb:EmitSound("Hero_Tinker.Laser")
-end
-
-function tableContains(list, element)
-    if list == nil then return false end
-    for i=1,#list do
-        if list[i] == element then
-            return true
-        end
-    end
-    return false
-end
-
-function DistancePointSegment( p, v, w )
-	local l = w - v
-	local l2 = l:Dot( l )
-	t = ( p - v ):Dot( w - v ) / l2
-	if t < 0.0 then
-		return ( v - p ):Length2D()
-	elseif t > 1.0 then
-		return ( w - p ):Length2D()
-	else
-		local proj = v + t * l
-		return ( proj - p ):Length2D()
-	end
 end

@@ -107,11 +107,10 @@ function updateWire(keys)
 
 
 			-- Check for enemy units in wire's path
-			local thinker_modifier = "modifier_dummy"
 			local radius = ability:GetLevelSpecialValueFor("radius", ability_level)
 			local direction = (target2:GetAbsOrigin() - target1:GetAbsOrigin()):Normalized()
 
-			local hit_units = unitsInLine(caster, ability, thinker_modifier, target1:GetAbsOrigin(), range, radius, direction, false)
+			local hit_units = unitsInLine(caster, ability, target1:GetAbsOrigin(), range, radius, direction)
 
 			if #hit_units > 0 then
 				wire_triggered = false -- Make sure attaching to an enemy doesn't instantly break wire

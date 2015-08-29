@@ -66,6 +66,44 @@
 	    	{
 	    		"ScriptFile"	"heroes/hero_youmu/eternal_truth.lua"
 	    		"Function"		"spellCast"
+	    		"Target"		"POINT"
+	    	}
+	    }
+
+	    "Modifiers"
+	    {
+	    	"modifier_eternal_truth"
+	    	{
+	    		"Passive"	"1"
+	    		"IsHidden"	"1"
+
+	    		"OnAttackLanded"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_youmu/eternal_truth.lua"
+	    				"Function"		"attackLanded"
+	    				"damage_dealt"	"%attack_damage"
+	    			}
+	    		}
+	    	}
+
+	    	"modifier_eternal_truth_slow"
+	    	{
+	    		"IsDebuff"		"1"
+	    		"IsPurgable"	"1"
+
+	    		"Duration"		"%slow_duration"
+
+	    		"Properties"
+	    		{
+	    		    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%slow" 
+	    		}
+	    	}
+
+	    	"modifier_eternal_truth_tear_tracker"
+	    	{
+	    		"Attributes"		"MODIFIER_ATTRIBUTE_MULTIPLE"
 	    	}
 	    }
 	}

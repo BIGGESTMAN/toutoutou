@@ -1,53 +1,38 @@
-function unitsInLine(caster, ability, thinker_modifier, origin, range, radius, direction, grantVision, offset_forward, target_types, target_Flags)
-	local thinkerRadius = radius * 1.5
-	offset_forward = offset_forward or false
+function unitsInLine(caster, ability, origin, range, radius, direction, require_forward, target_types, target_flags)
 	target_types = target_types or DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
 	target_flags = target_flags or DOTA_UNIT_TARGET_FLAG_NONE
 
 	local targets = {}
 
-	local number_of_thinkers = math.ceil(range / radius)
-	local distance_per_thinker = (range / number_of_thinkers)
-	local thinkers = {}
-	for i=1, number_of_thinkers do
-		local thinker = CreateUnitByName("npc_dota_invisible_vision_source", origin, false, caster, caster, caster:GetTeam() )
-		thinkers[i] = thinker
+	local team = caster:GetTeamNumber()
+	local line_midpoint = origin + direction * range / 2
+	local search_radius = (range / 2) + radius
+	local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
+	local iType = target_types
+	local iFlag = target_flags
+	local iOrder = FIND_CLOSEST
 
-		if grantVision then
-			thinker:SetDayTimeVisionRange( thinkerRadius )
-			thinker:SetNightTimeVisionRange( thinkerRadius )
-		end
+	DebugDrawCircle(line_midpoint, Vector(255,0,0), 1, search_radius, true, 2)
+	
+	local possible_targets = FindUnitsInRadius(team, line_midpoint, nil, search_radius, iTeam, iType, iFlag, iOrder, false)
+	for k,possible_target in pairs(possible_targets) do
+		-- Calculate distance
+		local pathStartPos	= origin * Vector( 1, 1, 0 )
+		local pathEndPos	= pathStartPos + direction * range
+		local distance = DistancePointSegment(possible_target:GetAbsOrigin() * Vector( 1, 1, 0 ), pathStartPos, pathEndPos )
+		local unit_in_line = distance <= radius
 
-		if offset_forward then
-			thinker:SetAbsOrigin(origin + direction * (distance_per_thinker * (i) + thinkerRadius / 2))
-		else
-			thinker:SetAbsOrigin(origin + direction * (distance_per_thinker * (i - 1) + thinkerRadius / 2))
-		end
-		ability:ApplyDataDrivenModifier(caster, thinker, thinker_modifier, {})
-
-		local team = caster:GetTeamNumber()
-		local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
-		local iType = target_types
-		local iFlag = target_flags
-		local iOrder = FIND_CLOSEST
-
-		-- DebugDrawCircle(thinker:GetAbsOrigin(), Vector(255,0,0), 1, thinkerRadius, true, 0.5)
-		
-		local possible_targets = FindUnitsInRadius(team, thinker:GetAbsOrigin(), nil, thinkerRadius, iTeam, iType, iFlag, iOrder, false)
-		for k,possible_target in pairs(possible_targets) do
-			-- Calculate distance
-			local pathStartPos	= origin * Vector( 1, 1, 0 )
-			local pathEndPos	= pathStartPos + direction * range
-
-			local distance = DistancePointSegment(possible_target:GetAbsOrigin() * Vector( 1, 1, 0 ), pathStartPos, pathEndPos )
-			if distance <= radius and not tableContains(targets, possible_target) then
-				table.insert(targets, possible_target)
+		if require_forward then -- Calculate angle
+			local direction_towards_origin = (possible_target:GetAbsOrigin() - origin):Normalized()
+			local angle = direction:Dot(direction_towards_origin)
+			if angle <= 0 then -- If unit isn't in front of origin
+				unit_in_line = false
 			end
 		end
-	end
 
-	for k,thinker in pairs(thinkers) do
-		thinker:RemoveSelf()
+		if distance <= radius and unit_in_line then
+			table.insert(targets, possible_target)
+		end
 	end
 
 	return targets
@@ -63,17 +48,17 @@ function tableContains(list, element)
     return false
 end
 
-function DistancePointSegment( p, v, w )
-	local l = w - v
-	local l2 = l:Dot( l )
-	t = ( p - v ):Dot( w - v ) / l2
+function DistancePointSegment( point, line_point_1, line_point_2 )
+	local length = line_point_2 - line_point_1
+	local length_squared = length:Dot( length )
+	t = ( point - line_point_1 ):Dot( line_point_2 - line_point_1 ) / length_squared
 	if t < 0.0 then
-		return ( v - p ):Length2D()
+		return ( line_point_1 - point ):Length2D()
 	elseif t > 1.0 then
-		return ( w - p ):Length2D()
+		return ( line_point_2 - point ):Length2D()
 	else
-		local proj = v + t * l
-		return ( proj - p ):Length2D()
+		local proj = line_point_1 + t * length
+		return ( proj - point ):Length2D()
 	end
 end
 

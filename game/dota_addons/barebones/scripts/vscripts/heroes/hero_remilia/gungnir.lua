@@ -24,10 +24,9 @@ function gungnirHit(keys)
 	local range = ability:GetLevelSpecialValueFor("penetrate_range", ability_level)
 	local radius = ability:GetLevelSpecialValueFor("penetrate_radius", ability_level)
 
-	local thinker_modifier = "modifier_gungnir_dummy"
 	local direction = caster:GetForwardVector()
 
-	local targets = unitsInLine(caster, ability, thinker_modifier, caster:GetAbsOrigin(), range, radius, direction, false, true, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES)
+	local targets = unitsInLine(caster, ability, caster:GetAbsOrigin(), range, radius, direction, true, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES)
 	local damage = keys.damage
 
 	local targets_hit = 0
