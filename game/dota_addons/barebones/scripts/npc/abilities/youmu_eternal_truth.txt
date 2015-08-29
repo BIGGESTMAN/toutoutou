@@ -11,7 +11,8 @@
 
 		"precache"
 		{
-
+			"particle"					"particles/youmu/eternal_truth_slash.vpcf"
+			"particle"					"particles/youmu/eternal_truth_tear.vpcf"
 		}
 
 		"AbilityCastPoint"				"0.2"
@@ -105,5 +106,26 @@
 	    	{
 	    		"Attributes"		"MODIFIER_ATTRIBUTE_MULTIPLE"
 	    	}
+
+			"modifier_eternal_truth_dummy"
+			{
+				"States"
+				{
+					"MODIFIER_STATE_INVULNERABLE"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_HEALTH_BAR"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_UNIT_COLLISION"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NOT_ON_MINIMAP"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_UNSELECTABLE"			"MODIFIER_STATE_VALUE_ENABLED"
+				}
+
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_youmu/eternal_truth.lua"
+						"Function"		"destroyTearDummy"
+					}
+				}
+			}
 	    }
 	}

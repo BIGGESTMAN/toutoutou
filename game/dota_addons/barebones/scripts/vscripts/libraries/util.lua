@@ -12,7 +12,7 @@ function unitsInLine(caster, ability, origin, range, radius, direction, require_
 	local iFlag = target_flags
 	local iOrder = FIND_CLOSEST
 
-	DebugDrawCircle(line_midpoint, Vector(255,0,0), 1, search_radius, true, 2)
+	-- DebugDrawCircle(line_midpoint, Vector(255,0,0), 1, search_radius, true, 2)
 	
 	local possible_targets = FindUnitsInRadius(team, line_midpoint, nil, search_radius, iTeam, iType, iFlag, iOrder, false)
 	for k,possible_target in pairs(possible_targets) do
