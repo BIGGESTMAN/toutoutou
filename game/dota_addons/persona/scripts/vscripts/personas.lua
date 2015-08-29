@@ -1,3 +1,5 @@
+require "libraries/damage_system"
+
 -- str = damage, mag = intelligence, end = health/hregen, swft = movespeed, agi = range
 -- resists: physical, fire, ice, wind, thunder, light, dark
 -- resist values: 0 = normal, -1 = weak, 1 = resist, 2 = block, 3 = absorb
@@ -7,6 +9,16 @@ MOVE_SPEED_MODIFIER = "modifier_persona_speed_bonus"
 CHARIOT = 3
 JUSTICE = 4
 TEMPERANCE = 5
+
+damage_types_table = {
+	"physical",
+	"fire",
+	"ice",
+	"wind",
+	"thunder",
+	"light",
+	"dark",
+}
 
 personas_table = {
 	slime = {
@@ -93,6 +105,7 @@ function Activate(keys)
 		-- print(caster:FindModifierByName("modifier_persona_speed_bonus"))
 	end
 
+	-- Switch out abilities
 	for i=0,5 do
 		local ability = caster:GetAbilityByIndex(i)
 		if ability then
@@ -103,6 +116,11 @@ function Activate(keys)
 	for k,ability in ipairs(item.attributes["abilities"]) do
 		caster:AddAbility(ability)
 		if caster:HasAbility(ability) then caster:FindAbilityByName(ability):SetLevel(1) end -- can remove this check once you actually implement all abilities personas have (tarunda, resist phys, and so on)
+	end
+
+	-- Set new resistances
+	for i=1,7 do
+		caster:SetResistance(damage_types_table[i], resistanceNumberFromType(item.attributes["resists"][i]))
 	end
 
 	if caster.activePersona and not caster.activePersona:IsNull() then caster.activePersona:SetActivated(true) end
@@ -194,4 +212,18 @@ function GetResultingArcana(persona1, persona2)
 	end
 
 	return resultingArcana
+end
+
+function resistanceNumberFromType(resistType)
+	if resistType == -1 then
+		return -50 -- weak = 1.5x damage
+	elseif resistType == 1 then
+		return 50 -- resist = 0.5x damage
+	elseif resistType == 2 then
+		return 100 -- block = 0x damage
+	elseif resistType == 3 then
+		return 200 -- absorb = -1x damage
+	else
+		return 0 -- normal
+	end
 end

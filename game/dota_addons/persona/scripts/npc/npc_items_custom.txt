@@ -1,7 +1,12 @@
 "DOTAAbilities"
 {
 	"Version"		"1"
-		"item_double_fusion"
+		"item_dummy_item"
+	{
+	  	"AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"BaseClass"           "item_datadriven"
+	}
+	"item_double_fusion"
 	{
 		"BaseClass"						"item_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"

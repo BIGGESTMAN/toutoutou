@@ -43,7 +43,7 @@
 		
 				"Properties"
 				{
-					"MODIFIER_PROPERTY_INCOMING_PHYSICAL_DAMAGE_PERCENTAGE" "%physical_damage_reduction"
+					//"MODIFIER_PROPERTY_INCOMING_PHYSICAL_DAMAGE_PERCENTAGE" "%physical_damage_reduction"
 				}
 			}
 		}

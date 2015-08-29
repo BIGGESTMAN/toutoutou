@@ -1,3 +1,5 @@
+require "libraries/damage_system"
+
 print ('[PERSONA] persona.lua' )
 
 -- GameRules Variables
@@ -215,6 +217,8 @@ function GameMode:CaptureGameMode()
 
 		mode:SetStashPurchasingDisabled(true)
 
+		mode:SetDamageFilter(Dynamic_Wrap( DamageSystem, "DamageFilter" ), self)
+
 		self:OnFirstPlayerLoaded()
 	end
 end
@@ -376,6 +380,8 @@ function GameMode:OnNPCSpawned(keys)
 	--print("[PERSONA] NPC Spawned")
 	--DeepPrintTable(keys)
 	local npc = EntIndexToHScript(keys.entindex)
+
+	DamageSystem:CreateResistances(npc)
 
 	if npc:IsRealHero() and npc.bFirstSpawned == nil then
 		npc.bFirstSpawned = true
