@@ -1,19 +1,20 @@
 	"karmic_punishing"
 	{
 		"BaseClass"						"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 
-		"AbilityTextureName"			"juggernaut_blade_fury"
+		"AbilityTextureName"			"youmu_karmic_punishing"
 
 		"precache"
 		{
 
 		}
 
-		"AbilityCastPoint"				"0.5"
-		"AbilityCooldown"				"20"
-		"AbilityManaCost"				""
-		"AbilityCastRange"				"500"
+		"AbilityCastPoint"				"0.2"
+		"AbilityCooldown"				"8"
+		"AbilityManaCost"				"40 45 50 55"
+		"AbilityCastRange"				"300"
+		"MaxLevel" 						"1"
 
 		"AbilityProcsMagicStick" 		"1"
 
@@ -21,67 +22,35 @@
 		{
 			"01"
 			{
-				"var_type"				"FIELD_INTEGER"
-				"evasion"				"25 30 35 40"
-			}
-			"02"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"movespeed"				"12 15 18 21"
-			}
-			"03"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"attackspeed"			"30 45 60 75"
-			}
-			"04"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"bonus_damage"			"30 40 50 60"
-			}
-			"05"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"duration"				"10"
-			}
-		}
-
-		"OnUpgrade"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"heroes/hero_youmu/eternal_truth.lua"
-				"Function"		"abilityLearned"
+				"var_type"				"FIELD_FLOAT"
+				"update_interval"		"0.03"
 			}
 		}
 
 		"OnSpellStart"
 	    {
-	    	"RemoveModifier"
+	    	"RunScript"
 	    	{
-	    		"ModifierName"	"modifier_wheel_of_pain_passive"
-	    		"Target" 		"CASTER"
-	    	}
-
-	    	"ApplyModifier"
-	    	{
-	    		"ModifierName"	"modifier_wheel_of_pain_active"
-	    		"Target" 		"CASTER"
+	    		"ScriptFile"	"heroes/hero_youmu/karmic_punishing.lua"
+	    		"Function"		"spellCast"
 	    	}
 	    }
 
 	    "Modifiers"
 	    {
-	    	"modifier_wheel_of_pain_passive"
+	    	"modifier_karmic_punishing"
 	    	{
 	    		"IsHidden"	"1"
+	    		"Passive"	"1"
 
-	    		"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT"
-
-	    		"Properties"
+	    		"ThinkInterval"  "%update_interval"
+	    		"OnIntervalThink"
 	    		{
-	    			"MODIFIER_PROPERTY_EVASION_CONSTANT" "%evasion"
-	    		    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%movespeed" 
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_youmu/karmic_punishing.lua"
+	    				"Function"		"updateEnabled"
+	    			}
 	    		}
 	    	}
 

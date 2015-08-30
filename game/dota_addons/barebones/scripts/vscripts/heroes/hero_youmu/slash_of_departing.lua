@@ -34,3 +34,11 @@ function spellCast(keys)
 	ally:Heal(healing, caster)
 	ally:Purge(false, true, false, true, true)
 end
+
+function abilityLearned(keys)
+	local caster = keys.caster
+	if keys.ability:GetLevel() == 1 then
+		local karmic_punishing_ability = caster:FindAbilityByName("karmic_punishing")
+		karmic_punishing_ability:SetLevel(1)
+	end
+end

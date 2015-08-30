@@ -39,6 +39,15 @@
 			}
 		}
 
+		"OnUpgrade"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/hero_youmu/slash_of_departing.lua"
+				"Function"		"abilityLearned"
+			}
+		}
+
 		"OnSpellStart"
 	    {
 	    	"RunScript"
