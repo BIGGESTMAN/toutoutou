@@ -1,4 +1,5 @@
 require "libraries/damage_system"
+require "persona_exp"
 
 print ('[PERSONA] persona.lua' )
 
@@ -217,6 +218,7 @@ function GameMode:CaptureGameMode()
 
 		mode:SetStashPurchasingDisabled(true)
 
+		mode:SetModifyExperienceFilter(Dynamic_Wrap(PersonaExp, "ExperienceFilter"), self)
 		mode:SetDamageFilter(Dynamic_Wrap( DamageSystem, "DamageFilter" ), self)
 
 		self:OnFirstPlayerLoaded()

@@ -9,7 +9,7 @@ function modifier_persona_speed_bonus:DeclareFunctions()
 end
 
 function modifier_persona_speed_bonus:GetModifierMoveSpeedBonus_Constant(params)
-	print(self.speed_bonus)
+	-- print(self.speed_bonus)
 	return self.speed_bonus
 end
 

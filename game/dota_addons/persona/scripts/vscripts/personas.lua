@@ -6,6 +6,9 @@ require "libraries/damage_system"
 
 MOVE_SPEED_MODIFIER = "modifier_persona_speed_bonus"
 
+BASE_EXP_REQUIRED = 300
+EXP_REQUIRED_INCREASE_PER_LEVEL = 100
+
 CHARIOT = 3
 JUSTICE = 4
 TEMPERANCE = 5
@@ -31,6 +34,7 @@ personas_table = {
 		agi = 0,
 		abilities = {"bash", "tarunda", "resist_physical"},
 		level = 2,
+		learned_abilities = {},
 		resists = {1,-1,0,0,0,0,0},
 
 		attackProjectile = "",
@@ -46,6 +50,7 @@ personas_table = {
 		agi = 5,
 		abilities = {"garu", "regenerate_1"},
 		level = 4,
+		learned_abilities = {},
 		resists = {0,0,0,1,0,1,-1},
 
 		attackProjectile = "",
@@ -61,6 +66,7 @@ personas_table = {
 		agi = 5,
 		abilities = {"dia", "bufu", "rakunda"},
 		level = 4,
+		learned_abilities = {},
 		resists = {0,-1,0,0,0,0,0},
 
 		attackProjectile = "",
@@ -82,6 +88,7 @@ ability_levels_table = {
 function InitializePersona(persona)
 	local personaName = string.gsub(persona:GetAbilityName(), "item_", "")
 	persona.attributes = personas_table[personaName]
+	persona.attributes["exp"] = 0
 	return persona
 end
 
@@ -115,7 +122,7 @@ function Activate(keys)
 	end
 	for k,ability in ipairs(item.attributes["abilities"]) do
 		caster:AddAbility(ability)
-		if caster:HasAbility(ability) then caster:FindAbilityByName(ability):SetLevel(1) end -- can remove this check once you actually implement all abilities personas have (tarunda, resist phys, and so on)
+		if caster:HasAbility(ability) then caster:FindAbilityByName(ability):SetLevel(1) else print("can't add ability, not found in kv file") end -- can remove this check once you actually implement all abilities personas are listed as having
 	end
 
 	-- Set new resistances

@@ -92,7 +92,7 @@ function update_persona_tooltip(data){
 			// if (i in resists)
 			// {
 				// resistBox.visible = true
-				$.Msg(i + 1, " ", resistNames[i])
+				// $.Msg(i + 1, " ", resistNames[i])
 				var resistText = $.FindChildInContext('#Resist' + (i + 1), hero)
 				resistText.text = resistNames[i] + ": " + resistStringFromType(resists[i])
 			// }
