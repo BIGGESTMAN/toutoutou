@@ -37,7 +37,7 @@
 			"03"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"charge_distance"		"600"
+				"charge_distance"		"300"
 			}
 			"04"
 			{

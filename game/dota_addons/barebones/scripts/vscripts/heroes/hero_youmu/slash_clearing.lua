@@ -23,7 +23,8 @@ function spellCast(keys)
 	local units = {}
 	local nearby_units = Entities:FindAllInSphere(caster:GetAbsOrigin(), illusion_search_radius)
 	for k,unit in pairs(nearby_units) do
-		if unit.GetMainControllingPlayer and unit:GetMainControllingPlayer() == caster:GetMainControllingPlayer() and unit:GetName() == caster:GetName() then
+		-- if unit.GetMainControllingPlayer and unit:GetMainControllingPlayer() == caster:GetMainControllingPlayer() and unit:GetName() == caster:GetName() then
+		if (unit.IsIllusion and unit:IsIllusion() and unit:GetPlayerID() == caster:GetPlayerID()) or unit == caster then
 			table.insert(units, unit)
 		end
 	end
@@ -90,6 +91,7 @@ function spellCast(keys)
 		-- Arrange units around target
 		local angle_increment = 360 / #units
 		local prototype_target_point = direction_from_cast
+		target_location = target:GetAbsOrigin()
 		for k,unit in pairs(units) do
 			local target_point = RotatePosition(Vector(0,0,0), QAngle(0,angle_increment * (k - 1),0), prototype_target_point) * ability:GetSpecialValueFor("radius") + target_location
 			unit:SetAbsOrigin(target_point)
@@ -104,22 +106,29 @@ function spellCast(keys)
 			if unit:IsIllusion() then
 				ability:ApplyDataDrivenModifier(caster, unit, "modifier_slash_clearing_illusion", {})
 				local distance_traveled = 0
-				unit.has_hit_target = false
+				local has_hit_target = false
 				Timers:CreateTimer(charge_delay, function()
 					if not unit:IsNull() then
 						unit_location = unit:GetAbsOrigin()
-						if distance_traveled < charge_distance then
+						target_location = target:GetAbsOrigin()
+						if distance_traveled < charge_distance or not has_hit_target then
 							-- Move illusion
+							if not has_hit_target and not target:IsNull() then
+								direction = (target_location - unit_location):Normalized()
+								unit:SetForwardVector(direction)
+							else
+								has_hit_target = true
+								distance_traveled = distance_traveled + charge_speed
+							end
 							unit:SetAbsOrigin(unit_location + direction * charge_speed)
-							distance_traveled = distance_traveled + charge_speed
 
 							-- Check for hit
-							if not unit.has_hit_target and not target:IsNull() then
+							if not has_hit_target and not target:IsNull() then
 								local distance_to_target = (target:GetAbsOrigin() - unit:GetAbsOrigin()):Length2D()
 								if distance_to_target < hit_distance then
 									ApplyDamage({victim = target, attacker = unit, damage = damage, damage_type = damage_type})
 									echoDamage(caster, damage, damage_type)
-									unit.has_hit_target = true
+									has_hit_target = true
 								end
 							end
 							return update_interval
@@ -129,6 +138,7 @@ function spellCast(keys)
 								unit:RemoveSelf()
 							else
 								unit:RemoveModifierByName("modifier_slash_clearing_illusion")
+								FindClearSpaceForUnit(unit, unit:GetAbsOrigin(), false)
 							end
 						end
 					end

@@ -37,6 +37,7 @@ function virudhakasSwordCast(keys)
 		local dummy_location = dummy_projectile:GetAbsOrigin()
 		local distance = (target_point - dummy_location):Length2D()
 		local direction = (target_point - dummy_location):Normalized()
+		print(distance, direction)
 
 		local damage = ability:GetLevelSpecialValueFor("damage", ability_level)
 		local damage_type = ability:GetAbilityDamageType()
