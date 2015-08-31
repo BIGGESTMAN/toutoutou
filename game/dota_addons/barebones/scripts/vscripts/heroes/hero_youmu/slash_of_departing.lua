@@ -55,7 +55,7 @@ end
 
 function abilityLearned(keys)
 	local caster = keys.caster
-	if keys.ability:GetLevel() == 1 then
+	if caster:HasAbility("karmic_punishing") and keys.ability:GetLevel() == 1 then -- Check for having ability in case of being an illusion
 		local karmic_punishing_ability = caster:FindAbilityByName("karmic_punishing")
 		karmic_punishing_ability:SetLevel(1)
 	end

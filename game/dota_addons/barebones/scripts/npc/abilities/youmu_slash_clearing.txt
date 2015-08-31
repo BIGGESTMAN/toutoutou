@@ -1,0 +1,130 @@
+	"slash_clearing"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+
+		"AbilityTextureName"			"youmu_slash_clearing"
+
+		"precache"
+		{
+
+		}
+
+		"AbilityCastPoint"				"0.2"
+		"AbilityCooldown"				"120 110 100"
+		"AbilityManaCost"				"180 260 340"
+		"AbilityCastRange"				"300"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"charge_delay"			"3"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"300"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"charge_distance"		"600"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"charge_speed"			"3000"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"vanish_duration"		"0.5"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"stun_duration"			"1.5"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"update_interval"		"0.03"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"illusions"				"6 7 8"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"illusion_damage_percent"	"90 115 130"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"illusion_damage_taken"	"550 450 350"
+			}
+		}
+
+		"OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"	"heroes/hero_youmu/slash_clearing.lua"
+	    		"Function"		"spellCast"
+	    	}
+	    }
+
+	    "Modifiers"
+	    {
+	    	"modifier_slash_clearing_stun"
+	    	{
+	    		"IsDebuff"		"1"
+	    		"IsStunDebuff"	"1"
+	    		"IsPurgable"	"1"
+
+	    		"Duration"		"%stun_duration"
+
+	    		"States"
+	    		{
+	    			"MODIFIER_STATE_STUNNED"	"MODIFIER_STATE_VALUE_ENABLED"
+	    		}
+
+				"EffectName"		"particles/generic_gameplay/generic_bashed.vpcf"
+				"EffectAttachType"	"follow_overhead"
+	    	}
+
+	    	"modifier_slash_clearing_vanish"
+	    	{
+				"States"
+				{
+					"MODIFIER_STATE_NO_HEALTH_BAR"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_UNIT_COLLISION"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_OUT_OF_GAME"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_INVULNERABLE"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_HEALTH_BAR"			"MODIFIER_STATE_VALUE_ENABLED"
+					//"MODIFIER_STATE_COMMAND_RESTRICTED"		"MODIFIER_STATE_VALUE_ENABLED"
+				}
+	    	}
+
+	    	"modifier_slash_clearing_illusion"
+	    	{
+				"IsHidden"	"1"
+
+	    		"States"
+				{
+	    			"MODIFIER_STATE_STUNNED"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
+	    	}
+	    }
+	}

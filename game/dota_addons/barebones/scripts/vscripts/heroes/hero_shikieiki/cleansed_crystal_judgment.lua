@@ -89,7 +89,7 @@ end
 function duelEnded(keys)
 	local target = keys.target
 
-	if not target.cleansed_crystal_duel_target:IsNull() then
+	if target.cleansed_crystal_duel_target and not target.cleansed_crystal_duel_target:IsNull() then
 		target.cleansed_crystal_duel_target:SetForceAttackTarget(nil)
 		target.cleansed_crystal_duel_target:RemoveModifierByName("modifier_cleansed_crystal_judgment")
 	end
