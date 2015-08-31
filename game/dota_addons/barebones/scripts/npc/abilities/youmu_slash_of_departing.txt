@@ -78,6 +78,15 @@
 	    	{
 	    		"IsHidden"	"1"
 
+	    		"OnCreated"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_youmu/slash_of_departing.lua"
+	    				"Function"		"auraApplied"
+	    			}
+	    		}
+
 	    		"OnTakeDamage"
 	    		{
 	    			"RunScript"
@@ -87,6 +96,11 @@
 	    				"damage_taken"	"%attack_damage"
 	    			}
 	    		}
+	    	}
+
+	    	"modifier_slash_of_departing_charge_stored"
+	    	{
+	    		
 	    	}
 	    }
 	}

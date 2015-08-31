@@ -1,9 +1,13 @@
-	"karmic_punishing"
+	"karmic_punishment"
 	{
 		"BaseClass"						"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 
-		"AbilityTextureName"			"youmu_karmic_punishing"
+		"AbilityTextureName"			"youmu_karmic_punishment"
 
 		"precache"
 		{
@@ -31,14 +35,14 @@
 	    {
 	    	"RunScript"
 	    	{
-	    		"ScriptFile"	"heroes/hero_youmu/karmic_punishing.lua"
+	    		"ScriptFile"	"heroes/hero_youmu/karmic_punishment.lua"
 	    		"Function"		"spellCast"
 	    	}
 	    }
 
 	    "Modifiers"
 	    {
-	    	"modifier_karmic_punishing"
+	    	"modifier_karmic_punishment"
 	    	{
 	    		"IsHidden"	"1"
 	    		"Passive"	"1"
@@ -48,33 +52,10 @@
 	    		{
 	    			"RunScript"
 	    			{
-	    				"ScriptFile"	"heroes/hero_youmu/karmic_punishing.lua"
+	    				"ScriptFile"	"heroes/hero_youmu/karmic_punishment.lua"
 	    				"Function"		"updateEnabled"
 	    			}
 	    		}
-	    	}
-
-	    	"modifier_wheel_of_pain_active"
-	    	{
-	    		"Duration"		"%duration"
-
-	    		"OnDestroy"
-	    		{
-	    			"ApplyModifier"
-	    			{
-	    				"ModifierName"	"modifier_wheel_of_pain_passive"
-	    				"Target" 		"CASTER"
-	    			}
-	    		}
-
-	    		"Properties"
-	    		{
-	    		    "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%attackspeed"
-	    		    "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE" "%bonus_damage"
-	    		}
-
-	    		"EffectName"				"particles/youmu/wheel_of_pain.vpcf"
-				"EffectAttachType"			"follow_origin"
 	    	}
 	    }
 	}
