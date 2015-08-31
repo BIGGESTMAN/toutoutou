@@ -114,7 +114,7 @@ function spellCast(keys)
 							distance_traveled = distance_traveled + charge_speed
 
 							-- Check for hit
-							if not unit.has_hit_target then
+							if not unit.has_hit_target and not target:IsNull() then
 								local distance_to_target = (target:GetAbsOrigin() - unit:GetAbsOrigin()):Length2D()
 								if distance_to_target < hit_distance then
 									ApplyDamage({victim = target, attacker = unit, damage = damage, damage_type = damage_type})
