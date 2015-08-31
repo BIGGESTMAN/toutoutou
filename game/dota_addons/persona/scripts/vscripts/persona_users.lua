@@ -62,6 +62,10 @@ function Setup_Persona_Tooltip(hero)
 			end
 		end
 
+		
+		-- for k,v in pairs(personas_table["slime"]) do
+		-- 	print(k,v)
+		-- end
 		CustomGameEventManager:Send_ServerToPlayer(player, "update_persona_tooltip", {playerid = playerid, hero=HeroIndex, unitInventories = unitsWithInventories})
 		return 0.03
 	end)

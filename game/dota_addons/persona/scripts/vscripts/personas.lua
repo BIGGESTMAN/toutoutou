@@ -13,77 +13,88 @@ CHARIOT = 3
 JUSTICE = 4
 TEMPERANCE = 5
 
-damage_types_table = {
-	"physical",
-	"fire",
-	"ice",
-	"wind",
-	"thunder",
-	"light",
-	"dark",
-}
+damage_types_table = damage_types_table or {}
+personas_table = personas_table or {}
+ability_levels_table = ability_levels_table or {}
 
-personas_table = {
-	slime = {
-		name = "slime",
-		arcana = CHARIOT,
-		str = 3,
-		mag = 2,
-		endr = 3,
-		swft = 5,
-		agi = 0,
-		abilities = {"bash", "tarunda", "resist_physical"},
-		level = 2,
-		-- learned_abilities = {},
-		resists = {1,-1,0,0,0,0,0},
+function InitializePersonaData()
+	damage_types_table = {
+		"physical",
+		"fire",
+		"ice",
+		"wind",
+		"thunder",
+		"light",
+		"dark",
+	}
 
-		attackProjectile = "",
-		particle = "",
-	},
-	angel = {
-		name = "angel",
-		arcana = JUSTICE,
-		str = 4,
-		mag = 5,
-		endr = 2,
-		swft = 7,
-		agi = 5,
-		abilities = {"garu", "regenerate_1"},
-		level = 4,
-		-- learned_abilities = {},
-		resists = {0,0,0,1,0,1,-1},
+	personas_table = {
+		slime = {
+			name = "slime",
+			arcana = CHARIOT,
+			str = 3,
+			mag = 2,
+			endr = 3,
+			swft = 5,
+			agi = 0,
+			abilities = {"bash", "tarunda"},
+			level = 2,
+			resists = {1,-1,0,0,0,0,0},
 
-		attackProjectile = "",
-		particle = "",
-	},
-	apsaras = {
-		name = "apsaras",
-		arcana = TEMPERANCE,
-		str = 3,
-		mag = 5,
-		endr = 3,
-		swft = 5,
-		agi = 5,
-		abilities = {"dia", "bufu", "rakunda"},
-		level = 4,
-		-- learned_abilities = {},
-		resists = {0,-1,0,0,0,0,0},
+			attackProjectile = "",
+			particle = "",
+			learned_abilities = {},
+		},
+		angel = {
+			name = "angel",
+			arcana = JUSTICE,
+			str = 4,
+			mag = 5,
+			endr = 2,
+			swft = 7,
+			agi = 5,
+			abilities = {"garu", "regenerate_1"},
+			level = 4,
+			resists = {0,0,0,1,0,1,-1},
 
-		attackProjectile = "",
-		particle = "",
-	},
-}
+			attackProjectile = "",
+			particle = "",
+			learned_abilities = {},
+		},
+		apsaras = {
+			name = "apsaras",
+			arcana = TEMPERANCE,
+			str = 3,
+			mag = 5,
+			endr = 3,
+			swft = 5,
+			agi = 5,
+			abilities = {"dia", "bufu", "rakunda"},
+			level = 4,
+			resists = {0,-1,0,0,0,0,0},
 
-ability_levels_table = {
-	tarunda = 1,
-	rakunda = 1,
-	bash = 2,
-	garu = 4,
-	bufu = 4,
-	dia = 4,
-	regenerate_1 = 3,
-	resist_physical = 5,
-}
+			attackProjectile = "",
+			particle = "",
+			learned_abilities = {},
+		},
+	}
+
+	personas_table["slime"]["learned_abilities"][3] = "resist_physical"
+	-- for k,v in pairs(personas_table["slime"]) do
+	-- 	print(k,v)
+	-- end
+
+	ability_levels_table = {
+		tarunda = 1,
+		rakunda = 1,
+		bash = 2,
+		garu = 4,
+		bufu = 4,
+		dia = 4,
+		regenerate_1 = 3,
+		resist_physical = 5,
+	}
+end
 
 function InitializePersona(persona)
 	local personaName = string.gsub(persona:GetAbilityName(), "item_", "")

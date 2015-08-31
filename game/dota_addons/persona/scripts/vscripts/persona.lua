@@ -1,5 +1,6 @@
 require "libraries/damage_system"
 require "persona_exp"
+require "personas"
 
 print ('[PERSONA] persona.lua' )
 
@@ -149,6 +150,8 @@ function GameMode:InitGameMode()
 
 	-- Commands can be registered for debugging purposes or as functions that can be called by the custom Scaleform UI
 	--Convars:RegisterCommand( "command_example", Dynamic_Wrap(dotacraft, 'ExampleConsoleCommand'), "A console command example", 0 )
+
+	InitializePersonaData()
 
 	print('[PERSONA] Done loading Persona gamemode!\n\n')
 end
