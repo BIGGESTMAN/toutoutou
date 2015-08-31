@@ -292,7 +292,8 @@
 
 		"precache"
 		{
-			
+			"particle"					"particles/spells/magic_bufu.vpcf"
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_ancient_apparition.vsndevts"
 		}
 
 		"AbilityCastPoint"				"0"
@@ -315,6 +316,12 @@
 			{
 				"ScriptFile"	"abilities/spells/magic_bufu"
 				"Function"		"SpellCast"
+			}
+
+			"FireSound"
+			{
+				"EffectName"	"Hero_Ancient_Apparition.IceBlast.Target"
+				"Target" 		"TARGET"
 			}
 		}
 	}
@@ -370,7 +377,8 @@
 
 		"precache"
 		{
-			
+			"particle"					"particles/spells/magic_garu.vpcf"
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_windrunner.vsndevts"
 		}
 
 		"AbilityCastPoint"				"0"

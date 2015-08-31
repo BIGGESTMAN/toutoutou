@@ -34,7 +34,7 @@ personas_table = {
 		agi = 0,
 		abilities = {"bash", "tarunda", "resist_physical"},
 		level = 2,
-		learned_abilities = {},
+		-- learned_abilities = {},
 		resists = {1,-1,0,0,0,0,0},
 
 		attackProjectile = "",
@@ -50,7 +50,7 @@ personas_table = {
 		agi = 5,
 		abilities = {"garu", "regenerate_1"},
 		level = 4,
-		learned_abilities = {},
+		-- learned_abilities = {},
 		resists = {0,0,0,1,0,1,-1},
 
 		attackProjectile = "",
@@ -66,7 +66,7 @@ personas_table = {
 		agi = 5,
 		abilities = {"dia", "bufu", "rakunda"},
 		level = 4,
-		learned_abilities = {},
+		-- learned_abilities = {},
 		resists = {0,-1,0,0,0,0,0},
 
 		attackProjectile = "",

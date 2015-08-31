@@ -10,4 +10,6 @@ function SpellCast(keys)
 
 	-- ApplyDamage({victim = target, attacker = caster, damage = damage, damage_type = damage_type})
 	ApplyCustomDamage(target, caster, damage, damage_type, "wind")
+
+	local particle = ParticleManager:CreateParticle("particles/spells/magic_garu.vpcf", PATTACH_ABSORIGIN, target)
 end

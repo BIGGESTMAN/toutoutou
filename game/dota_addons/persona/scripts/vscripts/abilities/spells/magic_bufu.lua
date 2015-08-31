@@ -7,4 +7,6 @@ function SpellCast(keys)
 	local damage_type = DAMAGE_TYPE_MAGICAL
 
 	ApplyDamage({victim = target, attacker = caster, damage = damage, damage_type = damage_type})
+
+	local particle = ParticleManager:CreateParticle("particles/spells/magic_bufu.vpcf", PATTACH_ABSORIGIN, target)
 end

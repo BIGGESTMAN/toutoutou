@@ -62,7 +62,7 @@ function Setup_Persona_Tooltip(hero)
 			end
 		end
 
-		-- CustomGameEventManager:Send_ServerToPlayer(player, "update_persona_tooltip", {playerid = playerid, hero=HeroIndex, unitInventories = unitsWithInventories})
+		CustomGameEventManager:Send_ServerToPlayer(player, "update_persona_tooltip", {playerid = playerid, hero=HeroIndex, unitInventories = unitsWithInventories})
 		return 0.03
 	end)
 end
