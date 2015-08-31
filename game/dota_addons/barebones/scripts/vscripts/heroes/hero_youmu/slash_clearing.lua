@@ -1,3 +1,5 @@
+require "heroes/hero_youmu/eternal_truth"
+
 function spellCast(keys)
 	local caster = keys.caster
 	local ability = keys.ability
@@ -116,6 +118,7 @@ function spellCast(keys)
 								local distance_to_target = (target:GetAbsOrigin() - unit:GetAbsOrigin()):Length2D()
 								if distance_to_target < hit_distance then
 									ApplyDamage({victim = target, attacker = unit, damage = damage, damage_type = damage_type})
+									echoDamage(caster, damage, damage_type)
 									unit.has_hit_target = true
 								end
 							end

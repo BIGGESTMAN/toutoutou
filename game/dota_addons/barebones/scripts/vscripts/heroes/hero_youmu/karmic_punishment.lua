@@ -1,3 +1,5 @@
+require "heroes/hero_youmu/eternal_truth"
+
 function updateEnabled(keys)
 	local caster = keys.caster
 	local ability = keys.ability
@@ -14,6 +16,8 @@ function spellCast(keys)
 	local bonus_damage = caster.slash_of_departing_stored_damage
 	local damage_type = ability:GetAbilityDamageType()
 	ApplyDamage({victim = target, attacker = caster, damage = bonus_damage, damage_type = damage_type})
+	echoDamage(caster, bonus_damage, damage_type)
+	echoDamage(caster, caster:GetAverageTrueAttackDamage(), DAMAGE_TYPE_PHYSICAL)
 
 	-- Apply debuffs
 	for k,modifier in pairs(caster.slash_of_departing_stored_debuffs) do
