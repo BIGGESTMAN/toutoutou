@@ -100,7 +100,7 @@
 
 	    	"modifier_slash_of_departing_charge_stored"
 	    	{
-	    		
+	    		"Attributes"		"MODIFIER_ATTRIBUTE_PERMANENT"
 	    	}
 	    }
 	}

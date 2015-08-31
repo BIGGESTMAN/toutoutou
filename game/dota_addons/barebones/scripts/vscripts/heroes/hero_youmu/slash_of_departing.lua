@@ -4,18 +4,22 @@ end
 
 function allyTookDamage(keys)
 	local ability = keys.ability
-	local ally = keys.unit
-	local damage = keys.damage_taken
+	if ability then -- this fucking ability.
+		local ally = keys.unit
+		local damage = keys.damage_taken
 
-	for time,damage in pairs(ally.slash_of_departing_damage_instances) do -- Do some cleanup of expired damage instances - probably not strictly necessary, but w/e
-		if GameRules:GetGameTime() - time > ability:GetSpecialValueFor("heal_period") then
-			ally.slash_of_departing_damage_instances[time] = nil
+		for time,damage in pairs(ally.slash_of_departing_damage_instances) do -- Do some cleanup of expired damage instances - probably not strictly necessary, but w/e
+			if GameRules:GetGameTime() - time > ability:GetSpecialValueFor("heal_period") then
+				ally.slash_of_departing_damage_instances[time] = nil
+			end
 		end
-	end
 
-	local time = GameRules:GetGameTime()
-	if not ally.slash_of_departing_damage_instances[time] then ally.slash_of_departing_damage_instances[time] = 0 end
-	ally.slash_of_departing_damage_instances[time] = ally.slash_of_departing_damage_instances[time] + damage
+		local time = GameRules:GetGameTime()
+		if not ally.slash_of_departing_damage_instances[time] then ally.slash_of_departing_damage_instances[time] = 0 end
+		ally.slash_of_departing_damage_instances[time] = ally.slash_of_departing_damage_instances[time] + damage
+	else
+		keys.unit:RemoveModifierByName("modifier_slash_of_departing_aura")
+	end
 end
 
 function spellCast(keys)
