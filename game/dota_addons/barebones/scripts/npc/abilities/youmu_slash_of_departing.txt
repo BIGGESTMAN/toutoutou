@@ -102,5 +102,10 @@
 	    	{
 	    		"Attributes"		"MODIFIER_ATTRIBUTE_PERMANENT"
 	    	}
+
+	    	"modifier_slash_of_departing_cast_recently"
+	    	{
+	    		"Duration"	"%per_unit_cooldown"
+	    	}
 	    }
 	}
