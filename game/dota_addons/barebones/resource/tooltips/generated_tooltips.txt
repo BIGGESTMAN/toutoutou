@@ -177,3 +177,35 @@
 		"DOTA_Tooltip_Ability_cleansed_crystal_judgment_Damage_taken" "ILLUSION DAMAGE TAKEN:"
 		"DOTA_Tooltip_Ability_cleansed_crystal_judgment_Duration" "DURATION:"
 
+		"DOTA_Tooltip_Ability_eternal_truth" "Acceptance of Eternal Truth"
+		"DOTA_Tooltip_Ability_eternal_truth_Description" "Youmu slashes the air, tearing space apart and dealing magical damage. When Youmu deals damage, all tears in space echo half that damage and slow movement for 2 seconds. Damaging multiple enemies in a single instance will echo only the highest amount, and enemies are damaged by only one tear at a time."
+		"DOTA_Tooltip_Ability_eternal_truth_Damage" "MAGICAL DAMAGE:"
+		"DOTA_Tooltip_Ability_eternal_truth_Slow" "MOVE SPEED SLOW:"
+		"DOTA_Tooltip_Ability_eternal_truth_Duration" "GASH DURATION:"
+		"DOTA_Tooltip_Ability_eternal_truth_Tear_length" "GASH LENGTH:"
+		"DOTA_Tooltip_Ability_eternal_truth_Tear_width" "GASH WIDTH:"
+
+		"DOTA_Tooltip_Ability_wheel_of_pain" "Wheel of Pain of the Living and Dead"
+		"DOTA_Tooltip_Ability_wheel_of_pain_Description" "Youmu's phantasmal nature passively gives her a chance to evade enemy attacks and increases her movement speed. On cast, Youmu focuses on her swordplay to disable the passive in exchange for bonus attack speed and damage."
+		"DOTA_Tooltip_Ability_wheel_of_pain_Evasion" "DODGE CHANCE:"
+		"DOTA_Tooltip_Ability_wheel_of_pain_Movespeed" "MOVE SPEED BONUS:"
+		"DOTA_Tooltip_Ability_wheel_of_pain_Attackspeed" "ATTACK SPEED BONUS:"
+		"DOTA_Tooltip_Ability_wheel_of_pain_Bonus_damage" "ATTACK DAMAGE BONUS:"
+		"DOTA_Tooltip_Ability_wheel_of_pain_Duration" "DURATION:"
+
+		"DOTA_Tooltip_Ability_slash_of_departing" "Slash of Departing from Hesitation"
+		"DOTA_Tooltip_Ability_slash_of_departing_Description" "A cut from Hakurouken removes most debuffs and disables from a friendly hero, and heals the damage they took during the last 2 seconds. An affected hero can't be targeted again for 25 seconds."
+		"DOTA_Tooltip_Ability_slash_of_departing_Max_heal" "MAXIMUM HEAL:"
+
+		"DOTA_Tooltip_Ability_karmic_punishment" "Karmic Punishment of the Idle and Unfocused"
+		"DOTA_Tooltip_Ability_karmic_punishment_Description" "A strike from Roukanken deals Youmu's attack damage, plus magical damage equal to the last heal of Acceptance of Eternal Truth and applies the debuffs and disables that it removed. The stored damage, debuffs and disables are removed after cast."
+
+		"DOTA_Tooltip_Ability_slash_clearing" "Slash Clearing the Six Senses"
+		"DOTA_Tooltip_Ability_slash_clearing_Description" "Youmu stuns an enemy and briefly vanishes, surrounding them with stationary illusions on reappearance. After 3 seconds, they dash through the target and deal a percentage of Youmu's attack damage. The illusions can be killed before they strike the target."
+		"DOTA_Tooltip_Ability_slash_clearing_Illusions" "NUMBER OF ILLUSIONS:"
+		"DOTA_Tooltip_Ability_slash_clearing_Illusion_damage_percent" "DAMAGE PER ILLUSION:"
+		"DOTA_Tooltip_Ability_slash_clearing_Illusion_damage_taken" "ILLUSION DAMAGE TAKEN:"
+		"DOTA_Tooltip_Ability_slash_clearing_Stun_duration" "STUN DURATION:"
+		"DOTA_Tooltip_Ability_slash_clearing_Vanish_duration" "VANISH DURATION:"
+		"DOTA_Tooltip_Ability_slash_clearing_Charge_speed" "TRAVEL SPEED:"
+

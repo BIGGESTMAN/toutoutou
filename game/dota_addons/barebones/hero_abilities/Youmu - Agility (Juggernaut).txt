@@ -1,0 +1,87 @@
+Youmu - Agility (Juggernaut)
+
+Base Stats
+
+STR : 19 (+1.9)
+AGI : 21 (+2.5)
+INT : 17 (+1.8)
+Damage : 23-27
+Armor : 1
+Attacks / Second : 0.66
+Movement Speed : 305
+Turn Rate : 0.6
+Sight Range : 1800/800
+Attack Range : Melee
+Missile Speed : Instant
+Attack Duration : 0.4/0.3
+Base Attack Time : 1.5
+
+Lv. 25
+
+STR : 84
+AGI : 101
+INT : 80
+HP : 1746
+Mana : 1040
+Damage : 124-128
+Armor : 15.14
+
+[Q] Acceptance of Eternal Truth (eternal_truth) : Youmu slashes the air, tearing space apart and dealing magical damage. When Youmu deals damage, all tears in space echo half that damage and slow movement for 2 seconds. Damaging multiple enemies in a single instance will echo only the highest amount, and enemies are damaged by only one tear at a time.
+Spell Immunity - The tear and echoed magical damage are blocked by Spell Immunity.
+DevNotes - The tear and echo both damage mechanical units. The tear is always created perpendicular to the line between Youmu and the targeted point. Tears don't echo their initial damage or echoes. The damage is echoed after all reductions, and its type is equal to the original.
+
+Cast Point : 0.2
+Magical Damage (damage) : 90/140/190/240
+Move Speed Slow (slow) : 20/25/30/35%
+Gash Duration (duration) : 14
+Cast Range : 500/575/650/725
+Gash Length (tear_length) : 500 
+Gash Width (tear_width) : 150
+Mana : 70/80/90/100
+Cooldown : 6
+
+[W] Wheel of Pain of the Living and Dead (wheel_of_pain) : Youmu's phantasmal nature passively gives her a chance to evade enemy attacks and increases her movement speed. On cast, Youmu focuses on her swordplay to disable the passive in exchange for bonus attack speed and damage.
+DevNotes - The passive is recovered when the active duration ends.
+
+Cast Point : 0
+Dodge Chance (evasion) : 25/30/35/40%
+Move Speed Bonus (movespeed) : 12/15/18/21%
+Attack Speed Bonus (attackspeed) : 30/45/60/75
+Attack Damage Bonus (bonus_damage) : 30/40/50/60
+Duration (duration) : 10
+Mana : 70
+Cooldown : 20
+
+[E] Slash of Departing from Hesitation (slash_of_departing) : A cut from Hakurouken removes most debuffs and disables from a friendly hero, and heals the damage they took during the last 2 seconds. An affected hero can't be targeted again for 25 seconds.
+DevNotes - Applies a strong dispel. Can't be cast through disables that normally block ability casts like silences and stuns etc.
+
+Cast Point : 0.5
+Maximum Heal (max_heal) : 150/250/350/450
+Cast Range : 500
+Mana : 80/85/90/95
+Cooldown : 15/13/11/8
+
+[D] Karmic Punishment of the Idle and Unfocused (karmic_punishment) : A strike from Roukanken deals Youmu's attack damage, plus magical damage equal to the last heal of Acceptance of Eternal Truth and applies the debuffs and disables that it removed. The stored damage, debuffs and disables are removed after cast.
+Spell Immunity - Can't target Spell Immune units. Debuffs and disables that pierce Spell Immunity are not removed. Linken's Sphere blocks on cast, but doesn't spend the stored damage and debuffs/disables.
+DevNotes - Can target and damage mechanical units. Debuffs and disables are applied at their full duration. This ability is treated as an attack with bonus magical damage, so the attack damage can crit or lifesteal etc.
+
+Cast Point : 0.2
+Cast Range : 300
+Mana : 40/45/50/55
+Cooldown : 8
+
+[R] Slash Clearing the Six Senses (slash_clearing) : Youmu stuns an enemy and briefly vanishes, surrounding them with stationary illusions on reappearance. After 3 seconds, they dash through the target and deal a percentage of Youmu's attack damage. The illusions can be killed before they strike the target.
+Scepter - Increases cast range. Surviving illusions strike again after another 1 second delay.
+Spell Immunity - Pierces Spell Immunity. Linken's Sphere blocks on cast.
+DevNotes - Can target and damage mechanical units. The stun and vanishing occurs simultaneously. The illusions are placed in a 300 radius circle facing the target, and Youmu reappears among them. They dash through the target, damaging on contact, and travel an additional 300 range before disappearing. With Scepter, they remain there for the second strike unless the target is dead.
+
+Cast Point : 0.2
+Number of Illusions (illusions) : 6/7/8
+Damage per Illusion (illusion_damage_percent) : 90/115/130%
+Illusion Damage Taken (illusion_damage_taken) : 550/450/350%
+Stun Duration (stun_duration) : 1.5
+Vanish Duration (vanish_duration) : 0.5
+Travel Speed (charge_speed) : 3000
+Cast Range : 300 {Scepter : 500}
+Mana : 180/260/340
+Cooldown : 120/110/100
