@@ -22,22 +22,30 @@ function virudhakasSwordCast(keys)
 	ability:ApplyDataDrivenModifier(caster, dummy_projectile, keys.projectile_modifier, {})
 	dummy_projectile.units_hit = {}
 
-	local particle = ParticleManager:CreateParticle("particles/byakuren/bead_possibility_3.vpcf", PATTACH_ABSORIGIN_FOLLOW, dummy_projectile)
-
-	local target_point = target:GetAbsOrigin()
+	local target_location = target:GetAbsOrigin()
+	local dummy_location = dummy_projectile:GetAbsOrigin()
+	local direction = (target_location - dummy_location):Normalized()
 
 	local dummy_speed = speed * 0.03
-	local arrival_distance = 25
+	local arrival_distance = 40
 	local drag_distance = 50
-
 	local radius = ability:GetLevelSpecialValueFor("radius", ability_level)
 
+	local particle = ParticleManager:CreateParticle("particles/byakuren/virudhakas_sword.vpcf", PATTACH_ABSORIGIN_FOLLOW, dummy_projectile)
+	ParticleManager:SetParticleControl(particle, 5, dummy_location + direction) -- Spear facing
+	ParticleManager:SetParticleControl(particle, 1, dummy_location + direction * 60) -- Spear glow endpoints
+	ParticleManager:SetParticleControl(particle, 2, dummy_location + direction * -90)
+
 	Timers:CreateTimer(0, function()
-		if not target:IsNull() then target_point = target:GetAbsOrigin() end
-		local dummy_location = dummy_projectile:GetAbsOrigin()
-		local distance = (target_point - dummy_location):Length2D()
-		local direction = (target_point - dummy_location):Normalized()
-		print(distance, direction)
+		if not target:IsNull() then target_location = target:GetAbsOrigin() end
+		dummy_location = dummy_projectile:GetAbsOrigin()
+		local distance = (target_location - dummy_location):Length2D()
+		direction = (target_location - dummy_location):Normalized()
+		ParticleManager:SetParticleControl(particle, 5, dummy_location + direction) -- Spear facing
+		ParticleManager:SetParticleControl(particle, 1, dummy_location + direction * 60) -- Spear glow endpoints
+		ParticleManager:SetParticleControl(particle, 2, dummy_location + direction * -90)
+		-- ParticleManager:SetParticleControl(particle, 2, dummy_location + direction * -90) -- Spear endcap flash endpoints
+		-- ParticleManager:SetParticleControl(particle, 2, dummy_location + direction * -90)
 
 		local damage = ability:GetLevelSpecialValueFor("damage", ability_level)
 		local damage_type = ability:GetAbilityDamageType()
@@ -70,7 +78,7 @@ function virudhakasSwordCast(keys)
 
 			for unit,v in pairs(dummy_projectile.units_hit) do
 				local direction_towards_spear = (origin - unit:GetAbsOrigin()):Normalized()
-				local angle = dummy_projectile:GetForwardVector():Dot(direction_towards_spear)
+				local angle = direction:Dot(direction_towards_spear)
 
 				local target_distance = (unit:GetAbsOrigin() - origin):Length2D()
 
