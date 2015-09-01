@@ -400,7 +400,7 @@ end
 
 -- An item was picked up off the ground
 function GameMode:OnItemPickedUp(keys)
-	print ( '[BAREBONES] OnItemPurchased' )
+	print ( '[BAREBONES] OnItemPickedUp' )
 	DeepPrintTable(keys)
 
 	local heroEntity = EntIndexToHScript(keys.HeroEntityIndex)

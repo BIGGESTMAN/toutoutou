@@ -22,7 +22,6 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"precache"
 		{
-			"particle"					"particles/byakuren/bead_possibility_3"
 			"particle"					"particles/byakuren/virudhakas_sword.vpcf"
 		}
 

@@ -85,6 +85,7 @@ end
 
 function updateHealth(keys)
 	keys.target.old_health = keys.target:GetHealth()
+	print(keys.target.old_health)
 end
 
 function damageTaken(keys)
@@ -92,7 +93,8 @@ function damageTaken(keys)
 	local unit = keys.unit
 	local ability = keys.ability
 
-	local newHealth = unit.old_health			
+	local newHealth = unit.old_health
+	print(newHealth)
 	unit:SetHealth(newHealth)
 	ability.damage_absorbed = ability.damage_absorbed + damage
 end
