@@ -6,7 +6,8 @@ function SpellCast(keys)
 	local damage = caster.activePersona.attributes["mag"] * ability:GetSpecialValueFor("magic_multiplier")
 	local damage_type = DAMAGE_TYPE_MAGICAL
 
-	ApplyDamage({victim = target, attacker = caster, damage = damage, damage_type = damage_type})
+	-- ApplyDamage({victim = target, attacker = caster, damage = damage, damage_type = damage_type})
+	ApplyCustomDamage(target, caster, damage, damage_type, "ice")
 
 	local particle = ParticleManager:CreateParticle("particles/spells/magic_bufu.vpcf", PATTACH_ABSORIGIN, target)
 end

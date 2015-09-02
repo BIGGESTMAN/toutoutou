@@ -42,6 +42,7 @@ game/dota_addons/dota2cfg.cfg
 game/dota_addons/persona/tools_asset_info.bin
 game/dota_addons/persona/tools_thumbnail_cache.bin
 game/dota_addons/persona/particles/*
+game/dota_addons/persona/panorama/*
 
 content/_toolsautosave/*
 content/core/*

@@ -29,6 +29,14 @@
 				"Function"		"SetPassiveModifier"
 				"modifier"		"modifier_resist_physical"
 			}
+			
+			"RunScript"
+			{
+				"ScriptFile"	"personas.lua"
+				"Function"		"AbilitySetResistance"
+				"damageType"	"physical"
+				"resistanceLevel"	"1"
+			}
 		}
 
 		"Modifiers"
@@ -37,14 +45,6 @@
 			{
 				"Passive"	"1"
 				"IsHidden"	"0"
-		
-				//"EffectName"		"particle_name"
-				//"EffectAttachType"	"follow_origin"
-		
-				"Properties"
-				{
-					//"MODIFIER_PROPERTY_INCOMING_PHYSICAL_DAMAGE_PERCENTAGE" "%physical_damage_reduction"
-				}
 			}
 		}
 	}

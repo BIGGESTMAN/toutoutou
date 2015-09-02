@@ -40,7 +40,7 @@
 			"FireSound"
 			{
 				"EffectName"	"Hero_Windrunner.ShackleshotCast"
-				"Target" 		"CASTER"
+				"Target" 		"TARGET"
 			}
 		}
 	}

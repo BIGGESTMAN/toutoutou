@@ -98,8 +98,28 @@ end
 
 function InitializePersona(persona)
 	local personaName = string.gsub(persona:GetAbilityName(), "item_", "")
-	persona.attributes = personas_table[personaName]
+	persona.attributes = {
+		name = personas_table[personaName]["name"],
+		arcana = personas_table[personaName]["arcana"],
+		str = personas_table[personaName]["str"],
+		mag = personas_table[personaName]["mag"],
+		endr = personas_table[personaName]["endr"],
+		swft = personas_table[personaName]["swft"],
+		agi = personas_table[personaName]["agi"],
+		abilities = {},
+		level = personas_table[personaName]["level"],
+		resists = personas_table[personaName]["resists"],
+
+		attackProjectile = personas_table[personaName]["attackProjectile"],
+		particle = personas_table[personaName]["particle"],
+		learned_abilities = personas_table[personaName]["learned_abilities"],
+	}
+
+	for k,v in ipairs(personas_table[personaName]["abilities"]) do
+		persona.attributes["abilities"][k] = v
+	end
 	persona.attributes["exp"] = 0
+
 	return persona
 end
 
@@ -123,6 +143,11 @@ function Activate(keys)
 		-- print(caster:FindModifierByName("modifier_persona_speed_bonus"))
 	end
 
+	-- Set new resistances
+	for i=1,#damage_types_table do
+		caster:SetResistance(damage_types_table[i], resistanceNumberFromType(item.attributes["resists"][i]))
+	end
+
 	-- Switch out abilities
 	for i=0,5 do
 		local ability = caster:GetAbilityByIndex(i)
@@ -134,11 +159,6 @@ function Activate(keys)
 	for k,ability in ipairs(item.attributes["abilities"]) do
 		caster:AddAbility(ability)
 		if caster:HasAbility(ability) then caster:FindAbilityByName(ability):SetLevel(1) else print("can't add ability, not found in kv file") end -- can remove this check once you actually implement all abilities personas are listed as having
-	end
-
-	-- Set new resistances
-	for i=1,7 do
-		caster:SetResistance(damage_types_table[i], resistanceNumberFromType(item.attributes["resists"][i]))
 	end
 
 	if caster.activePersona and not caster.activePersona:IsNull() then caster.activePersona:SetActivated(true) end
@@ -153,8 +173,14 @@ function SetPassiveModifier(keys)
 	keys.ability.passiveModifier = keys.modifier
 end
 
-function SetLevel(keys)
-	keys.ability.level = keys.level
+function AbilitySetResistance(keys)
+	print("SETTING RESISTANCE", keys.damageType, keys.resistanceLevel)
+	local caster = keys.caster
+	local damageType = keys.damageType
+	local resistType = keys.resistanceLevel
+	if resistanceNumberFromType(resistType) > caster:GetResistance(damageType) then
+		caster:SetResistance(damageType, resistanceNumberFromType(resistType))
+	end
 end
 
 function DoubleFusion(keys)
