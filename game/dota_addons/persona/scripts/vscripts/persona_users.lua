@@ -27,6 +27,7 @@ function Spawn(keys)
 	caster:AddNewModifier(caster, ability, "modifier_persona_health_bonus", {})
 	caster:AddNewModifier(caster, ability, "modifier_persona_speed_bonus", {})
 	caster:CastAbilityImmediately(personaItem, caster:GetPlayerID())
+	personaItem:EndCooldown()
 
 	local personaItemAngelTest = CreateItem("item_angel", caster, caster)
 	caster:AddItem(personaItemAngelTest)

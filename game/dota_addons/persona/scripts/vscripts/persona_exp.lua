@@ -1,5 +1,9 @@
+require "personas"
+
 BASE_EXP_REQUIRED = 300
 EXP_REQUIRED_INCREASE_PER_LEVEL = 100
+
+STAT_INCREASE_PERCENT = 20
 
 if PersonaExp == nil then
 	print ( '[PersonaExp] creating PersonaExp' )
@@ -37,13 +41,29 @@ function PersonaExp:ExperienceFilter(event)
 end
 
 function LevelUpPersona(hero, personaItem)
+	local DEBUG = false
 	personaItem.attributes["level"] = personaItem.attributes["level"] + 1
 	local level = personaItem.attributes["level"]
-	print("leveling up to:", level)
+	if DEBUG then print("leveling up to:", level) end
+
+	-- Check for learn ability
 	local learned_ability = personaItem.attributes["learned_abilities"][level]
 	if learned_ability then
-		print(learned_ability)
+		if DEBUG then print(learned_ability) end
 		table.insert(personaItem.attributes["abilities"], learned_ability)
 	end
+
+	local personaAttributes = personaItem.attributes
+	local personaName = personaAttributes["name"]
+
+	-- Increase stats
+	if DEBUG then print(personaAttributes["str"]) end
+	personaAttributes["str"] = personaAttributes["str"] + personas_table[personaName]["str"] * STAT_INCREASE_PERCENT / 100
+	if DEBUG then print(personaAttributes["str"]) end
+	personaAttributes["mag"] = personaAttributes["mag"] + personas_table[personaName]["mag"] * STAT_INCREASE_PERCENT / 100
+	personaAttributes["endr"] = personaAttributes["endr"] + personas_table[personaName]["endr"] * STAT_INCREASE_PERCENT / 100
+
+
 	hero:CastAbilityImmediately(personaItem, hero:GetPlayerID())
+	personaItem:EndCooldown()
 end

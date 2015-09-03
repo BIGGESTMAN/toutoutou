@@ -3,7 +3,7 @@ function SpellCast(keys)
 	local ability = keys.ability
 	local target = keys.target
 
-	local damage = caster:GetAverageTrueAttackDamage() * ability:GetSpecialValueFor("damage_percent") / 100
+	local damage = caster:GetAverageTrueAttackDamage() * ability:GetSpecialValueFor("damage_percent") / 1
 	local damage_type = DAMAGE_TYPE_PHYSICAL
 
 	local self_damage = caster:GetMaxHealth() * ability:GetSpecialValueFor("health_cost_percent") / 100

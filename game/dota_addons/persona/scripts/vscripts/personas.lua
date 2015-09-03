@@ -127,10 +127,14 @@ function Activate(keys)
 	local caster = keys.caster
 	local item = keys.ability
 
-	caster:SetBaseDamageMin(item.attributes["str"] * 10)
-	caster:SetBaseDamageMax(item.attributes["str"] * 10)
-	caster:SetBaseIntellect(10 + item.attributes["mag"] * 3)
-	caster:FindModifierByName("modifier_persona_health_bonus").health_bonus = item.attributes["endr"] * 60
+	-- Update hero stats
+	local effectiveStr = math.floor(item.attributes["str"])
+	local effectiveMag = math.floor(item.attributes["mag"])
+	local effectiveEndr = math.floor(item.attributes["endr"])
+	caster:SetBaseDamageMin(effectiveStr * 10)
+	caster:SetBaseDamageMax(effectiveStr * 10)
+	caster:SetBaseIntellect(10 + effectiveMag * 3)
+	caster:FindModifierByName("modifier_persona_health_bonus").health_bonus = effectiveEndr * 60
 	caster:FindModifierByName("modifier_persona_range_bonus").range_bonus = item.attributes["agi"] * 50
 	caster:FindModifierByName("modifier_persona_speed_bonus").speed_bonus = item.attributes["swft"] * 10
 	-- print(caster:FindModifierByName("modifier_persona_speed_bonus").speed_bonus)

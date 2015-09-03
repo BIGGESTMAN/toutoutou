@@ -51,13 +51,13 @@ function update_persona_tooltip(data){
 		resistsContainer.visible = true
 
 		var strengthText = $.FindChildInContext('#PersonaStrength', hero)
-		strengthText.text = "Strength:" + personaAttributes["str"]
+		strengthText.text = "Strength:" + Math.floor(personaAttributes["str"])
 
 		var magicText = $.FindChildInContext('#PersonaMagic', hero)
-		magicText.text = "Magic:" + personaAttributes["mag"]
+		magicText.text = "Magic:" + Math.floor(personaAttributes["mag"])
 
 		var enduranceText = $.FindChildInContext('#PersonaEndurance', hero)
-		enduranceText.text = "Endurance:" + personaAttributes["endr"]
+		enduranceText.text = "Endurance:" + Math.floor(personaAttributes["endr"])
 
 		var swiftnessText = $.FindChildInContext('#PersonaSwiftness', hero)
 		swiftnessText.text = "Swiftness:" + personaAttributes["swft"]
