@@ -109,6 +109,15 @@
 	    	"modifier_slash_of_departing_cast_recently"
 	    	{
 	    		"Duration"	"%per_unit_cooldown"
+
+	    		"OnDestroy"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_youmu/slash_of_departing.lua"
+	    				"Function"		"removeCooldownParticle"
+	    			}
+	    		}
 	    	}
 
 			"modifier_slash_of_departing_dummy"

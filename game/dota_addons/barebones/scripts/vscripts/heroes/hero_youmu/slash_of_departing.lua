@@ -118,10 +118,18 @@ function spellCast(keys)
 		ability:ApplyDataDrivenModifier(caster, ally, "modifier_slash_of_departing_cast_recently", {})
 
 		-- Create cooldown particle
-		ParticleManager:CreateParticleForPlayer("particles/youmu/slash_of_departing_cooldown.vpcf", PATTACH_ABSORIGIN_FOLLOW, ally, caster:GetPlayerOwner())
+		ally.slash_of_departing_cooldown_particle = ParticleManager:CreateParticleForPlayer("particles/youmu/slash_of_departing_cooldown.vpcf", PATTACH_ABSORIGIN_FOLLOW, ally, caster:GetPlayerOwner())
 	else
 		ability:RefundManaCost()
 		ability:EndCooldown()
+	end
+end
+
+function removeCooldownParticle(keys)
+	local target = keys.target
+	if target.slash_of_departing_cooldown_particle then
+		ParticleManager:DestroyParticle(target.slash_of_departing_cooldown_particle, true)
+		target.slash_of_departing_cooldown_particle = nil
 	end
 end
 
