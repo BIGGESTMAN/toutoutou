@@ -57,12 +57,26 @@ function LevelUpPersona(hero, personaItem)
 	local personaName = personaAttributes["name"]
 
 	-- Increase stats
+	local oldStr = math.floor(personaAttributes["str"])
+	local oldEndr = math.floor(personaAttributes["endr"])
+	local oldMag = math.floor(personaAttributes["mag"])
+
 	if DEBUG then print(personaAttributes["str"]) end
 	personaAttributes["str"] = personaAttributes["str"] + personas_table[personaName]["str"] * STAT_INCREASE_PERCENT / 100
 	if DEBUG then print(personaAttributes["str"]) end
 	personaAttributes["mag"] = personaAttributes["mag"] + personas_table[personaName]["mag"] * STAT_INCREASE_PERCENT / 100
 	personaAttributes["endr"] = personaAttributes["endr"] + personas_table[personaName]["endr"] * STAT_INCREASE_PERCENT / 100
 
+	local strIncrease = math.floor(personaAttributes["str"]) - oldStr
+	local endrIncrease = math.floor(personaAttributes["endr"]) - oldEndr
+	local magIncrease = math.floor(personaAttributes["mag"]) - oldMag
+	if strIncrease == 0 then strIncrease = 10 end
+	if endrIncrease == 0 then endrIncrease = 10 end
+	if magIncrease == 0 then magIncrease = 10 end
+	local statsIncreaseParticle = ParticleManager:CreateParticle("particles/general/levelup_stats.vpcf", PATTACH_ABSORIGIN_FOLLOW, hero)
+	ParticleManager:SetParticleControl(statsIncreaseParticle, 17, Vector(0,strIncrease,0))
+	ParticleManager:SetParticleControl(statsIncreaseParticle, 19, Vector(0,endrIncrease,0))
+	ParticleManager:SetParticleControl(statsIncreaseParticle, 21, Vector(0,magIncrease,0))
 
 	hero:CastAbilityImmediately(personaItem, hero:GetPlayerID())
 	personaItem:EndCooldown()

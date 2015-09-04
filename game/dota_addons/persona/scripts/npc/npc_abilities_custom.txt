@@ -87,6 +87,7 @@
 				"Function"		"SetPassiveModifier"
 				"modifier"		"modifier_resist_physical"
 			}
+			
 			"RunScript"
 			{
 				"ScriptFile"	"personas.lua"

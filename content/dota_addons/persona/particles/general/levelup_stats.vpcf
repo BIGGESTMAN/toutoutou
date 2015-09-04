@@ -1,0 +1,280 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	_class = "CParticleSystemDefinition"
+	m_bShouldHitboxesFallbackToRenderBounds = false
+	m_nMaxParticles = 1
+	m_Operators =
+	[
+		{
+			_class = "C_OP_BasicMovement"
+			m_fDrag = 1.000000
+			m_Gravity =
+			[
+				0.000000,
+				0.000000,
+				200.000000,
+			]
+		},
+		{
+			_class = "C_OP_Decay"
+		},
+		{
+			_class = "C_OP_VectorNoise"
+			m_vecOutputMax =
+			[
+				10.000000,
+				10.000000,
+				10.000000,
+			]
+			m_vecOutputMin =
+			[
+				-10.000000,
+				-10.000000,
+				-10.000000,
+			]
+			m_nFieldOutput = 0
+			m_fl4NoiseScale = 2.000000
+			m_flOpEndFadeOutTime = 0.250000
+			m_flOpStartFadeOutTime = 0.250000
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_SetControlPointsToParticle"
+			m_nFirstControlPoint = 3
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_PositionLock"
+		},
+		{
+			_class = "C_OP_SetParentControlPointsToChildCP"
+			m_nChildControlPoint = 3
+			m_nNumControlPoints = 6
+			m_nFirstSourcePoint = 4
+			m_Notes = "set character positions"
+		},
+		{
+			_class = "C_OP_SetControlPointPositions"
+			m_nCP1 = 4
+			m_nCP2 = 5
+			m_nCP3 = 6
+			m_nCP4 = 7
+			m_vecCP1Pos =
+			[
+				0.000000,
+				-210.000000,
+				0.000000,
+			]
+			m_vecCP2Pos =
+			[
+				0.000000,
+				-135.000000,
+				0.000000,
+			]
+			m_vecCP3Pos =
+			[
+				0.000000,
+				-35.000000,
+				0.000000,
+			]
+			m_vecCP4Pos =
+			[
+				0.000000,
+				35.000000,
+				0.000000,
+			]
+		},
+		{
+			_class = "C_OP_SetControlPointPositions"
+			m_nCP1 = 8
+			m_nCP2 = 9
+			m_nCP3 = 100
+			m_nCP4 = 100
+			m_vecCP1Pos =
+			[
+				0.000000,
+				135.000000,
+				0.000000,
+			]
+			m_vecCP2Pos =
+			[
+				0.000000,
+				210.000000,
+				0.000000,
+			]
+			m_vecCP3Pos =
+			[
+				0.000000,
+				0.000000,
+				0.000000,
+			]
+			m_vecCP4Pos =
+			[
+				0.000000,
+				0.000000,
+				0.000000,
+			]
+		},
+		{
+			_class = "C_OP_SetParentControlPointsToChildCP"
+			m_nChildControlPoint = 1
+			m_nNumControlPoints = 6
+			m_nFirstSourcePoint = 10
+			m_Notes = "set colors"
+		},
+		{
+			_class = "C_OP_SetControlPointPositions"
+			m_nCP1 = 10
+			m_nCP2 = 11
+			m_nCP3 = 12
+			m_nCP4 = 13
+			m_vecCP1Pos =
+			[
+				1.000000,
+				0.130000,
+				0.130000,
+			]
+			m_vecCP2Pos =
+			[
+				1.000000,
+				0.130000,
+				0.130000,
+			]
+			m_vecCP3Pos =
+			[
+				0.130000,
+				0.650000,
+				0.130000,
+			]
+			m_vecCP4Pos =
+			[
+				0.130000,
+				0.650000,
+				0.130000,
+			]
+			m_bUseWorldLocation = true
+		},
+		{
+			_class = "C_OP_SetControlPointPositions"
+			m_nCP1 = 14
+			m_nCP2 = 15
+			m_nCP3 = 100
+			m_nCP4 = 100
+			m_vecCP1Pos =
+			[
+				0.130000,
+				0.500000,
+				1.000000,
+			]
+			m_vecCP2Pos =
+			[
+				0.130000,
+				0.500000,
+				1.000000,
+			]
+			m_vecCP3Pos =
+			[
+				0.000000,
+				0.000000,
+				0.000000,
+			]
+			m_vecCP4Pos =
+			[
+				0.000000,
+				0.000000,
+				0.000000,
+			]
+			m_bUseWorldLocation = true
+		},
+		{
+			_class = "C_OP_SetParentControlPointsToChildCP"
+			m_nChildControlPoint = 2
+			m_nNumControlPoints = 6
+			m_nFirstSourcePoint = 16
+			m_Notes = "set levelup numbers"
+		},
+		{
+			_class = "C_OP_SetControlPointPositions"
+			m_nCP1 = 16
+			m_nCP2 = 17
+			m_nCP3 = 18
+			m_nCP4 = 19
+			m_vecCP1Pos =
+			[
+				0.000000,
+				0.000000,
+				0.000000,
+			]
+			m_vecCP2Pos =
+			[
+				0.000000,
+				1.000000,
+				0.000000,
+			]
+			m_vecCP3Pos =
+			[
+				0.000000,
+				0.000000,
+				0.000000,
+			]
+			m_vecCP4Pos =
+			[
+				0.000000,
+				2.000000,
+				0.000000,
+			]
+			m_bDisableOperator = true
+		},
+	]
+	m_Initializers =
+	[
+		{
+			_class = "C_INIT_CreateWithinSphere"
+		},
+		{
+			_class = "C_INIT_RandomLifeTime"
+			m_fLifetimeMax = 3.000000
+			m_fLifetimeMin = 3.000000
+		},
+	]
+	m_Emitters =
+	[
+		{
+			_class = "C_OP_InstantaneousEmitter"
+			m_nParticlesToEmit = 1
+		},
+	]
+	m_Children =
+	[
+		{
+			m_ChildRef = resource:"particles/general/levelup_stats_plus.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/general/levelup_stats_number.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/general/levelup_stats_plus.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/general/levelup_stats_number.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/general/levelup_stats_plus.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/general/levelup_stats_number.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/general/levelup_stats_victory_burst.vpcf"
+			m_bDisableChild = true
+		},
+		{
+			m_ChildRef = resource:"particles/general/levelup_stats_winner_magic.vpcf"
+			m_bDisableChild = true
+		},
+		{
+			m_ChildRef = resource:"particles/general/levelup_stats_winner_rays.vpcf"
+			m_bDisableChild = true
+		},
+	]
+}
