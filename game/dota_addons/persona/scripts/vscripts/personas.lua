@@ -193,7 +193,7 @@ function DoubleFusion(keys)
 	local persona1 = caster:GetItemInSlot(0)
 	local persona2 = caster:GetItemInSlot(1)
 
-	if persona1 and persona2 then
+	if persona1 and persona2 and persona1.attributes and persona2.attributes then
 		PersonaResult(caster, caster.arcana, persona1, persona2)
 	end
 end
