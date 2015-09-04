@@ -120,6 +120,9 @@ function InitializePersona(persona)
 	end
 	persona.attributes["exp"] = 0
 
+	-- Set charges to level
+	persona:SetCurrentCharges(persona.attributes["level"])
+
 	return persona
 end
 
@@ -164,6 +167,9 @@ function Activate(keys)
 		caster:AddAbility(ability)
 		if caster:HasAbility(ability) then caster:FindAbilityByName(ability):SetLevel(1) else print("can't add ability, not found in kv file") end -- can remove this check once you actually implement all abilities personas are listed as having
 	end
+
+	-- Set charges to level
+	item:SetCurrentCharges(item.attributes["level"])
 
 	if caster.activePersona and not caster.activePersona:IsNull() then caster.activePersona:SetActivated(true) end
 	caster.activePersona = item
