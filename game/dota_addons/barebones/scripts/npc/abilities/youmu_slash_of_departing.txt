@@ -11,6 +11,8 @@
 		"precache"
 		{
 			"particle"					"particles/youmu/slash_of_departing_charged.vpcf"
+			"particle"					"particles/youmu/slash_of_departing_slash.vpcf"
+			"particle"					"particles/youmu/slash_of_departing_swirl.vpcf"
 		}
 
 		"AbilityCastPoint"				"0.5"
@@ -107,5 +109,17 @@
 	    	{
 	    		"Duration"	"%per_unit_cooldown"
 	    	}
+
+			"modifier_slash_of_departing_dummy"
+			{
+				"States"
+				{
+					"MODIFIER_STATE_INVULNERABLE"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_HEALTH_BAR"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_UNIT_COLLISION"	"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NOT_ON_MINIMAP"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_UNSELECTABLE"		"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
 	    }
 	}

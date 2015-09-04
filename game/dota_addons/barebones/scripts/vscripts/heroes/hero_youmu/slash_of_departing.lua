@@ -53,7 +53,16 @@ function spellCast(keys)
 			end
 		end
 
-		-- Start particle
+		-- Create cast particles
+		local dummy_unit = CreateUnitByName("npc_dummy_unit", ally:GetAbsOrigin(), false, caster, caster, caster:GetTeam())
+		ability:ApplyDataDrivenModifier(caster, dummy_unit, "modifier_slash_of_departing_dummy", {})
+		Timers:CreateTimer(2,function()
+			dummy_unit:RemoveSelf()
+		end)
+		ParticleManager:CreateParticle("particles/youmu/slash_of_departing_slash.vpcf", PATTACH_ABSORIGIN, dummy_unit)
+		ParticleManager:CreateParticle("particles/youmu/slash_of_departing_swirl.vpcf", PATTACH_ABSORIGIN_FOLLOW, ally)
+
+		-- Start charge particle
 		print("?")
 		if not caster.slash_of_departing_charged_particle then
 			caster.slash_of_departing_charged_particle = ParticleManager:CreateParticle("particles/youmu/slash_of_departing_charged.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
@@ -100,7 +109,6 @@ function spellCast(keys)
 
 					ParticleManager:SetParticleControl(caster.slash_of_departing_charged_particle, 2, Vector(particle_angle,0,0))
 					ParticleManager:SetParticleControl(caster.slash_of_departing_charged_particle, 3, Vector(particle_radius,1,1))
-					print(particle_angle, particle_radius)
 					return 0.03
 				end
 			end)
@@ -108,7 +116,7 @@ function spellCast(keys)
 
 		ally:Heal(healing, caster)
 		ally:Purge(false, true, false, true, true)
-		ability:ApplyDataDrivenModifier(caster, ally, "modifier_slash_of_departing_cast_recently", {})
+		-- ability:ApplyDataDrivenModifier(caster, ally, "modifier_slash_of_departing_cast_recently", {})
 	else
 		ability:RefundManaCost()
 		ability:EndCooldown()
