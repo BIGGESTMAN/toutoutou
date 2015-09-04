@@ -36,4 +36,42 @@ function spellCast(keys)
 
 	ParticleManager:DestroyParticle(caster.slash_of_departing_charged_particle, false)
 	caster.slash_of_departing_charged_particle = nil
+
+	-- Create cast particles
+	local slash_dummy = CreateUnitByName("npc_dummy_unit", target:GetAbsOrigin(), false, caster, caster, caster:GetTeam())
+	ability:ApplyDataDrivenModifier(caster, slash_dummy, "modifier_karmic_punishment_dummy", {})
+	Timers:CreateTimer(2,function()
+		slash_dummy:RemoveSelf()
+	end)
+	ParticleManager:CreateParticle("particles/youmu/karmic_punishment_slash.vpcf", PATTACH_ABSORIGIN, slash_dummy)
+
+	local swirl_dummy = CreateUnitByName("npc_dummy_unit", target:GetAbsOrigin(), false, caster, caster, caster:GetTeam())
+	ability:ApplyDataDrivenModifier(caster, swirl_dummy, "modifier_karmic_punishment_dummy", {})
+	local vertical_offset = 700
+	local start_radius = 100
+	local end_radius = 25
+	local particle_duration = 0.5
+	local target_point = target:GetAbsOrigin()
+
+	local radius = start_radius
+	local vertical_position = vertical_offset
+	local particle = ParticleManager:CreateParticle("particles/youmu/karmic_punishment_swirl.vpcf", PATTACH_ABSORIGIN_FOLLOW, swirl_dummy)
+	ParticleManager:CreateParticle("particles/youmu/karmic_punishment_light.vpcf", PATTACH_ABSORIGIN, target)
+
+	ParticleManager:SetParticleControl(particle, 4, target_point + Vector(0,0,vertical_offset))  -- Set beam endpoints
+	ParticleManager:SetParticleControl(particle, 5, target_point)
+
+	Timers:CreateTimer(0, function()
+		if vertical_position > 0 then
+			radius = radius - ((start_radius - end_radius) / particle_duration) * 0.03
+			vertical_position = vertical_position - (vertical_offset / particle_duration) * 0.03
+
+			swirl_dummy:SetAbsOrigin(target_point + Vector(0,0,vertical_position))
+			ParticleManager:SetParticleControl(particle, 2, Vector(radius,0,0))
+			return 0.03
+		else
+			ParticleManager:DestroyParticle(particle, false)
+			swirl_dummy:RemoveSelf()
+		end
+	end)
 end
