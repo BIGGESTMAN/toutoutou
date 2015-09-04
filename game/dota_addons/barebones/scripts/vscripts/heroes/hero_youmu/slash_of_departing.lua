@@ -53,6 +53,59 @@ function spellCast(keys)
 			end
 		end
 
+		-- Start particle
+		print("?")
+		if not caster.slash_of_departing_charged_particle then
+			caster.slash_of_departing_charged_particle = ParticleManager:CreateParticle("particles/youmu/slash_of_departing_charged.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+			local min_angle = -15
+			local max_angle = 15
+			local angle_oscillation_time = 1
+			local min_radius = 0.5
+			local max_radius = 1.5
+			local radius_oscillation_time = 2
+
+			local angle_increasing = true
+			local radius_increasing = true
+			local particle_angle = min_angle
+			local particle_radius = min_radius
+			Timers:CreateTimer(0, function()
+				if caster.slash_of_departing_charged_particle then
+					if angle_increasing then
+						particle_angle = particle_angle + ((max_angle - min_angle) / angle_oscillation_time) * 0.03
+						if particle_angle > max_angle then
+							particle_angle = max_angle
+							angle_increasing = false
+						end
+					else
+						particle_angle = particle_angle - ((max_angle - min_angle) / angle_oscillation_time) * 0.03
+						if particle_angle < min_angle then
+							particle_angle = min_angle
+							angle_increasing = true
+						end
+					end
+
+					if radius_increasing then
+						particle_radius = particle_radius + ((max_radius - min_radius) / radius_oscillation_time) * 0.03
+						if particle_radius > max_radius then
+							particle_radius = max_radius
+							radius_increasing = false
+						end
+					else
+						particle_radius = particle_radius - ((max_radius - min_radius) / radius_oscillation_time) * 0.03
+						if particle_radius < min_radius then
+							particle_radius = min_radius
+							radius_increasing = true
+						end
+					end
+
+					ParticleManager:SetParticleControl(caster.slash_of_departing_charged_particle, 2, Vector(particle_angle,0,0))
+					ParticleManager:SetParticleControl(caster.slash_of_departing_charged_particle, 3, Vector(particle_radius,1,1))
+					print(particle_angle, particle_radius)
+					return 0.03
+				end
+			end)
+		end
+
 		ally:Heal(healing, caster)
 		ally:Purge(false, true, false, true, true)
 		ability:ApplyDataDrivenModifier(caster, ally, "modifier_slash_of_departing_cast_recently", {})

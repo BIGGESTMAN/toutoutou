@@ -33,4 +33,7 @@ function spellCast(keys)
 	caster.slash_of_departing_stored_damage = nil
 	caster.slash_of_departing_stored_debuffs = nil
 	caster:RemoveModifierByName("modifier_slash_of_departing_charge_stored")
+
+	ParticleManager:DestroyParticle(caster.slash_of_departing_charged_particle, false)
+	caster.slash_of_departing_charged_particle = nil
 end

@@ -10,7 +10,7 @@
 
 		"precache"
 		{
-
+			"particle"					"particles/youmu/slash_of_departing_charged.vpcf"
 		}
 
 		"AbilityCastPoint"				"0.5"
