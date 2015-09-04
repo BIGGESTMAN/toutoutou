@@ -80,4 +80,10 @@
 			m_nParticlesToEmit = 1
 		},
 	]
+	m_Children =
+	[
+		{
+			m_ChildRef = resource:"particles/youmu/karmic_punishment_glow.vpcf"
+		},
+	]
 }
