@@ -111,41 +111,49 @@ function spellCast(keys)
 				local has_hit_target = false
 				Timers:CreateTimer(charge_delay, function()
 					if not unit:IsNull() then
-						unit_location = unit:GetAbsOrigin()
-						target_location = target:GetAbsOrigin()
-						if distance_traveled < charge_distance or not has_hit_target then
-							-- Move illusion
-							if not has_hit_target and not target:IsNull() then
-								direction = (target_location - unit_location):Normalized()
-								unit:SetForwardVector(direction)
-							else
-								has_hit_target = true
-								distance_traveled = distance_traveled + charge_speed
-							end
-							unit:SetAbsOrigin(unit_location + direction * charge_speed)
-
-							-- Check for hit
-							if not has_hit_target and not target:IsNull() then
-								local distance_to_target = (target:GetAbsOrigin() - unit:GetAbsOrigin()):Length2D()
-								if distance_to_target < hit_distance then
-									ApplyDamage({victim = target, attacker = unit, damage = damage, damage_type = damage_type})
-									echoDamage(caster, damage, damage_type)
+						if not target:IsNull() and target:IsAlive() then
+							unit_location = unit:GetAbsOrigin()
+							target_location = target:GetAbsOrigin()
+							if distance_traveled < charge_distance or not has_hit_target then
+								-- Move illusion
+								if not has_hit_target and not target:IsNull() then
+									direction = (target_location - unit_location):Normalized()
+									unit:SetForwardVector(direction)
+								else
 									has_hit_target = true
+									distance_traveled = distance_traveled + charge_speed
 								end
-							end
-							return update_interval
-						else
-							-- Expire at end of charge distance if illusion was created by this ability
-							if unit.slash_clearing_illusion then
-								unit:RemoveSelf()
+								unit:SetAbsOrigin(unit_location + direction * charge_speed)
+
+								-- Check for hit
+								if not has_hit_target and not target:IsNull() then
+									local distance_to_target = (target:GetAbsOrigin() - unit:GetAbsOrigin()):Length2D()
+									if distance_to_target < hit_distance then
+										ApplyDamage({victim = target, attacker = unit, damage = damage, damage_type = damage_type})
+										echoDamage(caster, damage, damage_type)
+										has_hit_target = true
+									end
+								end
+								return update_interval
 							else
-								unit:RemoveModifierByName("modifier_slash_clearing_illusion")
-								FindClearSpaceForUnit(unit, unit:GetAbsOrigin(), false)
+								-- Expire at end of charge distance if illusion was created by this ability
+								endDash(unit)
 							end
+						else
+							endDash(unit)
 						end
 					end
 				end)
 			end
 		end
 	end)
+end
+
+function endDash(illusion)
+	if illusion.slash_clearing_illusion then
+		illusion:ForceKill(false)
+	else
+		illusion:RemoveModifierByName("modifier_slash_clearing_illusion")
+		FindClearSpaceForUnit(illusion, illusion:GetAbsOrigin(), false)
+	end
 end
