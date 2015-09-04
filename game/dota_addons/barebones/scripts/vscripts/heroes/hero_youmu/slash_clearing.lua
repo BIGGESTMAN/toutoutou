@@ -94,12 +94,14 @@ function spellCast(keys)
 		target_location = target:GetAbsOrigin()
 		for k,unit in pairs(units) do
 			local target_point = RotatePosition(Vector(0,0,0), QAngle(0,angle_increment * (k - 1),0), prototype_target_point) * ability:GetSpecialValueFor("radius") + target_location
+
 			unit:SetAbsOrigin(target_point)
-			local direction = (target_location - unit:GetAbsOrigin()):Normalized()
 			if unit == caster then
 				unit:Stop()
-				FindClearSpaceForUnit(caster, caster:GetAbsOrigin(), true)
+				FindClearSpaceForUnit(unit, unit:GetAbsOrigin(), true)
 			end
+			
+			local direction = (target_location - unit:GetAbsOrigin()):Normalized()
 			unit:SetForwardVector(direction)
 
 			-- Make illusion charge
