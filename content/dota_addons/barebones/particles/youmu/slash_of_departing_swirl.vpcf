@@ -143,6 +143,13 @@
 			m_flOutputMax = 0.000000
 			m_bScaleInitialRange = true
 		},
+		{
+			_class = "C_INIT_RemapScalar"
+			m_flInputMax = 0.500000
+			m_flOutputMin = 0.250000
+			m_flOutputMax = 1.500000
+			m_bScaleInitialRange = true
+		},
 	]
 	m_Emitters =
 	[

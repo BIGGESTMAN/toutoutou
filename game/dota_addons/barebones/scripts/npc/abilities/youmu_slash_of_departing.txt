@@ -13,6 +13,7 @@
 			"particle"					"particles/youmu/slash_of_departing_charged.vpcf"
 			"particle"					"particles/youmu/slash_of_departing_slash.vpcf"
 			"particle"					"particles/youmu/slash_of_departing_swirl.vpcf"
+			"particle"					"particles/youmu/slash_of_departing_cooldown.vpcf"
 		}
 
 		"AbilityCastPoint"				"0.5"

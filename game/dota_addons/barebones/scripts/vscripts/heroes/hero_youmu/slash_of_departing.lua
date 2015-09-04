@@ -63,7 +63,6 @@ function spellCast(keys)
 		ParticleManager:CreateParticle("particles/youmu/slash_of_departing_swirl.vpcf", PATTACH_ABSORIGIN_FOLLOW, ally)
 
 		-- Start charge particle
-		print("?")
 		if not caster.slash_of_departing_charged_particle then
 			caster.slash_of_departing_charged_particle = ParticleManager:CreateParticle("particles/youmu/slash_of_departing_charged.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
 			local min_angle = -15
@@ -116,7 +115,10 @@ function spellCast(keys)
 
 		ally:Heal(healing, caster)
 		ally:Purge(false, true, false, true, true)
-		-- ability:ApplyDataDrivenModifier(caster, ally, "modifier_slash_of_departing_cast_recently", {})
+		ability:ApplyDataDrivenModifier(caster, ally, "modifier_slash_of_departing_cast_recently", {})
+
+		-- Create cooldown particle
+		ParticleManager:CreateParticleForPlayer("particles/youmu/slash_of_departing_cooldown.vpcf", PATTACH_ABSORIGIN_FOLLOW, ally, caster:GetPlayerOwner())
 	else
 		ability:RefundManaCost()
 		ability:EndCooldown()
