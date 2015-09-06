@@ -27,6 +27,9 @@
 		{
 			_class = "C_INIT_RandomRadius"
 		},
+		{
+			_class = "C_INIT_RandomColor"
+		},
 	]
 	m_Emitters =
 	[

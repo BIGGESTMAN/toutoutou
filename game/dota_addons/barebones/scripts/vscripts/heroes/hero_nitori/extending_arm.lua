@@ -10,7 +10,7 @@ function extendingArmCast(keys)
 	local damage = ability:GetLevelSpecialValueFor("damage", ability_level)
 	local damage_type = ability:GetAbilityDamageType()
 	local update_interval = ability:GetLevelSpecialValueFor("update_interval", ability_level)
-	local speed = ability:GetLevelSpecialValueFor("travel_speed", ability_level) * 0.03
+	local speed = ability:GetLevelSpecialValueFor("travel_speed", ability_level) * update_interval
 	local arrival_distance = 25
 
 	local arm = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeamNumber())
@@ -60,7 +60,7 @@ function extendingArmCast(keys)
 					end
 				end
 
-				return 0.03
+				return update_interval
 			else
 				arm:RemoveSelf()
 			end
@@ -92,7 +92,7 @@ function extendingArmCast(keys)
 					end
 				end
 
-				return 0.03
+				return update_interval
 			else
 				FindClearSpaceForUnit(caster, arm.unit_hit:GetAbsOrigin(), false)
 				arm:RemoveSelf()

@@ -1,0 +1,128 @@
+	"bubble_dragon"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+
+		"AbilityTextureName"			"nitori_bubble_dragon"
+
+		"precache"
+		{
+			"particle"					"particles/nitori/bubble_dragon.vpcf"
+		}
+
+		"AbilityCastPoint"				"0.3"
+		"AbilityCooldown"				"20 17 14 11"
+		"AbilityManaCost"				"100 115 130 145"
+		"AbilityCastRange"				"1000"
+		"AOERadius"						"275"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"range"					"1000"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"275"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_per_second"		"50 60 70 80"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"travel_speed"			"400"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"1.5 2.0 2.5 3.0"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"stun_duration"			"0.1"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"update_interval"		"0.03"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_interval"		"1"
+			}
+		}
+
+		"OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"	"heroes/hero_nitori/bubble_dragon.lua"
+	    		"Function"		"spellCast"
+	    		"Target"		"POINT"
+	    	}
+	    }
+
+
+	    "Modifiers"
+	    {
+	    	"modifier_bubble_dragon_stun"
+	    	{
+	    		"IsPurgable"	"1"
+	    		"IsDebuff"		"1"
+	    		"IsStunDebuff"	"1"
+
+	    		"Duration"		"%stun_duration"
+
+	    		"States"
+	    		{
+	    			"MODIFIER_STATE_STUNNED"	"MODIFIER_STATE_VALUE_ENABLED"
+	    		}
+
+				"EffectName"		"particles/generic_gameplay/generic_bashed.vpcf"
+				"EffectAttachType"	"follow_overhead"
+
+				"OverrideAnimation"     "ACT_DOTA_DISABLED"
+	    	}
+
+	    	"modifier_bubble_dragon_bubbled"
+	    	{
+	    		"IsDebuff"		"1"
+
+	    		"States"
+	    		{
+	    			"MODIFIER_STATE_DISARMED"				"MODIFIER_STATE_VALUE_ENABLED"
+	    			"MODIFIER_STATE_SILENCED"				"MODIFIER_STATE_VALUE_ENABLED"
+	    			"MODIFIER_STATE_ROOTED"					"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_UNIT_COLLISION"		"MODIFIER_STATE_VALUE_ENABLED"
+	    		}
+
+				"OverrideAnimation"     "ACT_DOTA_FLAIL"
+	    	}
+
+			"modifier_bubble_dragon_dummy"
+			{
+				"States"
+				{
+					"MODIFIER_STATE_INVULNERABLE"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_HEALTH_BAR"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_UNIT_COLLISION"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NOT_ON_MINIMAP"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_UNSELECTABLE"			"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+	    }
+	}
