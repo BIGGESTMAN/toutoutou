@@ -24,7 +24,7 @@ function spellCast(keys)
 	local nearby_units = Entities:FindAllInSphere(caster:GetAbsOrigin(), illusion_search_radius)
 	for k,unit in pairs(nearby_units) do
 		-- if unit.GetMainControllingPlayer and unit:GetMainControllingPlayer() == caster:GetMainControllingPlayer() and unit:GetName() == caster:GetName() then
-		if (unit.IsIllusion and unit:IsIllusion() and unit:GetPlayerID() == caster:GetPlayerID()) or unit == caster then
+		if (unit.IsIllusion and unit:IsIllusion() and unit:GetPlayerID() == caster:GetPlayerID() and unit:IsAlive()) or unit == caster then
 			table.insert(units, unit)
 		end
 	end
@@ -36,7 +36,13 @@ function spellCast(keys)
 		unit:AddNoDraw()
 	end
 
+	-- Vanish particle
+	ParticleManager:CreateParticle("particles/youmu/slash_clearing_vanish.vpcf", PATTACH_ABSORIGIN, caster)
+
 	Timers:CreateTimer(ability:GetSpecialValueFor("vanish_duration"), function()
+		-- Start delay particle
+		ParticleManager:CreateParticle("particles/youmu/slash_clearing_delay.vpcf", PATTACH_ABSORIGIN, target)
+
 		for k,unit in pairs(units) do
 			unit:RemoveModifierByName("modifier_slash_clearing_vanish")
 			unit:RemoveNoDraw()
@@ -103,6 +109,9 @@ function spellCast(keys)
 			
 			local direction = (target_location - unit:GetAbsOrigin()):Normalized()
 			unit:SetForwardVector(direction)
+
+			-- Reappearing particle
+			ParticleManager:CreateParticle("particles/youmu/slash_clearing_reappear.vpcf", PATTACH_ABSORIGIN, unit)
 
 			-- Make illusion charge
 			if unit:IsIllusion() then

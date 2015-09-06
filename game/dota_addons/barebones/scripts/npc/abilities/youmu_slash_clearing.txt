@@ -12,7 +12,9 @@
 
 		"precache"
 		{
-
+			"particle"					"particles/youmu/slash_clearing_vanish.vpcf"
+			"particle"					"particles/youmu/slash_clearing_reappear.vpcf"
+			"particle"					"particles/youmu/slash_clearing_delay.vpcf"
 		}
 
 		"AbilityCastPoint"				"0.2"
