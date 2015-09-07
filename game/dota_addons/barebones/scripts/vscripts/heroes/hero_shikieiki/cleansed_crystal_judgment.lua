@@ -81,7 +81,7 @@ function spellCast(keys)
 	ability:ApplyDataDrivenModifier(caster, target, modifier_duel, {})
 	target.cleansed_crystal_duel_target = illusion
 
-	illusion.duel_particle = ParticleManager:CreateParticle("particles/shikieiki/cleansed_crystal_judgment.vpcf", PATTACH_ABSORIGIN, illusion)
+	illusion.duel_particle = ParticleManager:CreateParticle("particles/shikieiki/cleansed_crystal_judgment.vpcf", PATTACH_ABSORIGIN, caster)
 	local center_point = illusion:GetAbsOrigin() + (target:GetAbsOrigin() - illusion:GetAbsOrigin()) / 2
 	ParticleManager:SetParticleControl(illusion.duel_particle, 0, center_point)
 end

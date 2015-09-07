@@ -1,0 +1,93 @@
+	"flash_flood"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+
+		"AbilityTextureName"			"razor_eye_of_the_storm"
+
+		"precache"
+		{
+			"particle"					"particles/nitori/flash_flood.vpcf"
+		}
+
+		"AbilityCastPoint"				"0.3"
+		"AbilityCooldown"				"24"
+		"AbilityManaCost"				"110 120 130 140"
+		"AbilityCastRange"				"1500"
+		"AOERadius"						"575 650 725 800"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"6 7 8 9"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"575 650 725 800"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"22 28 34 40"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"slow"					"12 16 20 24"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"slow_increase"			"4 5 6 7"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_amp"			"10 12 14 16"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_amp_increase"	"2 3 4 5"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"delay"					"2"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"debuff_duration"		"0.5"
+			}
+			"10"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_interval"		"1"
+			}
+			"11"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"update_interval"		"0.03"
+			}
+		}
+
+		"OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"	"heroes/hero_nitori/flash_flood.lua"
+	    		"Function"		"spellCast"
+	    		"Target"		"POINT"
+	    	}
+	    }
+	}

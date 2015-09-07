@@ -129,8 +129,8 @@
 		},
 		{
 			_class = "C_INIT_RandomAlpha"
-			m_nAlphaMin = 50
-			m_nAlphaMax = 50
+			m_nAlphaMin = 40
+			m_nAlphaMax = 40
 		},
 		{
 			_class = "C_INIT_RandomRotationSpeed"
