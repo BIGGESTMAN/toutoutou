@@ -12,6 +12,7 @@
 		"precache"
 		{
 			"particle"					"particles/nitori/flash_flood.vpcf"
+			"particle"					"particles/nitori/flash_flood_drone.vpcf"
 		}
 
 		"AbilityCastPoint"				"0.3"
@@ -89,5 +90,20 @@
 	    		"Function"		"spellCast"
 	    		"Target"		"POINT"
 	    	}
+	    }
+
+	    "Modifiers"
+	    {
+			"modifier_flash_flood_dummy"
+			{
+				"States"
+				{
+					"MODIFIER_STATE_INVULNERABLE"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_HEALTH_BAR"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_UNIT_COLLISION"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NOT_ON_MINIMAP"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_UNSELECTABLE"			"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
 	    }
 	}
