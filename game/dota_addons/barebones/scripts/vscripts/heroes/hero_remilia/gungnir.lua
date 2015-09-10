@@ -147,3 +147,10 @@ function endGungnir(caster)
 	ability:EndCooldown()
 	ability:StartCooldown(ability:GetCooldown(ability_level))
 end
+
+function onUpgrade(keys)
+	if keys.ability:GetLevel() == 1 then
+		local sub_ability = keys.caster:FindAbilityByName("gungnir_throw")
+		sub_ability:SetLevel(1)
+	end
+end

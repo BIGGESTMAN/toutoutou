@@ -23,6 +23,7 @@ function spellCast(keys)
 	ParticleManager:SetParticleControl(rain_particle, 0, target_point)
 	ParticleManager:SetParticleControl(rain_particle, 4, Vector(radius,0,0)) -- Set particle radius
 	ParticleManager:SetParticleControl(rain_particle, 5, Vector(math.pow(radius, 2) * math.pi / 40,0,0)) -- Set particle density -- note that this doesn't really work because of particle limits (i think?)
+	ParticleManager:SetParticleControl(rain_particle, 6, Vector(1,0,0)) -- Set particle radius (raindrop size)
 
 	local particle_vertical_offset = Vector(0,0,500)
 	local drone_particle = ParticleManager:CreateParticle("particles/nitori/flash_flood_drone.vpcf", PATTACH_ABSORIGIN, caster)
@@ -65,7 +66,7 @@ function spellCast(keys)
 			local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
 			local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
 			local iOrder = FIND_ANY_ORDER
-			DebugDrawCircle(origin, Vector(40,40,180), 1, radius, true, 0.5)
+			-- DebugDrawCircle(origin, Vector(40,40,180), 1, radius, true, 0.5)
 
 			local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
 

@@ -1,0 +1,103 @@
+	"super_scope"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+
+		"AbilityTextureName"			"nitori_super_scope"
+
+		"precache"
+		{
+
+		}
+
+		"AbilityCastPoint"				"0.3"
+		"AbilityCooldown"				"90"
+		"AbilityManaCost"				"250 400 550"
+		"AOERadius"						"1800 2400 3000"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"8"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"charges"				"12 16 20"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"70 90 110"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"delay"					"1.0 0.9 0.8"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"range"					"1800 2400 3000"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"150"
+			}
+		}
+
+		"OnUpgrade"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/hero_nitori/super_scope.lua"
+				"Function"		"onUpgrade"
+			}
+		}
+
+		"OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"	"heroes/hero_nitori/super_scope.lua"
+	    		"Function"		"spellCast"
+	    	}
+	    }
+
+
+	    "Modifiers"
+	    {
+	    	"modifier_super_scope"
+	    	{
+	    		"Duration"		"%duration"
+
+				"States"
+				{
+					"MODIFIER_STATE_NO_HEALTH_BAR"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_UNIT_COLLISION"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_OUT_OF_GAME"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_INVULNERABLE"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_COMMAND_RESTRICTED"		"MODIFIER_STATE_VALUE_ENABLED"
+				}
+
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_nitori/super_scope.lua"
+						"Function"		"buffExpired"
+					}
+				}
+	    	}
+	    }
+	}
