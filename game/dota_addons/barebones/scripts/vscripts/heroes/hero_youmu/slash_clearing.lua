@@ -8,6 +8,7 @@ function spellCast(keys)
 	local illusion_search_radius = 800
 	local target_location = target:GetAbsOrigin()
 	local direction_from_cast = (target_location - caster:GetAbsOrigin()):Normalized()
+	direction_from_cast.z = 0
 	local update_interval = ability:GetSpecialValueFor("update_interval")
 	local charge_delay = ability:GetSpecialValueFor("charge_delay")
 	local charge_distance = ability:GetSpecialValueFor("charge_distance")
