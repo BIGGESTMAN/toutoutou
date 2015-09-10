@@ -16,9 +16,6 @@
 	m_Initializers =
 	[
 		{
-			_class = "C_INIT_CreateSequentialPath"
-		},
-		{
 			_class = "C_INIT_RandomLifeTime"
 		},
 		{
@@ -29,6 +26,9 @@
 		},
 		{
 			_class = "C_INIT_RandomColor"
+		},
+		{
+			_class = "C_INIT_CreateWithinSphere"
 		},
 	]
 	m_Emitters =

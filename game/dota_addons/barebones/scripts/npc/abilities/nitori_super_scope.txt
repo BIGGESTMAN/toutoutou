@@ -12,7 +12,8 @@
 
 		"precache"
 		{
-
+			"particle"					"particles/nitori/super_scope_reticle.vpcf"
+			"particle"					"particles/nitori/super_scope_explosion.vpcf"
 		}
 
 		"AbilityCastPoint"				"0.3"

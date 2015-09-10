@@ -27,6 +27,10 @@ function fireShot(keys)
 	local damage = ability:GetSpecialValueFor("damage")
 	local damage_type = ability:GetAbilityDamageType()
 
+	local reticle_particle = ParticleManager:CreateParticle("particles/nitori/super_scope_reticle.vpcf", PATTACH_ABSORIGIN, caster)
+	ParticleManager:SetParticleControl(reticle_particle, 0, target_point)
+	ParticleManager:SetParticleControl(reticle_particle, 1, Vector(delay,0,0)) -- Set particle lifetime
+
 	Timers:CreateTimer(delay, function()
 		local team = caster:GetTeamNumber()
 		local origin = target_point
@@ -35,11 +39,17 @@ function fireShot(keys)
 		local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
 		local iOrder = FIND_ANY_ORDER
 
+		DebugDrawCircle(origin, Vector(180,40,40), 1, radius, true, 0.5)
+
 		local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
 
 		for k,unit in pairs(targets) do
 			ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
 		end
+
+		local explosion_particle = ParticleManager:CreateParticle("particles/nitori/super_scope_explosion.vpcf", PATTACH_ABSORIGIN, caster)
+		ParticleManager:SetParticleControl(explosion_particle, 3, target_point)
+		ParticleManager:DestroyParticle(reticle_particle, false)
 	end)
 
 	local modifier = caster:FindModifierByName("modifier_super_scope")
