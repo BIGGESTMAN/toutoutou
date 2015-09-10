@@ -190,11 +190,13 @@ function orrerysSunAttack( event )
 	local ability = event.ability
 	local orb_firing_time = ability:GetSpecialValueFor("orb_firing_time")
 	local delay = orb_firing_time / (#caster.orbs - 1)
-	print(delay)
+	-- print(delay)
 
 	for i=1,#caster.orbs do
 		Timers:CreateTimer((i - 1) * delay, function()
-			caster.orbs[i]:PerformAttack(target, true, true, true, true )
+			if caster.orbs[i] then
+				caster.orbs[i]:PerformAttack(target, true, true, true, true )
+			end
 		end)
 	end
 end
@@ -214,14 +216,14 @@ function orbAttackHit( event )
 	ApplyDamage(damage_table)
 end
 
--- Kill all units when the owner dies
+-- Remove orbs when caster dies
 function endOrrerysSun( event )
 	local caster = event.caster
 	local targets = caster.orbs or {}
 
 	for _,unit in pairs(targets) do
 	   	if unit and IsValidEntity(unit) then
-	        unit:ForceKill(false)
+	        unit:RemoveSelf()
     	end
 	end
 

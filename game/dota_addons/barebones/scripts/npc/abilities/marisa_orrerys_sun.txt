@@ -136,6 +136,22 @@
 					}
 				}
 
+				"OnDestroy" // To try to account for illusions
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_marisa/orrerys_sun.lua"
+						"Function"		"endOrrerysSun"
+						"particle"		"particles/units/heroes/hero_wisp/wisp_death.vpcf"
+					}
+
+					"FireSound"
+					{
+						"EffectName"	"Hero_Wisp.Death"
+						"Target" 		"CASTER"
+					}
+				}
+
 				"OnAbilityExecuted"
 				{
 					"RunScript"
