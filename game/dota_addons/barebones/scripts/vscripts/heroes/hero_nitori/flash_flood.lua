@@ -25,9 +25,9 @@ function spellCast(keys)
 	ParticleManager:SetParticleControl(rain_particle, 5, Vector(math.pow(radius, 2) * math.pi / 40,0,0)) -- Set particle density -- note that this doesn't really work because of particle limits (i think?)
 	ParticleManager:SetParticleControl(rain_particle, 6, Vector(1,0,0)) -- Set particle radius (raindrop size)
 
-	local particle_vertical_offset = Vector(0,0,500)
-	local drone_particle = ParticleManager:CreateParticle("particles/nitori/flash_flood_drone.vpcf", PATTACH_ABSORIGIN, caster)
-	ParticleManager:SetParticleControl(drone_particle, 0, target_point + particle_vertical_offset)
+	-- local particle_vertical_offset = Vector(0,0,500)
+	-- local drone_particle = ParticleManager:CreateParticle("particles/nitori/flash_flood_drone.vpcf", PATTACH_ABSORIGIN, caster)
+	-- ParticleManager:SetParticleControl(drone_particle, 0, target_point + particle_vertical_offset)
 
 	-- Deal damage
 	Timers:CreateTimer(delay, function()
@@ -50,7 +50,7 @@ function spellCast(keys)
 			return damage_interval
 		else
 			ParticleManager:DestroyParticle(rain_particle, false)
-			ParticleManager:DestroyParticle(drone_particle, false)
+			-- ParticleManager:DestroyParticle(drone_particle, false)
 			Timers:CreateTimer(1, function() -- Give debuffs a second to fall off before killing dummy
 				dummy:RemoveSelf()
 			end)
