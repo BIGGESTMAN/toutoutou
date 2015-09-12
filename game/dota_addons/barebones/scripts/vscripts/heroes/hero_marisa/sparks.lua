@@ -2,6 +2,7 @@ require "libraries/util"
 require "libraries/animations"
 
 function startSpark(caster, ability, modifier, debuff_modifier, stacking_debuff, direction, spark_ability, particle)
+	print(spark_ability)
 	local ability_level = spark_ability:GetLevel() - 1
 	local end_distance = spark_ability:GetLevelSpecialValueFor("range", ability_level)
 	local end_radius = spark_ability:GetLevelSpecialValueFor("end_radius", ability_level)

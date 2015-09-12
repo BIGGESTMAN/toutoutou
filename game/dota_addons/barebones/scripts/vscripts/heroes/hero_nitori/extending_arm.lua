@@ -41,7 +41,7 @@ function extendingArmCast(keys)
 				local origin = arm:GetAbsOrigin()
 				local radius = hand_radius
 				local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
-				local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TREE
+				local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TREE + DOTA_UNIT_TARGET_BUILDING
 				local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
 				local iOrder = FIND_CLOSEST
 				DebugDrawCircle(origin, Vector(180,40,40), 1, radius, true, 0.5)

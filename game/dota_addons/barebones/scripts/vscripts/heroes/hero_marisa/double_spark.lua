@@ -9,8 +9,8 @@ function doubleSparkStart(keys)
 
 	local master_spark_ability = caster:FindAbilityByName("master_spark")
 	master_spark_ability:StartCooldown(master_spark_ability:GetCooldown(master_spark_ability:GetLevel()))
-	startSpark(caster, master_spark_ability, "modifier_master_spark", "modifier_master_spark_slow", true, direction1)
-	startSpark(caster, ability, "modifier_double_spark", "modifier_double_spark_slow", true, direction2)
+	startSpark(caster, master_spark_ability, "modifier_master_spark", "modifier_master_spark_slow", true, direction1, master_spark_ability, "particles/marisa/master_spark.vpcf")
+	startSpark(caster, ability, "modifier_double_spark", "modifier_double_spark_slow", true, direction2, master_spark_ability, "particles/marisa/master_spark.vpcf")
 
 	if caster:HasModifier("modifier_orrerys_sun") then
 		print("!")
