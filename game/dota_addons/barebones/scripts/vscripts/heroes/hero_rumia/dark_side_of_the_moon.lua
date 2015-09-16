@@ -24,7 +24,13 @@ function darkSideOfTheMoon(keys)
 			return 0.03
 		else
 			dummy_unit:SetAbsOrigin(target_point)
+
 			DebugDrawCircle(target_point, Vector(40,40,180), 1, radius, true, delay + 0.5)
+			Timers:CreateTimer(0.06, function() -- wait a bit so particle isn't offset
+				local aoe_particle = ParticleManager:CreateParticle("particles/rumia/dark_side_aoe.vpcf", PATTACH_ABSORIGIN, dummy_unit)
+				ParticleManager:SetParticleControl(aoe_particle, 1, Vector(radius,0,0))
+			end)
+
 			Timers:CreateTimer(delay, function()
 				local team = caster:GetTeamNumber()
 				local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
@@ -43,7 +49,8 @@ function darkSideOfTheMoon(keys)
 					ApplyDamage({ victim = unit, attacker = caster, damage = final_damage, damage_type = damage_type})
 				end
 
-				local explosion_particle = ParticleManager:CreateParticle(keys.explosion_particle_name, PATTACH_ABSORIGIN_FOLLOW, dummy_unit)
+				local explosion_particle = ParticleManager:CreateParticle("particles/rumia/dark_side_explosion.vpcf", PATTACH_ABSORIGIN_FOLLOW, dummy_unit)
+				ParticleManager:SetParticleControl(explosion_particle, 1, Vector(1,radius,1))
 				ParticleManager:SetParticleControlEnt(explosion_particle, 0, dummy_unit, PATTACH_POINT_FOLLOW, "attach_hitloc", dummy_unit:GetAbsOrigin(), true)
 
 				-- time out particle dummy after a while
