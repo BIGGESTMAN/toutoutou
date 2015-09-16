@@ -4,6 +4,9 @@ function darkSideOfTheMoon(keys)
 	local ability = keys.ability
 	local ability_level = ability:GetLevel() - 1
 
+	local delay = ability:GetSpecialValueFor("detonation_delay")
+	local radius = ability:GetSpecialValueFor("radius")
+
 	local dummy_unit = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeam())
 	ability:ApplyDataDrivenModifier(caster, dummy_unit, keys.dummy_modifier, {})
 
@@ -21,13 +24,13 @@ function darkSideOfTheMoon(keys)
 			return 0.03
 		else
 			dummy_unit:SetAbsOrigin(target_point)
-			Timers:CreateTimer(ability:GetLevelSpecialValueFor("detonation_delay", ability_level), function()
+			DebugDrawCircle(target_point, Vector(40,40,180), 1, radius, true, delay + 0.5)
+			Timers:CreateTimer(delay, function()
 				local team = caster:GetTeamNumber()
 				local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
 				local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
 				local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
 				local iOrder = FIND_ANY_ORDER
-				local radius = ability:GetLevelSpecialValueFor("radius", ability_level)
 
 				local targets = FindUnitsInRadius(team, target_point, nil, radius, iTeam, iType, iFlag, iOrder, false)
 				local damage = ability:GetLevelSpecialValueFor("damage", ability_level)

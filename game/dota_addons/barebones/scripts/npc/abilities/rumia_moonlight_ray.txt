@@ -1,7 +1,5 @@
 	"moonlight_ray"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_datadriven"
 		"AbilityTextureName"			"luna_lucent_beam"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
@@ -10,24 +8,21 @@
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 
-		"AbilityCastPoint"				"0.3"
-		"AbilityCooldown"				"9"
-		"AbilityManaCost"				"70"
-		"AbilityCastRange"				"850"
-
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
 
-		// Precache
-		//-------------------------------------------------------------------------------------------------------------
 		"precache"
 		{
 			"particle"					"particles/moonlight_ray.vpcf"
+			"particle"					"particles/rumia/moonlight_ray_slow.vpcf"
+			"particle"					"particles/rumia/moonlight_ray_slow_proc.vpcf"
 		}
+
+		"AbilityCastPoint"				"0.3"
+		"AbilityCooldown"				"9"
+		"AbilityManaCost"				"70"
 
 		"AbilityProcsMagicStick" 		"1"
 
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilitySpecial"
 		{
 			"01"
@@ -78,15 +73,15 @@
 			{
 				"ScriptFile"			"heroes/hero_rumia/moonlight_ray.lua"
 				"Function"				"moonlightRay"
-				"slow_modifier"			"modifier_slow"
+				"slow_modifier"			"modifier_moonlight_ray_slow"
 				"particle_name"			"particles/moonlight_ray.vpcf"
-				"dummy_modifier"		"modifier_dummy"
+				"dummy_modifier"		"modifier_moonlight_ray_dummy"
 			}
 		}
 
 		"Modifiers"
 		{
-			"modifier_slow"
+			"modifier_moonlight_ray_slow"
 	    	{
 	    		"IsHidden"			"0"
 	    		"IsDebuff"			"1"
@@ -105,7 +100,7 @@
 					{
 						"ScriptFile"	"heroes/hero_rumia/moonlight_ray.lua"
 						"Function"		"checkBonusDamageProc"
-						"proc_modifier"	"modifier_bonus_damage_procced"
+						"proc_modifier"	"modifier_moonlight_ray_bonus_damage_procced"
 					}
 				}
 
@@ -113,19 +108,25 @@
 				{
 					"RemoveModifier"
 					{
-						"ModifierName"	"modifier_bonus_damage_procced"
+						"ModifierName"	"modifier_moonlight_ray_bonus_damage_procced"
 						"Target" 		"TARGET"
+					}
+
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_rumia/moonlight_ray.lua"
+						"Function"		"removeSlowParticle"
 					}
 				}
 			}
 
-	    	"modifier_bonus_damage_procced"
+	    	"modifier_moonlight_ray_bonus_damage_procced"
 	    	{
 	    		"IsHidden"		"1"
 	    		"IsPurgable"	"0"
 	    	}
 
-	    	"modifier_dummy"
+	    	"modifier_moonlight_ray_dummy"
 	    	{
 	    		"States"
 				{
