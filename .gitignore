@@ -36,6 +36,7 @@ game/dota_addons/rpg_example/*
 game/dota_addons/tutorial_assist_game/*
 game/dota_addons/tutorial_basics/*
 game/dota_addons/ui_example/*
+game/dota_addons/workshop_testbed/*
 game/dota_addons/vpks/*
 game/dota_addons/dota2cfg.cfg
 
@@ -52,6 +53,7 @@ content/dota_addons/lua_ability_example/*
 content/dota_addons/overthrow/*
 content/dota_addons/rpg_example/*
 content/dota_addons/ui_example/*
+content/dota_addons/workshop_testbed/*
 
 
 content/dota_addons/persona/*

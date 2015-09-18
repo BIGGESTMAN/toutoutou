@@ -41,7 +41,7 @@
 			_class = "C_OP_InterpolateRadius"
 			m_flBias = 0.750000
 			m_flEndScale = 0.000000
-			m_flStartScale = 4.000000
+			m_flStartScale = 8.000000
 		},
 		{
 			_class = "C_OP_InheritFromParentParticles"

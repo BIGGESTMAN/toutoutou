@@ -1,7 +1,7 @@
 	"dark_side_of_the_moon"
 	{
 		"BaseClass"						"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
@@ -13,15 +13,14 @@
 		"precache"
 		{
 			"particle"					"particles/units/heroes/hero_wisp/wisp_guardian_.vpcf"
-			"particle"					"particles/units/heroes/hero_wisp/wisp_guardian_explosion.vpcf"
 			"particle"					"particles/rumia/dark_side_aoe.vpcf"
+			"particle"					"particles/rumia/dark_side_explosion.vpcf"
 		}
 
 		"AbilityCastPoint"				"0.3"
 		"AbilityCooldown"				"16 13 10 7"
 		"AbilityManaCost"				"80 90 100 110"
 		"AbilityCastRange"				"1100"
-		"AOERadius"						"300 325 350 375"
 
 		"AbilityProcsMagicStick" 		"1"
 
@@ -62,7 +61,6 @@
 				"Function"					"darkSideOfTheMoon"
 				"Target"					"POINT"
 				"particle_name"				"particles/units/heroes/hero_wisp/wisp_guardian_.vpcf"
-				"explosion_particle_name"	"particles/units/heroes/hero_wisp/wisp_guardian_explosion.vpcf"
 				"dummy_modifier"			"modifier_dark_side_of_the_moon_dummy"
 			}
 		}

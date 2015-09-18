@@ -25,7 +25,7 @@ function darkSideOfTheMoon(keys)
 		else
 			dummy_unit:SetAbsOrigin(target_point)
 
-			DebugDrawCircle(target_point, Vector(40,40,180), 1, radius, true, delay + 0.5)
+			-- DebugDrawCircle(target_point, Vector(40,40,180), 1, radius, true, delay + 0.5)
 			Timers:CreateTimer(0.06, function() -- wait a bit so particle isn't offset
 				local aoe_particle = ParticleManager:CreateParticle("particles/rumia/dark_side_aoe.vpcf", PATTACH_ABSORIGIN, dummy_unit)
 				ParticleManager:SetParticleControl(aoe_particle, 1, Vector(radius,0,0))

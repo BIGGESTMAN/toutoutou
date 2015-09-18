@@ -53,6 +53,7 @@ function checkBonusDamageProc(keys)
 	if not caster:CanEntityBeSeenByMyTeam(target) and not target:HasModifier(proc_modifier) then
 		ApplyDamage({victim = target, attacker = caster, damage = damage, damage_type = damage_type})
 		ability:ApplyDataDrivenModifier(caster, target, proc_modifier, {})
+		
 		local particle = ParticleManager:CreateParticle("particles/rumia/moonlight_ray_slow_proc.vpcf", PATTACH_ABSORIGIN, target)
 		ParticleManager:SetParticleControlEnt(particle, 1, target, PATTACH_POINT, "attach_origin", target:GetAbsOrigin(), true)
 		ParticleManager:SetParticleControlEnt(particle, 3, target, PATTACH_POINT, "attach_origin", target:GetAbsOrigin(), true)
