@@ -101,6 +101,13 @@ function candidShot(keys)
 			end
 		end
 
+		-- Delete enemy projectiles in area
+		for k,projectile in pairs(ProjectileList:GetProjectilesInArea(target_location, radius)) do
+			if projectile:GetTeamNumber() ~= caster:GetTeamNumber() and pointIsInRectangle(projectile:GetAbsOrigin(), corner_points) then
+				projectile:RemoveSelf()
+			end
+		end
+
 		caster:EmitSound("barebones.Shutter")
 	end)
 end

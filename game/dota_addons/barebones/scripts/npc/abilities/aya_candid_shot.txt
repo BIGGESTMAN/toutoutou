@@ -88,11 +88,6 @@
 				"ally_hit_particle"		"particles/candid_shot_ally.vpcf"
 				"enemy_hit_particle"	"particles/candid_shot_enemy.vpcf"
 			}
-			"CreateThinker"
-			{
-				"ModifierName"	"modifier_candid_shot"
-				"Target" 		"POINT"
-			}
 		}
 
 		"Modifiers"
