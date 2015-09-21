@@ -17,3 +17,4 @@
 		"npc_dota_hero_ancient_apparition"	"Cirno"
 		"npc_dota_hero_visage"				"Shikieiki"
 		"npc_dota_hero_juggernaut"			"Youmu"
+		"npc_dota_hero_faceless_void"		"Sakuya"
