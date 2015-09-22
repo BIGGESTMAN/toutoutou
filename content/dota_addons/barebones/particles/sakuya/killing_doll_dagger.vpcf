@@ -23,6 +23,9 @@
 			_class = "C_OP_Decay"
 			m_nOpEndCapState = 1
 		},
+		{
+			_class = "C_OP_SpinUpdate"
+		},
 	]
 	m_Renderers =
 	[
@@ -45,6 +48,8 @@
 		},
 		{
 			_class = "C_INIT_RandomAlpha"
+			m_nAlphaMin = 150
+			m_nAlphaMax = 150
 		},
 		{
 			_class = "C_INIT_RandomRadius"
@@ -72,6 +77,11 @@
 			m_flDegrees = -90.000000
 			m_nFieldOutput = 12
 			m_bRandomlyFlipDirection = false
+		},
+		{
+			_class = "C_INIT_RandomRotationSpeed"
+			m_flDegreesMax = 0.000000
+			m_flDegrees = 1080.000000
 		},
 	]
 	m_Emitters =

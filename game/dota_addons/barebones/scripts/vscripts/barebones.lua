@@ -229,7 +229,7 @@ function setupProjectileList()
 
 	function ProjectileList:GetProjectiles()
 		for projectile,_ in pairs(self.projectiles) do
-			print(projectile)
+			-- print(projectile)
 			if projectile:IsNull() or not projectile:IsAlive() then
 				self.projectiles[projectile] = nil
 			end
