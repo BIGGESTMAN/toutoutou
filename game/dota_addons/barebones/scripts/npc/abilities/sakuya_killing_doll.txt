@@ -12,6 +12,7 @@
 		"precache"
 		{
 			"particle"					"particles/sakuya/killing_doll_dagger.vpcf"
+			"particle"					"particles/sakuya/killing_doll_dagger_explosion.vpcf"
 		}
 
 		"AbilityCastPoint"				"0.2"

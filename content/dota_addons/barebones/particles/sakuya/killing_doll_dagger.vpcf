@@ -26,6 +26,18 @@
 		{
 			_class = "C_OP_SpinUpdate"
 		},
+		{
+			_class = "C_OP_SetControlPointsToParticle"
+			m_nFirstControlPoint = 3
+			m_bSetOrientation = true
+		},
+		{
+			_class = "C_OP_SetCPOrientationToPointAtCP"
+		},
+		{
+			_class = "C_OP_StopAfterCPDuration"
+			m_flDuration = 2.000000
+		},
 	]
 	m_Renderers =
 	[
@@ -89,6 +101,32 @@
 		{
 			_class = "C_OP_InstantaneousEmitter"
 			m_nParticlesToEmit = 1
+		},
+	]
+	m_Children =
+	[
+		{
+			m_ChildRef = resource:"particles/sakuya/killing_doll_dagger_trail_glow.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/sakuya/killing_doll_dagger_trail.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/sakuya/killing_doll_dagger_explosion.vpcf"
+			m_bEndCap = true
+			m_bDisableChild = true
+		},
+		{
+			m_ChildRef = resource:"particles/sakuya/killing_doll_dagger_trail_c.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/sakuya/killing_doll_dagger_trail_d.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/sakuya/killing_doll_dagger_trail_glow_b.vpcf"
+		},
+		{
+			m_ChildRef = resource:"particles/sakuya/killing_doll_dagger_trail_glow_c.vpcf"
 		},
 	]
 }

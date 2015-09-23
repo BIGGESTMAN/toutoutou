@@ -14,10 +14,10 @@ function spellCast(keys)
 	-- DebugDrawCircle(caster_location, Vector(255,40,40), 0.1, 350, true, 0.5)
 
 	-- Trigger increased cooldown from previous hits
-	if caster:HasModifier("modifier_killing_doll_cooldown_increase") then
-		local cooldown_increase = caster:GetModifierStackCount("modifier_killing_doll_cooldown_increase", caster)
-		ability:StartCooldown(ability:GetCooldown(ability:GetLevel() - 1) + cooldown_increase)
-	end
+	-- if caster:HasModifier("modifier_killing_doll_cooldown_increase") then
+	-- 	local cooldown_increase = caster:GetModifierStackCount("modifier_killing_doll_cooldown_increase", caster)
+	-- 	ability:StartCooldown(ability:GetCooldown(ability:GetLevel() - 1) + cooldown_increase)
+	-- end
 
 	for i=1,number_of_knives do
 		local angle = initial_angle + angle_increment * (i - 1)
@@ -35,6 +35,11 @@ function spellCast(keys)
 
 		local particle = ParticleManager:CreateParticle("particles/sakuya/killing_doll_dagger.vpcf", PATTACH_ABSORIGIN_FOLLOW, knife)
 		ParticleManager:SetParticleControl(particle, 1, target_point)
+
+		-- local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_phantom_assassin/phantom_assassin_stifling_dagger.vpcf", PATTACH_ABSORIGIN_FOLLOW, knife)
+		-- local particle = ParticleManager:CreateParticle("particles/sakuya/killing_doll_dagger_alt.vpcf", PATTACH_ABSORIGIN_FOLLOW, knife)
+		-- ParticleManager:SetParticleControlEnt(particle, 1, knife, PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", knife:GetAbsOrigin(), true)
+		-- ParticleManager:SetParticleControl(particle, 2, Vector(speed / update_interval,0,0))
 
 		local knife_location = knife:GetAbsOrigin()
 		local direction = (target_point - knife_location):Normalized()
@@ -69,6 +74,9 @@ function spellCast(keys)
 							caster:FindModifierByName("modifier_killing_doll_cooldown_increase"):IncrementStackCount()
 						end
 						knife:RemoveSelf()
+
+						local hit_particle = ParticleManager:CreateParticle("particles/sakuya/killing_doll_dagger_explosion.vpcf", PATTACH_POINT, unit)
+						ParticleManager:SetParticleControlEnt(hit_particle, 0, unit, PATTACH_POINT, "attach_hitloc", unit:GetAbsOrigin(), true)
 					end
 					return update_interval
 				else
