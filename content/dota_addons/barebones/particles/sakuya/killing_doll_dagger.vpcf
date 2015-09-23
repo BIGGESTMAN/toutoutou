@@ -37,6 +37,7 @@
 		{
 			_class = "C_OP_StopAfterCPDuration"
 			m_flDuration = 2.000000
+			m_bDisableOperator = true
 		},
 		{
 			_class = "C_OP_MovementPlaceOnGround"
