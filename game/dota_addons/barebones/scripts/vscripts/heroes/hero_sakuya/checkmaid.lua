@@ -93,7 +93,7 @@ function durationEnded(keys)
 		end)
 	end
 
-	-- Disable cannon shot ability
+	-- Disable end early ability
 	local main_ability_name	= "checkmaid"
 	local sub_ability_name	= "checkmaid_end"
 	caster:SwapAbilities(main_ability_name, sub_ability_name, true, false)
