@@ -14,10 +14,10 @@ function spellCast(keys)
 	-- DebugDrawCircle(caster_location, Vector(255,40,40), 0.1, 350, true, 0.5)
 
 	-- Trigger increased cooldown from previous hits
-	-- if caster:HasModifier("modifier_killing_doll_cooldown_increase") then
-	-- 	local cooldown_increase = caster:GetModifierStackCount("modifier_killing_doll_cooldown_increase", caster)
-	-- 	ability:StartCooldown(ability:GetCooldown(ability:GetLevel() - 1) + cooldown_increase)
-	-- end
+	if caster:HasModifier("modifier_killing_doll_cooldown_increase") then
+		local cooldown_increase = caster:GetModifierStackCount("modifier_killing_doll_cooldown_increase", caster)
+		ability:StartCooldown(ability:GetCooldown(ability:GetLevel() - 1) + cooldown_increase)
+	end
 
 	for i=1,number_of_knives do
 		local angle = initial_angle + angle_increment * (i - 1)
@@ -36,6 +36,7 @@ function spellCast(keys)
 		local particle = ParticleManager:CreateParticle("particles/sakuya/killing_doll_dagger.vpcf", PATTACH_ABSORIGIN_FOLLOW, knife)
 		ParticleManager:SetParticleControl(particle, 1, target_point)
 
+		-- Other particles for debugging
 		-- local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_phantom_assassin/phantom_assassin_stifling_dagger.vpcf", PATTACH_ABSORIGIN_FOLLOW, knife)
 		-- local particle = ParticleManager:CreateParticle("particles/sakuya/killing_doll_dagger_alt.vpcf", PATTACH_ABSORIGIN_FOLLOW, knife)
 		-- ParticleManager:SetParticleControlEnt(particle, 1, knife, PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", knife:GetAbsOrigin(), true)
