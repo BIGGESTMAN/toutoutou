@@ -32,7 +32,7 @@ for fname in filenames:
 
 			special = any((special_value in line) for special_value in special_values)
 
-			# print(line)
+			print(line)
 			effect, value = line.split(') :')
 			name, key = effect.split(" (")
 			# print(name)

@@ -1,23 +1,23 @@
-	"killing_doll"
+	"checkmaid"
 	{
 		"BaseClass"						"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET"
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 
-		"AbilityTextureName"			"bristleback_quill_spray"
+		"AbilityTextureName"			"templar_assassin_psionic_trap"
 
 		"precache"
 		{
-			"particle"					"particles/sakuya/killing_doll_dagger.vpcf"
-			"particle"					"particles/sakuya/killing_doll_dagger_explosion.vpcf"
+
 		}
 
-		"AbilityCastPoint"				"0.2"
-		"AbilityCooldown"				"4 3 2 1"
-		"AbilityManaCost"				"40"
+		"AbilityCastPoint"				"0.3"
+		"AbilityCooldown"				"14"
+		"AbilityManaCost"				"70"
+		"AbilityCastRange"				"600"
 
 		"AbilityProcsMagicStick" 		"1"
 
@@ -26,32 +26,32 @@
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"range"					"900"
+				"dagger_flight_range"	"650"
 			}
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"damage"				"40 50 60 70"
+				"damage"				"15 20 25 35"
 			}
 			"03"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"knives"				"3 4 5 6"
+				"daggers"				"12"
 			}
 			"04"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"travel_speed"			"1600"
+				"dagger_speed"			"900"
 			}
 			"05"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"radius"				"100"
+				"radius"				"550 500 450 400"
 			}
 			"06"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"cooldown_increase"		"1"
+				"dagger_radius"			"75"
 			}
 			"07"
 			{
@@ -60,18 +60,22 @@
 			}
 			"08"
 			{
-				"var_type"				"FIELD_INTEGER"
-				"cooldown_increase_duration"	"10"
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"1.0 1.5 2.0 2.5"
 			}
 			"09"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"cooldown_increase_max"	"12"
+				"enhanced_dagger_bonus_range"	"300"
 			}
-			"10"
+		}
+
+		"OnUpgrade"
+		{
+			"RunScript"
 			{
-				"var_type"				"FIELD_INTEGER"
-				"cone_width_degrees"	"90"
+				"ScriptFile"	"heroes/hero_sakuya/checkmaid.lua"
+				"Function"		"onUpgrade"
 			}
 		}
 
@@ -79,22 +83,39 @@
 	    {
 	    	"RunScript"
 	    	{
-	    		"ScriptFile"	"heroes/hero_sakuya/killing_doll.lua"
+	    		"ScriptFile"	"heroes/hero_sakuya/checkmaid.lua"
 	    		"Function"		"spellCast"
-	    		"Target"		"POINT"
 	    	}
 	    }
 
 	    "Modifiers"
 	    {
-	    	"modifier_killing_doll_cooldown_increase"
+	    	"modifier_checkmaid"
 	    	{
 	    		"IsDebuff"		"1"
+	    		"IsStunDebuff"	"1"
+	    		"IsPurgable"	"1"
 
-	    		"Duration"		"%cooldown_increase_duration"
+	    		"Duration"		"%duration"
+
+	    		"States"
+				{
+					"MODIFIER_STATE_INVULNERABLE"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_STUNNED"				"MODIFIER_STATE_VALUE_ENABLED"
+	    			"MODIFIER_STATE_FROZEN"					"MODIFIER_STATE_VALUE_ENABLED"
+				}
+
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_sakuya/checkmaid.lua"
+						"Function"		"durationEnded"
+					}
+				}
 	    	}
 
-			"modifier_killing_doll_dummy"
+			"modifier_checkmaid_dummy"
 			{
 				"States"
 				{

@@ -1,0 +1,90 @@
+Nitori - Radiant Intelligence (Tinker)
+
+Base Stats
+ 
+STR : 17 (+1.9)
+AGI : 14 (+1)
+INT : 27 (+3.2)
+Damage : 19-27
+Armor : 2
+Attacks / Second : 0.58
+Movement Speed : 295
+Turn Rate : 0.7
+Sight Range : 1800/800
+Attack Range : 500
+Missile Speed : 900
+Attack Duration : 0.2/0.97
+Base Attack Time : 1.7
+ 
+Lv. 25
+ 
+STR : 82
+AGI : 58
+INT : 123
+HP : 1708
+Mana : 1599
+Damage : 142-150
+Armor : 10.12
+
+[Q] Exteeeending Aaaaarm (extending_arm) : Deploys a mechanical hand that rapidly extends to maximum range. If the hand grabs a unit, building, or tree, Nitori is pulled to it, dealing magical damage to all enemies she collides with. Enemy units that are grabbed take the same amount of damage and are stunned.
+Spell Immunity - Grabs and stuns Spell Immune units while pulling Nitori to them, but deals no damage.
+DevNotes - Pulls Nitori to the target, not the location the target was grabbed.
+			Stuns target on hand hitting for the listed duration.
+
+Cast Point : 0.3
+Magical Damage (damage) : 100/170/240/310
+Travel Speed (travel_speed) : 1500
+Cast Range (range) : 1050/1200/1350/1500
+Max Travel Distance : 1050/1200/1350/1500
+Hand Radius (hand_radius) : 125
+Collision Radius (damage_radius) : 150
+Stun Duration (stun_duration) : 1.5
+Mana : 90/110/130/150
+Cooldown : 16/14/12/10
+
+[W] Fire! Bubble Dragon (bubble_dragon) : Nitori shoots a bubble that mini-stuns and captures enemies that bump into it. Trapped enemies travel with the bubble to its destination, taking magical damage each second while disarmed and silenced.
+
+Cast Point : 0.3
+Duration (duration) : 1.5/2/2.5/3
+Magical Damage Per Second (damage_per_second) : 50/60/70/80
+Mini-Stun Duration (stun_duration) : 0.1
+Travel Speed (travel_speed) : 400
+Cast Range (range) : 1000
+Radius (radius) : 275
+Mana : 100/115/130/145
+Cooldown : 20/17/14/11
+
+[E] Kappa's Flash Flood (flash_flood) : A rain-simulating drone is fired into the air, causing a deluge of stormwater after 2 seconds. The deluge deals magical damage to enemies each second while slowing movement and increasing magical damage taken. The slow and damage amplification increases each second.
+DevNotes - The area where the deluge will occur is indicated during the delay with rain effects, visual and audio, visible to all. No initial damage, which means the total magical damage is 132/196/272/360. The debuff lingers for 0.5 seconds.
+			Reduces magic resistance such that magic damage is amped by the % listed.
+
+Cast Point : 0.3
+Duration (duration) : 6/7/8/9
+Magical Damage Per Second (damage) : 22/28/34/40
+Move Speed Slow (slow) : 12/16/20/24%
+Move Speed Slow Increase Per Second (slow_increase) : 4/5/6/7%
+Magical Damage Increase (damage_amp) : 10/12/14/16%
+Magical Damage Increase Per Second (damage_amp_increase) : 2/3/4/5%
+Cast Range : 1500
+Radius (radius) : 575/650/725/800
+Mana : 110/120/130/140
+Cooldown : 24
+
+[R] Super Scope 3D (super_scope) : Nitori vanishes off the map to rain down fire in a large area around her. She gains cannon charges for 8 seconds, reappearing at her original location when the duration ends or after the last charge is spent. Each cannon shot deals magical damage and hits after a delay. The reticles around targeted areas are visible to both allies and enemies.
+Scepter - Adds the Nessie Sortie ability.
+DevNotes - Functions like Puck's Phase Shift. 
+
+Cast Point : 0.3
+Charges (charges) : 12/16/20
+Magical Damage (damage) : 70/90/110
+Delay (delay) : 1/0.9/0.8
+Cannon Cast Range (range) : 1800/2400/3000
+Cannon Radius (radius) : 150
+Mana : 250/400/550
+Cooldown : 90
+
+[R] Fire At Will (fire_at_will) : Consumes a charge to launch a shot from Nitori's cannon. It lands and deals magical damage after a delay.
+
+Magical Damage : 70/90/110
+Delay : 1/0.9/0.8
+Cooldown : 0.2

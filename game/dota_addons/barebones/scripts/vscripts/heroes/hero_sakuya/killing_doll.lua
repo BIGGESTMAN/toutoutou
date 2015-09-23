@@ -3,7 +3,13 @@ function spellCast(keys)
 	local caster_location = caster:GetAbsOrigin()
 	local ability = keys.ability
 
+	local enhanced_range_bonus = caster:FindAbilityByName("checkmaid"):GetSpecialValueFor("enhanced_dagger_bonus_range")
+	local radius = ability:GetSpecialValueFor("radius")
+	local knife_damage = ability:GetSpecialValueFor("damage")
+	local knife_damage_type = ability:GetAbilityDamageType()
 	local cooldown_increase_max = ability:GetSpecialValueFor("cooldown_increase_max")
+	local update_interval = ability:GetSpecialValueFor("update_interval")
+	local speed = ability:GetSpecialValueFor("travel_speed") * update_interval
 
 	local number_of_knives = ability:GetSpecialValueFor("knives")
 	local cone_width = ability:GetSpecialValueFor("cone_width_degrees")
@@ -24,11 +30,8 @@ function spellCast(keys)
 		local target_point = RotatePosition(Vector(0,0,0), QAngle(0,angle,0), prototype_target_point) + caster_location
 
 		local range = ability:GetSpecialValueFor("range")
-		local radius = ability:GetSpecialValueFor("radius")
-		local knife_damage = ability:GetSpecialValueFor("damage")
-		local knife_damage_type = ability:GetAbilityDamageType()
-		local update_interval = ability:GetSpecialValueFor("update_interval")
-		local speed = ability:GetSpecialValueFor("travel_speed") * update_interval
+		local enhanced = false
+		local units_hit = {}
 
 		local knife = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeamNumber())
 		ability:ApplyDataDrivenModifier(caster, knife, "modifier_killing_doll_dummy", {})
@@ -50,6 +53,15 @@ function spellCast(keys)
 
 		Timers:CreateTimer(0, function()
 			if not knife:IsNull() then
+				-- Check for Checkmaid on-cooldown bonus
+				if not knife.enhanced then
+					local checkmaid_ability = caster:FindAbilityByName("checkmaid")
+					if not checkmaid_ability:IsCooldownReady() then
+						enhanced = true
+						range = range + enhanced_range_bonus
+					end
+				end
+
 				knife_location = knife:GetAbsOrigin()
 				if distance_traveled < range then
 					-- Move projectile
@@ -67,17 +79,18 @@ function spellCast(keys)
 
 					local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
 
-					if #targets > 0 then
-						local unit = targets[1]
-						ApplyDamage({victim = unit, attacker = caster, damage = knife_damage, damage_type = knife_damage_type})
-						ability:ApplyDataDrivenModifier(caster, caster, "modifier_killing_doll_cooldown_increase", {})
-						if caster:GetModifierStackCount("modifier_killing_doll_cooldown_increase", caster) < cooldown_increase_max then
-							caster:FindModifierByName("modifier_killing_doll_cooldown_increase"):IncrementStackCount()
+					if not enhanced then
+						if #targets > 0 then
+							knifeHit(caster, ability, targets[1], knife_damage, knife_damage_type, cooldown_increase_max)
+							knife:RemoveSelf()
 						end
-						knife:RemoveSelf()
-
-						local hit_particle = ParticleManager:CreateParticle("particles/sakuya/killing_doll_dagger_explosion.vpcf", PATTACH_POINT, unit)
-						ParticleManager:SetParticleControlEnt(hit_particle, 0, unit, PATTACH_POINT, "attach_hitloc", unit:GetAbsOrigin(), true)
+					else
+						for k,unit in pairs(targets) do
+							if not units_hit[unit] then
+								knifeHit(caster, ability, unit, knife_damage, knife_damage_type, cooldown_increase_max)
+								units_hit[unit] = true
+							end
+						end
 					end
 					return update_interval
 				else
@@ -86,4 +99,15 @@ function spellCast(keys)
 			end
 		end)
 	end
+end
+
+function knifeHit(caster, ability, unit, damage, damage_type, cooldown_increase_max)
+	ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
+	ability:ApplyDataDrivenModifier(caster, caster, "modifier_killing_doll_cooldown_increase", {})
+	if caster:GetModifierStackCount("modifier_killing_doll_cooldown_increase", caster) < cooldown_increase_max then
+		caster:FindModifierByName("modifier_killing_doll_cooldown_increase"):IncrementStackCount()
+	end
+
+	local hit_particle = ParticleManager:CreateParticle("particles/sakuya/killing_doll_dagger_explosion.vpcf", PATTACH_POINT, unit)
+	ParticleManager:SetParticleControlEnt(hit_particle, 0, unit, PATTACH_POINT, "attach_hitloc", unit:GetAbsOrigin(), true)
 end

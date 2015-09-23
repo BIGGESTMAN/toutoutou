@@ -2,7 +2,7 @@
 	{
 		"BaseClass"						"ability_datadriven"
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
@@ -19,7 +19,6 @@
 		"AbilityCastPoint"				"0.3"
 		"AbilityCooldown"				"90"
 		"AbilityManaCost"				"250 400 550"
-		"AOERadius"						"1800 2400 3000"
 
 		"AbilityProcsMagicStick" 		"1"
 
@@ -74,7 +73,6 @@
 	    		"Function"		"spellCast"
 	    	}
 	    }
-
 
 	    "Modifiers"
 	    {
