@@ -13,6 +13,8 @@
 		{
 			"particle"					"particles/sakuya/killing_doll_dagger.vpcf"
 			"particle"					"particles/sakuya/killing_doll_dagger_explosion.vpcf"
+			"particle"					"particles/units/heroes/hero_phantom_assassin/phantom_assassin_phantom_strike_start.vpcf"
+			"particle"					"particles/units/heroes/hero_phantom_assassin/phantom_assassin_phantom_strike_end.vpcf"
 		}
 
 		"AbilityCastPoint"				"0.3"
