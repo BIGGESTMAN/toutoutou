@@ -3,7 +3,7 @@ function spellCast(keys)
 	local ability = keys.ability
 
 	caster.resurrection_old_model = caster:GetModelName()
-	caster:SetModel("models/heroes/phoenix/phoenix_egg.vmdl")
+	caster:SetOriginalModel("models/heroes/phoenix/phoenix_egg.vmdl")
 
 	ability:ApplyDataDrivenModifier(caster, caster, "modifier_resurrection", {})
 end
@@ -24,7 +24,7 @@ function healthDrainTick(keys)
 		caster:RemoveModifierByName("modifier_resurrection")
 		ability:ApplyDataDrivenModifier(caster, caster, "modifier_resurrection_lingering", {})
 
-		caster:SetModel(caster.resurrection_old_model)
+		caster:SetOriginalModel(caster.resurrection_old_model)
 		caster.resurrection_old_model = nil
 	else
 		caster:SetHealth(health - health_drain)
