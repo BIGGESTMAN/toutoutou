@@ -15,13 +15,14 @@ function spellCast(keys)
 	local damage_interval = ability:GetSpecialValueFor("damage_interval")
 
 	local update_interval = ability:GetSpecialValueFor("update_interval")
-	local speed = ability:GetSpecialValueFor("travel_speed") * update_interval
+	local speed = ability:GetSpecialValueFor("travel_speed") * update_interval / 2
 
 	local direction = (target_point - caster:GetAbsOrigin()):Normalized()
 	local target_range = (target_point - caster:GetAbsOrigin()):Length2D()
 	local distance_traveled = 0
 
 	ability:ApplyDataDrivenModifier(caster, caster, "modifier_fujiyama_volcano", {})
+	local dash_particle = ParticleManager:CreateParticle("particles/mokou/fujiyama_volcano_dash.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
 
 	Timers:CreateTimer(0, function()
 		if caster:IsAlive() then
@@ -38,6 +39,7 @@ function spellCast(keys)
 			else
 				FindClearSpaceForUnit(caster, caster:GetAbsOrigin(), false)
 				caster:RemoveModifierByName("modifier_fujiyama_volcano")
+				ParticleManager:DestroyParticle(dash_particle, true)
 
 				local impact_damage = caster:GetHealth() * health_percent_as_damage / 100
 				ApplyDamage({victim = caster, attacker = caster, damage = impact_damage, damage_type = impact_damage_type})
