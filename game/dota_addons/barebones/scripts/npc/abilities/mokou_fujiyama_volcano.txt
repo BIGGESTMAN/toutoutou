@@ -55,7 +55,7 @@
 			}
 			"07"
 			{
-				"var_type"				"FIELD_FLOAT"
+				"var_type"				"FIELD_INTEGER"
 				"travel_speed"			"1500"
 			}
 			"08"

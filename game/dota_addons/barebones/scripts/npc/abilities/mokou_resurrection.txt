@@ -1,0 +1,86 @@
+	"resurrection"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+
+		"AbilityTextureName"			"mokou_resurrection"
+
+		"precache"
+		{
+
+		}
+
+		"AbilityCastPoint"				"0.1"
+		"AbilityCooldown"				"45 30 15"
+		"AbilityManaCost"				"200"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"health_threshold"		"200"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"disable_duration"		"0.5"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"health_drain_interval"	"0.1"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"health_drain_per_second"	"100 150 200"
+			}
+		}
+
+		"OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"	"heroes/hero_mokou/resurrection.lua"
+	    		"Function"		"spellCast"
+	    	}
+	    }
+
+	    "Modifiers"
+	    {
+	    	"modifier_resurrection"
+			{
+				"ThinkInterval"  "%health_drain_interval"
+
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_mokou/resurrection.lua"
+						"Function"		"healthDrainTick"
+					}
+				}
+
+				"States"
+				{
+					"MODIFIER_STATE_MAGIC_IMMUNE"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_STUNNED"			"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+
+	    	"modifier_resurrection_lingering"
+			{
+				"Duration"	"%disable_duration"
+
+				"States"
+				{
+					"MODIFIER_STATE_MAGIC_IMMUNE"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_STUNNED"			"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+	    }
+	}

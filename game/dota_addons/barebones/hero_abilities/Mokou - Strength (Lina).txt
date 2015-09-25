@@ -1,0 +1,78 @@
+Mokou - Strength (Lina)
+
+Base Stats
+
+STR : 19 (+2.8)
+AGI : 14 (+1.5)
+INT : 17 (+1.9)
+Damage : 25-33
+Armor : -1
+Attacks / Second : 0.58
+Movement Speed : 300
+Turn Rate : 0.6
+Sight Range : 1800/800
+Attack Range : Melee
+Missile Speed : Instant
+Attack Duration : 0.3/0.5
+Base Attack Time : 1.7
+
+Lv. 25
+
+STR : 106
+AGI : 70
+INT : 82
+HP : 2164
+Mana : 1066
+Damage : 131-139
+Armor : 8.8
+
+[Q] Fujiyama Volcano (fujiyama_volcano) : An earth-shattering kick deals pure damage equal to 25% of Mokou's current health to herself and enemies at her destination. The resulting fissure deals magical damage over time and slows movement.
+Spell Immunity - Blocks fissure damage and slow.
+DevNotes - Both impact and fissure damages mechanical units. The damage is dealt to Mokou on impact, based on the health she had that exact moment. The fissure deals no initial damage, which means 6 instances of 25/35/45/55 damage. The slow lingers for 0.5 seconds. 
+
+Cast Point : 0.1
+Fissure Total Magical Damage (fissure_total_damage) : 150/210/270/330
+Fissure Move Speed Slow (slow) : 35/40/45/50%
+Fissure Duration (duration) : 6
+Travel Speed (travel_speed) : 1500
+Cast Range : 1100
+Kick Radius (impact_radius) : 225
+Fissure Radius (fissure_radius) : 325
+Mana : 90
+Cooldown : 21/19/17/15
+
+[W] Immortality’s Reckless Sacrifice (reckless_sacrifice) : Mokou sets herself ablaze with 3 flames. Each flame increases attack speed but deals magical damage to her each second. Flames are transfered by attacks with their duration reset. Enemies with 2 flames have their attack damage reduced, and 3 flames disarms them.
+Spell Immunity - Flames can be transferred to Spell Immune units, but they have no effect while they remain Spell Immune.
+DevNotes - Can be transferred to and fully affects mechanical units. No initial damage. The duration of each flame is independent of the others. 
+
+Cast Point : 0.1
+Magical Damage Each Second per Flame (damage_per_second) : 6/10/14/18
+Attack Speed per Flame (attackspeed) : 18/22/26/30
+Enemy Attack Damage Reduction (damage_reduction) : 40/60/80/100
+Duration (duration) : 8
+Mana : 70/80/90/100
+Cooldown : 34/27/20/13
+
+[E] Possessed by Phoenix (possessed_by_phoenix) : Whenever Mokou casts an ability, she deals magical damage around her based on a percentage of her missing health for 3 seconds. Enemies further away will take reduced damage. When cast on a hero, this effect triggers around them as well, stacking with the original.
+Spell Immunity - Damage and cast are blocked by Spell Immunity. Linken's Sphere blocks on cast.
+DevNotes - Can't target and doesn't damage mechanical units. No initial damage. The damage is determined by her current health at the time of each instance, meaning it changes if her health fluctuates. Casting an ability while the effect is active will reset the duration. Activates off ALL her abilities, including Hourai Doll. When cast on an enemy hero, they will take the maximum damage. The cast version is based on Mokou's health, not the target's. 
+
+Cast Point : 0.1
+Minimum Missing Health as Magical Damage per Second (damage_percent_min) : 4/5/6/7%
+Maximum Missing Health as Magical Damage per Second (damage_percent_max) : 8/10/12/14%
+Cast Duration (active_duration) : 8
+Cast Range : 750
+Radius (radius) : 500
+Max Damage Radius (full_damage_radius) : 150
+Current Health as Cost (health_cost_percent) : 15%
+Mana : 60
+Cooldown : 25/22/19/16
+
+[R] Resurrection (resurrection) : Mokou becomes immobile and Spell Immune as her health rapidly drains away. When it drops below 200, she instantly regains all her health.
+Scepter : Removes mana cost. Adds the Hourai Doll ability.
+DevNotes - Drains 10/15/20 health in 0.1 second intervals. Can't be canceled by anything, and Mokou can't move, attack, or cast abilities, but can use certain items like Spirit Breaker's Charge of Darkness. The disable and Spell Immunity end 0.5 seconds after her recovery.
+
+Cast Point : 0.1
+Health Drain Per Second (health_drain_per_second) : 100/150/200
+Mana : 200 {Scepter : 0}
+Cooldown : 45/30/15

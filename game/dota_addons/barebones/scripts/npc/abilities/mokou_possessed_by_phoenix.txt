@@ -59,6 +59,11 @@
 				"var_type"				"FIELD_FLOAT"
 				"damage_interval"		"0.5"
 			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"full_damage_radius"	"150"
+			}
 		}
 
 		"OnSpellStart"

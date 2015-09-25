@@ -4,6 +4,9 @@ function spellCast(keys)
 	local ability = keys.ability
 
 	ability:ApplyDataDrivenModifier(caster, target, "modifier_possessed_by_phoenix_active_effect", {})
+
+	local health_cost = caster:GetHealth() * ability:GetSpecialValueFor("health_cost_percent") / 100
+	ApplyDamage({victim = caster, attacker = caster, damage = health_cost, damage_type = DAMAGE_TYPE_PURE})
 end
 
 function passiveSpellCast(keys)
@@ -26,6 +29,7 @@ function damagePulse(keys)
 	local min_missing_health_percent = ability:GetSpecialValueFor("damage_percent_min") * damage_interval
 	local damage_type = ability:GetAbilityDamageType()
 	local radius = ability:GetSpecialValueFor("radius")
+	local full_damage_radius = ability:GetSpecialValueFor("full_damage_radius")
 
 	local missing_health = caster:GetHealthDeficit()
 	local max_damage = max_missing_health_percent * missing_health / 100
@@ -41,7 +45,8 @@ function damagePulse(keys)
 	local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
 	for k,unit in pairs(targets) do
 		local distance = (unit:GetAbsOrigin() - target:GetAbsOrigin()):Length2D()
-		local damage_modifier = 1 - (distance / radius)
+		local damage_modifier = 1 - (distance - full_damage_radius) / (radius - full_damage_radius)
+		if damage_modifier > 1 then damage_modifier = 1 end
 		local damage = min_damage + damage_modifier * (max_damage - min_damage)
 		ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
 	end
