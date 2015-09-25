@@ -144,12 +144,6 @@
 						"Function"		"endOrrerysSun"
 						"particle"		"particles/units/heroes/hero_wisp/wisp_death.vpcf"
 					}
-
-					"FireSound"
-					{
-						"EffectName"	"Hero_Wisp.Death"
-						"Target" 		"CASTER"
-					}
 				}
 
 				"OnAbilityExecuted"

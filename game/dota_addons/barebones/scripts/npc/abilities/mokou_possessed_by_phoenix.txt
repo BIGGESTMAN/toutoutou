@@ -1,0 +1,126 @@
+	"possessed_by_phoenix"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+
+		"AbilityTextureName"			"ogre_magi_ignite"
+
+		"precache"
+		{
+
+		}
+
+		"AbilityCastPoint"				"0.1"
+		"AbilityCooldown"				"25 22 19 16"
+		"AbilityManaCost"				"60"
+		"AbilityCastRange"				"750"
+		"AOERadius"						"500"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"500"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"passive_duration"		"3"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"active_duration"		"8"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_percent_min"	"4 5 6 7"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_percent_max"	"8 10 12 14"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"health_cost_percent"	"15"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_interval"		"0.5"
+			}
+		}
+
+		"OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"	"heroes/hero_mokou/possessed_by_phoenix.lua"
+	    		"Function"		"spellCast"
+	    	}
+	    }
+
+	    "Modifiers"
+	    {
+	    	"modifier_possessed_by_phoenix"
+			{
+				"Passive"		"1"
+				"IsHidden"		"1"
+
+				"OnAbilityExecuted"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_mokou/possessed_by_phoenix.lua"
+						"Function"		"passiveSpellCast"
+					}
+				}
+			}
+
+	    	"modifier_possessed_by_phoenix_passive_effect"
+			{
+				"Duration"		"%passive_duration"
+
+				"ThinkInterval"  "%damage_interval"
+
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_mokou/possessed_by_phoenix.lua"
+						"Function"		"damagePulse"
+					}
+				}
+
+				"Attributes"		"MODIFIER_ATTRIBUTE_PERMANENT"
+			}
+
+	    	"modifier_possessed_by_phoenix_active_effect"
+			{
+				"Duration"		"%active_duration"
+
+				"ThinkInterval"  "%damage_interval"
+
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_mokou/possessed_by_phoenix.lua"
+						"Function"		"damagePulse"
+					}
+				}
+
+				"Attributes"		"MODIFIER_ATTRIBUTE_PERMANENT"
+			}
+	    }
+	}
