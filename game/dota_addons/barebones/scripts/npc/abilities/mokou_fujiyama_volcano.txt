@@ -87,6 +87,14 @@
 
 	    "Modifiers"
 	    {
+	    	"modifier_fujiyama_volcano"
+			{
+				"States"
+				{
+					"MODIFIER_STATE_ROOTED"		"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+
 	    	"modifier_fujiyama_volcano_slow"
 			{
 				"IsDebuff"		"1"

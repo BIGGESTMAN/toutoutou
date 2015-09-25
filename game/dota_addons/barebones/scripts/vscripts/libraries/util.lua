@@ -155,3 +155,13 @@ function sizeOfTable(table)
 	end
 	return size
 end
+
+function getNumberOfModifierInstances(unit, modifier_name)
+	local count = 0
+	local modifiers = unit:GetModifierCount()
+	for i=0,modifiers - 1 do
+		local modifier = unit:GetModifierNameByIndex(i)
+		if modifier == modifier_name then count = count + 1 end
+	end
+	return count
+end

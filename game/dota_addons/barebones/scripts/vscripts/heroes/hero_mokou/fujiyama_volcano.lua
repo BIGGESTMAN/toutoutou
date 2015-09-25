@@ -21,6 +21,8 @@ function spellCast(keys)
 	local target_range = (target_point - caster:GetAbsOrigin()):Length2D()
 	local distance_traveled = 0
 
+	ability:ApplyDataDrivenModifier(caster, caster, "modifier_fujiyama_volcano", {})
+
 	Timers:CreateTimer(0, function()
 		if caster:IsAlive() then
 			if distance_traveled < target_range then
@@ -35,6 +37,7 @@ function spellCast(keys)
 				return update_interval
 			else
 				FindClearSpaceForUnit(caster, caster:GetAbsOrigin(), false)
+				caster:RemoveModifierByName("modifier_fujiyama_volcano")
 
 				local impact_damage = caster:GetHealth() * health_percent_as_damage / 100
 				ApplyDamage({victim = caster, attacker = caster, damage = impact_damage, damage_type = impact_damage_type})
@@ -42,7 +45,7 @@ function spellCast(keys)
 				local team = caster:GetTeamNumber()
 				local origin = caster:GetAbsOrigin()
 				local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
-				local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
+				local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL
 				local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
 				local iOrder = FIND_CLOSEST
 				-- DebugDrawCircle(origin, Vector(180,40,40), 0.1, radius, true, 0.2)
@@ -67,7 +70,7 @@ function spellCast(keys)
 					local team = caster:GetTeamNumber()
 					local origin = caster:GetAbsOrigin()
 					local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
-					local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
+					local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL
 					local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
 					local iOrder = FIND_CLOSEST
 					local targets = FindUnitsInRadius(team, origin, nil, fissure_radius, iTeam, iType, iFlag, iOrder, false)
