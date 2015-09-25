@@ -1,0 +1,79 @@
+Sakuya - Agility (Faceless Void)
+
+Base Stats
+
+STR : 17 (+2)
+AGI : 20 (+2.4)
+INT : 16 (+1.9)
+Damage : 25-32
+Armor : 0
+Attacks / Second : 0.62
+Movement Speed : 310
+Turn Rate : 0.6
+Sight Range : 1800/800
+Attack Range : 400
+Missile Speed : 1300
+Attack Duration : 0.5/0.5
+Base Attack Time : 1.6
+
+Lv. 25
+
+STR : 85
+AGI : 97
+INT : 81
+HP : 1765
+Mana : 1053
+Damage : 122-129
+Armor : 13.58
+
+[Q] Killing Doll (killing_doll) : Sakuya throws a fan of knives, each dealing physical damage to the first enemy hit. For each knife that deals damage, the cooldown increases by 1 second for 10 seconds.
+DevNotes - Damages mechanical units. Knives are thrown in a cone with an identical width through all levels. An enemy within 150 range is hit by all the knives. An enemy within 350 range is hit by 3 knives at max level. Maximum cooldown increase is 12 seconds, unaffected by cooldown reduction.
+
+Cast Point : 0.2
+Physical Damage per Knife (damage) : 40/50/60/70
+Number of Knives (knives) : 3/4/5/6
+Cast Range : 850
+Knife Travel Distance (range) : 900
+Knife Travel Speed (travel_speed) : 1600
+Radius per Knife (radius) : 100
+Mana : 40
+Cooldown : 4/3/2/1
+
+[W] Checkmaid (checkmaid) : Locks another unit in time, completely disabling them while making them invulnerable. Sakuya arranges a circle of daggers around them that closes in when the disable ends, each dealing physical damage to all enemies hit. Can be used again to end the duration early. While Checkmaid is on cooldown, knives from Killing Doll and Sakuya's World pierce enemies and travel 300 more distance per hit.
+Spell Immunity - Can't target Spell Immune units. Blocked by Linken's Sphere on cast and the circle of daggers isn't formed.
+DevNotes - Can target but doesn't damage mechanical units. Works like Naga Siren's Song of the Siren. The daggers travel towards the center and continue until maximum distance. The daggers don't deal damage while stationary. Recasting summons more daggers and extends the duration of the disable, meaning previous daggers will remain still. Daggers in movement can't be stopped, however. Knives in flight gain the pierce and bonus distance per hit if Checkmaid goes on cooldown, and knives that have the effect don't lose it when the ability becomes available.
+
+Cast Point : 0.3
+Physical Damage per Dagger (damage) : 15/20/25/35
+Number of Daggers (daggers) : 12
+Duration (duration) : 1/1.5/2/2.5
+Cast Range : 600
+Dagger Circle Radius (radius) : 550/500/450/400
+Dagger Travel Distance (dagger_flight_range) : 650
+Dagger Travel Speed (dagger_speed) : 900
+Radius per Dagger (dagger_radius) : 75
+Mana : 70
+Cooldown : 14
+
+[E] Sakuya’s World (sakuyas_world) : Sakuya leaps through frozen time. A knife flies from her initial position to her destination, and she throws another back at it. Each knife deals physical damage to the first enemy hit.
+DevNotes - Damages mechanical units. Disjoints projectiles.
+
+Cast Point : 0.3
+Physical Damage per Knife (damage) : 60/90/120/150
+Cast Range (range) : 1000
+Knife Travel Distance (dagger_range) : 900
+Knife Travel Speed (dagger_speed) : 1600
+Radius per Knife (radius) : 100
+Mana : 70
+Cooldown : 16/13/10/7
+
+[R] Lunar Dial (lunar_dial) : Time stops for all but Sakuya. Other units and buildings are completely disabled and invulnerable. She can still target them with attacks and Checkmaid, but projectiles from her attacks and abilities are frozen on formation. Projectiles in flight are frozen as well when Lunar Dial is activated. When the duration ends, all enemy heroes take some magical damage.
+Scepter - Increases duration. Resets the cooldown of all other abilities on cast and duration's end.
+Spell Immunity - Cast pierces Spell Immunity. Magical damage is blocked.
+DevNotes - Everything is frozen for other units. All ability/item cooldowns, projectiles, channels, cast/attack animations, buff/debuff/area of effect durations and their damage, damage from DoTs. Exception is the Checkmaid disable. DoTs on Sakuya still damage and can kill her, which ends the duration and deals the magical damage. 
+
+Cast Point : 0.3
+Duration : 4/5/6 {Scepter : 5/6/7}
+Magical Damage : 100
+Mana : 175/250/325
+Cooldown : 160/140/120

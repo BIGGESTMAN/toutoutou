@@ -1,0 +1,61 @@
+	"npc_dota_hero_mokou"
+	{
+		"AbilityLayout" 		"4"
+		"override_hero"			"npc_dota_hero_phoenix"
+		"SoundSet"				"0"
+		"Ability1"				"fujiyama_volcano"
+		"Ability2"				"reckless_sacrifice"
+		"Ability3"				"possessed_by_phoenix"
+		"Ability4"				"resurrection"
+		"Ability5"				""
+		"Ability6"				""
+		"Ability7"				"attribute_bonus"
+		"Ability8"				""
+		"Ability9"				""
+		"Ability10"				""
+		"Ability11"				""
+		"Ability12"				""
+		"Ability13"				""
+		"Ability14"				""
+		"Ability15"				""
+		"Ability16"				""
+
+		"ArmorPhysical"				"-1"									// Physical protection.
+		"MagicalResistance"			"25"								// Magical protection (percentage).
+
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"			"29"										// Damage range min.
+		"AttackDamageMax"			"29"										// Damage range max.
+
+		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"		"19"										// Base strength
+		"AttributeStrengthGain"		"2.8"										// Strength bonus per level.
+		"AttributeBaseAgility"		"14"										// Base agility
+		"AttributeAgilityGain"		"1.5"										// Agility bonus per level.
+		"AttributeBaseIntelligence"	"17"										// Base intelligence
+		"AttributeIntelligenceGain"	"1.9"										// Intelligence bonus per level.
+
+		//"BountyXP"					"0"										// Experience earn.
+		//"BountyGoldMin"				"0"										// Gold earned min.
+		//"BountyGoldMax"				"0"										// Gold earned max.
+
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"				"300"									// Speed.
+		"MovementTurnRate"			"0.6"									// Turning rate.
+
+		"StatusHealth"				"150"									// Base health.
+		"StatusHealthRegen"			"0"										// Health regeneration rate.
+		"StatusMana"				"0"										// Base mana.
+		"StatusManaRegen"			"0"										// Mana regeneration rate.
+
+		"VisionDaytimeRange"		"1800"									// Range of vision during day light.
+		"VisionNighttimeRange"		"800"									// Range of vision at night time.
+
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"				// Type of damage dealt. 
+		"AttackRate"				"1.7"									// Speed of attack.
+		"AttackAnimationPoint"		"0.3"									// Normalized time in animation cycle to attack.
+		"AttackRange"				"128"									// Range within a target can be attacked.
+		"AttackAcquisitionRange"	"300"									// Range within a target can be acquired.
+		//"ProjectileModel"			"particles/units/heroes/hero_phantom_assassin/phantom_assassin_stifling_dagger.vpcf"							// Particle system model for projectile.
+		//"ProjectileSpeed"			"1300"									// Speed of projectile.
+	}
