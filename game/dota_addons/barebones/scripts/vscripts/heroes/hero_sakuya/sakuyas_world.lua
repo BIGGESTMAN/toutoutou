@@ -12,10 +12,10 @@ function spellCast(keys)
 	local speed = ability:GetSpecialValueFor("dagger_speed") * update_interval
 
 	local target_direction = (target_point - caster_location):Normalized()
-	local range = ability:GetSpecialValueFor("range")
-	local distance = target_point - caster_location
-	if distance:Length2D() > range then
-		target_point = caster_location + target_direction * range
+	local cast_range = ability:GetSpecialValueFor("range")
+	local distance = (target_point - caster_location):Length2D()
+	if distance > cast_range then
+		target_point = caster_location + target_direction * cast_range
 	end
 
 	FindClearSpaceForUnit(caster, target_point, false)
@@ -38,7 +38,7 @@ function spellCast(keys)
 	daggers[2]:SetAbsOrigin(target_point)
 
 	for k,dagger in pairs(daggers) do
-		local range = ability:GetSpecialValueFor("range")
+		local range = ability:GetSpecialValueFor("dagger_range")
 		local enhanced = false
 		local units_hit = {}
 		local distance_traveled = 0
