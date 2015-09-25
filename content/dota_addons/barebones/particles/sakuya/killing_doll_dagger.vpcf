@@ -83,7 +83,6 @@
 			_class = "C_INIT_Orient2DRelToCP"
 			m_nCP = 1
 			m_nFieldOutput = 20
-			m_flRotOffset = 180.000000
 		},
 		{
 			_class = "C_INIT_RandomRotation"

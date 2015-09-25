@@ -21,10 +21,15 @@ function spellCast(keys)
 	FindClearSpaceForUnit(caster, target_point, false)
 	ProjectileManager:ProjectileDodge(caster)
 
+	local start_particle = ParticleManager:CreateParticle("particles/units/heroes/hero_phantom_assassin/phantom_assassin_phantom_strike_start.vpcf", PATTACH_POINT, caster)
+	ParticleManager:SetParticleControl(start_particle, 0, caster_location)
+	local end_particle = ParticleManager:CreateParticle("particles/units/heroes/hero_phantom_assassin/phantom_assassin_phantom_strike_end.vpcf", PATTACH_POINT, caster)
+	ParticleManager:SetParticleControl(start_particle, 0, target_point)
+
 	local daggers = {}
 	for i=1,2 do
 		local dagger = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeamNumber())
-		ability:ApplyDataDrivenModifier(caster, dagger, "modifier_killing_doll_dummy", {})
+		ability:ApplyDataDrivenModifier(caster, dagger, "modifier_sakuyas_world_dummy", {})
 		table.insert(daggers, dagger)
 	end
 	daggers[1]:SetForwardVector(target_direction)

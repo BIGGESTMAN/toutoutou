@@ -25,7 +25,7 @@ function spellCast(keys)
 			dagger:SetForwardVector(direction)
 
 			local particle = ParticleManager:CreateParticle("particles/sakuya/killing_doll_dagger.vpcf", PATTACH_ABSORIGIN_FOLLOW, dagger)
-			ParticleManager:SetParticleControl(particle, 1, target_location)
+			ParticleManager:SetParticleControl(particle, 1, target_point + direction * -1) -- Not a clue why this inversion is required
 		end
 
 		-- Enable end early ability
