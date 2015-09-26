@@ -26,7 +26,7 @@ Mana : 1066
 Damage : 131-139
 Armor : 8.8
 
-[Q] Fujiyama Volcano (fujiyama_volcano) : An earth-shattering kick deals pure damage equal to 25% of Mokou's current health to herself and enemies at her destination. The resulting fissure deals magical damage over time and slows movement.
+[Q] Fujiyama Volcano (fujiyama_volcano) : An earth-shattering kick deals pure damage equal to 25%% of Mokou's current health to herself and enemies at her destination. The resulting fissure deals magical damage over time and slows movement.
 Spell Immunity - Blocks fissure damage and slow.
 DevNotes - Both impact and fissure damages mechanical units. The damage is dealt to Mokou on impact, based on the health she had that exact moment. The fissure deals no initial damage, which means 6 instances of 25/35/45/55 damage. The slow lingers for 0.5 seconds. 
 

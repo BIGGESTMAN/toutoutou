@@ -101,16 +101,17 @@
 			_class = "C_INIT_PositionOffset"
 			m_OffsetMin =
 			[
-				0.000000,
+				100.000000,
 				0.000000,
 				200.000000,
 			]
 			m_OffsetMax =
 			[
-				0.000000,
+				100.000000,
 				0.000000,
 				200.000000,
 			]
+			m_bLocalCoords = true
 		},
 	]
 	m_Emitters =

@@ -41,7 +41,7 @@ function damagePulse(keys)
 	local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL
 	local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
 	local iOrder = FIND_ANY_ORDER
-	DebugDrawCircle(origin, Vector(255,0,0), 1, radius, true, 0.2)
+	-- DebugDrawCircle(origin, Vector(255,0,0), 1, radius, true, 0.2)
 	local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
 	for k,unit in pairs(targets) do
 		local distance = (unit:GetAbsOrigin() - target:GetAbsOrigin()):Length2D()

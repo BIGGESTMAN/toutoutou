@@ -15,7 +15,7 @@ function spellCast(keys)
 	local damage_interval = ability:GetSpecialValueFor("damage_interval")
 
 	local update_interval = ability:GetSpecialValueFor("update_interval")
-	local speed = ability:GetSpecialValueFor("travel_speed") * update_interval / 2
+	local speed = ability:GetSpecialValueFor("travel_speed") * update_interval
 
 	local direction = (target_point - caster:GetAbsOrigin()):Normalized()
 	local target_range = (target_point - caster:GetAbsOrigin()):Length2D()
@@ -39,7 +39,10 @@ function spellCast(keys)
 			else
 				FindClearSpaceForUnit(caster, caster:GetAbsOrigin(), false)
 				caster:RemoveModifierByName("modifier_fujiyama_volcano")
-				ParticleManager:DestroyParticle(dash_particle, true)
+
+				ParticleManager:DestroyParticle(dash_particle, false)
+				local impact_particle = ParticleManager:CreateParticle("particles/mokou/fujiyama_volcano_impact.vpcf", PATTACH_ABSORIGIN, caster)
+				ParticleManager:SetParticleControl(impact_particle, 0, caster:GetAbsOrigin())
 
 				local impact_damage = caster:GetHealth() * health_percent_as_damage / 100
 				ApplyDamage({victim = caster, attacker = caster, damage = impact_damage, damage_type = impact_damage_type})
@@ -50,7 +53,6 @@ function spellCast(keys)
 				local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL
 				local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
 				local iOrder = FIND_CLOSEST
-				-- DebugDrawCircle(origin, Vector(180,40,40), 0.1, radius, true, 0.2)
 				local targets = FindUnitsInRadius(team, origin, nil, impact_radius, iTeam, iType, iFlag, iOrder, false)
 				for k,unit in pairs(targets) do
 					ApplyDamage({victim = unit, attacker = caster, damage = impact_damage, damage_type = impact_damage_type})
@@ -66,7 +68,7 @@ function spellCast(keys)
 					local damage_tick = (fissure_time_active - fissure_damage_ticks * damage_interval) >= damage_interval
 					if damage_tick then
 						fissure_damage_ticks = fissure_damage_ticks + 1
-						DebugDrawCircle(origin, Vector(255,0,0), 1, fissure_radius, true, 0.2)
+						-- DebugDrawCircle(origin, Vector(255,0,0), 1, fissure_radius, true, 0.2)
 					end
 
 					local team = caster:GetTeamNumber()

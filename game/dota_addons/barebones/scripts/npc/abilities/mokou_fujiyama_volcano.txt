@@ -11,6 +11,7 @@
 		"precache"
 		{
 			"particle"					"particles/mokou/fujiyama_volcano_dash.vpcf"
+			"particle"					"particles/mokou/fujiyama_volcano_impact.vpcf"
 		}
 
 		"AbilityCastPoint"				"0.1"

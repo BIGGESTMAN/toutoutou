@@ -17,12 +17,16 @@
 	[
 		{
 			_class = "C_INIT_RandomLifeTime"
+			m_fLifetimeMin = 1.000000
+			m_fLifetimeMax = 1.000000
 		},
 		{
 			_class = "C_INIT_RandomAlpha"
 		},
 		{
 			_class = "C_INIT_RandomRadius"
+			m_flRadiusMin = 30.000000
+			m_flRadiusMax = 30.000000
 		},
 		{
 			_class = "C_INIT_RandomColor"
