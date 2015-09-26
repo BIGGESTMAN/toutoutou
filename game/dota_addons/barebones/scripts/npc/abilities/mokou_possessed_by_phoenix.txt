@@ -11,7 +11,7 @@
 
 		"precache"
 		{
-
+			"particle"					"particles/mokou/possessed_by_phoenix.vpcf"
 		}
 
 		"AbilityCastPoint"				"0.1"

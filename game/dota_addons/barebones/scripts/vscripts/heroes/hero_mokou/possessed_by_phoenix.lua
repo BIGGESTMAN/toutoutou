@@ -50,4 +50,7 @@ function damagePulse(keys)
 		local damage = min_damage + damage_modifier * (max_damage - min_damage)
 		ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
 	end
+
+	local particle = ParticleManager:CreateParticle("particles/mokou/possessed_by_phoenix.vpcf", PATTACH_ABSORIGIN, target)
+	-- ParticleManager:SetParticleControl(particle, 0, origin)
 end
