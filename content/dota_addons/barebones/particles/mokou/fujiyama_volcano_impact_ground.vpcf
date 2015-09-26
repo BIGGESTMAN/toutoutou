@@ -65,8 +65,8 @@
 	[
 		{
 			_class = "C_INIT_RandomRadius"
-			m_flRadiusMin = 35.000000
-			m_flRadiusMax = 60.000000
+			m_flRadiusMin = 25.000000
+			m_flRadiusMax = 45.000000
 		},
 		{
 			_class = "C_INIT_RemapInitialCPDirectionToRotation"

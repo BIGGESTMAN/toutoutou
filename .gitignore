@@ -40,6 +40,7 @@ game/dota_addons/workshop_testbed/*
 game/dota_addons/vpks/*
 game/dota_addons/dota2cfg.cfg
 
+game/dota_addons/barebones/network_measurement.txt
 game/dota_addons/barebones/scripts/npc/npc_heroes_custom.txt
 game/dota_addons/barebones/resource/addon_english.txt
 game/dota_addons/barebones/resource/tooltips/generated_tooltips.txt

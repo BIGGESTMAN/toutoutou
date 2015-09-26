@@ -12,6 +12,8 @@
 		{
 			"particle"					"particles/mokou/fujiyama_volcano_dash.vpcf"
 			"particle"					"particles/mokou/fujiyama_volcano_impact.vpcf"
+			"particle"					"particles/mokou/fujiyama_volcano_fissure.vpcf"
+			"particle"					"particles/mokou/fujiyama_volcano_fissure_glow.vpcf"
 		}
 
 		"AbilityCastPoint"				"0.1"
