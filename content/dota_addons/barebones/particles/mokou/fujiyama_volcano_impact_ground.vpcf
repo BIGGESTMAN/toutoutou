@@ -65,12 +65,13 @@
 	[
 		{
 			_class = "C_INIT_RandomRadius"
-			m_flRadiusMin = 20.000000
-			m_flRadiusMax = 36.000000
+			m_flRadiusMin = 35.000000
+			m_flRadiusMax = 60.000000
 		},
 		{
 			_class = "C_INIT_RemapInitialCPDirectionToRotation"
 			m_nFieldOutput = 12
+			m_bDisableOperator = true
 		},
 		{
 			_class = "C_INIT_PositionWarp"
@@ -113,6 +114,7 @@
 			_class = "C_INIT_RandomRotation"
 			m_nFieldOutput = 12
 			m_flDegreesMax = 10.000000
+			m_bDisableOperator = true
 		},
 		{
 			_class = "C_INIT_PositionOffset"
@@ -155,7 +157,7 @@
 		},
 		{
 			_class = "C_INIT_RandomRotation"
-			m_bDisableOperator = true
+			m_nFieldOutput = 12
 		},
 	]
 	m_Emitters =

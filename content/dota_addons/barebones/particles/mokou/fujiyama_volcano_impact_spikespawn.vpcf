@@ -40,7 +40,7 @@
 			_class = "C_OP_InterpolateRadius"
 			m_flBias = 0.750000
 			m_flEndScale = 0.000000
-			m_flStartScale = 4.000000
+			m_flStartScale = 8.000000
 		},
 		{
 			_class = "C_OP_RampScalarLinearSimple"
@@ -102,8 +102,8 @@
 		},
 		{
 			_class = "C_INIT_CreateWithinSphere"
-			m_fRadiusMin = 50.000000
-			m_fRadiusMax = 75.000000
+			m_fRadiusMin = 75.000000
+			m_fRadiusMax = 100.000000
 			m_vecDistanceBias =
 			[
 				1.000000,
@@ -149,6 +149,7 @@
 		{
 			_class = "C_OP_ContinuousEmitter"
 			m_flEmissionDuration = 0.100000
+			m_flEmitRate = 200.000000
 		},
 	]
 }

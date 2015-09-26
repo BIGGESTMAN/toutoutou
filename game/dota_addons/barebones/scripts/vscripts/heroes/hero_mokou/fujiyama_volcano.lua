@@ -54,6 +54,7 @@ function spellCast(keys)
 				local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
 				local iOrder = FIND_CLOSEST
 				local targets = FindUnitsInRadius(team, origin, nil, impact_radius, iTeam, iType, iFlag, iOrder, false)
+				DebugDrawCircle(origin, Vector(0,255,0), 1, fissure_radius, true, 0.2)
 				for k,unit in pairs(targets) do
 					ApplyDamage({victim = unit, attacker = caster, damage = impact_damage, damage_type = impact_damage_type})
 				end

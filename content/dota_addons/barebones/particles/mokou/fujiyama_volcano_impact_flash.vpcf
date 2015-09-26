@@ -55,8 +55,8 @@
 	[
 		{
 			_class = "C_INIT_RandomRadius"
-			m_flRadiusMin = 128.000000
-			m_flRadiusMax = 500.000000
+			m_flRadiusMin = 300.000000
+			m_flRadiusMax = 600.000000
 		},
 		{
 			_class = "C_INIT_RandomRotation"
@@ -92,7 +92,7 @@
 		{
 			_class = "C_INIT_RandomLifeTime"
 			m_fLifetimeMin = 0.150000
-			m_fLifetimeMax = 0.300000
+			m_fLifetimeMax = 0.225000
 		},
 		{
 			_class = "C_INIT_CreateWithinSphere"
