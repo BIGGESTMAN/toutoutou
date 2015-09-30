@@ -39,23 +39,27 @@ function spellCast(keys)
 			else
 				FindClearSpaceForUnit(caster, caster:GetAbsOrigin(), false)
 				caster:RemoveModifierByName("modifier_fujiyama_volcano")
+				local fissure_center = caster:GetAbsOrigin()
+
+				local fissure_dummy = CreateUnitByName("npc_dummy_unit", fissure_center, false, caster, caster, caster:GetTeamNumber())
+				ability:ApplyDataDrivenModifier(caster, fissure_dummy, "modifier_fujiyama_volcano_dummy", {})
 
 				ParticleManager:DestroyParticle(dash_particle, false)
-				local impact_particle = ParticleManager:CreateParticle("particles/mokou/fujiyama_volcano_impact.vpcf", PATTACH_ABSORIGIN, caster)
+				local impact_particle = ParticleManager:CreateParticle("particles/mokou/fujiyama_volcano_impact.vpcf", PATTACH_ABSORIGIN, fissure_dummy)
 				ParticleManager:SetParticleControl(impact_particle, 0, caster:GetAbsOrigin())
 
-				local fissure_particle = ParticleManager:CreateParticle("particles/mokou/fujiyama_volcano_fissure.vpcf", PATTACH_ABSORIGIN, caster)
+				local fissure_particle = ParticleManager:CreateParticle("particles/mokou/fujiyama_volcano_fissure.vpcf", PATTACH_ABSORIGIN, fissure_dummy)
 				ParticleManager:SetParticleControl(fissure_particle, 0, caster:GetAbsOrigin())
 
 				local impact_damage = caster:GetHealth() * health_percent_as_damage / 100
 				ApplyDamage({victim = caster, attacker = caster, damage = impact_damage, damage_type = impact_damage_type})
 
 				local team = caster:GetTeamNumber()
-				local origin = caster:GetAbsOrigin()
+				local origin = fissure_center
 				local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
 				local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL
 				local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
-				local iOrder = FIND_CLOSEST
+				local iOrder = FIND_ANY_ORDER
 				local targets = FindUnitsInRadius(team, origin, nil, impact_radius, iTeam, iType, iFlag, iOrder, false)
 				-- DebugDrawCircle(origin, Vector(0,255,0), 1, impact_radius, true, 0.2)
 				for k,unit in pairs(targets) do
@@ -63,7 +67,6 @@ function spellCast(keys)
 				end
 
 				-- Start fissure dot/slow effect
-				local fissure_center = caster:GetAbsOrigin()
 				local fissure_time_active = 0
 				local fissure_damage_ticks = 0
 
@@ -74,16 +77,10 @@ function spellCast(keys)
 						fissure_damage_ticks = fissure_damage_ticks + 1
 						-- DebugDrawCircle(origin, Vector(255,0,0), 1, fissure_radius, true, 0.2)
 
-						local fissure_damage_particle = ParticleManager:CreateParticle("particles/mokou/fujiyama_volcano_fissure_glow.vpcf", PATTACH_ABSORIGIN, caster)
+						local fissure_damage_particle = ParticleManager:CreateParticle("particles/mokou/fujiyama_volcano_fissure_glow.vpcf", PATTACH_ABSORIGIN, fissure_dummy)
 						ParticleManager:SetParticleControl(fissure_damage_particle, 0, fissure_center)
 					end
 
-					local team = caster:GetTeamNumber()
-					local origin = caster:GetAbsOrigin()
-					local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
-					local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL
-					local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
-					local iOrder = FIND_CLOSEST
 					local targets = FindUnitsInRadius(team, origin, nil, fissure_radius, iTeam, iType, iFlag, iOrder, false)
 					for k,unit in pairs(targets) do
 						ability:ApplyDataDrivenModifier(caster, unit, "modifier_fujiyama_volcano_slow", {})
@@ -95,7 +92,7 @@ function spellCast(keys)
 					if fissure_time_active < fissure_duration then
 						return update_interval
 					else
-						ParticleManager:DestroyParticle(fissure_particle, false)
+						fissure_dummy:RemoveSelf()
 					end
 				end)
 			end

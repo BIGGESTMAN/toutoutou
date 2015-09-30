@@ -63,7 +63,7 @@ function updateFlameParticles(keys)
 	local vertical_offset = 80
 	local rotation_time = 1
 	local angle_increment = (360 / rotation_time) * update_interval
-	local radius = 150
+	local radius = 75
 
 	local flame_stacks = getNumberOfModifierInstances(target, "modifier_reckless_sacrifice_flame")
 
