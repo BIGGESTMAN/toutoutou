@@ -47,11 +47,13 @@ function flameEnded(keys)
 
 	if not target:HasModifier("modifier_reckless_sacrifice_flame") then
 		target:RemoveModifierByName("modifier_reckless_sacrifice_tracker")
-		for k,dummy in pairs(target.reckless_flame_particle_dummies) do
-			destroyFlameDummy(dummy)
+		if target.reckless_flame_particle_dummies then
+			for k,dummy in pairs(target.reckless_flame_particle_dummies) do
+				destroyFlameDummy(dummy)
+			end
+			target.reckless_flame_particle_dummies = nil
+			target.reckless_flame_angle = nil
 		end
-		target.reckless_flame_particle_dummies = nil
-		target.reckless_flame_angle = nil
 	end
 end
 
