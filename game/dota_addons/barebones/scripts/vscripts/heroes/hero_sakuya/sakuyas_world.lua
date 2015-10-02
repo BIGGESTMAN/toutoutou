@@ -12,6 +12,7 @@ function spellCast(keys)
 	local speed = ability:GetSpecialValueFor("dagger_speed") * update_interval
 
 	local target_direction = (target_point - caster_location):Normalized()
+	if target_point == caster_location then target_direction = caster:GetForwardVector() end
 	local cast_range = ability:GetSpecialValueFor("range")
 	local distance = (target_point - caster_location):Length2D()
 	if distance > cast_range then
