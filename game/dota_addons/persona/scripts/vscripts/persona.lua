@@ -1,5 +1,6 @@
 require "libraries/damage_system"
 require "persona_exp"
+require "persona_drops"
 require "personas"
 
 print ('[PERSONA] persona.lua' )
@@ -48,7 +49,7 @@ CHEATY_STUFF = GetMapName() ~= "dota"
 
 MAX_ABILITY_LEVELS = false
 STARTING_ITEMS = CHEATY_STUFF
-FREEEEEEEE_MONEY = CHEATY_STUFF
+FREEEEEEEE_MONEY = false
 UNIVERSAL_SHOP_MODE = CHEATY_STUFF             -- Should the main shop contain Secret Shop items as well as regular items
 GOLD_PER_TICK = 99999                 		    -- How much gold should players get per tick?
 USE_CUSTOM_XP_VALUES = CHEATY_STUFF             -- Should we use custom XP values to level up heroes, or the default Dota numbers?
@@ -223,6 +224,7 @@ function GameMode:CaptureGameMode()
 
 		mode:SetModifyExperienceFilter(Dynamic_Wrap(PersonaExp, "ExperienceFilter"), self)
 		mode:SetDamageFilter(Dynamic_Wrap( DamageSystem, "DamageFilter" ), self)
+		mode:SetModifyGoldFilter(Dynamic_Wrap(PersonaDrops, "GoldFilter"), self)
 
 		self:OnFirstPlayerLoaded()
 	end

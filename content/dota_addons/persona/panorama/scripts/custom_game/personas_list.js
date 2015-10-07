@@ -1,4 +1,9 @@
 function update_persona_tooltip(data){
+	var wholeScreen = $('#PersonaAttributesContainer').GetParent()
+	var screenWidth = wholeScreen.actuallayoutwidth
+	var screenHeight = wholeScreen.actuallayoutheight
+	// $.Msg(screenWidth)
+
 	var hero = data.hero
 	var selectedUnit = null
 	var selectedControlledUnits = Players.GetSelectedEntities(data.playerid)
@@ -14,10 +19,11 @@ function update_persona_tooltip(data){
 	}
 
 	var cursorPosition = GameUI.GetCursorPosition()
-	// 1920 x 1200 hardcoded hacks, fuck yeah
-	var item1Location = [1400,1046]
-	var itemDimensions = [82,57]
-	var gapBetweenItems = [0,9]
+	// weird resolution hackiness? hm
+	var item1Location = [1400 / 1920 * screenWidth,1046 / 1200 * screenHeight]
+	var itemDimensions = [82 / 1920 * screenWidth,57 / 1200 * screenHeight]
+	var gapBetweenItems = [0 / 1920 * screenWidth,9 / 1200 * screenHeight]
+	// $.Msg(item1Location, itemDimensions, gapBetweenItems)
 
 	var mousedOverItem = null
 	for (var i = 0; i < 6; i++)

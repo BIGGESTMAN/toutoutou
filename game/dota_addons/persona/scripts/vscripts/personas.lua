@@ -4,7 +4,7 @@ require "libraries/damage_system"
 -- resists: physical, fire, ice, wind, thunder, light, dark
 -- resist values: 0 = normal, -1 = weak, 1 = resist, 2 = block, 3 = absorb
 
-MOVE_SPEED_MODIFIER = "modifier_persona_speed_bonus"
+-- MOVE_SPEED_MODIFIER = "modifier_persona_speed_bonus"
 
 BASE_EXP_REQUIRED = 300
 EXP_REQUIRED_INCREASE_PER_LEVEL = 100

@@ -147,7 +147,7 @@ function randomIndexOfTable(table, excluded_indices)
 
 	local indexes = {}
 	for k,v in pairs(table) do
-		if not tableContains(excluded_indices, k) then
+		if not tableContains(excluded, k) then
 			indexes[#indexes + 1] = k
 		end
 	end

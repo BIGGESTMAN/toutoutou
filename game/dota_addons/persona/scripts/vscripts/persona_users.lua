@@ -29,9 +29,9 @@ function Spawn(keys)
 	caster:CastAbilityImmediately(personaItem, caster:GetPlayerID())
 	personaItem:EndCooldown()
 
-	local personaItemAngelTest = CreateItem("item_angel", caster, caster)
-	caster:AddItem(personaItemAngelTest)
-	personaItemAngelTest = InitializePersona(personaItemAngelTest)
+	-- local personaItemAngelTest = CreateItem("item_angel", caster, caster)
+	-- caster:AddItem(personaItemAngelTest)
+	-- personaItemAngelTest = InitializePersona(personaItemAngelTest)
 
 	Setup_Persona_Tooltip(caster)
 end
