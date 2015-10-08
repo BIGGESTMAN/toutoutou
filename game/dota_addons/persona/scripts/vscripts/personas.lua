@@ -1,13 +1,12 @@
 require "libraries/damage_system"
 
--- str = damage, mag = intelligence, end = health/hregen, swft = movespeed, agi = range
+-- str = damage, mag = intelligence, end = health/hregen, swft = movespeed, dex = attackspeed, range = range
 -- resists: physical, fire, ice, wind, thunder, light, dark
 -- resist values: 0 = normal, -1 = weak, 1 = resist, 2 = block, 3 = absorb
 
 -- MOVE_SPEED_MODIFIER = "modifier_persona_speed_bonus"
 
-BASE_EXP_REQUIRED = 300
-EXP_REQUIRED_INCREASE_PER_LEVEL = 100
+FUSION_MAX_AVERAGE_LEVEL_DISTANCE = 10
 
 CHARIOT = 3
 JUSTICE = 4
@@ -28,61 +27,75 @@ function InitializePersonaData()
 		"dark",
 	}
 
-	personas_table = {
-		slime = {
-			name = "slime",
-			arcana = CHARIOT,
-			str = 3,
-			mag = 2,
-			endr = 3,
-			swft = 5,
-			agi = 0,
-			abilities = {"bash", "tarunda"},
-			level = 2,
-			resists = {1,-1,0,0,0,0,0},
+	personas_table = {}
+	personas_table["slime"] = {
+		name = "slime",
+		arcana = CHARIOT,
+		str = 3,
+		mag = 2,
+		endr = 3,
+		swft = 5,
+		dex = 3,
+		range = 128,
+		abilities = {"bash", "tarunda"},
+		level = 2,
+		learned_abilities = {},
+		resists = {1,-1,0,0,0,0,0},
+	}
+	-- personas_table["slime"]["attackProjectile"] = "wtf"
+	-- personas_table["slime"]["particle"] = ""
+	personas_table["slime"]["learned_abilities"][3] = "resist_physical"
 
-			attackProjectile = "",
-			particle = "",
-			learned_abilities = {},
-		},
-		angel = {
-			name = "angel",
-			arcana = JUSTICE,
-			str = 4,
-			mag = 5,
-			endr = 2,
-			swft = 7,
-			agi = 5,
-			abilities = {"garu", "regenerate_1"},
-			level = 4,
-			resists = {0,0,0,1,0,1,-1},
+	personas_table["angel"] = {
+		name = "angel",
+		arcana = JUSTICE,
+		str = 4,
+		mag = 5,
+		endr = 2,
+		swft = 7,
+		dex = 2,
+		range = 375,
+		abilities = {"garu", "regenerate_1"},
+		level = 4,
 
-			attackProjectile = "",
-			particle = "",
-			learned_abilities = {},
-		},
-		apsaras = {
-			name = "apsaras",
-			arcana = TEMPERANCE,
-			str = 3,
-			mag = 5,
-			endr = 3,
-			swft = 5,
-			agi = 5,
-			abilities = {"dia", "bufu", "rakunda"},
-			level = 4,
-			resists = {0,-1,0,0,0,0,0},
-
-			attackProjectile = "",
-			particle = "",
-			learned_abilities = {},
-		},
+		particle = "",
+		learned_abilities = {},
+		attackProjectile = "",
+		resists = {0,0,0,1,0,1,-1},
 	}
 
-	personas_table["slime"]["learned_abilities"][3] = "resist_physical"
-	-- for k,v in pairs(personas_table["slime"]) do
-	-- 	print(k,v)
-	-- end
+	personas_table["apsaras"] = {
+		name = "apsaras",
+		arcana = TEMPERANCE,
+		str = 3,
+		mag = 5,
+		endr = 3,
+		swft = 5,
+		dex = 3,
+		range = 375,
+		abilities = {"dia", "bufu", "rakunda"},
+		level = 4,
+
+		learned_abilities = {},
+		resists = {0,-1,0,0,0,0,0},
+	}
+
+	personas_table["centaur"] = {
+		name = "centaur",
+		arcana = CHARIOT,
+		str = 3,
+		mag = 2,
+		endr = 3,
+		swft = 5,
+		dex = 3,
+		range = 128,
+		abilities = {"cold_feet"},
+		level = 1,
+
+		learned_abilities = {},
+		resists = {0,0,2,0,-1,0,0},
+	}
+	personas_table["centaur"]["learned_abilities"][2] = "longshot"
 
 	ability_levels_table = {
 		tarunda = 1,
@@ -105,7 +118,8 @@ function InitializePersona(persona)
 		mag = personas_table[personaName]["mag"],
 		endr = personas_table[personaName]["endr"],
 		swft = personas_table[personaName]["swft"],
-		agi = personas_table[personaName]["agi"],
+		dex = personas_table[personaName]["dex"],
+		range = personas_table[personaName]["range"],
 		abilities = {},
 		level = personas_table[personaName]["level"],
 		resists = personas_table[personaName]["resists"],
@@ -138,8 +152,9 @@ function Activate(keys)
 	caster:SetBaseDamageMax(effectiveStr * 10)
 	caster:SetBaseIntellect(10 + effectiveMag * 3)
 	caster:FindModifierByName("modifier_persona_health_bonus").health_bonus = effectiveEndr * 60
-	caster:FindModifierByName("modifier_persona_range_bonus").range_bonus = item.attributes["agi"] * 50
+	caster:FindModifierByName("modifier_persona_range_bonus").range_bonus = item.attributes["range"] - 128
 	caster:FindModifierByName("modifier_persona_speed_bonus").speed_bonus = item.attributes["swft"] * 10
+	caster:FindModifierByName("modifier_persona_attackspeed_bonus").attackspeed_bonus = 20 + item.attributes["dex"] * 5
 	-- print(caster:FindModifierByName("modifier_persona_speed_bonus").speed_bonus)
 	-- caster:RemoveModifierByName("modifier_persona_speed_bonus")
 	if item.attributes["swft"] > 0 then -- This is insanely buggy in an insane way, fix this at some point

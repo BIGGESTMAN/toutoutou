@@ -19,7 +19,7 @@
 		"ItemAliases"					"double fusion"
 		
 		"ItemCost"						"0"
-		"ItemDroppable"					"1"
+		"ItemDroppable"					"0"
 		"ItemSellable"					"0"
 
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -54,7 +54,7 @@
 		"AbilityCastPoint"				"0.5"
 		"AbilityManaCost"				"0"
 		"ItemCost"						"400"
-		"ItemDroppable"					"1"
+		"ItemDroppable"					"0"
 		"ItemSellable"					"0"
 
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -96,7 +96,7 @@
 		"AbilityCastPoint"				"0.5"
 		"AbilityManaCost"				"0"
 		"ItemCost"						"600"
-		"ItemDroppable"					"1"
+		"ItemDroppable"					"0"
 		"ItemSellable"					"0"
 
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"
@@ -138,7 +138,7 @@
 		"AbilityCastPoint"				"0.5"
 		"AbilityManaCost"				"0"
 		"ItemCost"						"600"
-		"ItemDroppable"					"1"
+		"ItemDroppable"					"0"
 		"ItemSellable"					"0"
 
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_TEAMMATES | DECLARE_PURCHASES_IN_SPEECH | DECLARE_PURCHASES_TO_SPECTATORS"

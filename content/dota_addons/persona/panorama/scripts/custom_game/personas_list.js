@@ -68,8 +68,11 @@ function update_persona_tooltip(data){
 		var swiftnessText = $.FindChildInContext('#PersonaSwiftness', hero)
 		swiftnessText.text = "Swiftness:" + personaAttributes["swft"]
 
-		var agilityText = $.FindChildInContext('#PersonaAgility', hero)
-		agilityText.text = "Agility:" + personaAttributes["agi"]
+		var dexterityText = $.FindChildInContext('#PersonaDexterity', hero)
+		dexterityText.text = "Dexterity:" + personaAttributes["dex"]
+
+		var rangeText = $.FindChildInContext('#PersonaRange', hero)
+		rangeText.text = "Range:" + personaAttributes["range"]
 
 
 		// Update ability tooltips

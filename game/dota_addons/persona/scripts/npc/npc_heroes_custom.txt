@@ -54,7 +54,7 @@
 		"VisionNighttimeRange"		"800"									// Range of vision at night time.
 
 		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"				// Type of damage dealt. 
-		"AttackRate"				"1.7"									// Speed of attack.
+		"AttackRate"				"2"									// Speed of attack.
 		"AttackAnimationPoint"		"0.36"									// Normalized time in animation cycle to attack.
 		"AttackRange"				"128"									// Range within a target can be attacked.
 		"AttackAcquisitionRange"	"350"									// Range within a target can be acquired.

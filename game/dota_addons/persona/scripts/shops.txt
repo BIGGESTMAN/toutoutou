@@ -2,8 +2,6 @@
 {
     "consumables"
     {
-        "item"      "item_slime"
-        "item"      "item_angel"
         "item"      "item_double_fusion"
     }
 

@@ -9,10 +9,6 @@ if PersonaExp == nil then
 	print ( '[PersonaExp] creating PersonaExp' )
 	PersonaExp = {}
 	PersonaExp.__index = PersonaExp
-
-	-- --this here is a dummy to check if the damage has already been parsed by our filter, it does nothing
-	-- DamageSystem.handle = CreateItem('item_dummy_item', nil, nil):GetEntityIndex() 
-	-- print('[DamageSystem] Dummy ability handle: ', DamageSystem.handle)
 end
 
 function PersonaExp:ExperienceFilter(event)

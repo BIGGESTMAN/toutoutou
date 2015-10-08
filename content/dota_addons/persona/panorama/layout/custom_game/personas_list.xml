@@ -20,7 +20,10 @@
         <Label hittest="false"  class="PersonaAttribute" id="PersonaSwiftness"/>
       </Panel>
       <Panel hittest="false" class="PersonaAttributeBox">
-        <Label hittest="false"  class="PersonaAttribute" id="PersonaAgility"/>
+        <Label hittest="false"  class="PersonaAttribute" id="PersonaDexterity"/>
+      </Panel>
+      <Panel hittest="false" class="PersonaAttributeBox">
+        <Label hittest="false"  class="PersonaAttribute" id="PersonaRange"/>
       </Panel>
     </Panel>
     <Panel hittest="false"  id="PersonaSpellsContainer">
