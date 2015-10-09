@@ -66,6 +66,7 @@ function LevelUpPersona(hero, personaItem)
 	local strIncrease = math.floor(personaAttributes["str"]) - oldStr
 	local endrIncrease = math.floor(personaAttributes["endr"]) - oldEndr
 	local magIncrease = math.floor(personaAttributes["mag"]) - oldMag
+	-- GameRules:SendCustomMessage(personaItem.attributes["name"].." leveled up! +"..strIncrease.." STR, +"..endrIncrease.." ENDR, +"..magIncrease.." MAG", hero:GetTeamNumber(), hero:GetPlayerID())
 	if strIncrease == 0 then strIncrease = 10 end
 	if endrIncrease == 0 then endrIncrease = 10 end
 	if magIncrease == 0 then magIncrease = 10 end

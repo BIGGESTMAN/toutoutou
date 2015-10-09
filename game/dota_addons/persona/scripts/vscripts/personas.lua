@@ -6,7 +6,7 @@ require "libraries/damage_system"
 
 -- MOVE_SPEED_MODIFIER = "modifier_persona_speed_bonus"
 
-FUSION_MAX_AVERAGE_LEVEL_DISTANCE = 10
+FUSION_AVERAGE_LEVEL_OFFSET = 1
 
 CHARIOT = 3
 JUSTICE = 4
@@ -37,7 +37,7 @@ function InitializePersonaData()
 		swft = 5,
 		dex = 3,
 		range = 128,
-		abilities = {"bash", "tarunda", "grooved_spines"},
+		abilities = {"bash", "tarunda", "first_aid"},
 		level = 2,
 		learned_abilities = {},
 		resists = {1,-1,0,0,0,0,0},
@@ -144,6 +144,8 @@ function Activate(keys)
 	local caster = keys.caster
 	local item = keys.ability
 
+	-- GameRules:SendCustomMessage("Activating Persona: "..item.attributes["name"], caster:GetTeamNumber(), caster:GetPlayerID())
+
 	-- Update hero stats
 	local effectiveStr = math.floor(item.attributes["str"])
 	local effectiveMag = math.floor(item.attributes["mag"])
@@ -199,7 +201,7 @@ function SetPassiveModifier(keys)
 end
 
 function AbilitySetResistance(keys)
-	print("SETTING RESISTANCE", keys.damageType, keys.resistanceLevel)
+	-- print("SETTING RESISTANCE", keys.damageType, keys.resistanceLevel)
 	local caster = keys.caster
 	local damageType = keys.damageType
 	local resistType = keys.resistanceLevel
@@ -221,7 +223,7 @@ end
 
 function PersonaResult(caster, casterArcana, persona1, persona2)
 	local newPersonaArcana = GetResultingArcana(persona1, persona2)
-	local averageLevel = persona1.attributes["level"] + persona2.attributes["level"] / 2
+	local averageLevel = (persona1.attributes["level"] + persona2.attributes["level"]) / 2 + FUSION_AVERAGE_LEVEL_OFFSET
 
 	local possiblePersonas = {}
 	for personaName,persona in pairs(personas_table) do

@@ -364,6 +364,112 @@
 			}
 		}
 	}
+	"first_aid"
+	{
+		"BaseClass"						"ability_datadriven"
+		
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"MaxLevel"						"1"
+
+		"AbilityTextureName"			"dia"
+
+		"precache"
+		{
+			
+		}
+
+		"AbilityCastPoint"				"0.3"
+		"AbilityCooldown"				"10"
+		"AbilityManaCost"				"90"
+		"AbilityCastRange"				"600"
+
+		"AbilitySpecial"
+		{
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"heal"					"120"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_heal"			"80"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"heal_magic_multiplier"	"3"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_heal_magic_multiplier"	"2"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"emergency_heal_window"	"3"
+			}
+		}
+
+		"OnCreated"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"personas.lua"
+				"Function"		"SetPassiveModifier"
+				"modifier"		"modifier_first_aid_passive"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"abilities/spells/magic_first_aid"
+				"Function"		"SpellCast"
+			}
+		}
+
+		"Modifiers"
+		{
+	    	"modifier_first_aid_passive"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT"
+
+	    		"Aura"          	"modifier_first_aid_aura"
+	    		"Aura_Radius"   	"20100"
+	    		"Aura_Teams"    	"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+	    		"Aura_Types"    	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+	    		"Aura_Flags"    	"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+	    	}
+
+	    	"modifier_first_aid_aura"
+	    	{
+				"IsHidden"		"1"
+				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT"
+
+				"OnTakeDamage"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_first_aid_damage_taken"
+						"Target" 		"UNIT"
+					}
+				}
+	    	}
+
+	    	"modifier_first_aid_damage_taken"
+	    	{
+	    		"IsHidden"	"1"
+	    		"Duration"	"%emergency_heal_window"
+	    	}
+		}
+	}
 	"garu"
 	{
 		"BaseClass"						"ability_datadriven"

@@ -30,7 +30,7 @@ function PersonaDrops:GoldFilter(event)
 end
 
 function DropPersona(hero)
-	print("Dropping new persona")
+	-- print("Dropping new persona")
 	local highestCurrentLevel = 0
 	for i=0,5 do
 		local persona = hero:GetItemInSlot(i)
@@ -50,4 +50,6 @@ function DropPersona(hero)
 	local personaItem = CreateItem("item_"..personaType["name"], hero, hero)
 	hero:AddItem(personaItem)
 	personaItem = InitializePersona(personaItem)
+
+	GameRules:SendCustomMessage("New Persona: "..personaType["name"], hero:GetTeamNumber(), hero:GetPlayerID())
 end
