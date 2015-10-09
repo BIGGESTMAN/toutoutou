@@ -1,0 +1,54 @@
+	"grooved_spines"
+	{
+		"BaseClass"						"ability_datadriven"
+		
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"MaxLevel"						"1"
+
+		"AbilityTextureName"			"bristleback_quill_spray"
+
+		"precache"
+		{
+
+		}
+
+		"AbilityCastPoint"				"0.3"
+		"AbilityCooldown"				"10"
+		"AbilityManaCost"				"0"
+		"AbilityCastRange"				"650"
+
+		"AbilitySpecial"
+		{
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_percent"		"180"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"aoe_damage_percent"	"80"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"health_cost_percent"	"6"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"300"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"abilities/spells/physattack_grooved_spines.lua"
+				"Function"		"SpellCast"
+			}
+		}
+	}
