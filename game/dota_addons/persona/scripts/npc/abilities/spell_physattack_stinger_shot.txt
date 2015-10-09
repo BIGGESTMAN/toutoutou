@@ -1,23 +1,23 @@
-	"longshot"
+	"stinger_shot"
 	{
 		"BaseClass"						"ability_datadriven"
 		
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"MaxLevel"						"1"
 
-		"AbilityTextureName"			"drow_ranger_marksmanship"
+		"AbilityTextureName"			"clinkz_strafe"
 
 		"precache"
 		{
-			"particle"					"particles/spells/physattack_longshot.vpcf"
+
 		}
 
 		"AbilityCastPoint"				"0.5"
 		"AbilityCooldown"				"8"
 		"AbilityManaCost"				"0"
-		"AbilityCastRange"				"0"
+		"AbilityCastRange"				"700"
 
 		"AbilitySpecial"
 		{
@@ -54,7 +54,7 @@
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"health_cost_percent"	"6"
+				"health_cost_percent"	"8"
 			}
 			"02"
 			{

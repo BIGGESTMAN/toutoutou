@@ -118,18 +118,23 @@
 		{
 			m_bEndCap = true
 			m_ChildRef = resource:"particles/econ/items/mirana/mirana_crescent_arrow/mirana_spell_crescent_arrow_destruction.vpcf"
+			m_bDisableChild = true
 		},
 		{
 			m_ChildRef = resource:"particles/econ/items/mirana/mirana_crescent_arrow/mirana_spell_crescent_arrow_glow.vpcf"
+			m_bDisableChild = true
 		},
 		{
 			m_ChildRef = resource:"particles/econ/items/mirana/mirana_crescent_arrow/mirana_spell_crescent_arrow_glow_tip.vpcf"
+			m_bDisableChild = true
 		},
 		{
 			m_ChildRef = resource:"particles/econ/items/mirana/mirana_crescent_arrow/mirana_spell_crescent_arrow_glow_glow_soft.vpcf"
+			m_bDisableChild = true
 		},
 		{
 			m_ChildRef = resource:"particles/econ/items/mirana/mirana_crescent_arrow/mirana_spell_crescent_arrow_glow_core.vpcf"
+			m_bDisableChild = true
 		},
 	]
 }

@@ -37,7 +37,7 @@ function InitializePersonaData()
 		swft = 5,
 		dex = 3,
 		range = 128,
-		abilities = {"bash", "tarunda", "longshot"},
+		abilities = {"bash", "tarunda", "hammer_blow"},
 		level = 2,
 		learned_abilities = {},
 		resists = {1,-1,0,0,0,0,0},
