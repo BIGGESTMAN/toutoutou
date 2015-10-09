@@ -7,6 +7,7 @@
 	[
 		{
 			m_ChildRef = resource:"particles/items_fx/abyssal_blade_impact_warp.vpcf"
+			m_bDisableChild = true
 		},
 		{
 			m_ChildRef = resource:"particles/items_fx/abyssal_blade_impact02.vpcf"

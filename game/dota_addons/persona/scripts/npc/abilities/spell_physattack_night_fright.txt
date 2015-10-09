@@ -1,0 +1,86 @@
+	"night_fright"
+	{
+		"BaseClass"						"ability_datadriven"
+		
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"MaxLevel"						"1"
+
+		"AbilityTextureName"			"physattack_night_fright"
+
+		"precache"
+		{
+			"particle"					"particles/generic_gameplay/generic_sleep.vpcf"
+		}
+
+		"AbilityCastPoint"				"0.3"
+		"AbilityCooldown"				"8"
+		"AbilityManaCost"				"0"
+		"AbilityCastRange"				"400"
+
+		"AbilitySpecial"
+		{
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_percent"		"200"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"sleep_duration"		"3"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"min_sleep_duration"	"0.5"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"health_cost_percent"	"8"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"abilities/spells/physattack_night_fright.lua"
+				"Function"		"SpellCast"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_night_fright_sleep"
+	    	{
+	    		"Duration"		"%sleep_duration"
+	    		"IsDebuff"		"1"
+	    		"IsPurgable"	"1"
+	    		"IsStunDebuff"	"1"
+
+	    		"States"
+				{
+					"MODIFIER_STATE_STUNNED"				"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_LOW_ATTACK_PRIORITY"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
+
+				"OnAttacked"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"abilities/spells/physattack_night_fright.lua"
+						"Function"		"OnAttacked"
+					}
+				}
+
+				"OverrideAnimation"		"ACT_DOTA_DISABLED"
+
+				"EffectName"			"particles/generic_gameplay/generic_sleep.vpcf"
+				"EffectAttachType"		"follow_overhead"
+
+	    	}
+		}
+	}
