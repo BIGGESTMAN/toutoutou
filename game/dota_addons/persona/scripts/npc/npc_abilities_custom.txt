@@ -516,6 +516,50 @@
 			}
 		}
 	}
+	"playful_ally"
+	{
+		"BaseClass"						"ability_datadriven"
+		
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"MaxLevel"						"1"
+
+		"AbilityTextureName"			"morphling_hybrid"
+
+		"precache"
+		{
+			"particle"					"particles/units/heroes/hero_puck/puck_phase_shift_c.vpcf"
+		}
+
+		"AbilityCastPoint"				"0.1"
+		"AbilityCooldown"				"14"
+		"AbilityManaCost"				"70"
+		"AbilityCastRange"				"700"
+
+		"AbilitySpecial"
+		{
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"heal"					"80"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"heal_magic_multiplier"	"4"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"abilities/spells/magic_playful_ally"
+				"Function"		"SpellCast"
+			}
+		}
+	}
 	"spiral_force"
 	{
 		"BaseClass"						"ability_datadriven"
@@ -551,7 +595,7 @@
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"range"					"800"
+				"range"					"800" // Note: Doesn't actually do anything
 			}
 			"02"
 			{

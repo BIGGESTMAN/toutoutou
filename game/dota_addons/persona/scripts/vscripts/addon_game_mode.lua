@@ -25,6 +25,7 @@ function Precache( context )
 	PrecacheResource("particle", "particles/econ/generic/generic_aoe_explosion_sphere_1/generic_aoe_explosion_sphere_1.vpcf", context)
 	PrecacheResource("particle_folder", "particles/test_particle", context)
 	PrecacheResource("particle_folder", "particles/general", context)
+	PrecacheResource("particle_folder", "particles/spells", context)
 
 	-- Models can also be precached by folder or individually
 	-- PrecacheModel should generally used over PrecacheResource for individual models
