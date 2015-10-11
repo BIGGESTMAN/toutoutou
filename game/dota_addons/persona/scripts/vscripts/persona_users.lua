@@ -11,15 +11,7 @@ function Spawn(keys)
 	local ability = keys.ability
 	local arcana = keys.arcana
 	caster.arcana = arcana
-
-	-- local startingPersona = nil
-	-- for personaName,persona in pairs(personas_table) do
-	-- 	if persona["arcana"] == arcana then
-	-- 		startingPersona = personaName
-	-- 		break
-	-- 	end
-	-- end
-	local startingPersona = "slime"
+	local startingPersona = keys.persona
 
 	local personaItem = CreateItem("item_"..startingPersona, caster, caster)
 	caster:AddItem(personaItem)

@@ -8,6 +8,7 @@ require "libraries/damage_system"
 
 FUSION_AVERAGE_LEVEL_OFFSET = 1
 
+MAGICIAN = 2
 CHARIOT = 3
 JUSTICE = 4
 TEMPERANCE = 5
@@ -37,7 +38,7 @@ function InitializePersonaData()
 		swft = 5,
 		dex = 3,
 		range = 128,
-		abilities = {"bash", "mischief", "playful_ally"},
+		abilities = {"bash", "tarunda"},
 		level = 2,
 		learned_abilities = {},
 		resists = {1,-1,0,0,0,0,0},
@@ -96,6 +97,24 @@ function InitializePersonaData()
 		resists = {0,0,2,0,-1,0,0},
 	}
 	personas_table["centaur"]["learned_abilities"][2] = "longshot"
+
+	personas_table["pixie"] = {
+		name = "pixie",
+		arcana = MAGICIAN,
+		str = 2,
+		mag = 3,
+		endr = 2,
+		swft = 6,
+		dex = 4,
+		range = 300,
+		abilities = {"playful_ally"},
+		level = 2,
+
+		learned_abilities = {},
+		resists = {0,-1,0,1,0,0,0},
+	}
+	personas_table["pixie"]["learned_abilities"][3] = "vital_jolt"
+	personas_table["pixie"]["learned_abilities"][5] = "mischief"
 
 	ability_levels_table = {
 		tarunda = 1,

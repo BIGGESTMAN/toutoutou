@@ -1,11 +1,11 @@
-	"persona_user_chie"
+	"persona_user_yosuke"
 	{
 		"BaseClass"						"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 
 		"Modifiers"
 		{
-			"modifier_persona_user_chie"
+			"modifier_persona_user_yosuke"
 			{
 				"Passive"	"1"
 				"IsHidden"	"1"
@@ -16,8 +16,8 @@
 					{
 						"ScriptFile"	"persona_users.lua"
 						"Function"		"Spawn"
-						"arcana"		"3"
-						"persona"		"slime"
+						"arcana"		"2"
+						"persona"		"pixie"
 					}
 				}
 			}

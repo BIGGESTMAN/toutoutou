@@ -311,6 +311,7 @@ function GameMode:OnHeroInGame(hero)
 
 	local persona_user_abilities = {
 		"persona_user_chie",
+		"persona_user_yosuke",
 	}
 
 	for k,ability in pairs(persona_user_abilities) do

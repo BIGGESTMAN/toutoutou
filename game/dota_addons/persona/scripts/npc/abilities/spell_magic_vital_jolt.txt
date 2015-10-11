@@ -1,0 +1,59 @@
+	"vital_jolt"
+	{
+		"BaseClass"						"ability_datadriven"
+		
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"MaxLevel"						"1"
+
+		"AbilityTextureName"			"zuus_lightning_bolt_immortal"
+
+		"precache"
+		{
+
+		}
+
+		"AbilityCastPoint"				"0.2"
+		"AbilityCooldown"				"6"
+		"AbilityManaCost"				"70"
+		"AbilityCastRange"				"700"
+
+		"AbilitySpecial"
+		{
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"100"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_magic_multiplier"	"2"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_damage_hp_percent"	"80"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_damage"				"50"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_damage_magic_multiplier"	"1"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"abilities/spells/magic_vital_jolt.lua"
+				"Function"		"SpellCast"
+			}
+		}
+	}
