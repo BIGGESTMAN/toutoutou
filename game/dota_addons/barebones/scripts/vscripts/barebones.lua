@@ -317,6 +317,23 @@ function GameMode:OnHeroInGame(hero)
 	if hero:HasAbility("vajrapanis_incantation_channel") then
 		hero:FindAbilityByName("vajrapanis_incantation_channel"):SetLevel(1)
 	end
+
+	-- Check for aghanim's (lol.)
+	if not hero:IsIllusion() then
+		Timers:CreateTimer(0, function()
+			for i=0,5 do
+				local item = hero:GetItemInSlot(i)
+				if item and item:GetName() == "item_ultimate_scepter" then
+					if hero:GetName() == "npc_dota_hero_skywrath_mage" then
+						hero:FindAbilityByName("peerless_wind_god"):ApplyDataDrivenModifier(hero, hero, "modifier_peerless_wind_god_learned", {})
+					elseif hero:GetName() == "npc_dota_hero_rubick" then
+						hero:FindAbilityByName("double_spark"):ApplyDataDrivenModifier(hero, hero, "modifier_double_spark_learned", {})
+					end
+				end
+			end
+			return 0.03
+		end)
+	end
 end
 
 --[[

@@ -52,12 +52,18 @@ function Activate()
 	GameRules.GameMode = GameMode()
 	GameRules.GameMode:InitGameMode()
 
-	ListenToGameEvent("dota_item_purchased", updateAghsAbilities, nil)
-	ListenToGameEvent("dota_item_picked_up", updateAghsAbilities, nil)
+	-- ListenToGameEvent("dota_item_purchase", updateAghsAbilities, nil)
+	-- ListenToGameEvent("dota_item_picked_up", updateAghsAbilities, nil)
+	-- ListenToGameEvent("dota_inventory_player_got_item", test, nil)
+	-- ListenToGameEvent("dota_inventory_item_added", test, nil)
+	-- ListenToGameEvent("dota_inventory_item_changed", test, nil)
 end
 
 function updateAghsAbilities(eventInfo)
 	print("item purchased or picked up")
+	for k,v in pairs(eventInfo) do
+		print(k,v)
+	end
 	if eventInfo.itemname == "item_ultimate_scepter" then
 		local hero = EntIndexToHScript(eventInfo.HeroEntityIndex)
 		if hero:GetName() == "npc_dota_hero_skywrath_mage" then
@@ -65,5 +71,12 @@ function updateAghsAbilities(eventInfo)
 		elseif hero:GetName() == "npc_dota_hero_rubick" then
 			hero:FindAbilityByName("double_spark"):ApplyDataDrivenModifier(hero, hero, "modifier_double_spark_learned", {})
 		end
+	end
+end
+
+function test(eventInfo)
+	print("dota_inventory_item_added")
+	for k,v in pairs(eventInfo) do
+		print(k,v)
 	end
 end

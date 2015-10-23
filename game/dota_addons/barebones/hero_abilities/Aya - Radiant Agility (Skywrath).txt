@@ -1,0 +1,94 @@
+Aya - Agility
+ 
+Base Stats
+ 
+STR : 21 (+2.3)
+AGI : 22 (+2.5)
+INT : 15 (+2)
+Damage : 32-39
+Armor : -1
+Attacks / Second : 0.58
+Movement Speed : 335
+Turn Rate : 0.65
+Sight Range : 1800/800
+Attack Range : Melee
+Missile Speed : Instant
+Attack Duration : 0.33/0.64
+Base Attack Time : 1.7
+ 
+Lv. 25
+ 
+STR : 96
+AGI : 102
+INT : 83
+HP : 1974
+Mana : 1079
+Damage : 134-141
+Armor : 13.28
+ 
+[Q] Candid Shot (candid_shot) : Takes a photo of an area, dealing magical damage and briefly stunning all enemies hit. Enemy line projectiles in the area are destroyed. The further the shot, the smaller the radius.
+ 
+Cast Point : 0.1
+Magical Damage (damage) : 100/170/240/310
+Stun Duration (stun_duration) : 0.3
+Range : 900
+Maximum Shot Size : 600 x 400
+Minimum Shot Size : 300 x 200
+Mana : 75/80/85/90
+Cooldown : 9/8/7/6
+Lore (lore) : A gift from the Kappas, the Tengu Reporter's camera may be old-fashioned, but has some unique properties.
+Note0 (note0) : The shot size is a 600 x 400 rectangle at melee range, decreasing to a minimum of 300 x 200 at maximum range.
+ 
+[W] Tengu’s Macroburst (macroburst) : After moving a certain distance, Aya can fire a gust of wind at random unit in range, dealing magical damage. Does half damage to creeps.
+Spell Immunity - Does not damage or target units with spell immunity.
+
+Magical Damage : 110/170/230/290
+Distance to Ready (distance_to_ready) : 1050/950/850/750
+Travel Speed (speed) : 1800
+Search Radius (range) : 550
+Lore (lore) : The winds that bring news from distant lands can be honed to deliver sensational violence.
+Note0 (note0) : The gusts will target enemies in the fog of war, but not invisible units if there is no true sight available.
+ 
+[E] Wind God’s Fan (wind_gods_fan) : Aya moves with increased speed, and her damage increases based on distance moved before attacking, reset on each attack.
+ 
+Minimum Bonus Attack Damage (minimum_damage) : 10
+Maximum Bonus Attack Damage (maximum_damage) : 60/130/200/270
+Maximum Damage Distance (max_damage_distance) : 1500
+Move Speed Bonus (movespeed) : 8/12/16/20%
+Lore (lore) : After leveling his home and the ancient sequoia, the North Wind tore off the traveler's cloak.
+Note0 (note0) : The minimum bonus damage is 10.
+ 
+[R] Opening Wind of the Tengu Realm (opening_wind) : Aya launches a gust of wind that deals magical damage. If it damages an enemy, Aya gains Illusionary Dominance for a short duration.
+Scepter - Decreases cooldown. Aya gains Peerless Wind God, which can be cast within 1 second of each Illusionary Dominance to dash to her original position while attacking all enemies she passes. It benefits from Illusionary Dominance’s travel speed increase and costs no mana.
+ 
+Cast Point : 0.1
+Magical Damage (damage) : 100/150/200
+Illusionary Dominance Duration (duration) : 11/14/17
+Cast Range (range) : 1500
+Gust Travel Speed (speed) : 1500
+Gust Radius (radius) : 225
+Mana : 190
+Cooldown : 80/70/60
+Lore (lore) : With a stretch of her wings, Aya is ready to prove that she's the fastest thing alive in Gensokyo.
+Note0 (note0) : Pierces spell immunity.
+ 
+[D] Illusionary Dominance (illusionary_dominance) : Aya dashes a fixed distance in target direction, attacking all enemies she passes. Whenever she deals physical damage to enemy heroes, the travel speed of this ability increases while the cooldown decreases.
+ 
+Cooldown Reduction per Physical Damage Instance (cooldown_reduction) : 0.5
+Minimum Cooldown : 0.25
+Travel Speed Increase per Physical Damage Instance (speed_increase) : 300
+Travel Speed (speed) : 2500
+Max Travel Speed : 4000
+Cast Range (range) : 700/850/1000
+Radius (radius) : 225
+Mana : 40
+Cooldown : 3/2.5/2
+Lore (lore) : Unparalleled speed.
+Note0 (note0) : The maximum travel speed is 4000.
+Note1 (note1) : The minimum cooldown is 0.25 seconds.
+ 
+[F] Peerless Wind God (peerless_wind_god) : Can be cast within 1 second of each Illusionary Dominance. Aya dashes back to her original position, attacking all enemies she passes.
+ 
+Radius : 225
+Lore (lore) : Flawless technique.
+Note0 (note0) : The travel speed is always identical to that of Illusionary Dominance.

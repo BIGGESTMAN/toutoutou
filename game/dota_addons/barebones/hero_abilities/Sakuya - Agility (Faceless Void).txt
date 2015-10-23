@@ -67,13 +67,13 @@ Radius per Knife (radius) : 100
 Mana : 70
 Cooldown : 16/13/10/7
 
-[R] Lunar Dial (lunar_dial) : Time stops for all but Sakuya. Other units and buildings are completely disabled and invulnerable. She can still target them with attacks and Checkmaid, but projectiles from her attacks and abilities are frozen on formation. Projectiles in flight are frozen as well when Lunar Dial is activated. When the duration ends, all enemy heroes take some magical damage.
+[R] Lunar Dial (lunar_dial) : Time stops for all but Sakuya. Other units and buildings are completely disabled and invulnerable, although she can still target them with Checkmaid. Line projectiles in flight are frozen, and projectiles from her abilities are frozen on formation. When the duration ends, all enemy heroes take magical damage.
 Scepter - Increases duration. Resets the cooldown of all other abilities on cast and duration's end.
 Spell Immunity - Cast pierces Spell Immunity. Magical damage is blocked.
 DevNotes - Everything is frozen for other units. All ability/item cooldowns, projectiles, channels, cast/attack animations, buff/debuff/area of effect durations and their damage, damage from DoTs. Exception is the Checkmaid disable. DoTs on Sakuya still damage and can kill her, which ends the duration and deals the magical damage. 
 
 Cast Point : 0.3
-Duration : 4/5/6 {Scepter : 5/6/7}
-Magical Damage : 100
+Duration (duration) : 4/5/6 {Scepter : 5/6/7}
+Magical Damage (damage) : 100
 Mana : 175/250/325
 Cooldown : 160/140/120
