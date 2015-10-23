@@ -3,7 +3,11 @@ function spellCast(keys)
 	local target = keys.target
 	local ability = keys.ability
 
+	ability:ApplyDataDrivenModifier(caster, target, "modifier_possessed_by_phoenix_active_buff", {})
 	ability:ApplyDataDrivenModifier(caster, target, "modifier_possessed_by_phoenix_active_effect", {})
+	if not ability.active_targets then ability.active_targets = {} end
+	ability.active_targets = {}
+	ability.active_targets[target] = true
 
 	local health_cost = caster:GetHealth() * ability:GetSpecialValueFor("health_cost_percent") / 100
 	ApplyDamage({victim = caster, attacker = caster, damage = health_cost, damage_type = DAMAGE_TYPE_PURE})
@@ -16,6 +20,11 @@ function passiveSpellCast(keys)
 
 	if not triggering_ability:IsItem() then
 		ability:ApplyDataDrivenModifier(caster, caster, "modifier_possessed_by_phoenix_passive_effect", {})
+		if ability.active_targets then
+			for unit,v in pairs(ability.active_targets) do
+				ability:ApplyDataDrivenModifier(caster, unit, "modifier_possessed_by_phoenix_active_effect", {})
+			end
+		end
 	end
 end
 
@@ -53,4 +62,11 @@ function damagePulse(keys)
 
 	local particle = ParticleManager:CreateParticle("particles/mokou/possessed_by_phoenix.vpcf", PATTACH_ABSORIGIN, target)
 	-- ParticleManager:SetParticleControl(particle, 0, origin)
+end
+
+function activeBuffExpired(keys)
+	local ability = keys.ability
+	local target = keys.target
+	ability.active_targets[target] = nil
+	target:RemoveModifierByName("modifier_possessed_by_phoenix_active_effect")
 end

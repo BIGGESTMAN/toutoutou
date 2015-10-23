@@ -5,7 +5,7 @@
 
 		"MaxLevel"						"1"
 
-		"AbilityTextureName"			"mokou_resurrection"
+		"AbilityTextureName"			"phoenix_fire_spirits"
 
 		"precache"
 		{

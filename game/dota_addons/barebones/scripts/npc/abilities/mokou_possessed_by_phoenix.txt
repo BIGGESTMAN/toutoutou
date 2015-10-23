@@ -7,7 +7,7 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 
-		"AbilityTextureName"			"ogre_magi_ignite"
+		"AbilityTextureName"			"mokou_possessed_by_phoenix"
 
 		"precache"
 		{
@@ -112,7 +112,7 @@
 
 	    	"modifier_possessed_by_phoenix_active_effect"
 			{
-				"Duration"		"%active_duration"
+				"Duration"		"%passive_duration"
 
 				"ThinkInterval"  "%damage_interval"
 
@@ -126,6 +126,22 @@
 				}
 
 				"Attributes"		"MODIFIER_ATTRIBUTE_PERMANENT"
+			}
+
+	    	"modifier_possessed_by_phoenix_active_buff"
+			{
+				"Duration"			"%active_duration"
+
+				"Attributes"		"MODIFIER_ATTRIBUTE_PERMANENT"
+
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_mokou/possessed_by_phoenix.lua"
+						"Function"		"activeBuffExpired"
+					}
+				}
 			}
 	    }
 	}

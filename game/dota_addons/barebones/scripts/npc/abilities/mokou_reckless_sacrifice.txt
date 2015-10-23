@@ -5,7 +5,7 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 
-		"AbilityTextureName"			"invoker_exort"
+		"AbilityTextureName"			"ember_spirit_searing_chains"
 
 		"precache"
 		{

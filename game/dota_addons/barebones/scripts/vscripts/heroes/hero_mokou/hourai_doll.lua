@@ -10,7 +10,7 @@ function damageTaken(keys)
 	local ability = keys.ability
 
 	local health = caster:GetHealth()
-	if not ability.killer and health == 0 then
+	if not ability.killer and health == 0 and caster:HasScepter() then
 		caster:SetHealth(1)
 		ability:ApplyDataDrivenModifier(caster, caster, "modifier_hourai_doll_castable", {})
 		caster:AddNoDraw()
