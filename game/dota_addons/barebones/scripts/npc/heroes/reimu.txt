@@ -60,4 +60,5 @@
 		"AttackRange"				"128"									// Range within a target can be attacked.
 		"ProjectileModel"			"particles/reimu/yin_yang_scattering.vpcf"							// Particle system model for projectile.
 		"ProjectileSpeed"			"1000"									// Speed of projectile.
+		//"Model"						"models/reimu/reimu_reference.vmdl"						// Model.
 	}

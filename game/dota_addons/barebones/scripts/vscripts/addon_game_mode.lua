@@ -30,6 +30,7 @@ function Precache( context )
 	PrecacheResource("model_folder", "particles/heroes/antimage", context)
 	PrecacheResource("model", "particles/heroes/viper/viper.vmdl", context)
 	PrecacheModel("models/heroes/viper/viper.vmdl", context)
+	PrecacheModel("models/reimu/reimu_reference.vmdl", context)
 
 	-- Sounds can precached here like anything else
 	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_gyrocopter.vsndevts", context)

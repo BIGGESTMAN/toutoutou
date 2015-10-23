@@ -19,3 +19,4 @@
 		"npc_dota_hero_juggernaut"			"Youmu"
 		"npc_dota_hero_faceless_void"		"Sakuya"
 		"npc_dota_hero_phoenix"				"Mokou"
+		"npc_dota_hero_disruptor"			"Raiko"

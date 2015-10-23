@@ -6,6 +6,9 @@ function fantasySealCast( keys )
 	local ability_level = ability:GetLevel() - 1
 	local target = keys.target
 
+	-- target:SetOriginalModel("models/reimu/reimu_reference.vmdl")
+	-- target:SetModel("models/reimu/reimu_reference.vmdl")
+
 	local primary_target_shots = ability:GetLevelSpecialValueFor("primary_target_shots", ability_level)
 	local secondary_target_shots = ability:GetLevelSpecialValueFor("secondary_target_shots", ability_level)
 

@@ -24,6 +24,7 @@ game/dota_lv/*
 game/dota_lv_imported/*
 game/dota_schinese/*
 game/dota_schinese_imported/*
+game/dota_russian/*
 game/thirdpartylegalnotices.txt
 
 game/dota_addons/addon_template/*

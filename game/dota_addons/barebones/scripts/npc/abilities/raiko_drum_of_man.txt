@@ -1,0 +1,88 @@
+	"drum_of_man"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"MaxLevel"						"5"
+
+		"AbilityTextureName"			"lone_druid_spirit_bear_return"
+
+		"precache"
+		{
+
+		}
+
+		"AbilityCastPoint"				"0.2"
+		"AbilityCooldown"				"7 6 5 4 3"
+		"AbilityManaCost"				"25 30 35 40 45"
+		"AbilityCastRange"				"400"
+		"AOERadius"						"425"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_health"			"80 100 120 140"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_reduction"		"-10 -20 -30 -40 -50"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"6"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"425"
+			}
+		}
+
+		"OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"	"heroes/hero_raiko/drum_of_man.lua"
+	    		"Function"		"spellCast"
+	    	}
+	    }
+
+	    "Modifiers"
+	    {
+	    	"modifier_drum_of_man_bonus_health"
+			{
+				"Duration"		"%duration"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
+				}
+			}
+
+	    	"modifier_drum_of_man_damage_reduction"
+			{
+				"IsDebuff"		"1"
+				"IsPurgable"	"1"
+
+				"Duration"		"%duration"
+
+				"Properties"
+				{
+				    "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE" "%damage_reduction" 
+				}
+			}
+
+	    	"modifier_drum_of_man_cast_recently"
+			{
+				"Attributes"		"MODIFIER_ATTRIBUTE_PERMANENT"
+			}
+	    }
+	}
