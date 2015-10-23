@@ -298,7 +298,7 @@ function GameMode:OnHeroInGame(hero)
 				hero:AddItem(CreateItem("item_blink", hero, hero))
 				hero:AddItem(CreateItem("item_force_staff", hero, hero))
 				hero:AddItem(CreateItem("item_heart", hero, hero))
-				hero:AddItem(CreateItem("item_silver_edge", hero, hero))
+				hero:AddItem(CreateItem("item_ultimate_scepter", hero, hero))
 				hero:AddItem(CreateItem("item_abyssal_blade", hero, hero))
 				hero:AddItem(CreateItem("item_dagon", hero, hero))
 			end
@@ -319,21 +319,21 @@ function GameMode:OnHeroInGame(hero)
 	end
 
 	-- Check for aghanim's (lol.)
-	if not hero:IsIllusion() then
-		Timers:CreateTimer(0, function()
-			for i=0,5 do
-				local item = hero:GetItemInSlot(i)
-				if item and item:GetName() == "item_ultimate_scepter" then
-					if hero:GetName() == "npc_dota_hero_skywrath_mage" then
-						hero:FindAbilityByName("peerless_wind_god"):ApplyDataDrivenModifier(hero, hero, "modifier_peerless_wind_god_learned", {})
-					elseif hero:GetName() == "npc_dota_hero_rubick" then
-						hero:FindAbilityByName("double_spark"):ApplyDataDrivenModifier(hero, hero, "modifier_double_spark_learned", {})
-					end
+	Timers:CreateTimer(0, function()
+		for i=0,5 do
+			local item = hero:GetItemInSlot(i)
+			if item and item:GetName() == "item_ultimate_scepter" then
+				if hero:GetName() == "npc_dota_hero_skywrath_mage" then
+					hero:FindAbilityByName("peerless_wind_god"):ApplyDataDrivenModifier(hero, hero, "modifier_peerless_wind_god_learned", {})
+				elseif hero:GetName() == "npc_dota_hero_rubick" then
+					hero:FindAbilityByName("double_spark"):ApplyDataDrivenModifier(hero, hero, "modifier_double_spark_learned", {})
+				elseif hero:GetName() == "npc_dota_hero_phoenix" then
+					hero:FindAbilityByName("hourai_doll"):ApplyDataDrivenModifier(hero, hero, "modifier_hourai_doll_learned", {})
 				end
 			end
-			return 0.03
-		end)
-	end
+		end
+		return 0.03
+	end)
 end
 
 --[[

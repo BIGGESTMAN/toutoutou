@@ -76,3 +76,8 @@ Cast Point : 0.1
 Health Drain Per Second (health_drain_per_second) : 100/150/200
 Mana : 200 {Scepter : 0}
 Cooldown : 45/30/15
+
+[D] Hourai Doll (hourai_doll) : Can only be activated within 6 seconds of dying. After 3 seconds, brings Mokou to life with full health and mana. Unreliable gold loss and enemy gold and experience gain from Mokou's deaths only occur if 6 seconds pass without her using this ability.
+DevNotes - Visual indicator appears around where she died on activation, with global sound.
+
+Cooldown : 600

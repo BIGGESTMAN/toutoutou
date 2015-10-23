@@ -7,7 +7,7 @@
 		"Ability2"				"reckless_sacrifice"
 		"Ability3"				"possessed_by_phoenix"
 		"Ability4"				"resurrection"
-		"Ability5"				""
+		"Ability5"				"hourai_doll"
 		"Ability6"				""
 		"Ability7"				"attribute_bonus"
 		"Ability8"				""
