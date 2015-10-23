@@ -16,8 +16,6 @@ function spellCast(keys)
 	local angle_increment = cone_width / (number_of_knives - 1)
 	local initial_angle = cone_width / -2
 	local prototype_target_point = (keys.target_points[1] - caster_location):Normalized()
-	-- DebugDrawCircle(caster_location, Vector(180,40,40), 0.1, 150, true, 0.5)
-	-- DebugDrawCircle(caster_location, Vector(255,40,40), 0.1, 350, true, 0.5)
 
 	-- Trigger increased cooldown from previous hits
 	if caster:HasModifier("modifier_killing_doll_cooldown_increase") then
@@ -35,6 +33,7 @@ function spellCast(keys)
 
 		local knife = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeamNumber())
 		ability:ApplyDataDrivenModifier(caster, knife, "modifier_killing_doll_dummy", {})
+		ProjectileList:AddProjectile(knife)
 
 		local particle = ParticleManager:CreateParticle("particles/sakuya/killing_doll_dagger.vpcf", PATTACH_ABSORIGIN_FOLLOW, knife)
 		ParticleManager:SetParticleControl(particle, 1, target_point)
@@ -64,31 +63,33 @@ function spellCast(keys)
 
 				knife_location = knife:GetAbsOrigin()
 				if distance_traveled < range then
-					-- Move projectile
-					knife:SetAbsOrigin(knife_location + direction * speed)
-					distance_traveled = distance_traveled + speed
+					if not knife.frozen then
+						-- Move projectile
+						knife:SetAbsOrigin(knife_location + direction * speed)
+						distance_traveled = distance_traveled + speed
 
-					-- Check for units hit
-					local team = caster:GetTeamNumber()
-					local origin = knife:GetAbsOrigin()
-					local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
-					local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL
-					local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
-					local iOrder = FIND_CLOSEST
-					-- DebugDrawCircle(origin, Vector(180,40,40), 0.1, radius, true, 0.2)
+						-- Check for units hit
+						local team = caster:GetTeamNumber()
+						local origin = knife:GetAbsOrigin()
+						local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
+						local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL
+						local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
+						local iOrder = FIND_CLOSEST
+						-- DebugDrawCircle(origin, Vector(180,40,40), 0.1, radius, true, 0.2)
 
-					local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
+						local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
 
-					if not enhanced then
-						if #targets > 0 then
-							knifeHit(caster, ability, targets[1], knife_damage, knife_damage_type, cooldown_increase_max)
-							knife:RemoveSelf()
-						end
-					else
-						for k,unit in pairs(targets) do
-							if not units_hit[unit] then
-								knifeHit(caster, ability, unit, knife_damage, knife_damage_type, cooldown_increase_max)
-								units_hit[unit] = true
+						if not enhanced then
+							if #targets > 0 then
+								knifeHit(caster, ability, targets[1], knife_damage, knife_damage_type, cooldown_increase_max)
+								knife:RemoveSelf()
+							end
+						else
+							for k,unit in pairs(targets) do
+								if not units_hit[unit] then
+									knifeHit(caster, ability, unit, knife_damage, knife_damage_type, cooldown_increase_max)
+									units_hit[unit] = true
+								end
 							end
 						end
 					end

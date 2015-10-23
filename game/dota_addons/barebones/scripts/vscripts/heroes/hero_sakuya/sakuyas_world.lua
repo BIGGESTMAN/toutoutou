@@ -31,6 +31,7 @@ function spellCast(keys)
 	for i=1,2 do
 		local dagger = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeamNumber())
 		ability:ApplyDataDrivenModifier(caster, dagger, "modifier_sakuyas_world_dummy", {})
+		ProjectileList:AddProjectile(dagger)
 		table.insert(daggers, dagger)
 	end
 	daggers[1]:SetForwardVector(target_direction)
@@ -62,31 +63,33 @@ function spellCast(keys)
 				end
 
 				if distance_traveled < range then
-					-- Move projectile
-					dagger:SetAbsOrigin(dagger:GetAbsOrigin() + direction * speed)
-					distance_traveled = distance_traveled + speed
+					if not dagger.frozen then
+						-- Move projectile
+						dagger:SetAbsOrigin(dagger:GetAbsOrigin() + direction * speed)
+						distance_traveled = distance_traveled + speed
 
-					-- Check for units hit
-					local team = caster:GetTeamNumber()
-					local origin = dagger:GetAbsOrigin()
-					local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
-					local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL
-					local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
-					local iOrder = FIND_CLOSEST
-					-- DebugDrawCircle(origin, Vector(180,40,40), 0.1, radius, true, 0.2)
+						-- Check for units hit
+						local team = caster:GetTeamNumber()
+						local origin = dagger:GetAbsOrigin()
+						local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
+						local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL
+						local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
+						local iOrder = FIND_CLOSEST
+						-- DebugDrawCircle(origin, Vector(180,40,40), 0.1, radius, true, 0.2)
 
-					local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
+						local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
 
-					if not enhanced then
-						if #targets > 0 then
-							daggerHit(caster, ability, targets[1], damage, damage_type, cooldown_increase_max)
-							dagger:RemoveSelf()
-						end
-					else
-						for k,unit in pairs(targets) do
-							if not units_hit[unit] then
-								daggerHit(caster, ability, unit, damage, damage_type, cooldown_increase_max)
-								units_hit[unit] = true
+						if not enhanced then
+							if #targets > 0 then
+								daggerHit(caster, ability, targets[1], damage, damage_type, cooldown_increase_max)
+								dagger:RemoveSelf()
+							end
+						else
+							for k,unit in pairs(targets) do
+								if not units_hit[unit] then
+									daggerHit(caster, ability, unit, damage, damage_type, cooldown_increase_max)
+									units_hit[unit] = true
+								end
 							end
 						end
 					end

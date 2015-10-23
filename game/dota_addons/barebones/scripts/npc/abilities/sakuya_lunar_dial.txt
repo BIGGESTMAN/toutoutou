@@ -1,0 +1,101 @@
+	"lunar_dial"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_BUILDING"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+
+		"AbilityTextureName"			"mirana_invis"
+
+		"precache"
+		{
+
+		}
+
+		"AbilityCastPoint"				"0.3"
+		"AbilityCooldown"				"160 140 120"
+		"AbilityManaCost"				"175 250 325"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"4 5 6"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"100"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"update_interval"		"0.03"
+			}
+		}
+
+		"OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"	"heroes/hero_sakuya/lunar_dial.lua"
+	    		"Function"		"spellCast"
+	    		"Target"		"POINT"
+	    	}
+	    }
+
+	    "Modifiers"
+	    {
+	    	"modifier_lunar_dial_tracker"
+			{
+				"Duration"	"%duration"
+
+				"ThinkInterval"  "%update_interval"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_sakuya/lunar_dial.lua"
+						"Function"		"updateTick"
+					}
+				}
+
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_sakuya/lunar_dial.lua"
+						"Function"		"trackerDurationEnded"
+					}
+				}
+			}
+
+	    	"modifier_lunar_dial_frozen"
+			{
+				"Duration"	"%duration"
+				"IsDebuff"	"1"
+
+				"States"
+				{
+					"MODIFIER_STATE_INVULNERABLE"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_STUNNED"				"MODIFIER_STATE_VALUE_ENABLED"
+	    			"MODIFIER_STATE_FROZEN"					"MODIFIER_STATE_VALUE_ENABLED"
+				}
+
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_sakuya/lunar_dial.lua"
+						"Function"		"frozenDurationEnded"
+					}
+				}
+			}
+	    }
+	}

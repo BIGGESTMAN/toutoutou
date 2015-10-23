@@ -16,7 +16,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"precache"
 		{
-			"particle"					"particles/units/heroes/hero_morphling/morphling_waveform.vpcf"
+			"particle"					"particles/sanae/sea_split_wave.vpcf"
 		}
 
 		// Casting
@@ -84,24 +84,13 @@
 	    		"ScriptFile"		"heroes/hero_sanae/sea_split.lua"
 	    		"Function"			"seaSplitStart"
         		"Target"			"POINT"
-	    		"dummy_modifier"	"modifier_projectile"
-        		"particle_name"		"particles/units/heroes/hero_morphling/morphling_waveform.vpcf"
 	    	}
 	    }
 
 		"Modifiers"
 		{
-	    	"modifier_projectile"
+	    	"modifier_sea_split_dummy"
 	    	{
-	    		"OnCreated"
-				{
-					"ApplyModifier"
-					{
-						"Target"		"TARGET"
-						"ModifierName"	"modifier_phased"
-					}
-				}
-
 	    		"States"
 				{
 					"MODIFIER_STATE_INVULNERABLE"			"MODIFIER_STATE_VALUE_ENABLED"

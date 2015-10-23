@@ -5,9 +5,9 @@
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"AbilityTextureName"			"faceless_void_backtrack"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 
+		"AbilityTextureName"			"enigma_demonic_conversion_alt"
 		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
 
 		// Precache

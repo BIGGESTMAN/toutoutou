@@ -176,6 +176,15 @@
 			    		"Function"		"checkGhostForm"
 					}
 				}
+
+				"OnDeath"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_murasa/anchors.lua"
+						"Function"		"anchorDestroyed"
+					}
+				}
 			}
 
 	    	"modifier_drag"
@@ -288,6 +297,10 @@
 			"modifier_foundering_anchor_throwing_anchor"
 			{
 				"IsHidden"	"1"
+
+				"Duration"	"%update_interval"
+
+				"Attributes"		"MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
 
 				"States"
 				{

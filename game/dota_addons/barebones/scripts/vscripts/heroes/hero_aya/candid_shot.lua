@@ -72,7 +72,7 @@ function candidShot(keys)
 	-- End of delay, deal damage & stuff
 	Timers:CreateTimer(duration,function()
 		local team = caster:GetTeamNumber()
-		local iTeam = DOTA_UNIT_TARGET_TEAM_BOTH
+		local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
 		local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL
 		local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
 		local iOrder = FIND_ANY_ORDER
@@ -84,26 +84,19 @@ function candidShot(keys)
 
 		for k,unit in pairs(targets) do
 			if pointIsInRectangle(unit:GetAbsOrigin(), corner_points) then
-				if unit:GetTeamNumber() ~= caster:GetTeamNumber() then
-					ApplyDamage({ victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
-					ability:ApplyDataDrivenModifier(caster, unit, keys.stun_modifier, {})
-
-					local hit_particle = ParticleManager:CreateParticle(keys.enemy_hit_particle, PATTACH_POINT_FOLLOW, unit)
-					ParticleManager:SetParticleControl(hit_particle, 0, unit:GetAbsOrigin())
-					ParticleManager:SetParticleControl(hit_particle, 1, unit:GetAbsOrigin())
-				else
-					ProjectileManager:ProjectileDodge(unit)
-
-					local hit_particle = ParticleManager:CreateParticle(keys.ally_hit_particle, PATTACH_POINT_FOLLOW, unit)
-					ParticleManager:SetParticleControl(hit_particle, 0, unit:GetAbsOrigin())
-					ParticleManager:SetParticleControl(hit_particle, 1, unit:GetAbsOrigin())
-				end
+				ApplyDamage({ victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
+				ability:ApplyDataDrivenModifier(caster, unit, keys.stun_modifier, {})
 			end
 		end
 
 		-- Delete enemy projectiles in area
 		for k,projectile in pairs(ProjectileList:GetProjectilesInArea(target_location, radius)) do
 			if projectile:GetTeamNumber() ~= caster:GetTeamNumber() and pointIsInRectangle(projectile:GetAbsOrigin(), corner_points) then
+				local hit_particle = ParticleManager:CreateParticle(keys.ally_hit_particle, PATTACH_POINT_FOLLOW, caster)
+				ParticleManager:SetParticleControl(hit_particle, 0, projectile:GetAbsOrigin())
+				ParticleManager:SetParticleControl(hit_particle, 1, projectile:GetAbsOrigin())
+
+				projectile:Kill(ability, caster)
 				projectile:RemoveSelf()
 			end
 		end

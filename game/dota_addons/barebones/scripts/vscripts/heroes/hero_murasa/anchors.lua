@@ -30,10 +30,6 @@ function pullAnchor(caster, ability, pull_destination, anchor)
 	anchor.units_dragging = {}
 
 	moveAnchor(caster, anchor_ability, anchor, caster:GetAbsOrigin(), true)
-
-	-- Prevent caster from acting while anchor is in flight
-	local anchor_flight_time = (anchor:GetAbsOrigin() - pull_destination):Length2D() / anchor_ability:GetSpecialValueFor("speed")
-	anchor_ability:ApplyDataDrivenModifier(caster, caster, "modifier_foundering_anchor_throwing_anchor", {duration = anchor_flight_time})
 end
 
 function moveAnchor(caster, ability, anchor, target_point, pulling)
@@ -53,111 +49,134 @@ function moveAnchor(caster, ability, anchor, target_point, pulling)
 	if pulling then anchor:SetForwardVector(direction * -1) end -- Flipped because moving backwards
 	anchor:SetAbsOrigin(anchor:GetAbsOrigin() + height_offset)
 
+	-- Treat anchor as a projectile while in flight
+	ProjectileList:AddProjectile(anchor)
+
 	Timers:CreateTimer(0, function()
-		if not anchor:HasModifier("modifier_pulled") or pulling then
-			local caster_ghosted = caster:HasModifier("modifier_ghost")
-			local damage_type = DAMAGE_TYPE_PHYSICAL
-			if caster_ghosted then damage_type = DAMAGE_TYPE_MAGICAL end
+		if not anchor:IsNull() then
+			if not anchor:HasModifier("modifier_pulled") or pulling then
+				local caster_ghosted = caster:HasModifier("modifier_ghost")
+				local damage_type = DAMAGE_TYPE_PHYSICAL
+				if caster_ghosted then damage_type = DAMAGE_TYPE_MAGICAL end
 
-			anchor_location = anchor:GetAbsOrigin()
-			local distance = (target_point - anchor_location):Length2D()
-			local anchor_direction = anchor:GetForwardVector()
-			if distance > arrival_distance then
-				-- Move projectile
-				anchor:SetAbsOrigin(anchor_location + direction * dummy_speed)
+				anchor_location = anchor:GetAbsOrigin()
+				local distance = (target_point - anchor_location):Length2D()
+				local anchor_direction = anchor:GetForwardVector()
+				if distance > arrival_distance then
+					if not anchor.frozen then
+						-- Move projectile
+						anchor:SetAbsOrigin(anchor_location + direction * dummy_speed)
 
-				-- Check for units hit
-				if pulling then anchor_direction = anchor:GetForwardVector() * -1 end -- Flipped because facing backwards
+						-- Check for units hit
+						if pulling then anchor_direction = anchor:GetForwardVector() * -1 end -- Flipped because facing backwards
 
-				local team = caster:GetTeamNumber()
-				local origin = anchor_location + anchor_direction * drag_hitbox_offset
-				local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
-				local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
-				local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
-				local iOrder = FIND_ANY_ORDER
-				local radius = ability:GetLevelSpecialValueFor("drag_radius", ability_level)
-				-- DebugDrawCircle(origin, Vector(180,40,40), 1, radius, true, 0.5)
+						local team = caster:GetTeamNumber()
+						local origin = anchor_location + anchor_direction * drag_hitbox_offset
+						local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
+						local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
+						local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
+						local iOrder = FIND_ANY_ORDER
+						local radius = ability:GetLevelSpecialValueFor("drag_radius", ability_level)
+						-- DebugDrawCircle(origin, Vector(180,40,40), 1, radius, true, 0.5)
 
-				local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
-				local damage = ability:GetLevelSpecialValueFor("drag_damage", ability_level)
+						local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
+						local damage = ability:GetLevelSpecialValueFor("drag_damage", ability_level)
 
-				for k,unit in pairs(targets) do
-					if not anchor.units_hit[unit] then
-						ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
-						anchor.units_hit[unit] = true
+						for k,unit in pairs(targets) do
+							if not anchor.units_hit[unit] then
+								ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
+								anchor.units_hit[unit] = true
+								if not caster_ghosted then
+									ability:ApplyDataDrivenModifier(anchor, unit, "modifier_drag", {})
+									anchor.units_dragging[unit] = true
+								end
+							end
+						end
+
 						if not caster_ghosted then
-							ability:ApplyDataDrivenModifier(anchor, unit, "modifier_drag", {})
-							anchor.units_dragging[unit] = true
+							for unit,v in pairs(anchor.units_dragging) do
+								local direction_towards_anchor = (origin - unit:GetAbsOrigin()):Normalized()
+								local angle = anchor_direction:Dot(direction_towards_anchor)
+
+								local target_distance = (unit:GetAbsOrigin() - origin):Length2D()
+
+								if target_distance > drag_distance and angle > 0 then
+									local target_direction = (unit:GetAbsOrigin() - origin):Normalized()
+									unit:SetAbsOrigin(origin + drag_distance * target_direction)
+									unit:SetForwardVector(anchor_direction * -1) -- Force units to look backwards -- note that this doesn't actually work
+								end
+							end
+						else
+							-- Release dragged units
+							for unit,v in pairs(anchor.units_dragging) do
+								unit:RemoveModifierByName("modifier_drag")
+								FindClearSpaceForUnit(unit, unit:GetAbsOrigin(), false)
+								unit:SetForwardVector(anchor_direction * -1) -- Force units to look backwards -- note that this doesn't actually work
+							end
+							anchor.units_dragging = {}
 						end
 					end
-				end
 
-				if not caster_ghosted then
-					for unit,v in pairs(anchor.units_dragging) do
-						local direction_towards_anchor = (origin - unit:GetAbsOrigin()):Normalized()
-						local angle = anchor_direction:Dot(direction_towards_anchor)
+					-- Prevent caster from acting while anchor is in flight
+					ability:ApplyDataDrivenModifier(caster, caster, "modifier_foundering_anchor_throwing_anchor", {})
 
-						local target_distance = (unit:GetAbsOrigin() - origin):Length2D()
-
-						if target_distance > drag_distance and angle > 0 then
-							local target_direction = (unit:GetAbsOrigin() - origin):Normalized()
-							unit:SetAbsOrigin(origin + drag_distance * target_direction)
-							unit:SetForwardVector(anchor_direction * -1) -- Force units to look backwards -- note that this doesn't actually work
-						end
-					end
+					return 0.03
 				else
+					anchor:SetAbsOrigin(target_point + height_offset)
+					anchor:SetForwardVector((anchor:GetForwardVector() + Vector(0,0,-1)):Normalized()) -- Goofy shit to make anchor look stuck in the ground
+					if pulling then anchor:SetForwardVector((anchor:GetForwardVector() + Vector(0,0,1)):Normalized()) end -- again, flipped cause backwards
+
+					-- Stop treating anchor as projectile
+					ProjectileList:RemoveProjectile(anchor)
+
 					-- Release dragged units
 					for unit,v in pairs(anchor.units_dragging) do
 						unit:RemoveModifierByName("modifier_drag")
 						FindClearSpaceForUnit(unit, unit:GetAbsOrigin(), false)
-						unit:SetForwardVector(anchor_direction * -1) -- Force units to look backwards -- note that this doesn't actually work
+						unit:SetForwardVector(anchor_direction * -1) -- Force units to look backwards -- note that this doesn't actually work because of findclearspaceforunit changing their facing?
 					end
 					anchor.units_dragging = {}
-				end
 
-				return 0.03
-			else
-				anchor:SetAbsOrigin(target_point + height_offset)
-				anchor:SetForwardVector((anchor:GetForwardVector() + Vector(0,0,-1)):Normalized()) -- Goofy shit to make anchor look stuck in the ground
-				if pulling then anchor:SetForwardVector((anchor:GetForwardVector() + Vector(0,0,1)):Normalized()) end -- again, flipped cause backwards
+					if not pulling then
+					-- Root and damage in impact area
+						local team = caster:GetTeamNumber()
+						local origin = anchor_location
+						local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
+						local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
+						local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
+						local iOrder = FIND_ANY_ORDER
+						local radius = ability:GetLevelSpecialValueFor("destination_radius", ability_level)
 
-				-- Release dragged units
-				for unit,v in pairs(anchor.units_dragging) do
-					unit:RemoveModifierByName("modifier_drag")
-					FindClearSpaceForUnit(unit, unit:GetAbsOrigin(), false)
-					unit:SetForwardVector(anchor_direction * -1) -- Force units to look backwards -- note that this doesn't actually work because of findclearspaceforunit changing their facing?
-				end
-				anchor.units_dragging = {}
+						local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
+						local damage = ability:GetLevelSpecialValueFor("destination_damage", ability_level)
 
-				if not pulling then
-				-- Root and damage in impact area
-					local team = caster:GetTeamNumber()
-					local origin = anchor_location
-					local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
-					local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
-					local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
-					local iOrder = FIND_ANY_ORDER
-					local radius = ability:GetLevelSpecialValueFor("destination_radius", ability_level)
+						for k,unit in pairs(targets) do
+							ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
+							ability:ApplyDataDrivenModifier(anchor, unit, "modifier_root", {})
+						end
 
-					local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
-					local damage = ability:GetLevelSpecialValueFor("destination_damage", ability_level)
+						-- EmitSoundOn("Touhou.Anchor_Impact", anchor)
 
-					for k,unit in pairs(targets) do
-						ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
-						ability:ApplyDataDrivenModifier(anchor, unit, "modifier_root", {})
+						Timers:CreateTimer(ability:GetLevelSpecialValueFor("anchor_duration", ability_level), function()
+							if not anchor:IsNull() then anchor:RemoveSelf() end
+						end)
+					else
+						anchor:RemoveSelf()
 					end
-
-					-- EmitSoundOn("Touhou.Anchor_Impact", anchor)
-
-					Timers:CreateTimer(ability:GetLevelSpecialValueFor("anchor_duration", ability_level), function()
-						if not anchor:IsNull() then anchor:RemoveSelf() end
-					end)
-				else
-					anchor:RemoveSelf()
 				end
-
-				
 			end
+		else
 		end
 	end)
+end
+
+function anchorDestroyed(keys)
+	local anchor = keys.unit
+
+	-- Release dragged units when anchor is deleted as a projectile
+	for unit,v in pairs(anchor.units_dragging) do
+		unit:RemoveModifierByName("modifier_drag")
+		FindClearSpaceForUnit(unit, unit:GetAbsOrigin(), false)
+	end
+	anchor.units_dragging = {}
 end

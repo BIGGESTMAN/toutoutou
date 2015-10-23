@@ -15,6 +15,7 @@ function extendingArmCast(keys)
 
 	local arm = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeamNumber())
 	ability:ApplyDataDrivenModifier(caster, arm, "modifier_extending_arm_dummy", {})
+	ProjectileList:AddProjectile(arm)
 
 	local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_shredder/shredder_timberchain_rope.vpcf", PATTACH_ABSORIGIN_FOLLOW, arm)
 	ParticleManager:SetParticleControlEnt(particle, 0, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", caster:GetAbsOrigin(), true)
@@ -28,74 +29,80 @@ function extendingArmCast(keys)
 	local distance_traveled = 0
 
 	Timers:CreateTimer(0, function()
-		arm_location = arm:GetAbsOrigin()
-		if not arm.unit_hit then
-			if distance_traveled < range then
-				-- Move projectile
-				arm:SetAbsOrigin(arm_location + direction * speed)
-				distance_traveled = distance_traveled + speed
-				ParticleManager:SetParticleControl(particle, 1, arm:GetAbsOrigin())
+		if not arm:IsNull() then
+			arm_location = arm:GetAbsOrigin()
+			if not arm.unit_hit then
+				if distance_traveled < range then
+					if not arm.frozen then
+						-- Move projectile
+						arm:SetAbsOrigin(arm_location + direction * speed)
+						distance_traveled = distance_traveled + speed
+						ParticleManager:SetParticleControl(particle, 1, arm:GetAbsOrigin())
 
-				-- Check for units hit
-				local team = caster:GetTeamNumber()
-				local origin = arm:GetAbsOrigin()
-				local radius = hand_radius
-				local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
-				local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TREE + DOTA_UNIT_TARGET_BUILDING
-				local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
-				local iOrder = FIND_CLOSEST
-				DebugDrawCircle(origin, Vector(180,40,40), 1, radius, true, 0.5)
+						-- Check for units hit
+						local team = caster:GetTeamNumber()
+						local origin = arm:GetAbsOrigin()
+						local radius = hand_radius
+						local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
+						local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TREE + DOTA_UNIT_TARGET_BUILDING
+						local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
+						local iOrder = FIND_CLOSEST
+						-- DebugDrawCircle(origin, Vector(180,40,40), 1, radius, true, 0.5)
 
-				local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
+						local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
 
-				if #targets > 0 then
-					arm.unit_hit = targets[1]
-					arm.units_damaged[arm.unit_hit] = true
-					ApplyDamage({victim = arm.unit_hit, attacker = caster, damage = damage, damage_type = damage_type})
-					ability:ApplyDataDrivenModifier(caster, arm.unit_hit, "modifier_extending_arm_stun", {})
+						if #targets > 0 then
+							arm.unit_hit = targets[1]
+							arm.units_damaged[arm.unit_hit] = true
+							ApplyDamage({victim = arm.unit_hit, attacker = caster, damage = damage, damage_type = damage_type})
+							ability:ApplyDataDrivenModifier(caster, arm.unit_hit, "modifier_extending_arm_stun", {})
+						else
+							local trees = GridNav:GetAllTreesAroundPoint(arm:GetAbsOrigin(), hand_radius, false)
+							if #trees > 0 then
+								arm.unit_hit = trees[1]
+							end
+						end
+					end
+
+					return update_interval
 				else
-					local trees = GridNav:GetAllTreesAroundPoint(arm:GetAbsOrigin(), hand_radius, false)
-					if #trees > 0 then
-						arm.unit_hit = trees[1]
-					end
+					arm:RemoveSelf()
 				end
-
-				return update_interval
 			else
-				arm:RemoveSelf()
-			end
-		else
-			arm:SetAbsOrigin(arm.unit_hit:GetAbsOrigin())
-			local caster_location = caster:GetAbsOrigin()
-			local distance = (arm.unit_hit:GetAbsOrigin() - caster_location):Length2D()
-			direction = (arm.unit_hit:GetAbsOrigin() - caster_location):Normalized()
-			if distance > arrival_distance then
-				-- Move caster
-				caster:SetAbsOrigin(caster_location + direction * speed)
+				arm:SetAbsOrigin(arm.unit_hit:GetAbsOrigin())
+				ProjectileList:RemoveProjectile(arm)
 
-				-- Check for units hit
-				local team = caster:GetTeamNumber()
-				local origin = caster_location
-				local radius = damage_radius
-				local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
-				local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
-				local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
-				local iOrder = FIND_ANY_ORDER
+				local caster_location = caster:GetAbsOrigin()
+				local distance = (arm.unit_hit:GetAbsOrigin() - caster_location):Length2D()
+				direction = (arm.unit_hit:GetAbsOrigin() - caster_location):Normalized()
+				if distance > arrival_distance then
+					-- Move caster
+					caster:SetAbsOrigin(caster_location + direction * speed)
 
-				local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
-				local damage_type = ability:GetAbilityDamageType()
+					-- Check for units hit
+					local team = caster:GetTeamNumber()
+					local origin = caster_location
+					local radius = damage_radius
+					local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
+					local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
+					local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
+					local iOrder = FIND_ANY_ORDER
 
-				for k,unit in pairs(targets) do
-					if not arm.units_damaged[unit] then
-						ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
-						arm.units_damaged[unit] = true
+					local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
+					local damage_type = ability:GetAbilityDamageType()
+
+					for k,unit in pairs(targets) do
+						if not arm.units_damaged[unit] then
+							ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
+							arm.units_damaged[unit] = true
+						end
 					end
-				end
 
-				return update_interval
-			else
-				FindClearSpaceForUnit(caster, arm.unit_hit:GetAbsOrigin(), false)
-				arm:RemoveSelf()
+					return update_interval
+				else
+					FindClearSpaceForUnit(caster, arm.unit_hit:GetAbsOrigin(), false)
+					arm:RemoveSelf()
+				end
 			end
 		end
 	end)

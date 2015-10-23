@@ -17,6 +17,7 @@ function spellCast(keys)
 		for i=1, dagger_count do
 			local dagger = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeamNumber())
 			ability:ApplyDataDrivenModifier(caster, dagger, "modifier_checkmaid_dummy", {})
+			ProjectileList:AddProjectile(dagger)
 			table.insert(target.checkmaid_daggers, dagger)
 
 			local target_point = RotatePosition(Vector(0,0,0), QAngle(0,angle_increment * (i - 1),0), prototype_target_point) * ability:GetSpecialValueFor("radius") + target_location
@@ -62,27 +63,29 @@ function durationEnded(keys)
 			if not dagger:IsNull() then
 				dagger_location = dagger:GetAbsOrigin()
 				if distance_traveled < dagger_distance then
-					-- Move dagger
-					dagger:SetAbsOrigin(dagger_location + dagger:GetForwardVector() * dagger_speed)
-					distance_traveled = distance_traveled + dagger_speed
+					if not dagger.frozen then
+						-- Move dagger
+						dagger:SetAbsOrigin(dagger_location + dagger:GetForwardVector() * dagger_speed)
+						distance_traveled = distance_traveled + dagger_speed
 
-					-- Check for units hit
-					local team = caster:GetTeamNumber()
-					local origin = dagger_location
-					local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
-					local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
-					local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
-					local iOrder = FIND_ANY_ORDER
-					-- DebugDrawCircle(origin, Vector(180,40,40), 0.1, dagger_radius, true, 0.2)
+						-- Check for units hit
+						local team = caster:GetTeamNumber()
+						local origin = dagger_location
+						local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
+						local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
+						local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
+						local iOrder = FIND_ANY_ORDER
+						-- DebugDrawCircle(origin, Vector(180,40,40), 0.1, dagger_radius, true, 0.2)
 
-					local targets = FindUnitsInRadius(team, origin, nil, dagger_radius, iTeam, iType, iFlag, iOrder, false)
-					for k,unit in pairs(targets) do
-						if not units_hit[unit] then
-							ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
-							units_hit[unit] = true
+						local targets = FindUnitsInRadius(team, origin, nil, dagger_radius, iTeam, iType, iFlag, iOrder, false)
+						for k,unit in pairs(targets) do
+							if not units_hit[unit] then
+								ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
+								units_hit[unit] = true
 
-							local hit_particle = ParticleManager:CreateParticle("particles/sakuya/killing_doll_dagger_explosion.vpcf", PATTACH_POINT, unit)
-							ParticleManager:SetParticleControlEnt(hit_particle, 0, unit, PATTACH_POINT, "attach_hitloc", unit:GetAbsOrigin(), true)
+								local hit_particle = ParticleManager:CreateParticle("particles/sakuya/killing_doll_dagger_explosion.vpcf", PATTACH_POINT, unit)
+								ParticleManager:SetParticleControlEnt(hit_particle, 0, unit, PATTACH_POINT, "attach_hitloc", unit:GetAbsOrigin(), true)
+							end
 						end
 					end
 					return update_interval

@@ -70,6 +70,7 @@ function throw(keys)
 
 	local dummy_unit = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeam())
 	ability:ApplyDataDrivenModifier(caster, dummy_unit, "modifier_gungnir_dummy", {})
+	ProjectileList:AddProjectile(dummy_unit)
 	
 	local distance_traveled = 0
 	dummy_unit.units_hit = {}
@@ -87,37 +88,44 @@ function throw(keys)
 	ParticleManager:SetParticleControlEnt(particle, 2, dummy_endcap, PATTACH_POINT_FOLLOW, "attach_hitloc", dummy_endcap:GetAbsOrigin(), true)
 
 	Timers:CreateTimer(0, function()
-		dummy_location = dummy_unit:GetAbsOrigin()
-		if distance_traveled < range then
-			-- Move projectile
-			dummy_unit:SetAbsOrigin(dummy_location + direction * dummy_speed)
-			dummy_endcap:SetAbsOrigin(dummy_unit:GetAbsOrigin() + endcap_offset)
-			distance_traveled = distance_traveled + dummy_speed
+		if not dummy_unit:IsNull() then
+			dummy_location = dummy_unit:GetAbsOrigin()
+			if distance_traveled < range then
+				if not dummy_unit.frozen then
+					-- Move projectile
+					dummy_unit:SetAbsOrigin(dummy_location + direction * dummy_speed)
+					dummy_endcap:SetAbsOrigin(dummy_unit:GetAbsOrigin() + endcap_offset)
+					distance_traveled = distance_traveled + dummy_speed
 
-			-- Check for units hit
-			local team = caster:GetTeamNumber()
-			local origin = dummy_location - vertical_offset
-			local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
-			local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL
-			local iFlag = DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES
-			local iOrder = FIND_ANY_ORDER
+					-- Check for units hit
+					local team = caster:GetTeamNumber()
+					local origin = dummy_location - vertical_offset
+					local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
+					local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL
+					local iFlag = DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES
+					local iOrder = FIND_ANY_ORDER
 
-			local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
-			local damage_type = ability:GetAbilityDamageType()
+					local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
+					local damage_type = ability:GetAbilityDamageType()
 
-			for k,unit in pairs(targets) do
-				if not dummy_unit.units_hit[unit] then
-					unit:AddNewModifier(caster, ability, "modifier_gungnir_armor_reduction", {duration = ability:GetLevelSpecialValueFor("armor_reduction_duration", ability_level)})
-					unit:SetModifierStackCount("modifier_gungnir_armor_reduction", caster, hits + 1)
+					for k,unit in pairs(targets) do
+						if not dummy_unit.units_hit[unit] then
+							unit:AddNewModifier(caster, ability, "modifier_gungnir_armor_reduction", {duration = ability:GetLevelSpecialValueFor("armor_reduction_duration", ability_level)})
+							unit:SetModifierStackCount("modifier_gungnir_armor_reduction", caster, hits + 1)
 
-					ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
-					dummy_unit.units_hit[unit] = true
+							ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
+							dummy_unit.units_hit[unit] = true
+						end
+					end
 				end
+				return 0.03
+			else
+				ParticleManager:DestroyParticle(particle, false)
+				dummy_unit:RemoveSelf()
+				dummy_endcap:RemoveSelf()
 			end
-			return 0.03
 		else
 			ParticleManager:DestroyParticle(particle, false)
-			dummy_unit:RemoveSelf()
 			dummy_endcap:RemoveSelf()
 		end
 	end)
