@@ -70,5 +70,15 @@
 				"var_type"				"FIELD_INTEGER"
 				"cast_range"			"390 415 440 465"
 			}
+			"09"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"superhuman_attackspeed_bonus"	"300"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"superhuman_cost"		"2"
+			}
 		}
 	}

@@ -8,7 +8,7 @@
 		"Ability3"				"durgas_soul"
 		"Ability4"				"vajrapanis_incantation_channel"
 		"Ability5"				"virudhakas_sword"
-		"Ability6"				""
+		"Ability6"				"brilliance_of_mahavairocana"
 		"Ability7"				"attribute_bonus"
 		"Ability8"				"durgas_soul_retarget"
 		"Ability9"				""

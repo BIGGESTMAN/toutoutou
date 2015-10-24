@@ -70,6 +70,21 @@
 				"var_type"				"FIELD_FLOAT"
 				"update_interval"		"0.03"
 			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"max_superhuman_cost"	"10"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"superhuman_duration_increase"	"0.1"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"superhuman_radius_increase"	"40"
+			}
 		}
 
 		"OnSpellStart"

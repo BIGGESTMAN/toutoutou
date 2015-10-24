@@ -2,6 +2,7 @@ hanumans_dance = class({})
 LinkLuaModifier("modifier_dance_recastable", "heroes/hero_byakuren/modifier_dance_recastable.lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier("modifier_dancing", "heroes/hero_byakuren/modifier_dancing.lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier("modifier_hanumans_dance", "heroes/hero_byakuren/modifier_hanumans_dance.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier("modifier_hanumans_dance_as_bonus", "heroes/hero_byakuren/modifier_hanumans_dance_as_bonus.lua", LUA_MODIFIER_MOTION_NONE )
 
 
 function hanumans_dance:OnSpellStart()
@@ -20,13 +21,15 @@ function hanumans_dance:OnSpellStart()
 		end
 		caster:AddNewModifier(caster, ability, "modifier_dancing", {target = target:GetEntityIndex(), prior_slashes = prior_slashes})
 
-		-- Spend a charge
-		-- local charge_modifier = caster:FindModifierByName("modifier_vajrapanis_charges")
-		-- if charge_modifier:GetStackCount() > 1 then
-		-- 	charge_modifier:DecrementStackCount()
-		-- else
-		-- 	charge_modifier:Destroy()
-		-- end
+		-- Spend a charge, unless charges modifier has expired during cast animation
+		if caster:HasModifier("modifier_vajrapanis_charges") then
+			local charge_modifier = caster:FindModifierByName("modifier_vajrapanis_charges")
+			if charge_modifier:GetStackCount() > 1 then
+				charge_modifier:DecrementStackCount()
+			else
+				charge_modifier:Destroy()
+			end
+		end
 
 		caster:AddNewModifier(caster, ability, "modifier_dance_recastable", {duration = ability:GetLevelSpecialValueFor("recast_time", ability_level)})
 		local recast_modifier = caster:FindModifierByName("modifier_dance_recastable")

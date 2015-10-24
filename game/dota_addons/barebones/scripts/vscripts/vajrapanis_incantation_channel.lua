@@ -38,16 +38,21 @@ end
 function vajrapanis_incantation_channel:OnChannelFinish(interrupted)
 	if IsServer() then
 		local caster = self:GetCaster()
-		local ability_level = self:GetLevel() - 1
+		local ability = self
+		local ability_level = ability:GetLevel() - 1
+
+		local max_charges = ability:GetSpecialValueFor("max_charges")
+		-- Remove charge limit if upgraded by Aghanim's
+		if caster:HasScepter() then max_charges = 999 end
 
 		if not interrupted then
-			caster:AddNewModifier(caster, self, "modifier_vajrapanis_charges", {duration = self:GetLevelSpecialValueFor("charges_duration", ability_level)})
+			caster:AddNewModifier(caster, ability, "modifier_vajrapanis_charges", {duration = ability:GetSpecialValueFor("charges_duration")})
 			local modifier = caster:FindModifierByName("modifier_vajrapanis_charges")
-			if modifier:GetStackCount() < self:GetLevelSpecialValueFor("max_charges", ability_level) then
+			if modifier:GetStackCount() < max_charges then
 				modifier:IncrementStackCount()
-				if modifier:GetStackCount() < self:GetLevelSpecialValueFor("max_charges", ability_level) then
-					if caster:GetMana() > self:GetManaCost(ability_level) then
-						caster:CastAbilityNoTarget(self, caster:GetPlayerID())
+				if modifier:GetStackCount() < max_charges then
+					if caster:GetMana() > ability:GetManaCost(ability_level) then
+						caster:CastAbilityNoTarget(ability, caster:GetPlayerID())
 					end
 				end
 			end
@@ -57,4 +62,17 @@ function vajrapanis_incantation_channel:OnChannelFinish(interrupted)
 			caster:FindModifierByName("modifier_incantation_channeling"):SetDuration(0.06, true)
 		end
 	end
+end
+
+function vajrapanis_incantation_channel:GetChannelTime()
+	-- if IsServer() then
+		local caster = self:GetCaster()
+		local ability = self
+
+		if caster:HasScepter() then
+			return ability:GetSpecialValueFor("superhuman_channel_time")
+		else
+			return ability.BaseClass.GetChannelTime(self)
+		end
+	-- end
 end

@@ -330,6 +330,8 @@ function GameMode:OnHeroInGame(hero)
 				hero:FindAbilityByName("double_spark"):ApplyDataDrivenModifier(hero, hero, "modifier_double_spark_learned", {})
 			elseif hero:GetName() == "npc_dota_hero_phoenix" then
 				hero:FindAbilityByName("hourai_doll"):ApplyDataDrivenModifier(hero, hero, "modifier_hourai_doll_learned", {})
+			elseif hero:GetName() == "npc_dota_hero_templar_assassin" then
+				hero:FindAbilityByName("brilliance_of_mahavairocana"):ApplyDataDrivenModifier(hero, hero, "modifier_brilliance_of_mahavairocana_learned", {})
 			end
 			-- end
 		-- end

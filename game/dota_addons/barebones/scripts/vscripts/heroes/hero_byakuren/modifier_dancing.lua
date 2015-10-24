@@ -20,11 +20,31 @@ function modifier_dancing:OnCreated( kv )
 			self.dash_range = distance
 		end
 
+		-- If Superhuman is enabled and sufficient charges, add bonus attack speed
+		if caster:HasModifier("modifier_brilliance_of_mahavairocana_active") and caster:HasModifier("modifier_vajrapanis_charges") then
+			local superhuman_cost = ability:GetSpecialValueFor("superhuman_cost")
+			local charge_modifier = caster:FindModifierByName("modifier_vajrapanis_charges")
+			if charge_modifier:GetStackCount() >= superhuman_cost then
+				caster:AddNewModifier(caster, ability, "modifier_hanumans_dance_as_bonus", {})
+				if charge_modifier:GetStackCount() > superhuman_cost then
+					charge_modifier:SetStackCount(charge_modifier:GetStackCount() - superhuman_cost)
+				else
+					charge_modifier:Destroy()
+				end
+			end
+			-- Manually set cooldown, because this happens after the cast technically
+			ability:EndCooldown()
+			ability:StartCooldown(caster:GetSecondsPerAttack())
+		end
+
 		local total_dash_duration = caster:GetSecondsPerAttack()
 		self.speed = self.dash_range / total_dash_duration
 
 		-- Place autoattack on cooldown afterward
 		caster:AttackNoEarlierThan(caster:GetSecondsPerAttack())
+
+		-- Remove superhuman bonus attackspeed
+		caster:RemoveModifierByName("modifier_hanumans_dance_as_bonus")
 
 		local animation_properties = {duration=total_dash_duration, activity=ACT_DOTA_ATTACK, rate=(25 / 30) / total_dash_duration, translate="meld"}
 		StartAnimation(caster, animation_properties)

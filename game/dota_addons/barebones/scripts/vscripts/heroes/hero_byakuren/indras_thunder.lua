@@ -27,7 +27,30 @@ function indrasThunderCast(keys)
 	local arrival_distance = 25
 	local total_degrees_rotated = 90
 	local bead_count_factor = 120 -- 120 = arbitrary number to make the number of beads reasonable
-	local radius = ability:GetLevelSpecialValueFor("radius", ability_level)
+	local radius = ability:GetSpecialValueFor("radius")
+	local pull_duration = ability:GetSpecialValueFor("pull_duration")
+
+	-- If Superhuman is enabled and sufficient charges, add bonus radius and pull duration
+	if caster:HasModifier("modifier_brilliance_of_mahavairocana_active") and caster:HasModifier("modifier_vajrapanis_charges") then
+		local max_superhuman_cost = ability:GetSpecialValueFor("max_superhuman_cost")
+		local radius_increase_per_charge = ability:GetSpecialValueFor("superhuman_radius_increase")
+		local duration_increase_per_charge = ability:GetSpecialValueFor("superhuman_duration_increase")
+		local charge_modifier = caster:FindModifierByName("modifier_vajrapanis_charges")
+		local charges_spent = charge_modifier:GetStackCount()
+		if charges_spent > max_superhuman_cost then charges_spent = max_superhuman_cost end
+
+		radius = radius + radius_increase_per_charge * charges_spent
+		pull_duration = pull_duration + duration_increase_per_charge * charges_spent
+		if charge_modifier:GetStackCount() > charges_spent then
+			charge_modifier:SetStackCount(charge_modifier:GetStackCount() - charges_spent)
+		else
+			charge_modifier:Destroy()
+		end
+	end
+
+	-- Store values in projectile so beads can reference them later
+	dummy_projectile.radius = radius
+	dummy_projectile.pull_duration = pull_duration
 
 	-- Virudhaka's Sword light fragments interaction -- remove delay
 	local delay = ability:GetLevelSpecialValueFor("delay", ability_level)
@@ -71,7 +94,6 @@ function indrasThunderCast(keys)
 				local damage = ability:GetLevelSpecialValueFor("damage", ability_level)
 				local damage_type = ability:GetAbilityDamageType()
 
-				local pull_duration = ability:GetLevelSpecialValueFor("pull_duration", ability_level)
 				dummy_projectile.elapsed_time = 0
 				local update_interval = ability:GetLevelSpecialValueFor("update_interval", ability_level)
 
@@ -156,9 +178,9 @@ function updateBeads( event )
 	local rotation_time = 1.5
 	local number_of_beads = #dummy_projectile.beads
 
-	local radius = ability:GetLevelSpecialValueFor("radius", ability_level)
+	local radius = dummy_projectile.radius
 	if dummy_projectile.elapsed_time then
-		local percent_contracted = dummy_projectile.elapsed_time / ability:GetLevelSpecialValueFor("pull_duration", ability_level)
+		local percent_contracted = dummy_projectile.elapsed_time / dummy_projectile.pull_duration
 		radius = radius * (1 - percent_contracted)
 	end
 

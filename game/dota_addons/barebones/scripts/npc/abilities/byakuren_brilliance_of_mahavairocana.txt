@@ -1,0 +1,66 @@
+	"brilliance_of_mahavairocana"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+
+		"MaxLevel"						"1"
+
+		"AbilityTextureName"			"byakuren_brilliance_of_mahavairocana"
+		
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0"
+		"AbilityCooldown"				"0"
+		"AbilityManaCost"				"0"
+
+		"AbilityProcsMagicStick" 		"0"
+
+		"OnToggleOn"
+		{
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_brilliance_of_mahavairocana_active"
+				"Target" 		"CASTER"
+			}
+		}
+
+		"OnToggleOff"
+		{
+			"RemoveModifier"
+			{
+				"ModifierName"	"modifier_brilliance_of_mahavairocana_active"
+				"Target" 		"CASTER"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_brilliance_of_mahavairocana_active"
+			{
+				"IsHidden"		"0"
+			}
+
+			"modifier_brilliance_of_mahavairocana_learned"
+			{
+				"IsHidden"		"1"
+				"IsPurgable"	"0"
+				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ABILITY_LAYOUT" "6"
+				}
+
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_byakuren/brilliance_of_mahavairocana.lua"
+						"Function"		"spellLearned"
+					}
+				}
+			}
+		}
+	}
