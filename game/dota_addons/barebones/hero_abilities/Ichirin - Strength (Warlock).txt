@@ -66,7 +66,7 @@ Lore (lore) : A nyuudou wielder never strikes only once.
 Cooldown : 9/7/5/3
  
 [R] Traditional Era of a Splendid Old Man (traditional_era) : Unzan grows massive, shielding Ichirin from a flat amount of damage. If the instance of damage that breaks the shield is greater than its remaining health, the rest is not applied to Ichirin. While the shield is active, the root duration and radius of King Kraken Strike are increased, and Foreseeing Nyuudou Cloud strikes twice for each attack.
-Scepter - The damage absorbed increases further based on Ichirin’s Strength. Adds the Calamity Scolding Scorch ability.
+Scepter - The damage absorbed increases further based on Ichirin's Strength. Adds the Calamity Scolding Scorch ability.
 DevNotes - There is a 0.5 second delay between the Foreseeing Nyuudou Cloud strikes. Scepter's damage absorb bonus is based on total Strength.
 
 Cast Point : 0.6

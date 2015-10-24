@@ -41,7 +41,7 @@ Fissure Radius (fissure_radius) : 325
 Mana : 90
 Cooldown : 21/19/17/15
 
-[W] Immortality’s Reckless Sacrifice (reckless_sacrifice) : Mokou sets herself ablaze with 3 flames. Each flame increases attack speed but deals magical damage to her each second. Flames are transfered by attacks with their duration reset. Enemies with 2 flames have their attack damage reduced, and 3 flames disarms them.
+[W] Immortality's Reckless Sacrifice (reckless_sacrifice) : Mokou sets herself ablaze with 3 flames. Each flame increases attack speed but deals magical damage to her each second. Flames are transfered by attacks with their duration reset. Enemies with 2 flames have their attack damage reduced, and 3 flames disarms them.
 Spell Immunity - Flames can be transferred to Spell Immune units, but they have no effect while they remain Spell Immune.
 DevNotes - Can be transferred to and fully affects mechanical units. No initial damage. The duration of each flame is independent of the others. 
 

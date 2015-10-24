@@ -59,7 +59,7 @@ Lore (lore) : After leveling his home and the ancient sequoia, the North Wind to
 Note0 (note0) : The minimum bonus damage is 10.
  
 [R] Opening Wind of the Tengu Realm (opening_wind) : Aya launches a gust of wind that deals magical damage. If it damages an enemy, Aya gains Illusionary Dominance for a short duration.
-Scepter - Decreases cooldown. Aya gains Peerless Wind God, which can be cast within 1 second of each Illusionary Dominance to dash to her original position while attacking all enemies she passes. It benefits from Illusionary Dominance’s travel speed increase and costs no mana.
+Scepter - Decreases cooldown. Aya gains Peerless Wind God, which can be cast within 1 second of each Illusionary Dominance to dash to her original position while attacking all enemies she passes. It benefits from Illusionary Dominance's travel speed increase and costs no mana.
  
 Cast Point : 0.1
 Magical Damage (damage) : 100/150/200

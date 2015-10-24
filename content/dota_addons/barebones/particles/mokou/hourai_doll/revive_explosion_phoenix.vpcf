@@ -34,8 +34,8 @@
 		},
 		{
 			_class = "C_INIT_RandomAlpha"
-			m_nAlphaMin = 75
-			m_nAlphaMax = 75
+			m_nAlphaMin = 120
+			m_nAlphaMax = 120
 		},
 		{
 			_class = "C_INIT_RandomRadius"
@@ -69,13 +69,13 @@
 			[
 				0.000000,
 				0.000000,
-				100.000000,
+				150.000000,
 			]
 			m_OffsetMax =
 			[
 				0.000000,
 				0.000000,
-				100.000000,
+				150.000000,
 			]
 		},
 	]

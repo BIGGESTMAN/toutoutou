@@ -27,8 +27,8 @@ Damage : 129-135
 Armor : 13.62
 
 [Q] Fantasy Seal (fantasy_seal) : Launches 5 spirit bullets at an enemy that deal pure damage that decreases with distance traveled. If there are enemy heroes that are silenced or stunned in range, Reimu will fire 3 additional bullets at each of them.
-Spell Immunity - Pierces Spell Immunity. Linken’s Sphere blocks the first bullet.
-DevNotes - Can’t be disjointed. Reimu can act freely while the bullets are being fired, and it always takes 1 second to fire them all. If there are additional bullets, they are fired in a random order at all targets.
+Spell Immunity - Pierces Spell Immunity. Linken's Sphere blocks the first bullet.
+DevNotes - Can't be disjointed. Reimu can act freely while the bullets are being fired, and it always takes 1 second to fire them all. If there are additional bullets, they are fired in a random order at all targets.
 
 Cast Point : 0.4
 Max Physical Damage per Bullet (max_damage) : 24/36/48/60
@@ -58,9 +58,9 @@ Lore (lore) : Turning space inside-out, Reimu traps her foes inside a world with
 Mana : 90
 Cooldown : 25/22/19/16
 
-[E] Yin Yang Scattering (yin_yang_orbs) : Toggle. Reimu’s attacks become ranged, launching an orb that deals reduced damage but bounces between enemies, the damage increasing by 25%% on each bounce. Enemies with slowed movement are silenced as well.
-Spell Immunity - The orbs bounce on and off spell immune units, but don’t silence.
-DevNotes - The orbs have a travel speed of 1000. Works like Moon Glaive, doesn’t apply attack modifiers on bounces etc.
+[E] Yin Yang Scattering (yin_yang_orbs) : Toggle. Reimu's attacks become ranged, launching an orb that deals reduced damage but bounces between enemies, the damage increasing by 25%% on each bounce. Enemies with slowed movement are silenced as well.
+Spell Immunity - The orbs bounce on and off spell immune units, but don't silence.
+DevNotes - The orbs have a travel speed of 1000. Works like Moon Glaive, doesn't apply attack modifiers on bounces etc.
 
 Initial Damage (base_damage) : 50/55/60/65%
 Silence Duration (silence_duration) : 0.8

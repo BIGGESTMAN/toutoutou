@@ -10,7 +10,7 @@ abilities = []
 ability = None
 
 for fname in filenames:
-	with open(os.path.join(directoryname, fname)) as infile:
+	with open(os.path.join(directoryname, fname), encoding="utf8") as infile:
 		for line in infile:
 			line = line.strip()
 			if not line:
@@ -26,13 +26,19 @@ for fname in filenames:
 				ability['effects'] = []
 				abilities.append(ability)
 				continue
+
+			print(line)
+
+			# Special case for aghs descriptions, woo good code
+			if (ability and "Scepter - " in line):
+				ability['effects'].append((line[len("Scepter - "):], "Aghanim_Description"))
+				continue
 			
 			if (not ability) or ("(" not in line) or ("(Scepter" in line):
 				continue
 
 			special = any((special_value in line) for special_value in special_values)
 
-			print(line)
 			effect, value = line.split(') :')
 			name, key = effect.split(" (")
 			# print(name)

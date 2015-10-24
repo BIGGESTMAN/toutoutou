@@ -55,7 +55,7 @@ Radius per Dagger (dagger_radius) : 75
 Mana : 70
 Cooldown : 14
 
-[E] Sakuya’s World (sakuyas_world) : Sakuya leaps through frozen time. A knife flies from her initial position to her destination, and she throws another back at it. Each knife deals physical damage to the first enemy hit.
+[E] Sakuya's World (sakuyas_world) : Sakuya leaps through frozen time. A knife flies from her initial position to her destination, and she throws another back at it. Each knife deals physical damage to the first enemy hit.
 DevNotes - Damages mechanical units. Disjoints projectiles.
 
 Cast Point : 0.3
