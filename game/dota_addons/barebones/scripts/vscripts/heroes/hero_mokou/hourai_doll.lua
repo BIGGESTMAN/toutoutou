@@ -38,6 +38,8 @@ function spellCast(keys)
 
 	ability:ApplyDataDrivenModifier(caster, caster, "modifier_hourai_doll_reviving", {})
 	caster:RemoveModifierByName("modifier_hourai_doll_castable")
+
+	ParticleManager:CreateParticle("particles/mokou/hourai_doll_reviving.vpcf", PATTACH_ABSORIGIN, caster)
 end
 
 function revive(keys)

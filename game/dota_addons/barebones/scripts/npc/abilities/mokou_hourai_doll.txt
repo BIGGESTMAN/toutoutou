@@ -9,7 +9,7 @@
 
 		"precache"
 		{
-
+			"particle"					"particles/mokou/hourai_doll_reviving.vpcf"
 		}
 
 		"AbilityCastPoint"				"0"
