@@ -27,7 +27,7 @@
 		"AttackDamageMin"			"22"										// Damage range min.
 		"AttackDamageMax"			"22"										// Damage range max.
 
-		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributePrimary"			"DOTA_ATTRIBUTE_INTELLECT"
 		"AttributeBaseStrength"		"19"										// Base strength
 		"AttributeStrengthGain"		"1.8"										// Strength bonus per level.
 		"AttributeBaseAgility"		"16"										// Base agility

@@ -281,7 +281,7 @@ function fireLaserAt(caster, ability, orb, target)
 	local particle_name = "particles/units/heroes/hero_tinker/tinker_laser.vpcf"
 	local targetDirection = (target:GetAbsOrigin() - orb_location):Normalized()
 
-	local targets = unitsInLine(caster, ability, orb_location, range, radius, targetDirection, true)
+	local targets = unitsInLine(caster, orb_location, range, radius, targetDirection, true)
 
 	--print("laser hit target:", tableContains(targets, target))
 

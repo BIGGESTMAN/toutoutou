@@ -19,7 +19,7 @@ function spellCast(keys)
 	local line_start = target_point + right * -1 * length / 2
 	DebugDrawCircle(line_start, Vector(0,255,255), 1, 30, true, 0.5)
 
-	local targets = unitsInLine(caster, ability, line_start, length, width, right, false, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL)
+	local targets = unitsInLine(caster, line_start, length, width, right, false, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL)
 	if #targets > 0 then
 		echoDamage(caster, damage, damage_type)
 	end
@@ -70,7 +70,7 @@ function echoDamage(caster, damage, damage_type)
 				local right = RotatePosition(Vector(0,0,0), QAngle(0,-90,0), tear.forward)
 				local line_start = tear:GetAbsOrigin() + right * -1 * length / 2
 				local line_end = tear:GetAbsOrigin() + right * length / 2
-				local targets = unitsInLine(caster, ability, line_start, length, width, right, false, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL)
+				local targets = unitsInLine(caster, line_start, length, width, right, false, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL)
 				for _,unit in pairs(targets) do
 					if not tableContains(hit_units, unit) then
 						table.insert(hit_units, unit)

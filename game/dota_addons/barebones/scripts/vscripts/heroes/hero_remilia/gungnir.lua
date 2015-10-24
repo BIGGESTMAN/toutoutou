@@ -26,7 +26,7 @@ function gungnirHit(keys)
 
 	local direction = caster:GetForwardVector()
 
-	local targets = unitsInLine(caster, ability, caster:GetAbsOrigin(), range, radius, direction, true, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES)
+	local targets = unitsInLine(caster, caster:GetAbsOrigin(), range, radius, direction, true, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES)
 	local damage = keys.damage
 
 	local targets_hit = 0

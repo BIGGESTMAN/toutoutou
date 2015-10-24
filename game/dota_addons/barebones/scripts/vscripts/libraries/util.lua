@@ -1,4 +1,4 @@
-function unitsInLine(caster, ability, origin, range, radius, direction, require_forward, target_types, target_flags)
+function unitsInLine(caster, origin, range, radius, direction, require_forward, target_types, target_flags)
 	target_types = target_types or DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
 	target_flags = target_flags or DOTA_UNIT_TARGET_FLAG_NONE
 

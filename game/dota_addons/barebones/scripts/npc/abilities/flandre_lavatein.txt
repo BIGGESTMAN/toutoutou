@@ -1,0 +1,80 @@
+	"lavatein"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+
+		"AbilityTextureName"			"juggernaut_blade_dance"
+
+		"precache"
+		{
+			"particle"					"particles/flandre/lavatein/slash.vpcf"
+		}
+
+		"AbilityCastPoint"				"0.5"
+		"AbilityCooldown"				"10 8 9 7"
+		"AbilityManaCost"				"80 90 100 110"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"90 140 190 240"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"blade_range"			"550 600 650 700"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"blade_radius"			"175"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"1.2"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"illusion_damage_percent"	"75"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"update_interval"		"0.03"
+			}
+		}
+
+		"OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"	"heroes/hero_flandre/lavatein.lua"
+	    		"Function"		"spellCast"
+	    		"Target"		"POINT"
+	    	}
+	    }
+
+	    "Modifiers"
+	    {
+	    	"modifier_lavatein_casting"
+			{
+				"IsHidden"	"0"
+				"Duration"	"%duration"
+
+				"States"
+				{
+					"MODIFIER_STATE_COMMAND_RESTRICTED"		"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+	    }
+	}

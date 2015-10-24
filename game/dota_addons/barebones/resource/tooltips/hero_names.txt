@@ -20,3 +20,4 @@
 		"npc_dota_hero_faceless_void"		"Sakuya"
 		"npc_dota_hero_phoenix"				"Mokou"
 		"npc_dota_hero_disruptor"			"Raiko"
+		"npc_dota_hero_doom_bringer"		"Flandre"
