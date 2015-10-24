@@ -9,7 +9,9 @@
 
 		"precache"
 		{
-			"particle"					"particles/mokou/hourai_doll_reviving.vpcf"
+			"particle"					"particles/mokou/hourai_doll/hourai_doll_reviving_fire_sphere.vpcf"
+			"particle"					"particles/mokou/hourai_doll/hourai_doll_revivable.vpcf"
+			"particle"					"particles/mokou/hourai_doll/revive_explosion.vpcf"
 		}
 
 		"AbilityCastPoint"				"0"

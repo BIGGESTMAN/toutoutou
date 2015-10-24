@@ -192,13 +192,13 @@
 	m_Children =
 	[
 		{
-			m_ChildRef = resource:"particles/mokou/hourai_doll_reviving_a.vpcf"
+			m_ChildRef = resource:"particles/mokou/hourai_doll/hourai_doll_reviving_beam_a.vpcf"
 		},
 		{
-			m_ChildRef = resource:"particles/mokou/hourai_doll_reviving_b.vpcf"
+			m_ChildRef = resource:"particles/mokou/hourai_doll/hourai_doll_reviving_beam_b.vpcf"
 		},
 		{
-			m_ChildRef = resource:"particles/mokou/hourai_doll_reviving_c.vpcf"
+			m_ChildRef = resource:"particles/mokou/hourai_doll/hourai_doll_reviving_beam_c.vpcf"
 		},
 	]
 }

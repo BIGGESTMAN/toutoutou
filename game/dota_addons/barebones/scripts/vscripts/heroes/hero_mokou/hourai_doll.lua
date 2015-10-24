@@ -1,3 +1,5 @@
+require "libraries/animations"
+
 function spellLearned(keys)
 	local ability = keys.caster:FindAbilityByName("hourai_doll")
 	ability:SetLevel(1)
@@ -16,6 +18,8 @@ function damageTaken(keys)
 		caster:AddNoDraw()
 		ability:SetActivated(true)
 		ability.killer = keys.attacker
+
+		ability.revivable_particle = ParticleManager:CreateParticle("particles/mokou/hourai_doll/hourai_doll_revivable.vpcf", PATTACH_ABSORIGIN, caster)
 	end
 end
 
@@ -39,7 +43,9 @@ function spellCast(keys)
 	ability:ApplyDataDrivenModifier(caster, caster, "modifier_hourai_doll_reviving", {})
 	caster:RemoveModifierByName("modifier_hourai_doll_castable")
 
-	ParticleManager:CreateParticle("particles/mokou/hourai_doll_reviving.vpcf", PATTACH_ABSORIGIN, caster)
+	ParticleManager:DestroyParticle(ability.revivable_particle, false)
+	ability.revivable_particle = nil
+	ParticleManager:CreateParticle("particles/mokou/hourai_doll/hourai_doll_reviving_fire_sphere.vpcf", PATTACH_ABSORIGIN, caster)
 end
 
 function revive(keys)
@@ -48,4 +54,7 @@ function revive(keys)
 	caster:SetHealth(caster:GetMaxHealth())
 	caster:SetMana(caster:GetMaxMana())
 	caster:RemoveNoDraw()
+
+	ParticleManager:CreateParticle("particles/mokou/hourai_doll/revive_explosion.vpcf", PATTACH_ABSORIGIN, caster)
+	StartAnimation(caster, {duration=37 / 30, activity=ACT_DOTA_INTRO, rate=1})
 end
