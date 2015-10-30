@@ -13,7 +13,9 @@
 
 		"precache"
 		{
-
+			"particle"					"particles/flandre/there_will_be_none/mark.vpcf"
+			"particle"					"particles/flandre/there_will_be_none/rope.vpcf"
+			"particle"					"particles/flandre/there_will_be_none/bolt.vpcf"
 		}
 
 		"AbilityCastPoint"				"0.5"
