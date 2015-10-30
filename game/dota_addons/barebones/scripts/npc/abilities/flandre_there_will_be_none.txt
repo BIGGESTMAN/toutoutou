@@ -1,0 +1,60 @@
+	"there_will_be_none"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"there_will_be_none"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+
+		"AbilityTextureName"			"lion_finger_of_death"
+
+		"precache"
+		{
+
+		}
+
+		"AbilityCastPoint"				"0.5"
+		"AbilityCooldown"				"100 90 80"
+		"AbilityManaCost"				"100 150 200"
+		"AbilityCastRange"				"500"
+		"AOERadius"						"350"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"hp_percent_as_damage"	"40 50 60"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"mark_duration"			"8 10 12"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"trigger_duration"		"3"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"600"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"scepter_radius"		"350"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"update_interval"		"0.03"
+			}
+		}
+	}
