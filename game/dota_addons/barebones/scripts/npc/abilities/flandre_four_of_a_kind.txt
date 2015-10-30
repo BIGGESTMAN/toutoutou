@@ -1,0 +1,89 @@
+	"four_of_a_kind"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+
+		"AbilityTextureName"			"warlock_upheaval"
+
+		"precache"
+		{
+
+		}
+
+		"AbilityCastPoint"				"0"
+		"AbilityCooldown"				"28"
+		"AbilityManaCost"				"90"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"vanish_duration"		"0.5"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"9 11 13 15"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_dealt"			"21 24 27 30"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_taken"			"400"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"base_attack_time"		"1.6 1.5 1.4 1.3"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_reduction"		"12 13 14 15"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"attacks_angle"			"120"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"distance_between_units"	"150"
+			}
+		}
+
+		"OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"	"heroes/hero_flandre/four_of_a_kind.lua"
+	    		"Function"		"spellCast"
+	    	}
+	    }
+
+	    "Modifiers"
+	    {
+	    	"modifier_four_of_a_kind_passive"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_flandre/four_of_a_kind.lua"
+						"Function"		"createPassiveModifier"
+					}
+				}
+			}
+	    }
+	}

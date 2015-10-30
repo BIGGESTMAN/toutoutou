@@ -1,5 +1,5 @@
 function unitsInLine(caster, origin, range, radius, direction, require_forward, target_types, target_flags)
-	target_types = target_types or DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
+	target_types = target_types or DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL
 	target_flags = target_flags or DOTA_UNIT_TARGET_FLAG_NONE
 
 	local targets = {}
@@ -103,7 +103,7 @@ function GetEnemiesInCone(unit, start_radius, end_radius, end_distance, caster_f
 	-- Find the units
 	local team = unit:GetTeamNumber()
 	local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
-	local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO
+	local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL
 	local iFlag = target_flags or DOTA_UNIT_TARGET_FLAG_NONE
 	local iOrder = FIND_ANY_ORDER
 

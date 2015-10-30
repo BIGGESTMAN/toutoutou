@@ -1,0 +1,141 @@
+	"forbidden_games"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AOE"
+
+		"AbilityTextureName"			"legion_commander_moment_of_courage"
+
+		"precache"
+		{
+			"particle"					"particles/generic_gameplay/generic_stunned.vpcf"
+		}
+
+		"AbilityCastPoint"				"0"
+		"AbilityCooldown"				"0"
+		"AbilityManaCost"				"0"
+		"AOERadius"						"900"
+
+		"AbilityProcsMagicStick" 		"0"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_taken_percent"	"30 40 50 60"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"max_damage"			"100 170 240 310"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movespeed"				"10 15 20 25"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"stun_duration"			"1.0 1.2 1.4 1.6"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"900"
+			}
+		}
+
+	    "Modifiers"
+	    {
+	    	"modifier_forbidden_games_passive"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+
+				"Aura"          	"modifier_forbidden_games_aura"
+				"Aura_Radius"   	"%radius"
+				"Aura_Teams"    	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"Aura_Types"    	"DOTA_UNIT_TARGET_HERO"
+				"Aura_Flags"    	"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+				"Aura_ApplyToCaster" "0"
+
+				"OnTakeDamage"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_flandre/forbidden_games"
+						"Function"		"damageTaken"
+						"damage"		"%attack_damage"
+					}
+				}
+			}
+
+			"modifier_forbidden_games_aura"
+			{
+				"IsHidden"	"1"
+
+				"Attributes"		"MODIFIER_ATTRIBUTE_MULTIPLE"
+
+				"OnTakeDamage"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_flandre/forbidden_games"
+						"Function"		"damageTaken"
+						"damage"		"%attack_damage"
+					}
+				}
+			}
+
+			"modifier_forbidden_games_damage_bonus"
+			{
+				"Attributes"		"MODIFIER_ATTRIBUTE_PERMANENT"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE" "1"
+				}
+
+				"OnAttackLanded"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_flandre/forbidden_games"
+						"Function"		"attackLanded"
+					}
+				}
+			}
+
+			"modifier_forbidden_games_full"
+			{
+				"Attributes"		"MODIFIER_ATTRIBUTE_PERMANENT"
+
+				"IsHidden"	"1"
+
+				"Properties"
+				{
+				    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%movespeed" 
+				}
+			}
+
+			"modifier_forbidden_games_stun"
+			{
+				"IsDebuff"		"1"
+				"IsPurgable"	"1"
+				"IsStunDebuff"	"1"
+
+				"Duration"		"%stun_duration"
+
+				"States"
+				{
+					"MODIFIER_STATE_STUNNED"		"MODIFIER_STATE_VALUE_ENABLED"
+				}
+
+				"EffectName"		"particles/generic_gameplay/generic_stunned.vpcf"
+				"EffectAttachType"	"follow_overhead"
+
+				"OverrideAnimation"		"ACT_DOTA_DISABLED"
+			}
+	    }
+	}
