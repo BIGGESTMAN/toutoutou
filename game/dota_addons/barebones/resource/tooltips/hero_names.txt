@@ -21,3 +21,4 @@
 		"npc_dota_hero_phoenix"				"Mokou"
 		"npc_dota_hero_disruptor"			"Raiko"
 		"npc_dota_hero_doom_bringer"		"Flandre"
+		"npc_dota_hero_bounty_hunter"		"Nazrin"
