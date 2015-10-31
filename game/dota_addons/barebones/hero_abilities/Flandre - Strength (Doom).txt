@@ -73,6 +73,6 @@ Max Health as Pure Damage (hp_percent_as_damage) : 40/50/60%
 Mark Duration (mark_duration) : 8/10/12
 Cast Range : 500
 Search Radius (radius) : 600
-Scepter Mark Radius : 350
+Scepter Mark Radius (aghanim_scepter_radius) : 350
 Mana : 100/150/200
 Cooldown : 100/90/80

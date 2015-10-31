@@ -8,7 +8,7 @@ function there_will_be_none:OnSpellStart()
 		local target = self:GetCursorTarget()
 		local ability = self
 
-		local radius = ability:GetSpecialValueFor("scepter_radius")
+		local radius = ability:GetSpecialValueFor("aghanim_scepter_radius")
 		local update_interval = ability:GetSpecialValueFor("update_interval")
 		local mark_duration = ability:GetSpecialValueFor("mark_duration")
 
@@ -39,5 +39,5 @@ function there_will_be_none:GetBehavior()
 end
 
 function there_will_be_none:GetAOERadius()
-	return self:GetSpecialValueFor("scepter_radius")
+	return self:GetSpecialValueFor("aghanim_scepter_radius")
 end

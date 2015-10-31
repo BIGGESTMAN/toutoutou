@@ -10,7 +10,7 @@ abilities = []
 ability = None
 
 for fname in filenames:
-	with open(os.path.join(directoryname, fname), encoding="utf8") as infile:
+	with open(os.path.join(directoryname, fname), encoding="utf-8") as infile:
 		for line in infile:
 			line = line.strip()
 			if not line:

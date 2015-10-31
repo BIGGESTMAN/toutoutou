@@ -51,7 +51,7 @@
 			"04"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"scepter_radius"		"350"
+				"aghanim_scepter_radius"		"350"
 			}
 			"08"
 			{
