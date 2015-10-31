@@ -35,7 +35,7 @@ function krakenStrikeCast(keys)
 	AddFOWViewer(caster:GetTeamNumber(), target_point, radius, delay + 0.5, false)
 
 	Timers:CreateTimer(delay - particle_delay, function()
-		local particle = ParticleManager:CreateParticle("particles/ichirin/king_kraken_strike.vpcf", PATTACH_POINT_FOLLOW, caster)
+		local particle = ParticleManager:CreateParticle("particles/ichirin/king_kraken_strike.vpcf", PATTACH_POINT, caster)
 		ParticleManager:SetParticleControl(particle, 0, target_point + Vector(0,0,particle_height)) -- Fist spawn position
 		ParticleManager:SetParticleControl(particle, 1, Vector(particle_delay,0,0)) -- Particle duration
 		ParticleManager:SetParticleControl(particle, 2, Vector(0,0,0)) -- Max fist velocity -- set to 0 to freeze for now

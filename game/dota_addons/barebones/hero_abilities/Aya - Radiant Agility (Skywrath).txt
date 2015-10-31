@@ -70,7 +70,6 @@ Gust Radius (radius) : 225
 Mana : 190
 Cooldown : 80/70/60
 Lore (lore) : With a stretch of her wings, Aya is ready to prove that she's the fastest thing alive in Gensokyo.
-Note0 (note0) : Pierces spell immunity.
  
 [D] Illusionary Dominance (illusionary_dominance) : Aya dashes a fixed distance in target direction, attacking all enemies she passes. Whenever she deals physical damage to enemy heroes, the travel speed of this ability increases while the cooldown decreases.
  

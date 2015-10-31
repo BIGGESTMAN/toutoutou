@@ -1,7 +1,7 @@
 	"there_will_be_none"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"there_will_be_none"
+		"ScriptFile"					"heroes/hero_flandre/there_will_be_none"
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"

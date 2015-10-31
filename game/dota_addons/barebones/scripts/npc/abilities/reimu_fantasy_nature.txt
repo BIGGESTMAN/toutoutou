@@ -1,7 +1,7 @@
 	"fantasy_nature"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"fantasy_nature"
+		"ScriptFile"					"heroes/hero_reimu/fantasy_nature"
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"

@@ -1,7 +1,7 @@
 	"into_delirium"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"into_delirium"
+		"ScriptFile"					"heroes/hero_medicine/into_delirium"
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"

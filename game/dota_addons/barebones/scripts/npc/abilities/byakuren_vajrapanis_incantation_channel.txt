@@ -1,7 +1,7 @@
 	"vajrapanis_incantation_channel"
 	{
 		"BaseClass"						"ability_lua"
-		"ScriptFile"					"vajrapanis_incantation_channel"
+		"ScriptFile"					"heroes/hero_byakuren/vajrapanis_incantation_channel"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELED"
 		"AbilityTextureName"			"keeper_of_the_light_illuminate"
 		"MaxLevel" 						"1"
