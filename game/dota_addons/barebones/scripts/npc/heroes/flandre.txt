@@ -56,6 +56,6 @@
 		"AttackAnimationPoint"		"0.59"									// Normalized time in animation cycle to attack.
 		"AttackRange"				"128"									// Range within a target can be attacked.
 		"AttackAcquisitionRange"	"350"									// Range within a target can be acquired.
-		//"ProjectileModel"			"particles/units/heroes/hero_phantom_assassin/phantom_assassin_stifling_dagger.vpcf"							// Particle system model for projectile.
-		//"ProjectileSpeed"			"1100"									// Speed of projectile.
+		"ProjectileModel"			"particles/units/heroes/hero_warlock/warlock_base_attack.vpcf"							// Particle system model for projectile.
+		"ProjectileSpeed"			"1000"									// Speed of projectile.
 	}

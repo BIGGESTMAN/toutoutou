@@ -1,0 +1,78 @@
+Flandre - Strength (Doom)
+
+Base Stats
+
+STR : 25 (+3.2)
+AGI : 20 (+1.2)
+INT : 14 (+1.6)
+Damage : 29-37
+Armor : -2
+Attacks / Second : 0.58
+Movement Speed : 290
+Turn Rate : 0.5
+Sight Range : 1800/800
+Attack Range : Melee
+Missile Speed : Instant
+Attack Duration : 0.59/0.58
+Base Attack Time : 1.9
+
+Lv. 25
+
+STR : 121
+AGI : 68
+INT : 72
+HP : 2449
+Mana : 936
+Damage : 150-158
+Armor : 7.52
+
+[Q] Lävatein (lavatein) : Flandre and her illusions summon molten blades and swing them from left to right, dealing magical damage. Illusions deal 75%% of the damage.
+Spell Immunity - Blocked by Spell Immunity.
+DevNotes - Damages mechanical units. Illusions cancel all their actions, instantly turning to cast Lävatein towards the targeted area. The full swing covers 180 degrees in front of Flandre. Each blade can only hit the same enemy once. The swing cannot be canceled, neither by Flandre or enemies, though she can still be disabled.
+
+Cast Point : 0.5
+Swing Duration (duration) : 1.2
+Magical Damage (damage) : 90/140/190/240
+Blade Range (blade_range) : 550/600/650/700
+Blade Radius : 175
+Mana : 80/90/100/110
+Cooldown : 10/9/8/7
+
+[W] Four of a Kind (four_of_a_kind) : Flandre vanishes for 0.5 seconds and reappears with 3 illusions of herself that always stay by her sides. The illusions launch ranged attacks at random enemies they face. Each illusion reduces the damage Flandre takes by a percentage.
+DevNotes - The illusions and Flandre form a horizontal line, with Flandre randomly taking the place of either of the center two. The illusions have unobstructed movement and attack enemies 120 degrees in front of them while moving. The illusions will attack buildings if there are no other targets. The illusions can be disabled to prevent their attacks and Lävatein casts, but will continue to move with Flandre to remain in formation.
+
+Cast Point : 0
+Illusion Duration (duration) : 9/11/13/15
+Illusion Damage Dealt (damage_dealt) : 21/24/27/30%
+Illusion Damage Taken (damage_taken) : 400%
+Illusion Base Attack Time (base_attack_time) : 1.6/1.5/1.4/1.3
+Damage Reduction per Illusion (damage_reduction) : 12/13/14/15%
+Illusion Attack Range : 500
+Distance Between Illusions : 150
+Mana : 90
+Cooldown : 28
+Note0 (note0) : The damage reduction includes illusions from other sources.
+
+[E] Forbidden Games (forbidden_games) : Whenever Flandre or nearby enemy heroes are damaged, her next attack gains bonus damage based on the damage taken. At maximum damage, Flandre's movement speed increases, and the attack will stun.
+Spell Immunity - The damage pierces Spell Immunity, the stun does not.
+DevNotes - If the attack is against an enemy hero, it does not count towards the bonus damage of the next one. The bonus damage based on the actual damage taken, so after all reductions. HP removal effects like Armlet of Mordiggian don't give bonus damage. The bonus damage works on towers and is applied to crits, lifesteal etc. Flandre's illusions have this passive, based on the damage they or enemy heroes take.
+
+Damage Taken As Attack Bonus (damage_taken_percent) : 30/40/50/60%
+Maximum Attack Damage Bonus (max_damage) : 100/170/240/310
+Move Speed Bonus (movespeed) : 10/15/20/25%
+Stun Duration (stun_duration) : 1/1.2/1.4/1.6
+Search Radius (radius) : 900
+
+[R] And Then Will There Be None? (there_will_be_none) : Flandre marks an enemy hero for destruction. If they stay near her for 3 seconds, they take a massive amount of pure damage based on their maximum health. The time until their destruction is reset whenever they escape the radius.
+Scepter - Marks all enemy heroes in an area instead.
+Spell Immunity - Pierces Spell Immunity. The targeted version is blocked by Linken's Sphere on cast, but the scepter upgrade ignores it.
+DevNotes - If the mark duration ends, nothing happens to marked enemies that are ticking down. 
+
+Cast Point : 0.5
+Max Health as Pure Damage (hp_percent_as_damage) : 40/50/60%
+Mark Duration (mark_duration) : 8/10/12
+Cast Range : 500
+Search Radius (radius) : 600
+Scepter Mark Radius : 350
+Mana : 100/150/200
+Cooldown : 100/90/80

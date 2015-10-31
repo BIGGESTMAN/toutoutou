@@ -320,7 +320,7 @@ function GameMode:OnHeroInGame(hero)
 
 	-- Check for aghanim's (lol.)
 	Timers:CreateTimer(0, function()
-		if hero:HasScepter() then
+		if not hero:IsNull() and hero:HasScepter() then
 		-- for i=0,5 do
 			-- local item = hero:GetItemInSlot(i)
 			-- if item and item:GetName() == "item_ultimate_scepter" then

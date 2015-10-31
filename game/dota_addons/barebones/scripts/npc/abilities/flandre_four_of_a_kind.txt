@@ -46,7 +46,7 @@
 			"08"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"damage_reduction"		"12 13 14 15"
+				"damage_reduction"		"-12 -13 -14 -15"
 			}
 			"08"
 			{
@@ -58,13 +58,28 @@
 				"var_type"				"FIELD_INTEGER"
 				"distance_between_units"	"150"
 			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"illusions"				"3"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"update_interval"		"0.03"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"illusion_range"		"500"
+			}
 		}
 
 		"OnSpellStart"
 	    {
 	    	"RunScript"
 	    	{
-	    		"ScriptFile"	"heroes/hero_flandre/four_of_a_kind.lua"
+	    		"ScriptFile"	"heroes/hero_flandre/four_of_a_kind"
 	    		"Function"		"spellCast"
 	    	}
 	    }
@@ -76,14 +91,64 @@
 				"IsHidden"	"1"
 				"Passive"	"1"
 
-				"OnCreated"
+				"ThinkInterval"  "%update_interval"
+				"OnIntervalThink"
 				{
 					"RunScript"
 					{
-						"ScriptFile"	"heroes/hero_flandre/four_of_a_kind.lua"
-						"Function"		"createPassiveModifier"
+						"ScriptFile"	"heroes/hero_flandre/four_of_a_kind"
+						"Function"		"updateDamageReduction"
 					}
 				}
 			}
+
+			"modifier_four_of_a_kind_damage_reduction"
+			{
+				"IsHidden"	"0"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE" "%damage_reduction"
+				}
+			}
+
+	    	"modifier_four_of_a_kind_vanish"
+	    	{
+				"States"
+				{
+					"MODIFIER_STATE_NO_HEALTH_BAR"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_UNIT_COLLISION"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_OUT_OF_GAME"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_INVULNERABLE"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_STUNNED"				"MODIFIER_STATE_VALUE_ENABLED"
+				}
+	    	}
+
+	    	"modifier_four_of_a_kind_illusion"
+	    	{
+	    		"IsHidden"	"1"
+
+	    		"States"
+	    		{
+	    			"MODIFIER_STATE_ROOTED"					"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_UNIT_COLLISION"		"MODIFIER_STATE_VALUE_ENABLED"
+	    		}
+
+	    		"Properties"
+	    		{
+	    			"MODIFIER_PROPERTY_ATTACK_RANGE_BONUS" "%illusion_range"
+	    			"MODIFIER_PROPERTY_BASE_ATTACK_TIME_CONSTANT"	"%base_attack_time"
+	    		}
+	    	}
+
+	    	"modifier_four_of_a_kind_disarmed"
+	    	{
+	    		"IsHidden"	"1"
+
+	    		"States"
+	    		{
+	    			"MODIFIER_STATE_DISARMED"		"MODIFIER_STATE_VALUE_ENABLED"
+	    		}
+	    	}
 	    }
 	}

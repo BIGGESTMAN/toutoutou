@@ -27,11 +27,11 @@ function spellCast(keys)
 	local origin = caster:GetAbsOrigin()
 	local iTeam = DOTA_UNIT_TARGET_TEAM_FRIENDLY
 	local iType = DOTA_UNIT_TARGET_HERO
-	local iFlag = DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED
+	local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
 	local iOrder = FIND_ANY_ORDER
 	local units = FindUnitsInRadius(team, origin, nil, illusion_search_radius, iTeam, iType, iFlag, iOrder, false)
 	for k,unit in pairs(units) do
-		if (unit:IsIllusion() and unit:GetPlayerID() == caster:GetPlayerID() and unit:IsAlive()) then
+		if unit:IsIllusion() and unit:GetPlayerID() == caster:GetPlayerID() and unit:IsAlive() and not unit:IsStunned() and not unit:IsSilenced() then
 			table.insert(casters, unit)
 		end
 	end
