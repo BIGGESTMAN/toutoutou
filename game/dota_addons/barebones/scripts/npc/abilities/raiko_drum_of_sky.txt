@@ -1,13 +1,13 @@
-	"drum_of_man"
+	"drum_of_sky"
 	{
 		"BaseClass"						"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"MaxLevel"						"5"
 
-		"AbilityTextureName"			"lone_druid_spirit_bear_return"
+		"AbilityTextureName"			"invoker_emp"
 
 		"precache"
 		{
@@ -18,7 +18,7 @@
 		"AbilityCooldown"				"7 6 5 4 3"
 		"AbilityManaCost"				"25 30 35 40 45"
 		"AbilityCastRange"				"400"
-		"AOERadius"						"425"
+		"AOERadius"						"400"
 
 		"AbilityProcsMagicStick" 		"1"
 
@@ -27,22 +27,27 @@
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"bonus_health"			"80 100 120 140"
+				"bonus_mana"			"60 90 120 150 180"
 			}
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"damage_reduction"		"-10 -20 -30 -40 -50"
+				"mana_drained"			"80 110 140 170 200"
 			}
 			"04"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"duration"				"6"
+				"duration"				"3"
 			}
 			"04"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"radius"				"425"
+				"mana_bonus_duration"	"6"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"400"
 			}
 		}
 
@@ -50,46 +55,33 @@
 	    {
 	    	"RunScript"
 	    	{
-	    		"ScriptFile"	"heroes/hero_raiko/drum_of_man"
+	    		"ScriptFile"	"heroes/hero_raiko/drum_of_sky"
 	    		"Function"		"spellCast"
 	    	}
 	    }
 
 	    "Modifiers"
 	    {
-	    	"modifier_drum_of_man_bonus_health"
+	    	"modifier_drum_of_sky_bonus_mana"
 			{
-				"Duration"		"%duration"
+				"Duration"		"%mana_bonus_duration"
 
 				"Properties"
 				{
-					"MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
+					"MODIFIER_PROPERTY_MANA_BONUS" "%bonus_mana"
 				}
 
 				"OnDestroy"
 				{
 					"RunScript"
 					{
-						"ScriptFile"	"heroes/hero_raiko/drum_of_man"
-						"Function"		"healthBonusExpired"
+						"ScriptFile"	"heroes/hero_raiko/drum_of_sky"
+						"Function"		"manaBonusExpired"
 					}
 				}
 			}
 
-	    	"modifier_drum_of_man_damage_reduction"
-			{
-				"IsDebuff"		"1"
-				"IsPurgable"	"1"
-
-				"Duration"		"%duration"
-
-				"Properties"
-				{
-				    "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE" "%damage_reduction" 
-				}
-			}
-
-	    	"modifier_drum_of_man_cast_recently"
+	    	"modifier_drum_of_sky_cast_recently"
 			{
 				"Attributes"		"MODIFIER_ATTRIBUTE_PERMANENT"
 			}

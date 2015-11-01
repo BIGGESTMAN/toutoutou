@@ -1,13 +1,13 @@
-	"drum_of_man"
+	"drum_of_earth"
 	{
 		"BaseClass"						"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"MaxLevel"						"5"
 
-		"AbilityTextureName"			"lone_druid_spirit_bear_return"
+		"AbilityTextureName"			"raiko_drum_of_earth"
 
 		"precache"
 		{
@@ -17,8 +17,7 @@
 		"AbilityCastPoint"				"0.2"
 		"AbilityCooldown"				"7 6 5 4 3"
 		"AbilityManaCost"				"25 30 35 40 45"
-		"AbilityCastRange"				"400"
-		"AOERadius"						"425"
+		"AOERadius"						"400"
 
 		"AbilityProcsMagicStick" 		"1"
 
@@ -27,12 +26,12 @@
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"bonus_health"			"80 100 120 140"
+				"bonus_armor"			"4 6 8 10 12"
 			}
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"damage_reduction"		"-10 -20 -30 -40 -50"
+				"attackspeed_slow"		"-12 -15 -18 -21 -24"
 			}
 			"04"
 			{
@@ -42,7 +41,12 @@
 			"04"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"radius"				"425"
+				"attackspeed_duration"	"3"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"400"
 			}
 		}
 
@@ -50,46 +54,48 @@
 	    {
 	    	"RunScript"
 	    	{
-	    		"ScriptFile"	"heroes/hero_raiko/drum_of_man"
+	    		"ScriptFile"	"heroes/hero_raiko/drum_of_earth"
 	    		"Function"		"spellCast"
 	    	}
 	    }
 
 	    "Modifiers"
 	    {
-	    	"modifier_drum_of_man_bonus_health"
+	    	"modifier_drum_of_earth_armor"
 			{
 				"Duration"		"%duration"
 
 				"Properties"
 				{
-					"MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
+					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
 				}
 
-				"OnDestroy"
+				"OnAttacked"
 				{
-					"RunScript"
+					"ApplyModifier"
 					{
-						"ScriptFile"	"heroes/hero_raiko/drum_of_man"
-						"Function"		"healthBonusExpired"
+						"ModifierName"	"modifier_drum_of_earth_attackspeed_slow"
+						"Target" 		"ATTACKER"
 					}
 				}
 			}
 
-	    	"modifier_drum_of_man_damage_reduction"
+	    	"modifier_drum_of_earth_attackspeed_slow"
 			{
 				"IsDebuff"		"1"
 				"IsPurgable"	"1"
 
-				"Duration"		"%duration"
+				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE"
+
+				"Duration"		"%attackspeed_duration"
 
 				"Properties"
 				{
-				    "MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE" "%damage_reduction" 
+				    "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%attackspeed_slow" 
 				}
 			}
 
-	    	"modifier_drum_of_man_cast_recently"
+	    	"modifier_drum_of_earth_cast_recently"
 			{
 				"Attributes"		"MODIFIER_ATTRIBUTE_PERMANENT"
 			}

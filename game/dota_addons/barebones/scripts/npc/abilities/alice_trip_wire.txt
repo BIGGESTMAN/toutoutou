@@ -14,6 +14,7 @@
 		"AbilityCastRange"				"550"
 		"AbilityCooldown"				"20 17 14 11"
 		"AbilityManaCost"				"115"
+		"CastFilterRejectCaster" 		"1"
 
 		// Precache
 		//-------------------------------------------------------------------------------------------------------------

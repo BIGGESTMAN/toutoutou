@@ -18,7 +18,7 @@ function createWire(keys)
 		end
 	end
 
-	if caster ~= target and not identical_wire then
+	if not identical_wire then
 		local location = (target:GetAbsOrigin() + caster:GetAbsOrigin()) / 2 + Vector(0,0,50)
 		local wire_unit = CreateUnitByName("npc_dota_juggernaut_healing_ward", location, false, caster, caster, caster:GetTeamNumber())
 		ability:ApplyDataDrivenModifier(caster, wire_unit, keys.wire_unit_modifier, {})
@@ -42,9 +42,6 @@ function createWire(keys)
 		ability:ApplyDataDrivenModifier(caster, caster, keys.attach_window_modifier, {})
 
 		ability:ApplyDataDrivenModifier(caster, caster, keys.caster_modifier, {})
-	else
-		caster:SetMana(caster:GetMana() + ability:GetManaCost(ability_level))
-		ability:EndCooldown()
 	end
 end
 
@@ -161,7 +158,7 @@ function attach(keys)
 		end
 	end
 
-	if caster.last_wire[2] ~= target and caster ~= target and wire_distance <= wire_ability:GetLevelSpecialValueFor("max_length", wire_ability:GetLevel() - 1) and not identical_wire then
+	if caster.last_wire[2] ~= target and wire_distance <= wire_ability:GetLevelSpecialValueFor("max_length", wire_ability:GetLevel() - 1) and not identical_wire then
 		caster.last_wire[1] = target
 		local main_ability_name	= keys.main_ability_name
 		local sub_ability_name	= keys.ability:GetAbilityName()

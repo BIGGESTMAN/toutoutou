@@ -19,6 +19,7 @@
 		"AbilityCooldown"				"14"
 		"AbilityManaCost"				"70"
 		"AbilityCastRange"				"600"
+		"CastFilterRejectCaster" 		"1"
 
 		"AbilityProcsMagicStick" 		"1"
 

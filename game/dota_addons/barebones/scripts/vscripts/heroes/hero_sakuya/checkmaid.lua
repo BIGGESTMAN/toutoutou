@@ -2,41 +2,37 @@ function spellCast(keys)
 	local caster = keys.caster
 	local target = keys.target
 	local ability = keys.ability
-	if caster ~= target then
-		caster.checkmaid_target = target
-		local target_location = target:GetAbsOrigin()
 
-		local dagger_count = ability:GetSpecialValueFor("daggers")
-		local radius = ability:GetSpecialValueFor("radius")
+	caster.checkmaid_target = target
+	local target_location = target:GetAbsOrigin()
 
-		ability:ApplyDataDrivenModifier(caster, target, "modifier_checkmaid", {})
-		target.checkmaid_daggers = {}
+	local dagger_count = ability:GetSpecialValueFor("daggers")
+	local radius = ability:GetSpecialValueFor("radius")
 
-		local angle_increment = 360 / dagger_count
-		local prototype_target_point = (target_location - caster:GetAbsOrigin()):Normalized()
-		for i=1, dagger_count do
-			local dagger = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeamNumber())
-			ability:ApplyDataDrivenModifier(caster, dagger, "modifier_checkmaid_dummy", {})
-			ProjectileList:AddProjectile(dagger)
-			table.insert(target.checkmaid_daggers, dagger)
+	ability:ApplyDataDrivenModifier(caster, target, "modifier_checkmaid", {})
+	target.checkmaid_daggers = {}
 
-			local target_point = RotatePosition(Vector(0,0,0), QAngle(0,angle_increment * (i - 1),0), prototype_target_point) * ability:GetSpecialValueFor("radius") + target_location
-			dagger:SetAbsOrigin(target_point)
-			local direction = (target_location - target_point):Normalized()
-			dagger:SetForwardVector(direction)
+	local angle_increment = 360 / dagger_count
+	local prototype_target_point = (target_location - caster:GetAbsOrigin()):Normalized()
+	for i=1, dagger_count do
+		local dagger = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeamNumber())
+		ability:ApplyDataDrivenModifier(caster, dagger, "modifier_checkmaid_dummy", {})
+		ProjectileList:AddProjectile(dagger)
+		table.insert(target.checkmaid_daggers, dagger)
 
-			local particle = ParticleManager:CreateParticle("particles/sakuya/killing_doll_dagger.vpcf", PATTACH_ABSORIGIN_FOLLOW, dagger)
-			ParticleManager:SetParticleControl(particle, 1, target_point + direction)
-		end
+		local target_point = RotatePosition(Vector(0,0,0), QAngle(0,angle_increment * (i - 1),0), prototype_target_point) * ability:GetSpecialValueFor("radius") + target_location
+		dagger:SetAbsOrigin(target_point)
+		local direction = (target_location - target_point):Normalized()
+		dagger:SetForwardVector(direction)
 
-		-- Enable end early ability
-		local main_ability_name	= ability:GetAbilityName()
-		local sub_ability_name	= "checkmaid_end"
-		caster:SwapAbilities(main_ability_name, sub_ability_name, false, true)
-	else
-		ability:RefundManaCost()
-		ability:EndCooldown()
+		local particle = ParticleManager:CreateParticle("particles/sakuya/killing_doll_dagger.vpcf", PATTACH_ABSORIGIN_FOLLOW, dagger)
+		ParticleManager:SetParticleControl(particle, 1, target_point + direction)
 	end
+
+	-- Enable end early ability
+	local main_ability_name	= ability:GetAbilityName()
+	local sub_ability_name	= "checkmaid_end"
+	caster:SwapAbilities(main_ability_name, sub_ability_name, false, true)
 end
 
 function durationEnded(keys)

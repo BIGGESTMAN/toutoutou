@@ -13,6 +13,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.5"
 		"AbilityCastRange"				"550"
+		"CastFilterRejectCaster" 		"1"
 		
 		"OnSpellStart"
 		{
