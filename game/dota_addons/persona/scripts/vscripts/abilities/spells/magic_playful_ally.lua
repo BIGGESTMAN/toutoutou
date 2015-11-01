@@ -1,6 +1,8 @@
+require "personas"
+
 function SpellCast(keys)
 	local caster = keys.caster
-	local ability = keys.ability
+	local ability = CreateDummyAbility(caster, keys.ability)
 	local target = keys.target
 
 	local startParticle = ParticleManager:CreateParticle("particles/spells/magic_playful_ally_start.vpcf", PATTACH_ABSORIGIN, caster)

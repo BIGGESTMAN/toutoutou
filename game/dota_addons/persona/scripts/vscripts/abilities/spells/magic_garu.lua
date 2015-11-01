@@ -1,8 +1,8 @@
-require "libraries/damage_system"
+require "personas"
 
 function SpellCast(keys)
 	local caster = keys.caster
-	local ability = keys.ability
+	local ability = CreateDummyAbility(caster, keys.ability)
 	local target = keys.target
 
 	local damage = caster.activePersona.attributes["mag"] * ability:GetSpecialValueFor("magic_multiplier")

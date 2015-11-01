@@ -1,6 +1,8 @@
+require "personas"
+
 function SpellCast(keys)
 	local caster = keys.caster
-	local ability = keys.ability
+	local ability = CreateDummyAbility(caster, keys.ability)
 
 	local radius = ability:GetSpecialValueFor("radius")
 	local delay = ability:GetSpecialValueFor("delay")

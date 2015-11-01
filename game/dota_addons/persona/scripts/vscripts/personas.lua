@@ -1,5 +1,7 @@
 require "libraries/damage_system"
 
+LinkLuaModifier("modifier_dummy", "modifier_dummy", LUA_MODIFIER_MOTION_NONE )
+
 -- str = damage, mag = intelligence, end = health/hregen, swft = movespeed, dex = attackspeed, range = range
 -- resists: physical, fire, ice, wind, thunder, light, dark
 -- resist values: 0 = normal, -1 = weak, 1 = resist, 2 = block, 3 = absorb
@@ -316,4 +318,15 @@ function resistanceNumberFromType(resistType)
 	else
 		return 0 -- normal
 	end
+end
+
+function CreateDummyAbility(caster, ability)
+	local dummy = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), true, caster, caster, caster:GetTeamNumber())
+	dummy:AddAbility(ability:GetName())
+	dummy:FindAbilityByName(ability:GetName()):SetLevel(ability:GetLevel())
+	dummy:AddNewModifier(caster, ability, "modifier_dummy", {})
+	Timers:CreateTimer(600, function()
+		dummy:RemoveSelf()
+	end)
+	return dummy:GetAbilityByIndex(0)
 end

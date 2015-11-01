@@ -223,7 +223,7 @@ function GameMode:CaptureGameMode()
 		mode:SetStashPurchasingDisabled(true)
 
 		mode:SetModifyExperienceFilter(Dynamic_Wrap(PersonaExp, "ExperienceFilter"), self)
-		mode:SetDamageFilter(Dynamic_Wrap( DamageSystem, "DamageFilter" ), self)
+		mode:SetDamageFilter(Dynamic_Wrap(DamageSystem, "DamageFilter"), self)
 		mode:SetModifyGoldFilter(Dynamic_Wrap(PersonaDrops, "GoldFilter"), self)
 
 		self:OnFirstPlayerLoaded()

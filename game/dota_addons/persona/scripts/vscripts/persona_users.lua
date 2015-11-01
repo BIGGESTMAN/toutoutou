@@ -5,12 +5,10 @@ LinkLuaModifier("modifier_persona_health_bonus", "modifier_persona_health_bonus"
 LinkLuaModifier("modifier_persona_speed_bonus", "modifier_persona_speed_bonus", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier("modifier_persona_attackspeed_bonus", "modifier_persona_attackspeed_bonus", LUA_MODIFIER_MOTION_NONE )
 
-
 function Spawn(keys)
 	local caster = keys.caster
 	local ability = keys.ability
-	local arcana = keys.arcana
-	caster.arcana = arcana
+	caster.arcana = keys.arcana
 	local startingPersona = keys.persona
 
 	local personaItem = CreateItem("item_"..startingPersona, caster, caster)
@@ -24,15 +22,8 @@ function Spawn(keys)
 	caster:CastAbilityImmediately(personaItem, caster:GetPlayerID())
 	personaItem:EndCooldown()
 
-	-- local personaItemAngelTest = CreateItem("item_angel", caster, caster)
-	-- caster:AddItem(personaItemAngelTest)
-	-- personaItemAngelTest = InitializePersona(personaItemAngelTest)
-
 	Setup_Persona_Tooltip(caster)
 end
-
-
-
 
 -- Notify Panorama that the player spawned
 function Setup_Persona_Tooltip(hero)

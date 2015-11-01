@@ -1,6 +1,8 @@
+require "personas"
+
 function SpellCast(keys)
 	local caster = keys.caster
-	local ability = keys.ability
+	local ability = CreateDummyAbility(caster, keys.ability)
 	local target_point = keys.target_points[1]
 
 	local range = ability:GetSpecialValueFor("range")
