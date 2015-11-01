@@ -29,7 +29,10 @@ end
 function modifier_fantasy_nature_alt:OnTakeDamage(params)
 	if IsServer() then
 		local caster = self:GetParent()
-		if params.unit == caster then
+		local ability = self:GetAbility()
+		local target = params.unit
+
+		if target == caster then
 			caster.fantasy_nature_damage_absorbed = caster.fantasy_nature_damage_absorbed + params.damage
 
 			if params.damage_type == DAMAGE_TYPE_PHYSICAL then
@@ -42,6 +45,16 @@ function modifier_fantasy_nature_alt:OnTakeDamage(params)
 			end
 		elseif params.attacker == caster then
 			caster.fantasy_nature_damage_absorbed = caster.fantasy_nature_damage_absorbed + params.damage
+
+			-- Aghs upgrade: Chance to ministun
+			if caster:HasScepter() and not target:IsBuilding() then
+				local stun_chance = ability:GetSpecialValueFor("aghanim_scepter_stun_chance")
+				local stun_duration = ability:GetSpecialValueFor("aghanim_scepter_stun_duration")
+
+				if RandomInt(0, 99) < stun_chance then
+					target:AddNewModifier(caster, ability, "modifier_fantasy_nature_stun", {duration = stun_duration})
+				end
+			end
 		end
 	end
 end

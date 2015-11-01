@@ -64,16 +64,14 @@
 			}
 			"07"
 			{
-				"var_type"				"FIELD_INTEGER"
-				"scepter_cooldown"		"90 80 70"
-				"_value"				"DOTA_Tooltip_Ability_fantasy_nature_Cooldown_Scepter"
+				"var_type"				"FIELD_FLOAT"
+				"aghanim_scepter_stun_chance"	"50"
 
 			}
 			"08"
 			{
-				"var_type"				"FIELD_INTEGER"
-				"scepter_manacost"		"130"
-				"_value"				"DOTA_Tooltip_Ability_fantasy_nature_Mana_Cost_Scepter"
+				"var_type"				"FIELD_FLOAT"
+				"aghanim_scepter_stun_duration"	"0.1"
 
 			}
 		}
