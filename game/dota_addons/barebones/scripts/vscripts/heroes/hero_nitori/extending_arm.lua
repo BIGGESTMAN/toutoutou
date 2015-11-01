@@ -14,7 +14,6 @@ function extendingArmCast(keys)
 	local arrival_distance = 25
 
 	local arm = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeamNumber())
-	ability:ApplyDataDrivenModifier(caster, arm, "modifier_extending_arm_dummy", {})
 	ProjectileList:AddProjectile(arm)
 
 	local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_shredder/shredder_timberchain_rope.vpcf", PATTACH_ABSORIGIN_FOLLOW, arm)

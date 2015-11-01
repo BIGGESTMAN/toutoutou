@@ -105,16 +105,7 @@
 		{
 	    	"modifier_maelstrom"
 	    	{
-	    		"States"
-				{
-					"MODIFIER_STATE_INVULNERABLE"			"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_NO_HEALTH_BAR"			"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_NO_UNIT_COLLISION"		"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_NOT_ON_MINIMAP"			"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_UNSELECTABLE"			"MODIFIER_STATE_VALUE_ENABLED"
-				}
-
-				"ThinkInterval"			"%update_interval"
+	    		"ThinkInterval"			"%update_interval"
 
 				"OnIntervalThink"
 				{

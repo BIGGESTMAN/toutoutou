@@ -42,7 +42,6 @@ function spellCast(keys)
 				local fissure_center = caster:GetAbsOrigin()
 
 				local fissure_dummy = CreateUnitByName("npc_dummy_unit", fissure_center, false, caster, caster, caster:GetTeamNumber())
-				ability:ApplyDataDrivenModifier(caster, fissure_dummy, "modifier_fujiyama_volcano_dummy", {})
 
 				ParticleManager:DestroyParticle(dash_particle, false)
 				local impact_particle = ParticleManager:CreateParticle("particles/mokou/fujiyama_volcano_impact.vpcf", PATTACH_ABSORIGIN, fissure_dummy)

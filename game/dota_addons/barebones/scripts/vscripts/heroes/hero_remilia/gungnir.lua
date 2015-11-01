@@ -69,7 +69,6 @@ function throw(keys)
 	local dummy_speed = speed * 0.03
 
 	local dummy_unit = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeam())
-	ability:ApplyDataDrivenModifier(caster, dummy_unit, "modifier_gungnir_dummy", {})
 	ProjectileList:AddProjectile(dummy_unit)
 	
 	local distance_traveled = 0
@@ -80,7 +79,6 @@ function throw(keys)
 
 
 	dummy_endcap = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeam())
-	ability:ApplyDataDrivenModifier(caster, dummy_endcap, "modifier_gungnir_dummy", {})
 	local endcap_offset = direction * ability:GetLevelSpecialValueFor("penetrate_range", ability_level)
 
 	local particle = ParticleManager:CreateParticle("particles/remilia/spear_throw.vpcf", PATTACH_POINT_FOLLOW, dummy_unit)

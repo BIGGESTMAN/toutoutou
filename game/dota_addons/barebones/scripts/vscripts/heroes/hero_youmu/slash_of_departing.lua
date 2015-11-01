@@ -55,7 +55,6 @@ function spellCast(keys)
 
 		-- Create cast particles
 		local dummy_unit = CreateUnitByName("npc_dummy_unit", ally:GetAbsOrigin(), false, caster, caster, caster:GetTeam())
-		ability:ApplyDataDrivenModifier(caster, dummy_unit, "modifier_slash_of_departing_dummy", {})
 		Timers:CreateTimer(2,function()
 			dummy_unit:RemoveSelf()
 		end)

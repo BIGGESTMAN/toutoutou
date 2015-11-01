@@ -13,7 +13,6 @@ function spellCast(keys)
 	local damage_type = ability:GetAbilityDamageType()
 
 	local tornado = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeamNumber())
-	ability:ApplyDataDrivenModifier(caster, tornado, "modifier_opening_wind_projectile", {})
 	ProjectileList:AddProjectile(tornado)
 
 	local particle = ParticleManager:CreateParticle("particles/aya/opening_wind_tornado.vpcf", PATTACH_ABSORIGIN_FOLLOW, tornado)

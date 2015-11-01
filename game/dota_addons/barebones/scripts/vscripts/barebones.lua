@@ -412,6 +412,10 @@ function GameMode:OnNPCSpawned(keys)
 		npc.bFirstSpawned = true
 		GameMode:OnHeroInGame(npc)
 	end
+
+	if npc:HasAbility("reflex_dummy_unit") then
+		npc:FindAbilityByName("reflex_dummy_unit"):SetLevel(1)
+	end
 end
 
 -- An entity somewhere has been hurt.  This event fires very often with many units so don't do too many expensive

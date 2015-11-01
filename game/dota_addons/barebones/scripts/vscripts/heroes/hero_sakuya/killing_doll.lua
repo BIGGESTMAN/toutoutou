@@ -32,7 +32,6 @@ function spellCast(keys)
 		local units_hit = {}
 
 		local knife = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeamNumber())
-		ability:ApplyDataDrivenModifier(caster, knife, "modifier_killing_doll_dummy", {})
 		ProjectileList:AddProjectile(knife)
 
 		local particle = ParticleManager:CreateParticle("particles/sakuya/killing_doll_dagger.vpcf", PATTACH_ABSORIGIN_FOLLOW, knife)

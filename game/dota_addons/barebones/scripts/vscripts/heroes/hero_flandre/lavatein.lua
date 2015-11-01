@@ -1,7 +1,5 @@
 require "libraries/util"
 
--- LinkLuaModifier("modifier_dummy", "modifier_dummy.lua", LUA_MODIFIER_MOTION_NONE )
-
 function spellCast(keys)
 	local caster = keys.caster
 	local ability = keys.ability
@@ -46,8 +44,6 @@ function spellCast(keys)
 
 		unit:SetForwardVector(unit.lavatein_overall_direction)
 
-		-- local particle_dummy = CreateUnitByName("npc_dummy_unit", unit:GetAbsOrigin(), false, caster, caster, caster:GetTeamNumber())
-		-- particle_dummy:AddNewModifier(unit, ability, "modifier_dummy", {})
 		local particle = ParticleManager:CreateParticle("particles/flandre/lavatein/slash.vpcf", PATTACH_ABSORIGIN, unit)
 		-- local initial_sword_location = RotatePosition(Vector(0,0,0), QAngle(0,swing_angle / 2,0), unit.lavatein_overall_direction) * 800
 		-- DebugDrawCircle(initial_sword_location + unit:GetAbsOrigin(), Vector(255,0,0), 1, blade_radius, true, 2)

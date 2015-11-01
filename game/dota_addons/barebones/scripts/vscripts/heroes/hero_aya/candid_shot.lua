@@ -6,6 +6,8 @@ function candidShot(keys)
 	local ability_level = ability:GetLevel() - 1
 
 	local particle_duration = 0.5
+	local vision_radius = ability:GetSpecialValueFor("vision")
+	local vision_duration = ability:GetSpecialValueFor("vision_duration")
 	local width = ability:GetLevelSpecialValueFor("width", ability_level)
 	local height = ability:GetLevelSpecialValueFor("height", ability_level)
 	local aoe_loss_from_range = ability:GetLevelSpecialValueFor("aoe_loss_from_range", ability_level)
@@ -18,13 +20,8 @@ function candidShot(keys)
 	local target_points = {}
 	local angles = {}
 
-	-- Create vision dummy
-	local vision_dummy = CreateUnitByName("npc_dummy_blank", target_location, false, caster, caster, caster_team)
-	ability:ApplyDataDrivenModifier(caster, vision_dummy, "modifier_vision_dummy", {})
-
-	Timers:CreateTimer(ability:GetLevelSpecialValueFor("vision_duration", ability_level),function()
-		vision_dummy:RemoveSelf()
-	end)
+	-- Provide vision
+	AddFOWViewer(caster:GetTeamNumber(), target_location, vision_radius, vision_duration, false)
 
 	-- 1,2,3,4 is forward,right,back,left
 	angles[1] = caster:GetForwardVector()
@@ -44,7 +41,6 @@ function candidShot(keys)
 	corner_points[4] = target_points[4] + angles[1] * height / 2
 
 	-- Cosmetic variables
-	local dummy_modifier = keys.dummy_modifier
 	local wall_particle = keys.wall_particle
 	local duration = ability:GetLevelSpecialValueFor("delay", ability_level)
 
@@ -57,8 +53,7 @@ function candidShot(keys)
 			connecting_point = corner_points[1]
 		end
 
-		local dummy = CreateUnitByName("npc_dummy_blank", point, false, caster, caster, caster_team)
-		ability:ApplyDataDrivenModifier(caster, dummy, dummy_modifier, {})
+		local dummy = CreateUnitByName("npc_dummy_unit", point, false, caster, caster, caster_team)
 
 		-- Create the wall particle
 		local wall_particle = ParticleManager:CreateParticle(wall_particle, PATTACH_POINT_FOLLOW, dummy)

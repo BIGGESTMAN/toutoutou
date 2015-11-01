@@ -8,7 +8,6 @@ function darkSideOfTheMoon(keys)
 	local radius = ability:GetSpecialValueFor("radius")
 
 	local dummy_unit = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeam())
-	ability:ApplyDataDrivenModifier(caster, dummy_unit, keys.dummy_modifier, {})
 	ProjectileList:AddProjectile(dummy_unit)
 
 	local particle = ParticleManager:CreateParticle(keys.particle_name, PATTACH_ABSORIGIN_FOLLOW, dummy_unit)

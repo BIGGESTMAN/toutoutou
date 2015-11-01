@@ -156,8 +156,6 @@ function indrasThunderCast(keys)
 		local particle = ParticleManager:CreateParticle(particle, PATTACH_ABSORIGIN, unit)
 		ParticleManager:SetParticleControlEnt(particle, 0, unit, PATTACH_ABSORIGIN, "attach_origin", unit:GetAbsOrigin(), true)
 		ParticleManager:ReleaseParticleIndex(particle) -- no idea if this line is necessary
-
-		ability:ApplyDataDrivenModifier(caster, unit, keys.bead_modifier, {})
 		
 		-- Add the spawned unit to the table
 		table.insert(dummy_projectile.beads, unit)

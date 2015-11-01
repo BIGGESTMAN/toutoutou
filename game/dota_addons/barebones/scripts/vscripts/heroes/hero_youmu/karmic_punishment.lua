@@ -39,14 +39,12 @@ function spellCast(keys)
 
 	-- Create cast particles
 	local slash_dummy = CreateUnitByName("npc_dummy_unit", target:GetAbsOrigin(), false, caster, caster, caster:GetTeam())
-	ability:ApplyDataDrivenModifier(caster, slash_dummy, "modifier_karmic_punishment_dummy", {})
 	Timers:CreateTimer(2,function()
 		slash_dummy:RemoveSelf()
 	end)
 	ParticleManager:CreateParticle("particles/youmu/karmic_punishment_slash.vpcf", PATTACH_ABSORIGIN, slash_dummy)
 
 	local swirl_dummy = CreateUnitByName("npc_dummy_unit", target:GetAbsOrigin(), false, caster, caster, caster:GetTeam())
-	ability:ApplyDataDrivenModifier(caster, swirl_dummy, "modifier_karmic_punishment_dummy", {})
 	local vertical_offset = 700
 	local start_radius = 100
 	local end_radius = 25

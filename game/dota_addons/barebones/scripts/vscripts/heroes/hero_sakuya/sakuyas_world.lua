@@ -30,7 +30,6 @@ function spellCast(keys)
 	local daggers = {}
 	for i=1,2 do
 		local dagger = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeamNumber())
-		ability:ApplyDataDrivenModifier(caster, dagger, "modifier_sakuyas_world_dummy", {})
 		ProjectileList:AddProjectile(dagger)
 		table.insert(daggers, dagger)
 	end

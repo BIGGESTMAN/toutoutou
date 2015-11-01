@@ -15,7 +15,6 @@ function spellCast(keys)
 	local update_interval = ability:GetSpecialValueFor("update_interval")
 
 	local dummy = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeamNumber())
-	ability:ApplyDataDrivenModifier(caster, dummy, "modifier_flash_flood_dummy", {})
 
 	dummy.elapsed_duration = 0
 

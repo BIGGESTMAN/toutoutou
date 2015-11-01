@@ -19,7 +19,6 @@ function virudhakasSwordCast(keys)
 	local speed = ability:GetLevelSpecialValueFor("speed", ability_level)
 
 	local dummy_projectile = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeam())
-	ability:ApplyDataDrivenModifier(caster, dummy_projectile, keys.projectile_modifier, {})
 	dummy_projectile.units_hit = {}
 
 	local target_location = target:GetAbsOrigin()

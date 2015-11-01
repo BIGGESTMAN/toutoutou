@@ -16,7 +16,6 @@ function spellCast(keys)
 	local prototype_target_point = (target_location - caster:GetAbsOrigin()):Normalized()
 	for i=1, dagger_count do
 		local dagger = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeamNumber())
-		ability:ApplyDataDrivenModifier(caster, dagger, "modifier_checkmaid_dummy", {})
 		ProjectileList:AddProjectile(dagger)
 		table.insert(target.checkmaid_daggers, dagger)
 

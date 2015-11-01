@@ -71,7 +71,6 @@ function dealDamage(keys)
 		local speed = ability:GetLevelSpecialValueFor("shard_speed", ability_level) * 0.03
 
 		local shard = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeamNumber())
-		ability:ApplyDataDrivenModifier(caster, shard, "modifier_super_ice_kick_dummy", {})
 
 		local particle = ParticleManager:CreateParticle("particles/cirno/ice_kick_shard.vpcf", PATTACH_ABSORIGIN_FOLLOW, shard)
 		-- ParticleManager:SetParticleControlEnt(particle, 0, shard, PATTACH_POINT_FOLLOW, "attach_hitloc", shard:GetAbsOrigin(), true)

@@ -14,7 +14,6 @@ function spellCast(keys)
 	local arrival_distance = 15
 
 	local bubble = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeamNumber())
-	ability:ApplyDataDrivenModifier(caster, bubble, "modifier_bubble_dragon_dummy", {})
 	ProjectileList:AddProjectile(bubble)
 
 	local particle = ParticleManager:CreateParticle("particles/nitori/bubble_dragon.vpcf", PATTACH_ABSORIGIN_FOLLOW, bubble)

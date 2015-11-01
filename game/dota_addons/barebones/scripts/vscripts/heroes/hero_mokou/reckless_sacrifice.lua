@@ -74,7 +74,6 @@ function updateFlameParticles(keys)
 
 	while flame_stacks > #target.reckless_flame_particle_dummies do
 		local dummy = CreateUnitByName("npc_dummy_unit", target:GetAbsOrigin(), false, target, target, target:GetTeamNumber())
-		ability:ApplyDataDrivenModifier(target, dummy, "modifier_reckless_sacrifice_dummy", {})
 		dummy.particle = ParticleManager:CreateParticle("particles/mokou/reckless_sacrifice/flame.vpcf", PATTACH_ABSORIGIN, dummy)
 		ParticleManager:SetParticleControlEnt(dummy.particle, 0, dummy, PATTACH_POINT_FOLLOW, "attach_origin", dummy:GetAbsOrigin(), true)
 		table.insert(target.reckless_flame_particle_dummies, dummy)

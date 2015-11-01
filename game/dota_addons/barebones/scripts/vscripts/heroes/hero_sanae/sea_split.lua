@@ -9,7 +9,6 @@ function seaSplitStart(keys)
 	local range = ability:GetLevelSpecialValueFor("range", ability_level)
 
 	local dummy_unit = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeam())
-	ability:ApplyDataDrivenModifier(caster, dummy_unit, "modifier_sea_split_dummu", {})
 	ProjectileList:AddProjectile(dummy_unit)
 
 	local target_point = keys.target_points[1]

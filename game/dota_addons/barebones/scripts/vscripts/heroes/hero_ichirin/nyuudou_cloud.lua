@@ -46,7 +46,6 @@ function punch(caster, ability, origin, direction)
 	local particle_start_offset = direction * -400
 
 	local dummy_unit = CreateUnitByName("npc_dummy_unit", punch_origin, false, caster, caster, caster:GetTeam())
-	ability:ApplyDataDrivenModifier(caster, dummy_unit, "modifier_nyuudou_cloud_dummy", {})
 	
 	local distance_traveled = 0
 	dummy_unit.units_hit = {}
