@@ -32,7 +32,7 @@ DevNotes - The tear and echo both damage mechanical units. The tear is always cr
 
 Cast Point : 0.2
 Magical Damage (damage) : 90/140/190/240
-Move Speed Slow (slow) : 20/25/30/35%
+%Move Speed Slow (slow) : 20/25/30/35%
 Gash Duration (duration) : 14
 Cast Range : 500/575/650/725
 Gash Length (tear_length) : 500 
@@ -44,8 +44,8 @@ Cooldown : 6
 DevNotes - The passive is recovered when the active duration ends.
 
 Cast Point : 0
-Dodge Chance (evasion) : 25/30/35/40%
-Move Speed Bonus (movespeed) : 12/15/18/21%
+%Dodge Chance (evasion) : 25/30/35/40%
+%Move Speed Bonus (movespeed) : 12/15/18/21%
 Attack Speed Bonus (attackspeed) : 30/45/60/75
 Attack Damage Bonus (bonus_damage) : 30/40/50/60
 Duration (duration) : 10
@@ -77,8 +77,8 @@ DevNotes - Can target and damage mechanical units. The stun and vanishing occurs
 
 Cast Point : 0.2
 Number of Illusions (illusions) : 6/7/8
-Damage per Illusion (illusion_damage_percent) : 90/115/130%
-Illusion Damage Taken (illusion_damage_taken) : 550/450/350%
+%Damage per Illusion (illusion_damage_percent) : 90/115/130%
+%Illusion Damage Taken (illusion_damage_taken) : 550/450/350%
 Stun Duration (stun_duration) : 1.5
 Vanish Duration (vanish_duration) : 0.5
 Travel Speed (charge_speed) : 3000

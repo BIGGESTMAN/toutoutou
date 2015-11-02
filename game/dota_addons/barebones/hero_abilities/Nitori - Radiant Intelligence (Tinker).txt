@@ -61,10 +61,10 @@ DevNotes - The area where the deluge will occur is indicated during the delay wi
 Cast Point : 0.3
 Duration (duration) : 6/7/8/9
 Magical Damage Per Second (damage) : 22/28/34/40
-Move Speed Slow (slow) : 12/16/20/24%
-Move Speed Slow Increase Per Second (slow_increase) : 4/5/6/7%
-Magical Damage Increase (damage_amp) : 10/12/14/16%
-Magical Damage Increase Per Second (damage_amp_increase) : 2/3/4/5%
+%Move Speed Slow (slow) : 12/16/20/24%
+%Move Speed Slow Increase Per Second (slow_increase) : 4/5/6/7%
+%Magical Damage Increase (damage_amp) : 10/12/14/16%
+%Magical Damage Increase Per Second (damage_amp_increase) : 2/3/4/5%
 Cast Range : 1500
 Radius (radius) : 575/650/725/800
 Mana : 110/120/130/140

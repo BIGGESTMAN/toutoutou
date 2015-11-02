@@ -54,7 +54,7 @@ Note0 (note0) : The gusts will target enemies in the fog of war, but not invisib
 Minimum Bonus Attack Damage (minimum_damage) : 10
 Maximum Bonus Attack Damage (maximum_damage) : 60/130/200/270
 Maximum Damage Distance (max_damage_distance) : 1500
-Move Speed Bonus (movespeed) : 8/12/16/20%
+%Move Speed Bonus (movespeed) : 8/12/16/20%
 Lore (lore) : After leveling his home and the ancient sequoia, the North Wind tore off the traveler's cloak.
 Note0 (note0) : The minimum bonus damage is 10.
  

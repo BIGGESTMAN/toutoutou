@@ -48,7 +48,7 @@ Cooldown : 8
 Cast Point : 0.4
 Outer Magical Damage (outer_barrier_damage) : 40/60/80/100
 Inner Magical Damage (inner_barrier_damage) : 80/120/160/200
-Move Speed Slow (movespeed_slow) : 25%
+%Move Speed Slow (movespeed_slow) : 25%
 Attack Speed Slow (attackspeed_slow) : 60
 Slow Linger Duration : 0.5
 Barrier Duration (barrier_duration) : 5/6/7/8
@@ -62,7 +62,7 @@ Cooldown : 25/22/19/16
 Spell Immunity - The orbs bounce on and off spell immune units, but don't silence.
 DevNotes - The orbs have a travel speed of 1000. Works like Moon Glaive, doesn't apply attack modifiers on bounces etc.
 
-Initial Damage (base_damage) : 50/55/60/65%
+%Initial Damage (base_damage) : 50/55/60/65%
 Silence Duration (silence_duration) : 0.8
 Bounces (bounces) : 2/3/4/5
 Range (bonus_range_tooltip) : 320/360/400/440
@@ -77,8 +77,8 @@ DevNotes - The damage is split into five intervals, per 0.2 seconds. The scepter
 
 Cast Point : 0.4
 Base Physical Damage (base_damage) : 100
-Damage Dealt/Received/Avoided As Physical Damage (bonus_damage_percent) : 60/80/100%
-Scepter Stun Chance (aghanim_scepter_stun_chance) : 50%
+%Damage Dealt/Received/Avoided As Physical Damage (bonus_damage_percent) : 60/80/100%
+%Scepter Stun Chance (aghanim_scepter_stun_chance) : 50%
 Scepter Stun Duration (aghanim_scepter_stun_duration) : 0.1
 Duration (duration) : 6/8/10
 Radius (radius) : 450

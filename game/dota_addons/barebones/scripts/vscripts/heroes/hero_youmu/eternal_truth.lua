@@ -5,7 +5,7 @@ function spellCast(keys)
 	local ability = keys.ability
 	local ability_level = ability:GetLevel() - 1
 	local target_point = keys.target_points[1]
-	DebugDrawCircle(target_point, Vector(0,255,0), 1, 30, true, 0.5)
+	-- DebugDrawCircle(target_point, Vector(0,255,0), 1, 30, true, 0.5)
 
 	local damage = ability:GetSpecialValueFor("damage")
 	local damage_type = ability:GetAbilityDamageType()
@@ -17,7 +17,7 @@ function spellCast(keys)
 	local forward = (target_point - caster:GetAbsOrigin()):Normalized()
 	local right = RotatePosition(Vector(0,0,0), QAngle(0,-90,0), forward)
 	local line_start = target_point + right * -1 * length / 2
-	DebugDrawCircle(line_start, Vector(0,255,255), 1, 30, true, 0.5)
+	-- DebugDrawCircle(line_start, Vector(0,255,255), 1, 30, true, 0.5)
 
 	local targets = unitsInLine(caster, line_start, length, width, right, false, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL)
 	if #targets > 0 then

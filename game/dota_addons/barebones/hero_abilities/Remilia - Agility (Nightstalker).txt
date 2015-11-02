@@ -48,7 +48,7 @@ Cooldown : 10 {Scepter : 6}
 [W] Curse of Vlad Tepes (vlad_tepes) : Remilia gives in to her thirst, healing herself for a portion of all damage she deals.
 
 Cast Point : 0.2
-Lifesteal (lifesteal_percent) : 55/70/85/100%
+%Lifesteal (lifesteal_percent) : 55/70/85/100%
 Duration (duration) : 6
 Lore (lore) : The Scarlet Devil feeds like an animal, bathing in the blood of her prey.
 Mana : 75
@@ -57,8 +57,8 @@ Cooldown : 19/16/13/10 {Scepter : 6}
 [E] Scarlet Destiny (scarlet_destiny) : Toggle. While active, Remilia consumes a charge with each attack, causing it to deal critical damage while never missing. She also consumes a charge whenever she would take physical or magical damage over a threshold based on her current health, evading it instead.
 DevNotes - The evade works like Backtrack. The first time this ability is skilled, 1 charge is given.
  
-Critical Damage (crit_damage) : 150/180/210/240%
-Current Health Threshold (health_threshold) : 8%
+%Critical Damage (crit_damage) : 150/180/210/240%
+%Current Health Threshold (health_threshold) : 8%
 Number of Charges (max_charges) : 4/6/8/10
 Recharge Time (recharge_time) : 8
 Note0 (note0) : Most debuffs and disables from evaded attacks and abilities are still applied.

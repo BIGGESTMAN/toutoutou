@@ -32,7 +32,7 @@ DevNotes - Both impact and fissure damages mechanical units. The damage is dealt
 
 Cast Point : 0.1
 Fissure Total Magical Damage (fissure_total_damage) : 150/210/270/330
-Fissure Move Speed Slow (slow) : 35/40/45/50%
+%Fissure Move Speed Slow (slow) : 35/40/45/50%
 Fissure Duration (duration) : 6
 Travel Speed (travel_speed) : 1500
 Cast Range : 1100
@@ -58,13 +58,13 @@ Spell Immunity - Damage and cast are blocked by Spell Immunity. Linken's Sphere 
 DevNotes - Can't target and doesn't damage mechanical units. No initial damage. The damage is determined by her current health at the time of each instance, meaning it changes if her health fluctuates. Casting an ability while the effect is active will reset the duration. Activates off ALL her abilities, including Hourai Doll. When cast on an enemy hero, they will take the maximum damage. The cast version is based on Mokou's health, not the target's. 
 
 Cast Point : 0.1
-Minimum Missing Health as Magical Damage per Second (damage_percent_min) : 4/5/6/7%
-Maximum Missing Health as Magical Damage per Second (damage_percent_max) : 8/10/12/14%
+%Minimum Missing Health as Magical Damage per Second (damage_percent_min) : 4/5/6/7%
+%Maximum Missing Health as Magical Damage per Second (damage_percent_max) : 8/10/12/14%
 Cast Duration (active_duration) : 8
 Cast Range : 750
 Radius (radius) : 500
 Max Damage Radius (full_damage_radius) : 150
-Current Health as Cost (health_cost_percent) : 15%
+%Current Health as Cost (health_cost_percent) : 15%
 Mana : 60
 Cooldown : 25/22/19/16
 

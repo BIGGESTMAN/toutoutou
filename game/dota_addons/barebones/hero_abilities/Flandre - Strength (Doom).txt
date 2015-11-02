@@ -43,10 +43,10 @@ DevNotes - The illusions and Flandre form a horizontal line, with Flandre random
 
 Cast Point : 0
 Illusion Duration (duration) : 9/11/13/15
-Illusion Damage Dealt (damage_dealt) : 21/24/27/30%
-Illusion Damage Taken (damage_taken) : 400%
+%Illusion Damage Dealt (damage_dealt) : 21/24/27/30%
+%Illusion Damage Taken (damage_taken) : 400%
 Illusion Base Attack Time (base_attack_time) : 1.6/1.5/1.4/1.3
-Damage Reduction per Illusion (damage_reduction) : 12/13/14/15%
+%Damage Reduction per Illusion (damage_reduction) : 12/13/14/15%
 Illusion Attack Range : 500
 Distance Between Illusions : 150
 Mana : 90
@@ -57,9 +57,9 @@ Note0 (note0) : The damage reduction includes illusions from other sources.
 Spell Immunity - The damage pierces Spell Immunity, the stun does not.
 DevNotes - If the attack is against an enemy hero, it does not count towards the bonus damage of the next one. The bonus damage based on the actual damage taken, so after all reductions. HP removal effects like Armlet of Mordiggian don't give bonus damage. The bonus damage works on towers and is applied to crits, lifesteal etc. Flandre's illusions have this passive, based on the damage they or enemy heroes take.
 
-Damage Taken As Attack Bonus (damage_taken_percent) : 30/40/50/60%
+%Damage Taken As Attack Bonus (damage_taken_percent) : 30/40/50/60%
 Maximum Attack Damage Bonus (max_damage) : 100/170/240/310
-Move Speed Bonus (movespeed) : 10/15/20/25%
+%Move Speed Bonus (movespeed) : 10/15/20/25%
 Stun Duration (stun_duration) : 1/1.2/1.4/1.6
 Search Radius (radius) : 900
 
@@ -69,7 +69,7 @@ Spell Immunity - Pierces Spell Immunity. The targeted version is blocked by Link
 DevNotes - If the mark duration ends, nothing happens to marked enemies that are ticking down. 
 
 Cast Point : 0.5
-Max Health as Pure Damage (hp_percent_as_damage) : 40/50/60%
+%Max Health as Pure Damage (hp_percent_as_damage) : 40/50/60%
 Mark Duration (mark_duration) : 8/10/12
 Cast Range : 500
 Search Radius (radius) : 600

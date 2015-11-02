@@ -15,7 +15,7 @@
 		}
 
 		"AbilityCastPoint"				"0.5"
-		"AbilityCooldown"				"10 8 9 7"
+		"AbilityCooldown"				"10 9 8 7"
 		"AbilityManaCost"				"80 90 100 110"
 
 		"AbilityProcsMagicStick" 		"1"

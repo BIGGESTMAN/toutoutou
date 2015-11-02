@@ -47,7 +47,7 @@ DevNotes - The duration of each stack is independent, and at maximum stacks a ne
 Cast Point : 0.2
 Stack Duration (stack_duration) : 10
 Bonus Attack Speed per Stack (attack_speed) : 12/16/20/24
-Bonus Move Speed per Stack (move_speed) : 3/5/7/9%
+%Bonus Move Speed per Stack (move_speed) : 3/5/7/9%
 Base Active Duration (active_duration_base) : 5
 Duration Increase per Stack (active_duration_bonus) : 1/1.5/2/2.5
 Note0 (note0) : The duration of each stack is independent, and at maximum stacks a new stack replaces the oldest one.
@@ -72,7 +72,7 @@ DevNotes - There is a 0.5 second delay between the Foreseeing Nyuudou Cloud stri
 Cast Point : 0.6
 Duration (duration) : 25
 Damage Absorbed (shield_amount) : 400/650/900
-King Kraken Strike Root Duration Increase (kraken_root_duration_increase) : 20/30/40%
+%King Kraken Strike Root Duration Increase (kraken_root_duration_increase) : 20/30/40%
 King Kraken Strike Radius Increase (kraken_radius_increase) : 75/125/175
 Scepter Damage Absorbed Increase per Strength : 7
 Lore (lore) : In the thickest of fights, Unzan honors his promise to protect Ichirin through thick and thin.
@@ -84,7 +84,7 @@ Spell Immunity - Secondary bolts spawn for Spell Immune units, but have no effec
 DevNotes - Can't be disjointed.
  
 Magical Damage : 100/170/240
-Move Speed Slow : 25/35/45%
+%Move Speed Slow : 25/35/45%
 Slow Duration : 2
 Autumn Storm Clouds Delay Between Bolts : 0.8
 Bolt Travel Speed : 700

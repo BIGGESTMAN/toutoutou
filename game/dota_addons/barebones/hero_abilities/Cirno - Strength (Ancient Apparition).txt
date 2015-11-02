@@ -31,7 +31,7 @@ DevNotes - The hailstorm doesn't follow the enemy. The eye is the area in the ce
 
 Cast Point : 0.4
 Magical Damage per Second (damage_per_second) : 50/60/70/80
-Move Speed Slow (slow) : 15/20/25/30%
+%Move Speed Slow (slow) : 15/20/25/30%
 Area Duration (duration) : 3/4/5/6
 Range : 600
 Eye Radius (center_radius) : 100
@@ -55,7 +55,7 @@ Cooldown : 13
 [E] Cold Divinity (cold_divinity) : Enemies that attack or stay near Cirno for too long are chilled, slowing their movement and attack speed. The chill lasts 4 seconds and stacks up to 5 times.
 DevNotes - The stacks are not separate and are removed all at once when they expire.
 
-Move Speed Slow (movespeed_slow) : 8/9/10/11%
+%Move Speed Slow (movespeed_slow) : 8/9/10/11%
 Attack Speed Slow (attackspeed_slow) : 12/14/16/18
 Time to Chill (application_time) : 3.5/3/2.5/2
 Radius : 400
@@ -68,7 +68,7 @@ Spell Immunity - The kick pierces Spell Immunity, the shrapnel does not. Linken'
 DevNotes - The shrapnel is released in a circle around Cirno and doesn't hit the kick target. The kick deals initial damage. The stun does not linger.
 
 Cast Point : 0.4
-Attack Damage as Physical Damage (physical_damage_scaling) : 60/70/80%
+%Attack Damage as Physical Damage (physical_damage_scaling) : 60/70/80%
 Magical Damage per Shard (shard_damage) : 30
 Shards per Half Second (shards) : 8/12/16
 Mini-Root Duration (root_duration) : 0.1
