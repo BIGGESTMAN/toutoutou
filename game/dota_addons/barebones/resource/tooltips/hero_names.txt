@@ -22,3 +22,4 @@
 		"npc_dota_hero_disruptor"			"Raiko"
 		"npc_dota_hero_doom_bringer"		"Flandre"
 		"npc_dota_hero_bounty_hunter"		"Nazrin"
+		"npc_dota_hero_necrolyte"			"Komachi"
