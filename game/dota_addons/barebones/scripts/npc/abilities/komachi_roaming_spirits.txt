@@ -1,0 +1,86 @@
+	"roaming_spirits"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+
+		"AbilityTextureName"			"komachi_roaming_spirits"
+
+		"precache"
+		{
+			"particle"					"particles/komachi/roaming_spirits/flame.vpcf"
+		}
+
+		"AbilityCastPoint"				"0.5"
+		"AbilityCooldown"				"9 8 7 6"
+		"AbilityManaCost"				"90 100 110 120"
+		"AbilityCastRange"				"400"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"105 160 215 270"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_damage_percent"	"20"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"healing"				"21 32 43 54"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"flame_count"			"5"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_flames"			"1"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"6"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"flame_area_radius"		"325"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"flame_spill_time"		"0.5"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"flame_radius"			"80"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"update_interval"		"0.03"
+			}
+		}
+
+		"OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"	"heroes/hero_komachi/roaming_spirits.lua"
+	    		"Function"		"spellCast"
+	    	}
+	    }
+	}
