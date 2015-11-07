@@ -1,0 +1,136 @@
+	"thundercloud_stickleback"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+
+		"AbilityTextureName"			"razor_plasma_field"
+
+		"precache"
+		{
+
+		}
+
+		"AbilityCastPoint"				"0.3"
+		"AbilityCooldown"				"24 21 18 15"
+		"AbilityManaCost"				"120 140 160 180"
+		"AbilityCastRange"				"600"
+		"AOERadius"						"450"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"6"
+			}
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"450"
+			}
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"initial_damage"		"25 30 35 40"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"explosion_damage"		"35 50 65 80"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"slow"					"-40"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"slow_duration"			"1"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"knockback_range"		"400 450 500 550"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"knockback_duration"	"0.2"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_interval"		"1.5"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"update_interval"		"0.03"
+			}
+		}
+
+		"OnSpellStart"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"	"heroes/hero_iku/thundercloud_stickleback"
+	    		"Function"		"spellCast"
+	    	}
+	    }
+
+	    "Modifiers"
+	    {
+	    	"modifier_thundercloud_stickleback"
+	    	{
+	    		"IsDebuff"		"1"
+	    		"IsPurgable"	"1"
+
+	    		"Duration"	"%duration"
+
+	    		"ThinkInterval"  "%damage_interval"
+	    		"OnIntervalThink"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_iku/thundercloud_stickleback"
+	    				"Function"		"explode"
+	    			}
+	    		}
+	    	}
+
+	    	"modifier_thundercloud_stickleback_knockback"
+	    	{
+	    		"IsDebuff"		"1"
+
+	    		"Duration"		"%knockback_duration"
+
+	    		"States"
+	    		{
+	    			"MODIFIER_STATE_STUNNED"				"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_UNIT_COLLISION"		"MODIFIER_STATE_VALUE_ENABLED"
+	    		}
+
+				"OverrideAnimation"     "ACT_DOTA_FLAIL"
+	    	}
+
+	    	"modifier_thundercloud_stickleback_slow"
+	    	{
+	    		"IsDebuff"		"1"
+	    		"IsPurgable"	"1"
+
+	    		"Duration"		"%slow_duration"
+
+	    		"Properties"
+	    		{
+	    		    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%slow" 
+	    		}
+	    	}
+	    }
+	}
