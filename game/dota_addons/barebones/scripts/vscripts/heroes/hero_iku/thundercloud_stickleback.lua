@@ -35,10 +35,10 @@ function explode(keys)
 	DebugDrawCircle(origin, Vector(0,0,255), 1, radius, true, 0.75)
 
 	for k,unit in pairs(targets) do
-		if unit ~= target then
-			ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
-			ability:ApplyDataDrivenModifier(caster, unit, "modifier_thundercloud_stickleback_slow", {})
+		ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
+		ability:ApplyDataDrivenModifier(caster, unit, "modifier_thundercloud_stickleback_slow", {})
 
+		if unit ~= target then
 			local direction = (unit:GetAbsOrigin() - target:GetAbsOrigin()):Normalized()
 			local target_range = knockback_range
 			local distance_traveled = 0

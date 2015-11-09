@@ -1,6 +1,7 @@
 print ('[BAREBONES] barebones.lua' )
 
 require "projectile_list"
+require "damage_filter"
 
 -- GameRules Variables
 ENABLE_HERO_RESPAWN = true              -- Should the heroes automatically respawn on a timer or stay dead until manually respawned
@@ -215,9 +216,12 @@ function GameMode:CaptureGameMode()
 		mode:SetGoldSoundDisabled( DISABLE_GOLD_SOUNDS )
 		mode:SetRemoveIllusionsOnDeath( REMOVE_ILLUSIONS_ON_DEATH )
 
-		self:OnFirstPlayerLoaded()
-
 		setupProjectileList()
+
+		-- mode:SetTrackingProjectileFilter(Dynamic_Wrap(ProjectileList, "TrackingProjectileCreated"), self)
+		mode:SetDamageFilter(Dynamic_Wrap(DamageFilter, "DamageFilter"), self)
+
+		self:OnFirstPlayerLoaded()
 	end
 end
 

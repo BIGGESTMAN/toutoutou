@@ -1,7 +1,6 @@
 there_will_be_none = class({})
 LinkLuaModifier("modifier_there_will_be_none_mark", "heroes/hero_flandre/modifier_there_will_be_none_mark.lua", LUA_MODIFIER_MOTION_NONE )
 
-
 function there_will_be_none:OnSpellStart()
 	if IsServer() then
 		local caster = self:GetCaster()

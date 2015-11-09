@@ -1,0 +1,158 @@
+	"veils_like_sky"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+
+		"AbilityTextureName"			"riki_smoke_screen"
+
+		"precache"
+		{
+			"particle"					"particles/generic_gameplay/generic_stunned.vpcf"
+		}
+
+		"AbilityCastPoint"				"0"
+		"AbilityCooldown"				"12 10 8 6"
+		"AbilityManaCost"				"50"
+		"AOERadius"						"550"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"evasion"				"35 50 65 80"
+			}
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"stationary_deactivate_time"	"1"
+			}
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"deactivate_duration"	"5 4 3 2"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"magic_dodge_duration"	"2"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"100 180 260 340"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"stun_duration"			"1.5"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"550"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"update_interval"		"0.03"
+			}
+		}
+
+		"OnSpellStart"
+	    {
+	    	"ApplyModifier"
+	    	{
+	    		"ModifierName"	"modifier_veils_like_sky_magic_dodge"
+	    		"Target" 		"CASTER"
+	    	}
+	    }
+
+	    "Modifiers"
+	    {
+	    	"modifier_veils_like_sky_tracker_datadriven"
+	    	{
+	    		"Passive"		"1"
+	    		"IsHidden"		"1"
+
+	    		"ThinkInterval"  "%update_interval"
+	    		"OnIntervalThink"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_iku/veils_like_sky"
+	    				"Function"		"updateMovement"
+	    			}
+	    		}
+
+	    		"OnAbilityExecuted"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_iku/veils_like_sky"
+	    				"Function"		"abilityExecuted"
+	    			}
+	    		}
+	    	}
+
+	    	"modifier_veils_like_sky_evasion"
+	    	{
+
+	    	}
+
+	    	"modifier_veils_like_sky_evasion_disabled"
+	    	{
+	    		"IsDebuff"	"1"
+
+	    		"Duration"	"%deactivate_duration"
+
+	    		"OnDestroy"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_iku/veils_like_sky"
+	    				"Function"		"evasionDisabledExpiration"
+	    			}
+	    		}
+	    	}
+
+	    	"modifier_veils_like_sky_magic_dodge"
+	    	{
+	    		"Duration"	"%magic_dodge_duration"
+
+	    		"OnDestroy"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_iku/veils_like_sky"
+	    				"Function"		"magicDodgeRemoved"
+	    			}
+	    		}
+	    	}
+
+	    	"modifier_veils_like_sky_stun"
+	    	{
+	    		"IsDebuff"		"1"
+	    		"IsPurgable"	"1"
+	    		"IsStunDebuff"	"1"
+
+	    		"Duration"		"%stun_duration"
+
+	    		"States"
+	    		{
+	    			"MODIFIER_STATE_STUNNED"				"MODIFIER_STATE_VALUE_ENABLED"
+	    		}
+
+				"EffectName"		"particles/generic_gameplay/generic_stunned.vpcf"
+				"EffectAttachType"	"follow_overhead"
+
+				"OverrideAnimation"     "ACT_DOTA_DISABLED"
+	    	}
+	    }
+	}
