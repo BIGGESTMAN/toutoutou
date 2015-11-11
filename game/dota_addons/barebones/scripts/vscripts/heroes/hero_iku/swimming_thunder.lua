@@ -6,6 +6,10 @@ function spellCast(keys)
 	local sphere = CreateUnitByName("npc_dummy_unit", caster:GetOrigin(), false, caster, caster, caster:GetTeamNumber())
 	ability:ApplyDataDrivenModifier(caster, sphere, "modifier_swimming_thunder_sphere", {})
 	ParticleManager:CreateParticle("particles/units/heroes/hero_stormspirit/stormspirit_ball_lightning.vpcf", PATTACH_ABSORIGIN_FOLLOW, sphere)
+	if caster:HasModifier("modifier_elekiter_dragon_palace_active") then
+		sphere.elekiter = true
+		caster:RemoveModifierByName("modifier_elekiter_dragon_palace_active")
+	end
 
 	charge(sphere, caster, ability, target, true)
 
@@ -18,10 +22,9 @@ function spellCast(keys)
 		local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
 		local iOrder = FIND_ANY_ORDER
 		local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
-		DebugDrawCircle(origin, Vector(0,255,0), 1, radius, true, 1)
 
 		for k,unit in pairs(targets) do
-			if unit ~= target then
+			if unit ~= target and caster:CanEntityBeSeenByMyTeam(unit) then
 				local scepter_sphere = CreateUnitByName("npc_dummy_unit", caster:GetOrigin(), false, caster, caster, caster:GetTeamNumber())
 				ability:ApplyDataDrivenModifier(caster, scepter_sphere, "modifier_swimming_thunder_sphere", {})
 				ParticleManager:CreateParticle("particles/units/heroes/hero_stormspirit/stormspirit_ball_lightning.vpcf", PATTACH_ABSORIGIN_FOLLOW, scepter_sphere)
@@ -45,7 +48,6 @@ function updateSphere(keys)
 		local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
 		local iOrder = FIND_ANY_ORDER
 		local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
-		DebugDrawCircle(origin, Vector(255,0,255), 1, radius, true, 0.03)
 
 		for k,unit in pairs(targets) do
 			ability:ApplyDataDrivenModifier(sphere, unit, "modifier_swimming_thunder_attack_checker", {})
@@ -59,8 +61,19 @@ function unitAttacked(keys)
 	local ability = keys.ability
 	local attacker = keys.attacker
 	local sphere = attacker:FindModifierByName("modifier_swimming_thunder_attack_checker").sphere
-	if sphere and IsValidEntity(sphere) and not sphere.cooldown and not sphere.charging then
+	if sphere and IsValidEntity(sphere) and not sphere.cooldown and not sphere.charging and not sphere.elekiter then
 		charge(sphere, caster, ability, attacker, false)
+	end
+end
+
+function unitCastAbility(keys)
+	local caster = keys.caster
+	local ability = keys.ability
+	local unit = keys.unit
+	local ability_executed = keys.event_ability
+	local sphere = unit:FindModifierByName("modifier_swimming_thunder_attack_checker").sphere
+	if sphere and IsValidEntity(sphere) and not sphere.cooldown and not sphere.charging and sphere.elekiter and not ability_executed:IsItem() then
+		charge(sphere, caster, ability, unit, false)
 	end
 end
 
@@ -85,6 +98,8 @@ function charge(sphere, caster, ability, target, initial, scepter)
 
 	local arrival_distance = speed / 2 + 5
 
+	ProjectileList:AddProjectile(sphere)
+
 	Timers:CreateTimer(0, function()
 		if not sphere:IsNull() then
 			if not target:IsNull() then target_location = target:GetAbsOrigin() end
@@ -102,7 +117,6 @@ function charge(sphere, caster, ability, target, initial, scepter)
 				local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
 				local iOrder = FIND_ANY_ORDER
 				local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
-				DebugDrawCircle(origin, Vector(0,0,255), 1, radius, true, 0.3)
 
 				for k,unit in pairs(targets) do
 					if not units_hit[unit] then
@@ -123,7 +137,6 @@ function charge(sphere, caster, ability, target, initial, scepter)
 				local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
 				local iOrder = FIND_ANY_ORDER
 				local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
-				DebugDrawCircle(origin, Vector(0,0,255), 1, radius, true, 0.75)
 
 				for k,unit in pairs(targets) do
 					ApplyDamage({victim = unit, attacker = caster, damage = area_damage, damage_type = damage_type})
@@ -132,6 +145,8 @@ function charge(sphere, caster, ability, target, initial, scepter)
 				if initial then ability:ApplyDataDrivenModifier(caster, sphere, "modifier_swimming_thunder_duration", {}) end
 				if not sphere:HasModifier("modifier_swimming_thunder_duration") or scepter then sphere:RemoveSelf() end
 				sphere.charging = false
+
+				ProjectileList:RemoveProjectile(sphere)
 			end
 		end
 	end)
@@ -147,4 +162,12 @@ function durationExpired(keys)
 	if not sphere.charging then
 		sphere:RemoveSelf()
 	end
+end
+
+function upgradeDragonPalace(keys)
+	local caster = keys.caster
+	local ability = keys.ability
+
+	local dragon_palace_ability = caster:FindAbilityByName("elekiter_dragon_palace")
+	dragon_palace_ability:SetLevel(ability:GetLevel())
 end

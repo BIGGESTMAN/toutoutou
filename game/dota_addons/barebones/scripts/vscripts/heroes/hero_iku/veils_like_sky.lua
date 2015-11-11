@@ -1,3 +1,5 @@
+LinkLuaModifier("modifier_veils_like_sky_windburn", "heroes/hero_iku/modifier_veils_like_sky_windburn.lua", LUA_MODIFIER_MOTION_NONE )
+
 function updateMovement(keys)
 	local caster = keys.caster
 	local ability = keys.ability
@@ -48,6 +50,36 @@ function evasionDisabledExpiration(keys)
 	local ability = keys.ability
 
 	ability:ApplyDataDrivenModifier(caster, caster, "modifier_veils_like_sky_evasion", {})
+end
+
+function spellCast(keys)
+	local caster = keys.caster
+	local ability = keys.ability
+
+	if not caster:HasModifier("modifier_elekiter_dragon_palace_active") then
+		ability:ApplyDataDrivenModifier(caster, caster, "modifier_veils_like_sky_magic_dodge", {})
+	else
+		caster:RemoveModifierByName("modifier_elekiter_dragon_palace_active")
+		local damage = ability:GetSpecialValueFor("elekiter_damage")
+		local damage_type = ability:GetAbilityDamageType()
+		local duration = ability:GetSpecialValueFor("elekiter_duration")
+
+		local team = caster:GetTeamNumber()
+		local origin = caster:GetAbsOrigin()
+		local radius = ability:GetSpecialValueFor("radius")
+		local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
+		local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL
+		local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
+		local iOrder = FIND_ANY_ORDER
+		local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
+		DebugDrawCircle(origin, Vector(0,0,255), 1, radius, true, 0.5)
+
+		for k,unit in pairs(targets) do
+			ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
+			ability:ApplyDataDrivenModifier(caster, unit, "modifier_veils_like_sky_windburn_stun", {})
+			unit:AddNewModifier(caster, ability, "modifier_veils_like_sky_windburn", {duration = duration})
+		end
+	end
 end
 
 function magicDodgeRemoved(keys)

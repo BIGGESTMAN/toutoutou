@@ -1,0 +1,107 @@
+Iku - Intelligence (Zeus)
+
+Base Stats
+
+STR : 20 (+2.1)
+AGI : 13 (+1.1)
+INT : 26 (+2.8)
+Damage : 37-43
+Armor : 1
+Attacks / Second : 0.58
+Movement Speed : 285
+Turn Rate : 0.4
+Sight Range : 1800/800
+Attack Range : Melee
+Missile Speed : Instant
+Attack Duration : 0.6/0.3
+Base Attack Time : 1.7
+
+Lv. 25
+
+STR : 90
+AGI : 59
+INT : 113
+HP : 1860
+Mana : 1469
+Damage : 150-156
+Armor : 9.26
+
+[Q] Dragon's Gleaming Eyes (dragons_gleaming_eyes) : Electrically binds an enemy with the enemy closest to them, dealing magical damage to both. They take magical damage each second that increases the further the distance between them is. The bindings are removed if they stand next to each other for 3 seconds.\n<font color='#DC143C'>Elekiter Dragon Palace:</font> <font color='#F08080'>Deals increased damage the closer the binded enemies are and breaks when they move away from each other.</font>
+Spell Immunity - Cast blocked by Spell Immunity. Only Spell Immune targets block the damage, not their pair. Linken's Sphere blocks on cast only if they're the main target.
+Dev Notes - Initial damage, then maximum of 8 instances, 1 per second. The time to remove is reset when the targets move out of range of each other.
+
+Cast Point : 0.3
+Max Duration (duration) : 8
+Initial Magical Damage (initial_damage) : 40/80/120/160
+Maximum Magical Damage (max_damage_per_second) : 50/65/80/95
+Minimum Magical Damage (min_damage_per_second) : 20/25/30/35
+Cast Range : 700
+Maximum Damage Range (max_damage_range) : 700
+Minimum Damage & Removal Range (min_damage_range) : 250
+Search Radius (secondary_target_radius) : 600
+Mana : 110
+Cooldown : 13
+Dragon Palace Maximum Damage Range : 350
+Dragon Palace Minimum Damage & Break Range : 900
+
+[W] Thundercloud Stickleback (thundercloud_stickleback) : Iku turns a hero into a living thundercloud for 6 seconds, dealing some initial magical damage if they are an enemy. Every 1.5 seconds, they emit an explosive discharge that slows movement and deals magical damage, as well as knocking back enemies near that hero.\n<font color='#DC143C'>Elekiter Dragon Palace:</font> <font color='#F08080'>Explodes only once, but sucks all enemies hit in.</font>
+Spell Immunity - Blocked by Spell Immunity. Blocked by Linken's Sphere on cast.
+DevNotes - The knockback is always 450 and away from the target, regardless of the distance between the two.
+
+Cast Point : 0.3
+Initial Magical Damage (initial_damage) : 25/30/35/40
+Explosion Magical Damage (explosion_damage) : 35/50/65/80
+%Move Speed Slow (slow) : 40% 
+Slow Duration (slow_duration) : 1
+Cast Range : 600
+Knockback Range (knockback_range) : 400/450/500/550
+Radius (radius) : 450
+Mana : 120/140/160/180
+Cooldown : 24/21/18/15
+Dragon Palace Pull Radius : 400/450/500/550
+
+[E] Veils Like Sky (veils_like_sky) : Iku manipulates air currents, gaining a high chance to evade all physical damage. The evasion is disabled when Iku casts an ability or doesn't move for 1 second. On activation, Iku evades the next instance of magical damage and counters with a punishing shock, dealing magical damage to all nearby enemies and stunning.\n<font color='#DC143C'>Elekiter Dragon Palace:</font> <font color='#F08080'>Windburns enemies, mini-stunning them each second while dealing magical damage until they deal magical damage to Iku.</font>
+Spell Immunity - Blocked by Spell Immunity.
+
+Cast Point : 0
+Disable Duration (deactivate_duration) : 5/4/3/2
+%Physical Dodge Chance (evasion) : 35/50/65/80%
+Magical Dodge Duration (magic_dodge_duration) : 2
+Magical Damage (damage) : 100/180/260/340
+Stun Duration (stun_duration) : 1.5
+Radius (radius) : 550
+Mana : 50
+Cooldown : 12/10/8/6
+Dragon Palace Maximum Duration : 6
+Dragon Palace Ministun Duration : 0.1
+Dragon Palace Maximum Damage : 140/245/350/455
+
+[R] Swimming Thunder (swimming_thunder) : Fires spherical lightning at an enemy hero, dealing magical damage to them and in an area around them, as well as to enemies in its path. Whenever an enemy hero attacks, the sphere charges at them, dealing the same amount of damage.\n<font color='#DC143C'>Elekiter Dragon Palace:</font> <font color='#F08080'>The sphere charges whenever an enemy hero casts a spell.</font>
+Scepter - Fires additional spheres at all enemies in range that move slowly and disappear on hit.
+Spell Immunity - Cast blocked by Spell Immunity, and sphere ignores attacks made by Spell Immune units. Linken's Sphere only blocks the first impact.
+DevNotes - The spheres have 1200 range flying vision and can't be disjointed. The target of each charge takes full damage. Sphere duration begins on first impact. The primary sphere ignores all attacks made while it charges. The charge cooldown begins at flight.
+
+Cast Point : 0.3
+Magical Damage (target_damage) : 80/120/160
+Area Magical Damage (area_damage) : 120/180/240
+Travel Magical Damage (passthrough_damage) : 80/110/140
+Sphere Duration (duration) : 8/10/12
+Charge Cooldown (charge_cooldown) : 1
+Cast Range : 800
+Impact Damage Radius (area_damage_radius) : 250
+Travel Damage Radius (passthrough_damage_radius) : 175
+Search Radius (charge_search_radius) : 1200
+Travel Speed (speed) : 1800
+Scepter Spheres Travel Speed (aghanim_scepter_speed) : 600
+Mana : 190/310/430
+Cooldown : 70/60/50
+
+[D] Elekiter Dragon Palace (elekiter_dragon_palace) : Iku consumes a charge to strike a pose that <font color='#DC143C'>modifies</font> her next ability.
+DevNotes - Dragon's Gleaming Eyes breaks when the targets are 900 or greater distance away from each other for 1 second. Veils Like Sky deals 20/35/50/65 damage and ministuns per instance, with an initial instance for a maximum of 7 instances. Modified abilities should have a different color scheme, blue and red possibly.
+
+Cast Point : 0.6
+Duration (duration) : 14
+Number of Charges (max_charges) : 1/2/3
+Charge Restore Time (charge_restore_time) : 30
+Mana : 30
+Cooldown : 1

@@ -100,7 +100,24 @@
 	    			"RunScript"
 	    			{
 	    				"ScriptFile"	"heroes/hero_iku/thundercloud_stickleback"
-	    				"Function"		"explode"
+	    				"Function"		"normalExplode"
+	    			}
+	    		}
+	    	}
+
+	    	"modifier_thundercloud_stickleback_elekiter"
+	    	{
+	    		"IsDebuff"		"1"
+	    		"IsPurgable"	"1"
+
+	    		"Duration"	"%damage_interval"
+
+	    		"OnDestroy"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_iku/thundercloud_stickleback"
+	    				"Function"		"elekiterExplode"
 	    			}
 	    		}
 	    	}

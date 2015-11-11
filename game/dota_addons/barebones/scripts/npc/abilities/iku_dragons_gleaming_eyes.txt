@@ -74,6 +74,21 @@
 				"var_type"				"FIELD_FLOAT"
 				"update_interval"		"0.03"
 			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"elekiter_max_damage_range"	"350"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"elekiter_min_damage_range"	"900"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"elekiter_removal_time"	"1"
+			}
 		}
 
 		"OnSpellStart"

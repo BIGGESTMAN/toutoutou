@@ -14,6 +14,14 @@ function spellCast(keys)
 	local damage_interval = ability:GetSpecialValueFor("damage_interval")
 	local update_interval = ability:GetSpecialValueFor("update_interval")
 
+	local elekiter = caster:HasModifier("modifier_elekiter_dragon_palace_active")
+	if elekiter then
+		max_damage_range = ability:GetSpecialValueFor("elekiter_max_damage_range")
+		min_damage_range = ability:GetSpecialValueFor("elekiter_min_damage_range")
+		removal_time = ability:GetSpecialValueFor("elekiter_removal_time")
+		caster:RemoveModifierByName("modifier_elekiter_dragon_palace_active")
+	end
+
 	local secondary_target = nil
 
 	local team = caster:GetTeamNumber()
@@ -39,7 +47,10 @@ function spellCast(keys)
 			if not target:IsNull() and target:HasModifier("modifier_dragons_gleaming_eyes_bound") and
 			not secondary_target:IsNull() and secondary_target:HasModifier("modifier_dragons_gleaming_eyes_bound") then
 				local distance = (target:GetAbsOrigin() - secondary_target:GetAbsOrigin()):Length2D()
-				if distance <= min_damage_range then
+
+				local in_range = distance > min_damage_range
+				if elekiter then in_range = distance < min_damage_range end
+				if not in_range then
 					time_nearby = time_nearby + update_interval
 					if time_nearby >= removal_time then
 						target:RemoveModifierByName("modifier_dragons_gleaming_eyes_bound")
@@ -54,11 +65,21 @@ function spellCast(keys)
 				if time_since_damage >= damage_interval then
 					time_since_damage = time_since_damage - damage_interval
 					local damage = min_damage_per_second
-					if distance > min_damage_range then
-						if distance < max_damage_range then
-							damage = damage + (max_damage_per_second - min_damage_per_second) * (distance - min_damage_range) / (max_damage_range - min_damage_range)
-						else
-							damage = max_damage_per_second
+					if not elekiter then
+						if distance > min_damage_range then
+							if distance < max_damage_range then
+								damage = damage + (max_damage_per_second - min_damage_per_second) * (distance - min_damage_range) / (max_damage_range - min_damage_range)
+							else
+								damage = max_damage_per_second
+							end
+						end
+					else
+						if distance < min_damage_range then
+							if distance > max_damage_range then
+								damage = damage + (max_damage_per_second - min_damage_per_second) * (1 - (distance - max_damage_range) / (min_damage_range - max_damage_range))
+							else
+								damage = max_damage_per_second
+							end
 						end
 					end
 					ApplyDamage({victim = target, attacker = caster, damage = damage, damage_type = damage_type})

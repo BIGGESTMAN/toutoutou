@@ -63,14 +63,34 @@
 				"var_type"				"FIELD_FLOAT"
 				"update_interval"		"0.03"
 			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"elekiter_damage"		"20 35 50 65"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"elekiter_duration"		"6"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"elekiter_stun_duration"	"0.1"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"elekiter_damage_interval"	"1"
+			}
 		}
 
 		"OnSpellStart"
 	    {
-	    	"ApplyModifier"
+	    	"RunScript"
 	    	{
-	    		"ModifierName"	"modifier_veils_like_sky_magic_dodge"
-	    		"Target" 		"CASTER"
+	    		"ScriptFile"	"heroes/hero_iku/veils_like_sky"
+	    		"Function"		"spellCast"
 	    	}
 	    }
 
@@ -143,6 +163,25 @@
 	    		"IsStunDebuff"	"1"
 
 	    		"Duration"		"%stun_duration"
+
+	    		"States"
+	    		{
+	    			"MODIFIER_STATE_STUNNED"				"MODIFIER_STATE_VALUE_ENABLED"
+	    		}
+
+				"EffectName"		"particles/generic_gameplay/generic_stunned.vpcf"
+				"EffectAttachType"	"follow_overhead"
+
+				"OverrideAnimation"     "ACT_DOTA_DISABLED"
+	    	}
+
+	    	"modifier_veils_like_sky_windburn_stun"
+	    	{
+	    		"IsDebuff"		"1"
+	    		"IsPurgable"	"1"
+	    		"IsStunDebuff"	"1"
+
+	    		"Duration"		"%elekiter_stun_duration"
 
 	    		"States"
 	    		{

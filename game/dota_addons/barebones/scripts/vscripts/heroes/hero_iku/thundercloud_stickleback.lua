@@ -6,17 +6,26 @@ function spellCast(keys)
 	local damage = ability:GetSpecialValueFor("initial_damage")
 	local damage_type = ability:GetAbilityDamageType()
 
-	ability:ApplyDataDrivenModifier(caster, target, "modifier_thundercloud_stickleback", {})
+	if not caster:HasModifier("modifier_elekiter_dragon_palace_active") then
+		ability:ApplyDataDrivenModifier(caster, target, "modifier_thundercloud_stickleback", {})
+	else
+		ability:ApplyDataDrivenModifier(caster, target, "modifier_thundercloud_stickleback_elekiter", {})
+		caster:RemoveModifierByName("modifier_elekiter_dragon_palace_active")
+	end
 	if target:GetTeamNumber() ~= caster:GetTeamNumber() then
 		ApplyDamage({victim = target, attacker = caster, damage = damage, damage_type = damage_type})
 	end
 end
 
-function explode(keys)
-	local caster = keys.caster
-	local ability = keys.ability
-	local target = keys.target
+function normalExplode(keys)
+	explode(keys.caster, keys.ability, keys.target, false)
+end
 
+function elekiterExplode(keys)
+	explode(keys.caster, keys.ability, keys.target, true)
+end
+
+function explode(caster, ability, target, elekiter)
 	local radius = ability:GetSpecialValueFor("radius")
 	local damage = ability:GetSpecialValueFor("explosion_damage")
 	local damage_type = ability:GetAbilityDamageType()
@@ -41,6 +50,10 @@ function explode(keys)
 		if unit ~= target then
 			local direction = (unit:GetAbsOrigin() - target:GetAbsOrigin()):Normalized()
 			local target_range = knockback_range
+			if elekiter then
+				direction = direction * -1
+				target_range = (unit:GetAbsOrigin() - target:GetAbsOrigin()):Length2D()
+			end
 			local distance_traveled = 0
 
 			ability:ApplyDataDrivenModifier(caster, unit, "modifier_thundercloud_stickleback_knockback", {})
@@ -58,7 +71,7 @@ function explode(keys)
 						distance_traveled = distance_traveled + speed
 						return update_interval
 					else
-						FindClearSpaceForUnit(unit, unit:GetAbsOrigin(), false)
+						FindClearSpaceForUnit(unit, unit:GetAbsOrigin(), elekiter)
 						unit:RemoveModifierByName("modifier_thundercloud_stickleback_knockback")
 					end
 				end

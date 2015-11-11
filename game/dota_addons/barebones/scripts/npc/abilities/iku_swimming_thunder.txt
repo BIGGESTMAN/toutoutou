@@ -87,6 +87,15 @@
 			}
 		}
 
+		"OnUpgrade"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/hero_iku/swimming_thunder"
+				"Function"		"upgradeDragonPalace"
+			}
+		}
+
 		"OnSpellStart"
 	    {
 	    	"RunScript"
@@ -148,6 +157,15 @@
 	    			{
 	    				"ScriptFile"	"heroes/hero_iku/swimming_thunder"
 	    				"Function"		"unitAttacked"
+	    			}
+	    		}
+
+	    		"OnAbilityExecuted"
+	    		{
+	    			"RunScript"
+	    			{
+	    				"ScriptFile"	"heroes/hero_iku/swimming_thunder"
+	    				"Function"		"unitCastAbility"
 	    			}
 	    		}
 	    	}
