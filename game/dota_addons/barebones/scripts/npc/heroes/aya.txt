@@ -60,5 +60,7 @@
 		"AttackRange"				"128"									// Range within a target can be attacked.
 		"ProjectileModel"			"melee_hero"							// Particle system model for projectile.
 		//"ProjectileSpeed"			"900"									// Speed of projectile.
-
+		"Model"						"models/aya/aya_mmd.vmdl"						// Model.
+		"ItemSlots"
+		{ }
 	}

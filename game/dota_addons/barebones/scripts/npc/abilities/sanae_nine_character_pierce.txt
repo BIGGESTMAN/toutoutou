@@ -10,7 +10,7 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityTextureName"			"dark_troll_warlord_ensnare"
 
-		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_5"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_4"
 
 		// Precache
 		//-------------------------------------------------------------------------------------------------------------

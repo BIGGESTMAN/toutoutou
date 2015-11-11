@@ -104,7 +104,7 @@
 		{
 			_class = "C_INIT_CreateOnModel"
 			m_nControlPointNumber = 1
-			m_nDesiredHitbox = 20
+			m_nDesiredHitbox = 26
 			m_bUseBones = true
 		},
 		{

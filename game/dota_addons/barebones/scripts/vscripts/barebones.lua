@@ -420,6 +420,21 @@ function GameMode:OnNPCSpawned(keys)
 	if npc:HasAbility("reflex_dummy_unit") then
 		npc:FindAbilityByName("reflex_dummy_unit"):SetLevel(1)
 	end
+
+	if npc:GetName() == "npc_dota_hero_skywrath_mage" then
+		local cosmetics = {}
+		local cosmetic = npc:FirstMoveChild()
+		while cosmetic ~= nil do
+			print(cosmetic)
+			if cosmetic:GetClassname() == "dota_item_wearable" then
+				table.insert(cosmetics, cosmetic)
+			end
+			cosmetic = cosmetic:NextMovePeer()
+		end
+		for k,v in pairs(cosmetics) do
+			v:RemoveSelf()
+		end
+	end
 end
 
 -- An entity somewhere has been hurt.  This event fires very often with many units so don't do too many expensive

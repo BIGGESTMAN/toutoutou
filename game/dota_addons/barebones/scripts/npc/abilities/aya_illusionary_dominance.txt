@@ -12,7 +12,7 @@
 		"MaxLevel" 						"3"
 
 		"AbilityTextureName"			"faceless_void_time_walk"
-		"AbilityCastAnimation"			"ACT_DOTA_FLAIL"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_1"
 
 		// Precache
 		//-------------------------------------------------------------------------------------------------------------

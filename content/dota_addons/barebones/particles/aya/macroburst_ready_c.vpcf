@@ -35,6 +35,7 @@
 		},
 		{
 			_class = "C_OP_PositionLock"
+			m_bDisableOperator = true
 		},
 		{
 			_class = "C_OP_RampScalarLinearSimple"
@@ -56,6 +57,11 @@
 			m_nControlPointNumber = 1
 			m_bRigid = true
 			m_bUseBones = true
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_InheritFromParentParticles"
+			m_nFieldOutput = 0
 		},
 	]
 	m_Initializers =
@@ -103,6 +109,10 @@
 			m_nControlPointNumber = 1
 			m_nDesiredHitbox = 20
 			m_bUseBones = true
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_INIT_CreateFromParentParticles"
 		},
 	]
 	m_Emitters =

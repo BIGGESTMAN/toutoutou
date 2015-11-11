@@ -57,4 +57,5 @@
 		"AttackAcquisitionRange"	"480"									// Range within a target can be acquired.
 		"AttackRange"				"480"									// Range within a target can be attacked.
 		"ProjectileSpeed"			"900"									// Speed of projectile.
+		"Model"						"models/thd2/sanae/sanae_mmd.vmdl"						// Model.
 	}

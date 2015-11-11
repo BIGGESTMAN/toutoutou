@@ -65,6 +65,11 @@
 			m_nControlPointNumber = 1
 			m_bRigid = true
 			m_bUseBones = true
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_InheritFromParentParticles"
+			m_nFieldOutput = 0
 		},
 	]
 	m_Initializers =
@@ -102,8 +107,12 @@
 		{
 			_class = "C_INIT_CreateOnModel"
 			m_nControlPointNumber = 1
-			m_nDesiredHitbox = 20
+			m_nDesiredHitbox = 26
 			m_bUseBones = true
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_INIT_CreateFromParentParticles"
 		},
 	]
 	m_Emitters =
