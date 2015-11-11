@@ -7,7 +7,7 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 
-		"AbilityTextureName"			"leshrac_lightning_storm"
+		"AbilityTextureName"			"winter_wyvern_winters_curse"
 
 		"precache"
 		{

@@ -421,7 +421,7 @@ function GameMode:OnNPCSpawned(keys)
 		npc:FindAbilityByName("reflex_dummy_unit"):SetLevel(1)
 	end
 
-	if npc:GetName() == "npc_dota_hero_skywrath_mage" then
+	if npc:GetName() == "npc_dota_hero_skywrath_mage" or npc:GetName() == "npc_dota_hero_morphling" then
 		local cosmetics = {}
 		local cosmetic = npc:FirstMoveChild()
 		while cosmetic ~= nil do
