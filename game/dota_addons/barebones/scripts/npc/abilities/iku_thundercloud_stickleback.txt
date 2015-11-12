@@ -11,7 +11,10 @@
 
 		"precache"
 		{
-
+			"particle"					"particles/iku/thundercloud_stickleback/aura.vpcf"
+			"particle"					"particles/iku/thundercloud_stickleback/elekiter_aura.vpcf"
+			"particle"					"particles/iku/thundercloud_stickleback/pulse.vpcf"
+			"particle"					"particles/iku/thundercloud_stickleback/elekiter_pulse.vpcf"
 		}
 
 		"AbilityCastPoint"				"0.3"
@@ -103,6 +106,9 @@
 	    				"Function"		"normalExplode"
 	    			}
 	    		}
+
+	    		"EffectName"		"particles/iku/thundercloud_stickleback/aura.vpcf"
+	    		"EffectAttachType"	"follow_origin"
 	    	}
 
 	    	"modifier_thundercloud_stickleback_elekiter"
@@ -120,6 +126,9 @@
 	    				"Function"		"elekiterExplode"
 	    			}
 	    		}
+
+	    		"EffectName"		"particles/iku/thundercloud_stickleback/elekiter_aura.vpcf"
+	    		"EffectAttachType"	"follow_origin"
 	    	}
 
 	    	"modifier_thundercloud_stickleback_knockback"

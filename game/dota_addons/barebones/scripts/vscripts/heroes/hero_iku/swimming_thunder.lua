@@ -3,13 +3,15 @@ function spellCast(keys)
 	local ability = keys.ability
 	local target = keys.target
 
+	local particle_name = "particles/iku/swimming_thunder/sphere.vpcf"
 	local sphere = CreateUnitByName("npc_dummy_unit", caster:GetOrigin(), false, caster, caster, caster:GetTeamNumber())
 	ability:ApplyDataDrivenModifier(caster, sphere, "modifier_swimming_thunder_sphere", {})
-	ParticleManager:CreateParticle("particles/units/heroes/hero_stormspirit/stormspirit_ball_lightning.vpcf", PATTACH_ABSORIGIN_FOLLOW, sphere)
 	if caster:HasModifier("modifier_elekiter_dragon_palace_active") then
 		sphere.elekiter = true
 		caster:RemoveModifierByName("modifier_elekiter_dragon_palace_active")
+		particle_name = "particles/iku/swimming_thunder/elekiter_sphere.vpcf"
 	end
+	ParticleManager:CreateParticle(particle_name, PATTACH_ABSORIGIN_FOLLOW, sphere)
 
 	charge(sphere, caster, ability, target, true)
 
@@ -27,7 +29,7 @@ function spellCast(keys)
 			if unit ~= target and caster:CanEntityBeSeenByMyTeam(unit) then
 				local scepter_sphere = CreateUnitByName("npc_dummy_unit", caster:GetOrigin(), false, caster, caster, caster:GetTeamNumber())
 				ability:ApplyDataDrivenModifier(caster, scepter_sphere, "modifier_swimming_thunder_sphere", {})
-				ParticleManager:CreateParticle("particles/units/heroes/hero_stormspirit/stormspirit_ball_lightning.vpcf", PATTACH_ABSORIGIN_FOLLOW, scepter_sphere)
+				ParticleManager:CreateParticle(particle_name, PATTACH_ABSORIGIN_FOLLOW, scepter_sphere)
 
 				charge(scepter_sphere, caster, ability, unit, true, true)
 			end
@@ -108,20 +110,22 @@ function charge(sphere, caster, ability, target, initial, scepter)
 			direction = (target_location - sphere_location):Normalized()
 
 			if distance > arrival_distance then
-				sphere:SetAbsOrigin(sphere_location + direction * speed)
-				local team = caster:GetTeamNumber()
-				local origin = sphere:GetAbsOrigin()
-				local radius = passthrough_damage_radius
-				local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
-				local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL
-				local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
-				local iOrder = FIND_ANY_ORDER
-				local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
+				if not sphere.frozen then
+					sphere:SetAbsOrigin(sphere_location + direction * speed)
+					local team = caster:GetTeamNumber()
+					local origin = sphere:GetAbsOrigin()
+					local radius = passthrough_damage_radius
+					local iTeam = DOTA_UNIT_TARGET_TEAM_ENEMY
+					local iType = DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_MECHANICAL
+					local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
+					local iOrder = FIND_ANY_ORDER
+					local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
 
-				for k,unit in pairs(targets) do
-					if not units_hit[unit] then
-						ApplyDamage({victim = unit, attacker = caster, damage = passthrough_damage, damage_type = damage_type})
-						units_hit[unit] = true
+					for k,unit in pairs(targets) do
+						if not units_hit[unit] then
+							ApplyDamage({victim = unit, attacker = caster, damage = passthrough_damage, damage_type = damage_type})
+							units_hit[unit] = true
+						end
 					end
 				end
 				return update_interval

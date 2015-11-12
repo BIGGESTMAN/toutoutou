@@ -12,7 +12,8 @@
 
 		"precache"
 		{
-			"particle"					"particles/units/heroes/hero_stormspirit/stormspirit_ball_lightning.vpcf"
+			"particle"					"particles/iku/swimming_thunder/sphere.vpcf"
+			"particle"					"particles/iku/swimming_thunder/elekiter_sphere.vpcf"
 		}
 
 		"AbilityCastPoint"				"0.3"

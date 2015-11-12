@@ -1,4 +1,5 @@
 function spellUpgraded(keys)
+	local caster = keys.caster
 	local ability = keys.ability
 
 	if ability:GetLevel() == 1 then caster.elekiter_charges = ability:GetSpecialValueFor("max_charges") end

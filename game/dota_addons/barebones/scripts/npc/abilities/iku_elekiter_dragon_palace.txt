@@ -9,7 +9,7 @@
 
 		"precache"
 		{
-
+			"particle"					"particles/iku/elekiter_dragon_palace/active.vpcf"
 		}
 
 		"AbilityCastPoint"				"0.6"
@@ -86,6 +86,9 @@
 	    	"modifier_elekiter_dragon_palace_active"
 	    	{
 	    		"Duration"	"%duration"
+
+	    		"EffectName"		"particles/iku/elekiter_dragon_palace/active.vpcf"
+	    		"EffectAttachType"	"follow_origin"
 	    	}
 	    }
 	}

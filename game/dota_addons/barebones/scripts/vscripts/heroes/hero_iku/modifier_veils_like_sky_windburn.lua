@@ -41,3 +41,11 @@ end
 function modifier_veils_like_sky_windburn:IsPurgable()
 	return true
 end
+
+function modifier_veils_like_sky_windburn:GetEffectName()
+	return "particles/iku/veils_like_sky/windburn.vpcf"
+end
+
+function modifier_veils_like_sky_windburn:GetEffectAttachType()
+	return PATTACH_ABSORIGIN_FOLLOW
+end

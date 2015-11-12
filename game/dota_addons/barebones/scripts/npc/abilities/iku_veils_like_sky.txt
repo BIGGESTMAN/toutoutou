@@ -12,6 +12,11 @@
 		"precache"
 		{
 			"particle"					"particles/generic_gameplay/generic_stunned.vpcf"
+			"particle"					"particles/iku/veils_like_sky/evasion_aura.vpcf"
+			"particle"					"particles/iku/veils_like_sky/magic_dodge_active.vpcf"
+			"particle"					"particles/iku/veils_like_sky/shock.vpcf"
+			"particle"					"particles/iku/veils_like_sky/windburn.vpcf"
+			"particle"					"particles/iku/veils_like_sky/windburn_cast.vpcf"
 		}
 
 		"AbilityCastPoint"				"0"
@@ -123,7 +128,7 @@
 
 	    	"modifier_veils_like_sky_evasion"
 	    	{
-
+				
 	    	}
 
 	    	"modifier_veils_like_sky_evasion_disabled"

@@ -32,7 +32,6 @@ function explode(caster, ability, target, elekiter)
 	local knockback_range = ability:GetSpecialValueFor("knockback_range")
 	local knockback_duration = ability:GetSpecialValueFor("knockback_duration")
 	local update_interval = ability:GetSpecialValueFor("update_interval")
-	local speed = knockback_range / knockback_duration * update_interval
 
 	local team = caster:GetTeamNumber()
 	local origin = target:GetAbsOrigin()
@@ -41,7 +40,6 @@ function explode(caster, ability, target, elekiter)
 	local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
 	local iOrder = FIND_ANY_ORDER
 	local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
-	DebugDrawCircle(origin, Vector(0,0,255), 1, radius, true, 0.75)
 
 	for k,unit in pairs(targets) do
 		ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
@@ -55,12 +53,13 @@ function explode(caster, ability, target, elekiter)
 				target_range = (unit:GetAbsOrigin() - target:GetAbsOrigin()):Length2D()
 			end
 			local distance_traveled = 0
+			local speed = target_range / knockback_duration * update_interval
 
 			ability:ApplyDataDrivenModifier(caster, unit, "modifier_thundercloud_stickleback_knockback", {})
 
 			Timers:CreateTimer(0, function()
 				if not unit:IsNull() and unit:IsAlive() then
-					if distance_traveled < knockback_range then
+					if distance_traveled < target_range then
 						-- Move unit -- includes a distance check to prevent overshooting
 						local distance = target_range - distance_traveled
 						if speed < distance then
@@ -71,11 +70,15 @@ function explode(caster, ability, target, elekiter)
 						distance_traveled = distance_traveled + speed
 						return update_interval
 					else
-						FindClearSpaceForUnit(unit, unit:GetAbsOrigin(), elekiter)
+						FindClearSpaceForUnit(unit, unit:GetAbsOrigin(), false)
 						unit:RemoveModifierByName("modifier_thundercloud_stickleback_knockback")
 					end
 				end
 			end)
 		end
 	end
+
+	local particle_name = "particles/iku/thundercloud_stickleback/pulse.vpcf"
+	if elekiter then particle_name = "particles/iku/thundercloud_stickleback/elekiter_pulse.vpcf" end
+	ParticleManager:CreateParticle(particle_name, PATTACH_ABSORIGIN, target)
 end

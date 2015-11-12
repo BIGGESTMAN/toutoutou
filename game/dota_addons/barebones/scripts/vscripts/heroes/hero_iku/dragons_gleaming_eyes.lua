@@ -13,6 +13,8 @@ function spellCast(keys)
 	local secondary_target_radius = ability:GetSpecialValueFor("secondary_target_radius")
 	local damage_interval = ability:GetSpecialValueFor("damage_interval")
 	local update_interval = ability:GetSpecialValueFor("update_interval")
+	
+	local particle_name = "particles/iku/dragons_gleaming_eyes/rope.vpcf"
 
 	local elekiter = caster:HasModifier("modifier_elekiter_dragon_palace_active")
 	if elekiter then
@@ -20,6 +22,7 @@ function spellCast(keys)
 		min_damage_range = ability:GetSpecialValueFor("elekiter_min_damage_range")
 		removal_time = ability:GetSpecialValueFor("elekiter_removal_time")
 		caster:RemoveModifierByName("modifier_elekiter_dragon_palace_active")
+		particle_name = "particles/iku/dragons_gleaming_eyes/elekiter_rope.vpcf"
 	end
 
 	local secondary_target = nil
@@ -32,7 +35,6 @@ function spellCast(keys)
 	local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
 	local iOrder = FIND_CLOSEST
 	local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
-	DebugDrawCircle(origin, Vector(0,0,255), 1, radius, true, 0.75)
 	if #targets > 1 then secondary_target = targets[2] end
 
 	ApplyDamage({victim = target, attacker = caster, damage = initial_damage, damage_type = damage_type})
@@ -40,6 +42,10 @@ function spellCast(keys)
 		ApplyDamage({victim = secondary_target, attacker = caster, damage = initial_damage, damage_type = damage_type})
 		ability:ApplyDataDrivenModifier(caster, target, "modifier_dragons_gleaming_eyes_bound", {})
 		ability:ApplyDataDrivenModifier(caster, secondary_target, "modifier_dragons_gleaming_eyes_bound", {})
+
+		local particle = ParticleManager:CreateParticle(particle_name, PATTACH_POINT_FOLLOW, target)
+		ParticleManager:SetParticleControlEnt(particle, 0, target, PATTACH_POINT_FOLLOW, "attach_hitloc", target:GetAbsOrigin(), true)
+		ParticleManager:SetParticleControlEnt(particle, 1, secondary_target, PATTACH_POINT_FOLLOW, "attach_hitloc", secondary_target:GetAbsOrigin(), true)
 
 		local time_nearby = 0
 		local time_since_damage = 0
@@ -55,6 +61,7 @@ function spellCast(keys)
 					if time_nearby >= removal_time then
 						target:RemoveModifierByName("modifier_dragons_gleaming_eyes_bound")
 						secondary_target:RemoveModifierByName("modifier_dragons_gleaming_eyes_bound")
+						ParticleManager:DestroyParticle(particle, false)
 						return
 					end
 				else
@@ -89,6 +96,7 @@ function spellCast(keys)
 			else
 				if not target:IsNull() then target:RemoveModifierByName("modifier_dragons_gleaming_eyes_bound") end
 				if not secondary_target:IsNull() then secondary_target:RemoveModifierByName("modifier_dragons_gleaming_eyes_bound") end
+				ParticleManager:DestroyParticle(particle, false)
 			end
 		end)
 	end

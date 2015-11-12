@@ -11,7 +11,8 @@
 
 		"precache"
 		{
-
+			"particle"					"particles/iku/dragons_gleaming_eyes/rope.vpcf"
+			"particle"					"particles/iku/dragons_gleaming_eyes/elekiter_rope.vpcf"
 		}
 
 		"AbilityCastPoint"				"0.3"

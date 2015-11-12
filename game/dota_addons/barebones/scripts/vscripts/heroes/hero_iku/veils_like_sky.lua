@@ -23,6 +23,10 @@ function updateMovement(keys)
 		if caster.veils_time_since_moved >= deactivate_time then
 			caster:RemoveModifierByName("modifier_veils_like_sky_evasion")
 			ability:ApplyDataDrivenModifier(caster, caster, "modifier_veils_like_sky_evasion_disabled", {})
+			if caster.veils_like_sky_evasion_particle then
+				ParticleManager:DestroyParticle(caster.veils_like_sky_evasion_particle, false)
+				caster.veils_like_sky_evasion_particle = nil
+			end
 		end
 	else
 		caster.veils_time_since_moved = nil
@@ -50,6 +54,9 @@ function evasionDisabledExpiration(keys)
 	local ability = keys.ability
 
 	ability:ApplyDataDrivenModifier(caster, caster, "modifier_veils_like_sky_evasion", {})
+
+	caster.veils_like_sky_evasion_particle = ParticleManager:CreateParticle("particles/iku/veils_like_sky/evasion_aura.vpcf", PATTACH_POINT_FOLLOW, caster)
+	ParticleManager:SetParticleControlEnt(caster.veils_like_sky_evasion_particle, 0, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", caster:GetAbsOrigin(), true)
 end
 
 function spellCast(keys)
@@ -58,6 +65,9 @@ function spellCast(keys)
 
 	if not caster:HasModifier("modifier_elekiter_dragon_palace_active") then
 		ability:ApplyDataDrivenModifier(caster, caster, "modifier_veils_like_sky_magic_dodge", {})
+
+		local particle = ParticleManager:CreateParticle("particles/iku/veils_like_sky/magic_dodge_active.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+		ParticleManager:SetParticleControlEnt(particle, 0, caster, PATTACH_ABSORIGIN_FOLLOW, "attach_origin", caster:GetAbsOrigin(), true)
 	else
 		caster:RemoveModifierByName("modifier_elekiter_dragon_palace_active")
 		local damage = ability:GetSpecialValueFor("elekiter_damage")
@@ -72,13 +82,14 @@ function spellCast(keys)
 		local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
 		local iOrder = FIND_ANY_ORDER
 		local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
-		DebugDrawCircle(origin, Vector(0,0,255), 1, radius, true, 0.5)
 
 		for k,unit in pairs(targets) do
 			ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
 			ability:ApplyDataDrivenModifier(caster, unit, "modifier_veils_like_sky_windburn_stun", {})
 			unit:AddNewModifier(caster, ability, "modifier_veils_like_sky_windburn", {duration = duration})
 		end
+
+		ParticleManager:CreateParticle("particles/iku/veils_like_sky/windburn_cast.vpcf", PATTACH_ABSORIGIN, caster)
 	end
 end
 
@@ -99,11 +110,12 @@ function magicDodgeRemoved(keys)
 		local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
 		local iOrder = FIND_ANY_ORDER
 		local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
-		DebugDrawCircle(origin, Vector(0,0,255), 1, radius, true, 0.5)
 
 		for k,unit in pairs(targets) do
 			ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
 			ability:ApplyDataDrivenModifier(caster, unit, "modifier_veils_like_sky_stun", {})
 		end
+
+		ParticleManager:CreateParticle("particles/iku/veils_like_sky/shock.vpcf", PATTACH_ABSORIGIN, caster)
 	end
 end
