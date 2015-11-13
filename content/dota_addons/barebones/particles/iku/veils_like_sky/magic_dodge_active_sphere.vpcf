@@ -37,6 +37,7 @@
 			_class = "C_OP_FadeAndKill"
 			m_flEndFadeInTime = 0.100000
 			m_flStartAlpha = 0.000000
+			m_flStartFadeOutTime = 0.900000
 		},
 	]
 	m_Initializers =
@@ -70,8 +71,8 @@
 		},
 		{
 			_class = "C_INIT_RandomLifeTime"
-			m_fLifetimeMin = 1.500000
-			m_fLifetimeMax = 1.500000
+			m_fLifetimeMin = 2.000000
+			m_fLifetimeMax = 2.000000
 		},
 		{
 			_class = "C_INIT_CreateWithinSphere"
