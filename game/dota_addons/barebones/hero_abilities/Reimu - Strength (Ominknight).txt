@@ -26,7 +26,7 @@ Mana : 988
 Damage : 129-135
 Armor : 13.62
 
-[Q] Fantasy Seal (fantasy_seal) : Launches 5 spirit bullets at an enemy that deal pure damage that decreases with distance traveled. If there are enemy heroes that are silenced or stunned in range, Reimu will fire 3 additional bullets at each of them.
+[Q] Fantasy Seal (fantasy_seal) : Launches 5 spirit bullets at an enemy that deal pure damage that decreases with distance traveled. If there are enemies that are silenced or stunned in range, Reimu will fire 3 additional bullets at each of them.
 Spell Immunity - Pierces Spell Immunity. Linken's Sphere blocks the first bullet.
 DevNotes - Can't be disjointed. Reimu can act freely while the bullets are being fired, and it always takes 1 second to fire them all. If there are additional bullets, they are fired in a random order at all targets.
 
