@@ -1,0 +1,68 @@
+	"peta_flare"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"heroes/hero_utsuho/peta_flare"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+
+		"AbilityTextureName"			"winter_wyvern_winters_curse"
+
+		"precache"
+		{
+
+		}
+
+		"AbilityCastPoint"				"0.8"
+		"AbilityCooldown"				"9 8 7 6"
+		"AbilityManaCost"				"110"
+		"AOERadius"						"600"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"range"					"900"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"speed"					"550"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"120 180 240 300"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"starting_radius"		"380 410 440 470"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"ending_radius"			"50"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"reduction_start_time"	"0.5"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_reduction_factor"	"0.5"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"update_interval"		"0.03"
+			}
+		}
+	}

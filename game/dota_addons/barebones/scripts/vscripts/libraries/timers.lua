@@ -210,3 +210,7 @@ function Timers:RemoveTimers(killAll)
 end
 
 Timers:start()
+
+function CT(name, args)
+    Timers:CreateTimer(name, args)
+end

@@ -1,0 +1,62 @@
+	"npc_dota_hero_utsuho"
+	{
+		"AbilityLayout" 		"4"
+		"override_hero"			"npc_dota_hero_obsidian_destroyer"
+		"SoundSet"				"0"
+		"Ability1"				"peta_flare"
+		"Ability2"				"abyss_nova"
+		"Ability3"				"hells_tokamak"
+		"Ability4"				"subterranean_sun"
+		"Ability5"				""
+		"Ability6"				""
+		"Ability7"				"attribute_bonus"
+		"Ability8"				""
+		"Ability9"				""
+		"Ability10"				""
+		"Ability11"				""
+		"Ability12"				""
+		"Ability13"				""
+		"Ability14"				""
+		"Ability15"				""
+		"Ability16"				""
+
+		"ArmorPhysical"				"2"									// Physical protection.
+		"MagicalResistance"			"25"								// Magical protection (percentage).
+
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"31"										// Damage range min.
+		"AttackDamageMax"			"31"										// Damage range max.
+
+		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"		"24"										// Base strength
+		"AttributeStrengthGain"		"3.0"										// Strength bonus per level.
+		"AttributeBaseAgility"		"16"										// Base agility
+		"AttributeAgilityGain"		"1.9"										// Agility bonus per level.
+		"AttributeBaseIntelligence"	"13"										// Base intelligence
+		"AttributeIntelligenceGain"	"1.1"										// Intelligence bonus per level.
+
+		//"BountyXP"					"0"										// Experience earn.
+		//"BountyGoldMin"				"0"										// Gold earned min.
+		//"BountyGoldMax"				"0"										// Gold earned max.
+
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"				"280"									// Speed.
+		"MovementTurnRate"			"0.5"									// Turning rate.
+
+		"StatusHealth"				"150"									// Base health.
+		"StatusHealthRegen"			"0"										// Health regeneration rate.
+		"StatusMana"				"0"										// Base mana.
+		"StatusManaRegen"			"0"										// Mana regeneration rate.
+
+		"VisionDaytimeRange"		"1800"									// Range of vision during day light.
+		"VisionNighttimeRange"		"800"									// Range of vision at night time.
+
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"				// Type of damage dealt. 
+		"AttackRate"				"1.7"									// Speed of attack.
+		"AttackAnimationPoint"		"0.25"									// Normalized time in animation cycle to attack.
+		"AttackRange"				"350"									// Range within a target can be attacked.
+		"AttackAcquisitionRange"	"600"									// Range within a target can be acquired.
+		//"ProjectileModel"			"particles/units/heroes/hero_bounty_hunter/bounty_hunter_suriken_toss.vpcf"							// Particle system model for projectile.
+		"ProjectileSpeed"			"1200"									// Speed of projectile.
+		"Model"						"models/thd2/utsuho/utsuho_mmd.vmdl"						// Model.
+	}

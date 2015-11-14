@@ -3,6 +3,8 @@ print ('[BAREBONES] barebones.lua' )
 require "projectile_list"
 require "damage_filter"
 
+imported_model_characters = {"npc_dota_hero_skywrath_mage", "npc_dota_hero_morphling", "npc_dota_hero_obsidian_destroyer"}
+
 -- GameRules Variables
 ENABLE_HERO_RESPAWN = true              -- Should the heroes automatically respawn on a timer or stay dead until manually respawned
 ALLOW_SAME_HERO_SELECTION = true        -- Should we let people select the same hero as each other
@@ -421,11 +423,17 @@ function GameMode:OnNPCSpawned(keys)
 		npc:FindAbilityByName("reflex_dummy_unit"):SetLevel(1)
 	end
 
-	if npc:GetName() == "npc_dota_hero_skywrath_mage" or npc:GetName() == "npc_dota_hero_morphling" then
+	local imported_model = false
+	for k,name in pairs(imported_model_characters) do
+		if npc:GetName() == name then
+			imported_model = true
+			break
+		end
+	end
+	if imported_model then
 		local cosmetics = {}
 		local cosmetic = npc:FirstMoveChild()
 		while cosmetic ~= nil do
-			print(cosmetic)
 			if cosmetic:GetClassname() == "dota_item_wearable" then
 				table.insert(cosmetics, cosmetic)
 			end

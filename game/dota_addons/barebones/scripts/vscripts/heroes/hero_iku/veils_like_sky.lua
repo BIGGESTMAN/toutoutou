@@ -55,8 +55,8 @@ function evasionDisabledExpiration(keys)
 
 	ability:ApplyDataDrivenModifier(caster, caster, "modifier_veils_like_sky_evasion", {})
 
-	caster.veils_like_sky_evasion_particle = ParticleManager:CreateParticle("particles/iku/veils_like_sky/evasion_aura.vpcf", PATTACH_POINT_FOLLOW, caster)
-	ParticleManager:SetParticleControlEnt(caster.veils_like_sky_evasion_particle, 0, caster, PATTACH_POINT_FOLLOW, "attach_hitloc", caster:GetAbsOrigin(), true)
+	caster.veils_like_sky_evasion_particle = ParticleManager:CreateParticle("particles/iku/veils_like_sky/evasion_aura.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+	ParticleManager:SetParticleControlEnt(caster.veils_like_sky_evasion_particle, 0, caster, PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", caster:GetAbsOrigin(), true)
 end
 
 function spellCast(keys)

@@ -24,3 +24,4 @@
 		"npc_dota_hero_bounty_hunter"		"Nazrin"
 		"npc_dota_hero_necrolyte"			"Komachi"
 		"npc_dota_hero_zuus"				"Iku"
+		"npc_dota_hero_obsidian_destroyer"	"Utsuho"
