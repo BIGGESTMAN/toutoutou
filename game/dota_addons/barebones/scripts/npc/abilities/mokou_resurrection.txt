@@ -4,7 +4,7 @@
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 
-		"AbilityTextureName"			"mokou_resurrection"
+		"AbilityTextureName"			"lina_fiery_soul"
 
 		"precache"
 		{

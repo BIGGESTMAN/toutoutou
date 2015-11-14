@@ -1,7 +1,7 @@
 print ('[BAREBONES] barebones.lua' )
 
 require "projectile_list"
-require "damage_filter"
+require "filters"
 
 imported_model_characters = {"npc_dota_hero_skywrath_mage", "npc_dota_hero_morphling", "npc_dota_hero_obsidian_destroyer"}
 
@@ -221,7 +221,8 @@ function GameMode:CaptureGameMode()
 		setupProjectileList()
 
 		-- mode:SetTrackingProjectileFilter(Dynamic_Wrap(ProjectileList, "TrackingProjectileCreated"), self)
-		mode:SetDamageFilter(Dynamic_Wrap(DamageFilter, "DamageFilter"), self)
+		mode:SetDamageFilter(Dynamic_Wrap(Filters, "DamageFilter"), self)
+		mode:SetModifierGainedFilter(Dynamic_Wrap(Filters, "ModifierGainedFilter"), self)
 
 		self:OnFirstPlayerLoaded()
 	end

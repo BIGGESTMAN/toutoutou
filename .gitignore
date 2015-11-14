@@ -47,6 +47,7 @@ game/dota_addons/barebones/scripts/npc/npc_abilities_custom.txt
 game/dota_addons/barebones/resource/addon_english.txt
 game/dota_addons/barebones/resource/tooltips/generated_tooltips.txt
 game/dota_addons/barebones/resource/overviews/hero_demo_main.txt
+game/dota_addons/barebones/resource/images/*
 game/dota_addons/barebones/particles/*
 game/dota_addons/barebones/tools_asset_info.bin
 game/dota_addons/barebones/tools_thumbnail_cache.bin

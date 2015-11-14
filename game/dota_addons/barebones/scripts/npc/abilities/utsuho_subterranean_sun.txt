@@ -1,0 +1,127 @@
+	"subterranean_sun"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+
+		"AbilityTextureName"			"mokou_resurrection"
+
+		"precache"
+		{
+
+		}
+
+		"AbilityCastPoint"				"0.8"
+		"AbilityCooldown"				"180 160 140"
+		"AbilityManaCost"				"150 200 250"
+		"AbilityCastRange"				"900"
+		"AOERadius"						"350"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"delay"					"3"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"7"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"base_damage"			"30 40 50"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"pull_radius"			"475"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"pull_speed"			"60"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_radius"			"350"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"effect_increase_percent"	"40"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"effect_increase_interval"	"2.5"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"update_interval"		"0.03"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_interval"		"1"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"aghanim_scepter_pull_radius"	"600"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"aghanim_scepter_damage_radius"	"440"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/hero_utsuho/subterranean_sun"
+				"Function"		"spellCast"
+				"Target"		"POINT"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_subterranean_sun_pull"
+			{
+				"IsDebuff"	"1"
+
+				"States"
+				{
+					"MODIFIER_STATE_ROOTED"					"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_UNIT_COLLISION"		"MODIFIER_STATE_VALUE_ENABLED"
+				}
+
+				"OverrideAnimation"	"ACT_DOTA_FLAIL"
+			}
+
+			"modifier_subterranean_sun_silence"
+			{
+				"IsHidden"		"1"
+				"IsPurgable"	"1"
+				"IsDebuff"		"1"
+
+				"States"
+				{
+					"MODIFIER_STATE_SILENCED"		"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+		}
+	}

@@ -1,9 +1,9 @@
-if not DamageFilter then 
-	DamageFilter = {}
-	DamageFilter.__index = DamageFilter
+if not Filters then 
+	Filters = {}
+	Filters.__index = Filters
 end
 
-function DamageFilter:DamageFilter(event)
+function Filters:DamageFilter(event)
 	local attacker = EntIndexToHScript(event.entindex_attacker_const)
 	local target = EntIndexToHScript(event.entindex_victim_const)
 	local damage_type = event.damagetype_const
@@ -15,6 +15,15 @@ function DamageFilter:DamageFilter(event)
 	if target:HasModifier("modifier_veils_like_sky_magic_dodge") and damage_type == DAMAGE_TYPE_MAGICAL then
 		target.veils_magic_dodged = true
 		target:RemoveModifierByName("modifier_veils_like_sky_magic_dodge")
+		return false
+	end
+	return true
+end
+
+function Filters:ModifierGainedFilter(event)
+	local caster = EntIndexToHScript(event.entindex_caster_const)
+	local target = EntIndexToHScript(event.entindex_parent_const)
+	if target:HasModifier("modifier_hells_tokamak_active") and caster:GetTeamNumber() ~= target:GetTeamNumber() then
 		return false
 	end
 	return true

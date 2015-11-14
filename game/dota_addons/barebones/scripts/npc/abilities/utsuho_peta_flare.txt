@@ -2,13 +2,13 @@
 	{
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/hero_utsuho/peta_flare"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 
-		"AbilityTextureName"			"winter_wyvern_winters_curse"
+		"AbilityTextureName"			"techies_suicide"
 
 		"precache"
 		{
@@ -18,7 +18,6 @@
 		"AbilityCastPoint"				"0.8"
 		"AbilityCooldown"				"9 8 7 6"
 		"AbilityManaCost"				"110"
-		"AOERadius"						"600"
 
 		"AbilityProcsMagicStick" 		"1"
 

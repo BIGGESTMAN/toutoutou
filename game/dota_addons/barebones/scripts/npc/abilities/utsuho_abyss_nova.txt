@@ -1,0 +1,103 @@
+	"abyss_nova"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+
+		"AbilityTextureName"			"vengefulspirit_nether_swap"
+
+		"precache"
+		{
+
+		}
+
+		"AbilityCastPoint"				"0.8"
+		"AbilityCooldown"				"30"
+		"AbilityManaCost"				"30"
+		"AOERadius"						"800"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"800"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"16"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"base_mana_restore"		"4 6 8 10"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"mana_restore_per_enemy"	"2 3 4 5"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"mana_restore_per_hero"	"6 9 12 20"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"base_damage"			"40 70 100 130"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_bonus_percent"	"70 80 90 100"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"update_interval"		"0.25"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/hero_utsuho/abyss_nova"
+				"Function"		"spellCast"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_abyss_nova_active"
+			{
+				"Duration"	"%duration"
+
+				"ThinkInterval"  "%update_interval"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_utsuho/abyss_nova"
+						"Function"		"restoreMana"
+					}
+				}
+
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_utsuho/abyss_nova"
+						"Function"		"removeManaGainChecker"
+					}
+				}
+			}
+		}
+	}

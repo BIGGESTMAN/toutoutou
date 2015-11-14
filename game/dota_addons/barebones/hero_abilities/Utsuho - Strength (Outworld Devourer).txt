@@ -1,0 +1,86 @@
+Utsuho - Strength (Outworld Devourer)
+
+Base Stats
+
+STR : 24 (+3)
+AGI : 16 (+1.9)
+INT : 13 (+1)
+Damage : 28-35
+Armor : 2
+Attacks / Second : 0.58
+Movement Speed : 280
+Turn Rate : 0.5
+Sight Range : 1800/800
+Attack Range : 350
+Missile Speed : 1200
+Attack Duration : 0.25/0.8
+Base Attack Time : 1.7
+
+Lv. 25
+
+STR : 116
+AGI : 81
+INT : 57
+HP : 2354
+Mana : 741
+Damage : 144-151
+Armor : 13.34
+
+[Q] Peta Flare (peta_flare) : Okuu releases an atomic blast that deals pure damage which decreases along with its size as it travels.
+Spell Immunity - Pierces Spell Immunity.
+DevNotes - The reduction begins 0.5 seconds after the projectile is created. Numbers are rough, the projectile should reach 900 range while around 50 radius then disappear. Damage reduction is half of size reduction.
+
+Cast Point : 0.8
+Maximum Pure Damage (damage) : 120/180/240/300
+Damage Reduction per Second : 10%
+Size Reduction per Second : 20%
+Range (range) : 900
+Radius (starting_radius) : 380/410/440/470
+Travel Speed (speed) : 550
+Mana : 110
+Cooldown : 9/8/7/6
+
+[W] Abyss Nova (abyss_nova) : A nuclear chain reaction restores Okuu's mana each second per nearby enemy, restoring a larger amount for each hero. She reaches critical mass when her mana becomes full, dealing pure damage around her based on a percentage of all mana restored while under this effect.
+Spell Immunity - Pierces Spell Immunity.
+DevNotes - Nothing happens when the duration ends. When she reaches full mana, the damage occurs and the regen ends. Regenerates mana in 0.25 second intervals with no initial instance, checking for enemies in range per instance.
+
+Cast Point : 0.8
+Duration (duration) : 16
+Base Mana Restore (base_mana_restore) : 4/6/8/10
+Mana Restore Per Enemy (mana_restore_per_enemy) : 2/3/4/5
+Mana Restore Per Enemy Hero (mana_restore_per_hero) : 6/9/12/20
+Base Pure Damage (base_damage) : 40/70/100/130
+%Bonus Pure Damage per Mana Restored (damage_bonus_percent) : 70/80/90/100%
+Radius : 800
+Mana : 30
+Cooldown : 30
+
+[E] Hell's Tokamak (hells_tokamak) : Okuu gathers fusion energy to regenerate the health of nearby friendly units. She also becomes immune to most debuffs and disables until her health falls below a percentage of what she had when this ability was cast.
+DevNotes - When her health falls below the threshold, the immunity and regen ends. Regenerates health in 0.1 second intervals, with no initial instance.
+
+Cast Point : 0.4
+Duration (duration) : 12
+Health Regeneration (health_regen) : 10/16/22/28
+Immunity Threshold (immunity_health_threshold) : 70/60/50/40%
+Radius (radius) : 800
+Mana : 70
+Cooldown : 25
+
+[R] Subterranean Sun (subterranean_sun) : After a long delay, Okuu creates an artifical sun. It pulls enemies inwards while silencing and rooting them, dealing pure damage if they're close to the center. The damage, pull radius and pull speed increases every 2.5 seconds.
+Spell Immunity - The pull, damage and root pierce Spell Immunity. 
+Scepter - Dramatically increases the sun's initial radius.
+DevNotes - During the delay, a global warning alarm plays. Deals initial damage when an enemy enters the damage radius, then every second.
+
+Cast Point : 0.8
+Delay (delay) : 3
+Duration (duration) : 7
+Initial Pure Damage per Second (base_damage) : 30/40/50
+Damage & Radius & Pull Strength Increase : 40%
+Cast Range : 900
+Pull Radius (pull_radius) : 475 {Scepter : 600}
+Damage Radius (damage_radius) : 350 {Scepter :440}
+Pull Speed : 60
+Mana : 150/200/250
+Cooldown : 180/160/140
+Scepter Pull Radius (aghanim_scepter_pull_radius) : 600
+Scepter Damage Radius (aghanim_scepter_damage_radius) : 440

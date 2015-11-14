@@ -9,7 +9,7 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 		"FightRecapLevel"				"2"
-		"AbilityTextureName"			"lina_fiery_soul"
+		"AbilityTextureName"			"vengefulspirit_command_aura"
 		"MaxLevel" 						"3"
 		"RequiredLevel"					"6"
 		"LevelsBetweenUpgrades"			"5"
