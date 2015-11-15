@@ -3,7 +3,11 @@ print ('[BAREBONES] barebones.lua' )
 require "projectile_list"
 require "filters"
 
-imported_model_characters = {"npc_dota_hero_skywrath_mage", "npc_dota_hero_morphling", "npc_dota_hero_obsidian_destroyer", "npc_dota_hero_juggernaut"}
+imported_model_characters = {"npc_dota_hero_skywrath_mage",
+							"npc_dota_hero_morphling",
+							"npc_dota_hero_obsidian_destroyer",
+							"npc_dota_hero_juggernaut",
+							--[["npc_dota_hero_weaver,"--]]}
 
 -- GameRules Variables
 ENABLE_HERO_RESPAWN = true              -- Should the heroes automatically respawn on a timer or stay dead until manually respawned

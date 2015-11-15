@@ -60,4 +60,5 @@
 		"AttackRange"				"550"									// Range within a target can be attacked.
 		//"ProjectileModel"			"ranged_hero"							// Particle system model for projectile.
 		"ProjectileSpeed"			"900"									// Speed of projectile.
+		//"Model"						"models/thd2/alice/alice.vmdl"						// Model.
 	}
