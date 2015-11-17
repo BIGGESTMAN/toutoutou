@@ -436,6 +436,7 @@ function GameMode:OnNPCSpawned(keys)
 		end
 	end
 	if imported_model then
+		print("Removing cosmetics")
 		local cosmetics = {}
 		local cosmetic = npc:FirstMoveChild()
 		while cosmetic ~= nil do
