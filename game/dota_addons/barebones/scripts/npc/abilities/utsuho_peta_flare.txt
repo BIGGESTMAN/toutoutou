@@ -12,7 +12,7 @@
 
 		"precache"
 		{
-
+			"particle"					"particles/utsuho/peta_flare/flare.vpcf"
 		}
 
 		"AbilityCastPoint"				"0.8"

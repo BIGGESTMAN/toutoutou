@@ -32,11 +32,11 @@ function peta_flare:OnSpellStart()
 		local damage_reduction_factor = ability:GetSpecialValueFor("damage_reduction_factor")
 
 		local projectile = CreateUnitByName("npc_dummy_unit", caster:GetOrigin(), false, caster, caster, caster:GetTeamNumber())
-		local particle_name = "particles/iku/swimming_thunder/sphere.vpcf"
-		ParticleManager:CreateParticle(particle_name, PATTACH_ABSORIGIN_FOLLOW, projectile)
+		local particle = ParticleManager:CreateParticle("particles/utsuho/peta_flare/flare.vpcf", PATTACH_ABSORIGIN_FOLLOW, projectile)
 
-		local projectile_location = projectile:GetAbsOrigin()
-		local direction = (target_location - projectile_location):Normalized()
+		local direction = (target_location - projectile:GetAbsOrigin()):Normalized()
+		local initial_distance = starting_radius * 0.8
+		projectile:SetAbsOrigin(projectile:GetAbsOrigin() + direction * initial_distance)
 		local units_hit = {}
 		local distance_traveled = 0
 
@@ -57,7 +57,7 @@ function peta_flare:OnSpellStart()
 						local iFlag = DOTA_UNIT_TARGET_FLAG_NONE
 						local iOrder = FIND_ANY_ORDER
 						local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
-						DebugDrawCircle(origin, Vector(255,0,0), 5, radius, true, 0.25)
+						-- DebugDrawCircle(origin, Vector(255,0,0), 5, radius, true, 0.25)
 
 						local radius_reduction = 1 - (radius / starting_radius)
 						local damage = (1 - radius_reduction * damage_reduction_factor) * base_damage
@@ -68,6 +68,8 @@ function peta_flare:OnSpellStart()
 								units_hit[unit] = true
 							end
 						end
+
+						ParticleManager:SetParticleControl(particle, 1, Vector(radius / 5,0,0))
 					end
 					return update_interval
 				else
