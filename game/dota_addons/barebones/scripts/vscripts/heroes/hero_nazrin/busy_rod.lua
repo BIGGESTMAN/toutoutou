@@ -24,6 +24,8 @@ function busy_rod:OnSpellStart()
 				total_treasures = total_treasures + 1
 			end
 		end
+		total_treasures = total_treasures + runesInLine(caster:GetAbsOrigin(), direction, distance, radius)
+
 		local damage = base_damage + bonus_damage * total_treasures
 		for k,unit in pairs(targets) do
 			ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
@@ -51,4 +53,20 @@ function busy_rod:GetCastRange( vLocation, hTarget )
 	else
 		return self:GetSpecialValueFor("reveal_radius")
 	end
+end
+
+function runesInLine(origin, direction, distance, width)
+	local pathStartPos	= origin * Vector(1,1,0)
+	local line_midpoint = pathStartPos + direction * distance / 2
+	local pathEndPos	= pathStartPos + direction * distance
+	local radius 		= distance / 2 + width
+	local allEntities = Entities:FindAllInSphere(line_midpoint, radius)
+	local runes = 0
+	for k,v in pairs(allEntities) do
+		if v:GetDebugName() == "dota_item_rune" then
+			local distance = DistancePointSegment(v:GetAbsOrigin() * Vector(1,1,0), pathStartPos, pathEndPos)
+			if distance <= width then runes = runes + 1 end
+		end
+	end
+	return runes
 end

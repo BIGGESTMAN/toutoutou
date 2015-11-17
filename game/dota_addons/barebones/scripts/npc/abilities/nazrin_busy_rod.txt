@@ -60,5 +60,10 @@
 				"var_type"				"FIELD_FLOAT"
 				"update_interval"		"0.03"
 			}
+			"08" // For tooltips
+			{
+				"var_type"				"FIELD_INTEGER"
+				"normal_cast_range"		"650"
+			}
 		}
 	}
