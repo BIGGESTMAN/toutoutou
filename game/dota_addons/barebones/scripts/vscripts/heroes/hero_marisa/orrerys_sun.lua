@@ -22,7 +22,7 @@ function orrerysSunStart( event )
 						   "particles/orrerys_sun_pink.vpcf", "particles/orrerys_sun_blue.vpcf", "particles/orrerys_sun_red.vpcf"}
 		for i=1,orbs do
 			local unit = CreateUnitByName(unit_name, caster:GetAbsOrigin(), true, caster, caster, caster:GetTeamNumber())
-			local particle = ParticleManager:CreateParticle(particles[#caster.orbs + 1], PATTACH_ABSORIGIN, unit)
+			local particle = ParticleManager:CreateParticle(particles[#caster.orbs + 1], PATTACH_ABSORIGIN, caster)
 			ParticleManager:SetParticleControlEnt(particle, 1, unit, PATTACH_ABSORIGIN, "attach_origin", unit:GetAbsOrigin(), true)
 			ParticleManager:SetParticleControlEnt(particle, 0, unit, PATTACH_ABSORIGIN, "attach_origin", unit:GetAbsOrigin(), true)
 
