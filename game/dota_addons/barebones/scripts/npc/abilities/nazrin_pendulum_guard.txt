@@ -1,0 +1,94 @@
+	"pendulum_guard"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_BUILDING"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+
+		"AbilityTextureName"			"antimage_spell_shield"
+
+		"precache"
+		{
+
+		}
+
+		"AbilityCastPoint"				"0"
+		"AbilityCooldown"				"14 10 6 2"
+		"AbilityManaCost"				"60 70 80 90"
+		"AbilityCastRange"				"1000"
+
+		"AbilityProcsMagicStick" 		"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"total_damage"			"120 180 240 300"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"gold_drain_percent"	"24 27 30 33"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"max_rats"				"2 3 4 5"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"4"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"building_damage_penalty"	"50"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"charge_restore_time"	"40"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"update_interval"		"0.03"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_interval"		"1"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/hero_nazrin/clever_commander"
+				"Function"		"spellCast"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_clever_commander_rat"
+			{
+				"IsHidden"	"1"
+
+				"States"
+				{
+					"MODIFIER_STATE_NO_UNIT_COLLISION"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+
+			"modifier_clever_commander_debuff"
+			{
+				"IsDebuff"	"1"
+			}
+		}
+	}

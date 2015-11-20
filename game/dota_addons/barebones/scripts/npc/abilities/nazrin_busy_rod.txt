@@ -9,11 +9,11 @@
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 
-		"AbilityTextureName"			"tinker_laser"
+		"AbilityTextureName"			"rubick_null_field"
 
 		"precache"
 		{
-
+			"particle"					"particles/units/heroes/hero_tinker/tinker_laser.vpcf"
 		}
 
 		"AbilityCastPoint"				"0.3"

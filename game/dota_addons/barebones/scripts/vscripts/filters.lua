@@ -28,3 +28,14 @@ function Filters:ModifierGainedFilter(event)
 	end
 	return true
 end
+
+function Filters:ModifyGoldFilter(event)
+	local hero = PlayerResource:GetPlayer(event.player_id_const):GetAssignedHero()
+	if hero:HasModifier("modifier_clever_commander_debuff") and event.reliable == 0 then
+		local modifier = hero:FindModifierByName("modifier_clever_commander_debuff")
+		local gold_drained = event.gold * (1 - modifier.gold_drain_percent / 100)
+		modifier.rat.gold_stolen = 	modifier.rat.gold_stolen + gold_drained
+		event.gold = event.gold - gold_drained
+	end
+	return true
+end

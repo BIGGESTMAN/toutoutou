@@ -227,6 +227,7 @@ function GameMode:CaptureGameMode()
 		-- mode:SetTrackingProjectileFilter(Dynamic_Wrap(ProjectileList, "TrackingProjectileCreated"), self)
 		mode:SetDamageFilter(Dynamic_Wrap(Filters, "DamageFilter"), self)
 		mode:SetModifierGainedFilter(Dynamic_Wrap(Filters, "ModifierGainedFilter"), self)
+		mode:SetModifyGoldFilter(Dynamic_Wrap(Filters, "ModifyGoldFilter"), self)
 
 		self:OnFirstPlayerLoaded()
 	end
