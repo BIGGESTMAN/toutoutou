@@ -1,3 +1,5 @@
+require "libraries/util"
+
 if not Filters then 
 	Filters = {}
 	Filters.__index = Filters
@@ -29,8 +31,7 @@ function Filters:DamageFilter(event)
 			local pre_reduction_damage = damage
 			local new_post_reduction_damage = damage
 			if damage_type == DAMAGE_TYPE_PHYSICAL then
-				local damage_multiplier = damageMultiplierForArmor(target:GetPhysicalArmorValue())
-				pre_reduction_damage = pre_reduction_damage / damage_multiplier
+				pre_reduction_damage = pre_reduction_damage / damageMultiplierForArmor(target:GetPhysicalArmorValue())
 				new_post_reduction_damage = pre_reduction_damage * damageMultiplierForArmor(attacker:GetPhysicalArmorValue())
 			elseif damage_type == DAMAGE_TYPE_MAGICAL then
 				pre_reduction_damage = pre_reduction_damage / (1 - target:GetMagicalArmorValue())
@@ -45,10 +46,6 @@ function Filters:DamageFilter(event)
 		end
 	end
 	return true
-end
-
-function damageMultiplierForArmor(armor)
-	return 1 - 0.06 * armor / (1 + (0.06 * math.abs(armor)))
 end
 
 function Filters:ModifierGainedFilter(event)

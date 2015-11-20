@@ -165,3 +165,7 @@ function getNumberOfModifierInstances(unit, modifier_name)
 	end
 	return count
 end
+
+function damageMultiplierForArmor(armor)
+	return 1 - 0.06 * armor / (1 + (0.06 * math.abs(armor)))
+end

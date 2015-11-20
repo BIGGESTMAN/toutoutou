@@ -26,6 +26,10 @@ function spellCast(keys)
 	ability:ApplyDataDrivenModifier(caster, rat, "modifier_clever_commander_rat", {})
 	rat.gold_stolen = 0
 
+	-- Set rat stats based on skill rank
+	local ability_level = ability:GetLevel() - 1
+	if ability_level > 0 then rat:CreatureLevelUp(ability_level) end
+
 	local tether_particle = ParticleManager:CreateParticle("particles/alice/hourai_doll_tether.vpcf", PATTACH_POINT_FOLLOW, rat)
 	ParticleManager:SetParticleControlEnt(tether_particle, 0, rat, PATTACH_POINT_FOLLOW, "attach_hitloc", rat:GetAbsOrigin(), true)
 	ParticleManager:SetParticleControlEnt(tether_particle, 1, target, PATTACH_POINT_FOLLOW, "attach_hitloc", target:GetAbsOrigin(), true)
