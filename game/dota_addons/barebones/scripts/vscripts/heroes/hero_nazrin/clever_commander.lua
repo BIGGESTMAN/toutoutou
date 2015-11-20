@@ -36,7 +36,6 @@ function spellCast(keys)
 				if not latched then
 					rat:SetForceAttackTarget(target)
 					local distance = (rat:GetAbsOrigin() - target:GetAbsOrigin()):Length2D()
-					print(distance)
 					if distance < latch_distance then
 						latched = true
 						ability:ApplyDataDrivenModifier(caster, target, "modifier_clever_commander_debuff", {})
@@ -45,7 +44,7 @@ function spellCast(keys)
 						ApplyDamage({victim = target, attacker = rat, damage = damage, damage_type = damage_type})
 					end
 				else
-					FindClearSpaceForUnit(rat, target:GetAbsOrigin(), true)
+					if not target:IsBuilding() then FindClearSpaceForUnit(rat, target:GetAbsOrigin(), true) end
 					duration_elapsed = duration_elapsed + update_interval
 					if duration_elapsed / (damage_ticks + 1) >= damage_interval then
 						ApplyDamage({victim = target, attacker = rat, damage = damage, damage_type = damage_type})
