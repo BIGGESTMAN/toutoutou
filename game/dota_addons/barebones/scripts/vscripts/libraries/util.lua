@@ -169,3 +169,16 @@ end
 function damageMultiplierForArmor(armor)
 	return 1 - 0.06 * armor / (1 + (0.06 * math.abs(armor)))
 end
+
+function splitGoldAmongTeam(gold, team_number)
+	local players = {}
+	for i=0,9 do
+		if PlayerResource:IsValidPlayer(i) and PlayerResource:GetTeam(i) == team_number then
+			table.insert(players, i)
+		end
+	end
+	for k,playerID in pairs(players) do
+		PlayerResource:ModifyGold(playerID, gold / #players, false, DOTA_ModifyGold_AbilityCost)
+		PopupGoldGain(PlayerResource:GetSelectedHeroEntity(playerID), gold / #players)
+	end
+end

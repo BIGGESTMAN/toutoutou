@@ -1,11 +1,11 @@
 	"gold_rush"
 	{
 		"BaseClass"						"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_BUILDING"
-		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 
 		"AbilityTextureName"			"earthshaker_fissure_alt_gold"
 
@@ -14,10 +14,11 @@
 
 		}
 
-		"AbilityCastPoint"				"0"
-		"AbilityCooldown"				"14 10 6 2"
-		"AbilityManaCost"				"60 70 80 90"
-		"AbilityCastRange"				"1000"
+		"AbilityCastPoint"				"0.3"
+		"AbilityCooldown"				"125 115 105"
+		"AbilityManaCost"				"250 350 450"
+		"AbilityCastRange"				"600"
+		"AOERadius"						"350"
 
 		"AbilityProcsMagicStick" 		"1"
 
@@ -26,42 +27,52 @@
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"total_damage"			"120 180 240 300"
+				"duration"				"25"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"taunt_duration"		"2.0 2.5 3.0"
 			}
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"gold_drain_percent"	"24 27 30 33"
-			}
-			"02"
-			{
-				"var_type"				"FIELD_INTEGER"
-				"max_rats"				"2 3 4 5"
+				"taunt_radius"			"350"
 			}
 			"03"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"duration"				"4"
+				"health"				"750 1000 1250"
 			}
 			"04"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"building_damage_penalty"	"50"
+				"base_bounty"			"150 175 200"
 			}
 			"08"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"charge_restore_time"	"40"
+				"bounty_increase_damage_dealt"	"50"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bounty_increase_heroes_killed"	"25 30 35"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"hero_kill_search_radius"	"1000"
 			}
 			"08"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"update_interval"		"0.03"
+				"aghanim_scepter_taunt_duration"	"2.5 3.0 3.5"
 			}
 			"08"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"damage_interval"		"1"
+				"aghanim_scepter_rat_interval"	"5"
 			}
 		}
 
@@ -69,26 +80,72 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"	"heroes/hero_nazrin/clever_commander"
+				"ScriptFile"	"heroes/hero_nazrin/gold_rush"
 				"Function"		"spellCast"
+				"Target"		"POINT"
 			}
 		}
 
 		"Modifiers"
 		{
-			"modifier_clever_commander_rat"
+			"modifier_gold_rush_mound"
 			{
 				"IsHidden"	"1"
 
 				"States"
 				{
-					"MODIFIER_STATE_NO_UNIT_COLLISION"	"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_MAGIC_IMMUNE"			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_LOW_ATTACK_PRIORITY"	"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_SPECIALLY_DENIABLE"		"MODIFIER_STATE_VALUE_ENABLED"
+				}
+
+				"OnTakeDamage"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_nazrin/gold_rush"
+						"Function"		"damageTaken"
+						"damage"		"%attack_damage"
+					}
+				}
+
+				"OnDeath"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_nazrin/gold_rush"
+						"Function"		"moundDestroyed"
+					}
 				}
 			}
 
-			"modifier_clever_commander_debuff"
+			"modifier_gold_rush_taunt"
 			{
-				"IsDebuff"	"1"
+				"IsDebuff"		"1"
+				"IsPurgable"	"1"
+				"IsStunDebuff"	"1"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PHYSICAL"		"0"
+					"MODIFIER_PROPERTY_DISABLE_AUTOATTACK"				"0"
+				}
+
+				"States"
+				{
+					"MODIFIER_STATE_ATTACK_IMMUNE" 			"MODIFIER_STATE_VALUE_DISABLED"
+					"MODIFIER_STATE_DISARMED"				"MODIFIER_STATE_VALUE_DISABLED"
+					"MODIFIER_STATE_COMMAND_RESTRICTED"		"MODIFIER_STATE_VALUE_ENABLED"
+				}
+
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/hero_nazrin/gold_rush"
+						"Function"		"tauntEnded"
+					}
+				}
 			}
 		}
 	}

@@ -1,0 +1,103 @@
+Nazrin - Intelligence (Bounty Hunter)
+
+Base Stats
+
+STR : 16 (+2.1)
+AGI : 17 (+2.2)
+INT : 24 (+3.1)
+Damage : 15-24
+Armor : -1
+Attacks / Second : 0.58
+Movement Speed : 305
+Turn Rate : 0.5
+Sight Range : 1800/800
+Attack Range : 400
+Missile Speed : 1000
+Attack Duration : 0.4/0.5
+Base Attack Time : 1.7
+
+Lv. 25
+
+STR : 86
+AGI : 89
+INT : 118
+HP : 1784
+Mana : 1534
+Damage : 133-142
+Armor : 11.46
+
+[Q] Busy Rod (busy_rod) : Nazrin's rods passively reveal nearby treasure - Enemy heroes with a certain amount of gold per level, couriers, runes and mounds of gold. Fires a laser at an enemy or treasure that deals magical damage. Each Treasure hit increases the laser's damage, and they can be targeted outside the normal range if they are revealed.
+Spell Immunity - Deals no damage to Spell Immune units, but they still increase its damage if they are treasures. Linken's Sphere blocks on cast if they are the primary target.
+DevNotes - Gives shared vision of treasure that lingers for 1 second. Gives true sight of invisible units. The laser has no travel speed and instantly deals damage.
+
+Cast Point : 0.3
+Base Magical Damage (damage) : 90/140/190/240
+Bonus Magical Damage Per Treasure (bonus_damage) : 45/70/95/120
+Hero Gold Per Level Threshold (gold_threshold_per_level) : 180/150/120/90
+Cast Range (normal_cast_range) : 650
+Laser Radius : 200
+Reveal Radius (reveal_radius) : 1000/1200/1400/1600
+Mana : 90/110/130/150
+Cooldown : 8
+
+[W] A Tiny, Tiny, Clever Commander (clever_commander) : Nazrin orders a rat to gnaw on an enemy or building to deal physical damage over time. Buildings take halved damage and heroes have their unreliable gold gain reduced. They scurry back to Nazrin after 4 seconds, giving her the stolen gold. Rats have spell immunity and are ignored by towers and creeps. The maximum number of rats include those in action, and dead rats are replaced after 40 seconds.
+Spell Immunity - Spell Immune units can't be targeted, but previous rats will continue to gnaw and debuff them. Blocked by Linken's Sphere on impact, with the rat immediately returning to Nazrin.
+DevNotes - Rats deal initial damage, meaning 5 instances of 24/36/48/60 damage. When killed by an enemy hero, they gain the stolen gold along with the bounty. On learning this ability, Nazrin gains 2 rats. Rats don't have true sight, but will continue to chase and gnaw on units that turn invisible.
+
+Cast Point : 0
+Total Physical Damage (total_damage) : 120/180/240/300
+%Unreliable Gold Gain Reduction (gold_drain_percent) : 24/27/30/33%
+Maximum Rats (max_rats) : 2/3/4/5
+Cast Range : 1000
+Mana : 60/70/80/90
+Cooldown : 14/10/6/2
+
+Rat 
+HP : 100/120/140/160
+Health Regen : 0.5
+Damage : 0
+Armor : 0
+Movement Speed : 450
+Collision Size : 8, Phased
+Sight Range : 400/400
+Attack Range : Melee
+Attack Duration : 0/0
+Base Attack Time : 0
+Bounty : 10/12/14/16
+Experience : 15
+
+[E] Pendulum Guard (pendulum_guard) : A protective shell disarms a unit or building while absorbing damage taken, reflecting it for enemies close by. When the shell expires, Nazrin restores mana equal to the damage absorbed.
+Spell Immunity - Blocked by Spell Immunity. For reflected damage, only magical damage is blocked. Linken's Sphere blocks on cast.
+DevNotes - The absorb is applied before armor/magic resistance/other damage reduction effects. The reflected damage's type is identical to its source. If the target dies, mana is instantly restored.
+
+Cast Point : 0.3
+Duration (duration) : 4
+%Damage Absorb/Reflect (damage_percent) : 45/55/65/75%
+Cast Range : 900
+Radius (radius) : 350/400/450/500
+Mana : 80
+Cooldown : 18/15/12/9
+
+[R] Gold Rush (gold_rush) : Nazrin unearths a mound of gold that taunts enemy heroes. The mound is spell immune and is ignored by towers and creeps. It gives a large bounty split among the team that gets the last hit, which increases by half the damage enemies dealt, the total bounty increased by a percentage for each hero that was killed near it.
+Spell Immunity - Pierces Spell Immunity.
+DevNotes - The mound is treated as a building, and gives unreliable gold. Taunts only on cast. For enemies, the bounty increases for the damage your team inflicted. Multiple hero kills increases the total bounty by x1.35, x1.7, x2.05 and so on.
+
+Cast Point : 0.3
+Taunt Duration (taunt_duration) : 2/2.5/3 {Scepter : 2.5/3/3.5}
+Mound Duration (duration) : 25
+Mound Health (health) : 750/1000/1250
+Base Bounty (base_bounty) : 150/175/200
+%Total Bounty Increase per Hero Killed (bounty_increase_heroes_killed) : 25/30/35%
+Cast Range : 600
+Taunt Radius (taunt_radius) : 350
+Kill Search Radius (hero_kill_search_radius) : 1000
+Mana : 250/350/450
+Cooldown : 125/115/105
+
+Mound of Gold
+HP : 750/1000/1250
+Armor : 8
+Sight Range : 1800/1800
+Base Attack Time : 0
+Bounty : 150/175/200
+Experience : 50
