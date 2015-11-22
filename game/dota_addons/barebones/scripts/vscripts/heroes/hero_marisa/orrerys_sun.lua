@@ -13,6 +13,7 @@ function orrerysSunStart( event )
 		-- Initialize the table to keep track of all orbs
 		if caster.orbs then
 			for k,orb in pairs(caster.orbs) do
+				ParticleManager:DestroyParticle(orb.particle, false)
 				orb:RemoveSelf()
 			end
 		end
@@ -22,9 +23,9 @@ function orrerysSunStart( event )
 						   "particles/orrerys_sun_pink.vpcf", "particles/orrerys_sun_blue.vpcf", "particles/orrerys_sun_red.vpcf"}
 		for i=1,orbs do
 			local unit = CreateUnitByName(unit_name, caster:GetAbsOrigin(), true, caster, caster, caster:GetTeamNumber())
-			local particle = ParticleManager:CreateParticle(particles[#caster.orbs + 1], PATTACH_ABSORIGIN, caster)
-			ParticleManager:SetParticleControlEnt(particle, 1, unit, PATTACH_ABSORIGIN, "attach_origin", unit:GetAbsOrigin(), true)
-			ParticleManager:SetParticleControlEnt(particle, 0, unit, PATTACH_ABSORIGIN, "attach_origin", unit:GetAbsOrigin(), true)
+			unit.particle = ParticleManager:CreateParticle(particles[#caster.orbs + 1], PATTACH_ABSORIGIN, caster)
+			ParticleManager:SetParticleControlEnt(unit.particle, 1, unit, PATTACH_ABSORIGIN, "attach_origin", unit:GetAbsOrigin(), true)
+			ParticleManager:SetParticleControlEnt(unit.particle, 0, unit, PATTACH_ABSORIGIN, "attach_origin", unit:GetAbsOrigin(), true)
 
 			ability:ApplyDataDrivenModifier(caster, unit, "modifier_orrerys_sun_orb", {})
 			
@@ -32,7 +33,7 @@ function orrerysSunStart( event )
 			table.insert(caster.orbs, unit)
 		end
 		
-		caster.orbs_angle = 0
+		if not caster.orbs_angle then caster.orbs_angle = 0 end
 	end
 end
 
@@ -104,12 +105,9 @@ function updateOrbs( event )
 		local angle = (360 / number_of_orbs) * (orb_number - 1)
 		local target_point = RotatePosition(rotation_point, QAngle(0,angle,0), prototype_target_point)
 
-		if firing_spark then
+		-- Tilt orbs up/down if casting/just finished casting spark
+		if caster.spark_tilt_angle then
 			target_point = tiltOrb(rotation_point, target_point, caster.spark_tilt_angle, caster:GetForwardVector())
-		else -- Tilt back down after spark
-			if caster.spark_tilt_angle then
-				target_point = tiltOrb(rotation_point, target_point, caster.spark_tilt_angle, caster:GetForwardVector())
-			end
 		end
 		caster.orbs[orb_number]:SetAbsOrigin(target_point)
 	end

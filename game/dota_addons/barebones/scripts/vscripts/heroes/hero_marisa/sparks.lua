@@ -35,7 +35,7 @@ function startSpark(caster, ability, modifier, debuff_modifier, stacking_debuff,
 	-- Provide initial vision through hacky hacks, aww yeah
 	GetEnemiesInCone(caster, start_radius, end_radius, end_distance, spell_forward, 4, false, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, damage_interval)
 
-	-- EmitSoundOn("Touhou.Spark", caster)
+	EmitSoundOn("Touhou.Spark", caster)
 	Timers:CreateTimer(tracer_duration, function()
 		if not caster:IsNull() and caster:HasModifier(modifier) then
 			-- Adjust direction if Marisa is flying around

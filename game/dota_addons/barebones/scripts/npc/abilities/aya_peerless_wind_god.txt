@@ -28,12 +28,6 @@
 
 			"FireSound"
 			{
-				"EffectName"	"barebones.Hohohaha"
-				"Target" 		"CASTER"
-			}
-
-			"FireSound"
-			{
 				"EffectName"	"Hero_Windrunner.ShackleshotCast"
 				"Target" 		"CASTER"
 			}
