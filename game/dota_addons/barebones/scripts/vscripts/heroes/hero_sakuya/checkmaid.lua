@@ -9,8 +9,9 @@ function spellCast(keys)
 	local dagger_count = ability:GetSpecialValueFor("daggers")
 	local radius = ability:GetSpecialValueFor("radius")
 
+	print(target:GetUnitName())
 	ability:ApplyDataDrivenModifier(caster, target, "modifier_checkmaid", {})
-	target.checkmaid_daggers = {}
+	if not target.checkmaid_daggers then target.checkmaid_daggers = {} end
 
 	local angle_increment = 360 / dagger_count
 	local prototype_target_point = (target_location - caster:GetAbsOrigin()):Normalized()

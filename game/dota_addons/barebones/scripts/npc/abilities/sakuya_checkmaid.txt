@@ -98,6 +98,8 @@
 	    		"IsStunDebuff"	"1"
 	    		"IsPurgable"	"1"
 
+	    		"Attributes"	"MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+
 	    		"Duration"		"%duration"
 
 	    		"States"
