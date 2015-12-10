@@ -28,8 +28,8 @@
 		{
 			"01" // unused
 			{
-				"var_type"				"FIELD_INTEGER"
-				"channel_time_per_charge"	"1"
+				"var_type"				"FIELD_FLOAT"
+				"channel_time_per_charge"	"0.75"
 			}
 			"05"
 			{
@@ -45,7 +45,7 @@
 			"03"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"charges_duration"		"10"
+				"charges_duration"		"14"
 				"_value"				"DOTA_Tooltip_Ability_Vajrapanis_Incantation_Channel_Charges_Duration"
 			}
 			"04" // unused
