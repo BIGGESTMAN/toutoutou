@@ -7,6 +7,7 @@ imported_model_characters = {"npc_dota_hero_skywrath_mage",
 							"npc_dota_hero_morphling",
 							"npc_dota_hero_obsidian_destroyer",
 							"npc_dota_hero_juggernaut",
+							"npc_dota_hero_templar_assassin",
 							--[["npc_dota_hero_weaver,"--]]}
 
 -- GameRules Variables

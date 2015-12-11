@@ -56,4 +56,6 @@
 		"AttackAnimationPoint"		"0.35"									// Normalized time in animation cycle to attack.
 		"AttackAcquisitionRange"	"128"									// Range within a target can be acquired.
 		"AttackRange"				"128"									// Range within a target can be attacked.
+		"Model"						"models/thd2/hiziri_byakuren/hiziri_byakuren_mmd.vmdl"						// Model.
+		"HealthBarOffset"			"200"
 	}

@@ -25,3 +25,4 @@
 		"npc_dota_hero_necrolyte"			"Komachi"
 		"npc_dota_hero_zuus"				"Iku"
 		"npc_dota_hero_obsidian_destroyer"	"Utsuho"
+		"npc_dota_hero_sven"				"Keine"

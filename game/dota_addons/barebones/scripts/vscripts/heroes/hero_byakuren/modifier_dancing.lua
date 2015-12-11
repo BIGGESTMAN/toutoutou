@@ -46,7 +46,7 @@ function modifier_dancing:OnCreated( kv )
 		-- Remove superhuman bonus attackspeed
 		caster:RemoveModifierByName("modifier_hanumans_dance_as_bonus")
 
-		local animation_properties = {duration=total_dash_duration, activity=ACT_DOTA_ATTACK, rate=(25 / 30) / total_dash_duration, translate="meld"}
+		local animation_properties = {duration=total_dash_duration, activity=ACT_DOTA_CAST_ABILITY_1, rate=(15 / 30) / total_dash_duration}
 		StartAnimation(caster, animation_properties)
 		
 		self:StartIntervalThink(ability:GetLevelSpecialValueFor("update_interval", ability_level))
