@@ -193,7 +193,7 @@ function orrerysSunAttack( event )
 	for i=1,#caster.orbs do
 		Timers:CreateTimer((i - 1) * delay, function()
 			if caster.orbs[i] then
-				caster.orbs[i]:PerformAttack(target, true, true, true, true )
+				caster.orbs[i]:PerformAttack(target, true, true, true, true, true)
 			end
 		end)
 	end

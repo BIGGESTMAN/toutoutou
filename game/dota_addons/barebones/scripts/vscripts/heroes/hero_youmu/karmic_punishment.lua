@@ -12,7 +12,7 @@ function spellCast(keys)
 	local ability = keys.ability
 
 	-- Deal damage
-	caster:PerformAttack(target, true, true, true, true)
+	caster:PerformAttack(target, true, true, true, true, false)
 	local bonus_damage = caster.slash_of_departing_stored_damage
 	local damage_type = ability:GetAbilityDamageType()
 	ApplyDamage({victim = target, attacker = caster, damage = bonus_damage, damage_type = damage_type})

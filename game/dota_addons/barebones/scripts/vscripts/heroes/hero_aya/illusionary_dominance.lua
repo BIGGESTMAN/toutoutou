@@ -87,7 +87,7 @@ function updateDashing(keys)
 	for k,unit in pairs(targets) do
 		if not ability.units_hit[unit] then
 			ability.units_hit[unit] = true
-			caster:PerformAttack(unit, true, true, true, true )
+			caster:PerformAttack(unit, true, true, true, true, false)
 			if ability.canAccelerate and unit:IsHero() then
 				if not caster:HasModifier("modifier_illusionary_dominance_accelerating") then
 					ability:ApplyDataDrivenModifier(caster, caster, "modifier_illusionary_dominance_accelerating", {})

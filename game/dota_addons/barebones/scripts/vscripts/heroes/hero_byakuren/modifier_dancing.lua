@@ -121,7 +121,7 @@ function slash(caster, ability, modifier)
 	local targets = FindUnitsInRadius(team, origin, nil, radius, iTeam, iType, iFlag, iOrder, false)
 
 	for k,unit in pairs(targets) do
-		caster:PerformAttack(unit, true, true, false, true)
+		caster:PerformAttack(unit, true, true, false, true, false)
 		ApplyDamage({victim = unit, attacker = caster, damage = bonus_damage, damage_type = damage_type})
 		local hit_particle = ParticleManager:CreateParticle("particles/byakuren/hanumans_dance_slash_hit.vpcf", PATTACH_ABSORIGIN, caster)
 		ParticleManager:SetParticleControl(hit_particle, 0, unit:GetAbsOrigin())

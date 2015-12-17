@@ -31,7 +31,7 @@ function swoop(keys)
 			direction = (target_point - caster:GetAbsOrigin()):Normalized()
 			caster:SetForwardVector(direction)
 			
-			caster:PerformAttack(target, true, true, false, false)
+			caster:PerformAttack(target, true, true, false, false, false)
 			ability:ApplyDataDrivenModifier(caster, target, "modifier_queen_of_midnight_stun", {})
 			caster:AttackNoEarlierThan(caster:GetSecondsPerAttack())
 			caster:RemoveModifierByName("modifier_queen_of_midnight_swooping")
