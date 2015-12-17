@@ -97,6 +97,8 @@
 						"Function"		"frozenDurationEnded"
 					}
 				}
+
+				"Attributes"		"MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
 			}
 	    }
 	}
