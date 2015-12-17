@@ -58,5 +58,5 @@
 		"AttackAcquisitionRange"	"650"									// Range within a target can be acquired.
 		"ProjectileModel"			"particles/units/heroes/hero_phantom_assassin/phantom_assassin_stifling_dagger.vpcf"							// Particle system model for projectile.
 		"ProjectileSpeed"			"1300"									// Speed of projectile.
-		//"Model"						"models/test/sakuya_mmd.vmdl"						// Model.
+		"Model"						"models/thd2/sakuya/sakuya_mmd.vmdl"						// Model.
 	}

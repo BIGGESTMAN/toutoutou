@@ -9,6 +9,7 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 
 		"AbilityTextureName"			"mirana_invis"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_2"
 
 		"precache"
 		{
