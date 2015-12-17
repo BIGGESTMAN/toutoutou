@@ -45,13 +45,12 @@ function startSpark(caster, ability, modifier, debuff_modifier, stacking_debuff,
 
 			local cone_units = GetEnemiesInCone(caster, start_radius, end_radius, end_distance, spell_forward, 4, false, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, damage_interval)
 			for k,unit in pairs(cone_units) do
-				-- Damage
-				ApplyDamage({ victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
 				ability:ApplyDataDrivenModifier(caster, unit, debuff_modifier, {})
 				if stacking_debuff then
 					unit:FindModifierByName(debuff_modifier):SetStackCount(current_slow)
 					current_slow = current_slow + slow_increment
 				end
+				ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
 
 				-- Provide vision of Marisa to targets hit
 				caster:MakeVisibleDueToAttack(caster:GetOpposingTeamNumber())
