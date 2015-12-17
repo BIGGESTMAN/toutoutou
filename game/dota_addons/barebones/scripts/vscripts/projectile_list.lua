@@ -64,6 +64,7 @@ function setupProjectileList()
 			local origin_location = origin:GetAttachmentOrigin(origin:ScriptLookupAttachment("attach_attack1"))
 			local projectile = CreateUnitByName("npc_dummy_unit", origin_location, false, origin, origin, origin:GetTeamNumber())
 			projectile:SetAbsOrigin(origin_location)
+			ProjectileList:AddProjectile(projectile)
 
 			local target_location = getTargetHitloc(target)
 			local projectile_location = projectile:GetAbsOrigin()
@@ -82,25 +83,31 @@ function setupProjectileList()
 
 			Timers:CreateTimer(0, function()
 				if not projectile:IsNull() then
-					if not target:IsNull() then
-						target_location = getTargetHitloc(target)
-						ParticleManager:SetParticleControl(particle, 1, target_location)
-					end
-					projectile_location = projectile:GetAbsOrigin()
-					local distance = (target_location - projectile_location):Length2D()
-					direction = (target_location - projectile_location):Normalized()
-
-					if distance > arrival_distance then
-						projectile:SetAbsOrigin(projectile_location + direction * dummy_speed)
-						return 0.03
-					else
-						if not target:IsNull() and not origin:IsNull() then
-							origin:PerformAttack(target, true, true, true, true, false)
+					if not projectile.frozen then
+						ParticleManager:SetParticleControl(particle, 2, Vector(speed,0,0))
+						if not target:IsNull() then
+							target_location = getTargetHitloc(target)
+							ParticleManager:SetParticleControl(particle, 1, target_location)
 						end
-						ParticleManager:DestroyParticle(particle, false)
-						Timers:CreateTimer(3, function()
-							projectile:RemoveSelf()
-						end)
+						projectile_location = projectile:GetAbsOrigin()
+						local distance = (target_location - projectile_location):Length2D()
+						direction = (target_location - projectile_location):Normalized()
+
+						if distance > arrival_distance then
+							projectile:SetAbsOrigin(projectile_location + direction * dummy_speed)
+							return 0.03
+						else
+							if not target:IsNull() and not origin:IsNull() then
+								origin:PerformAttack(target, true, true, true, true, false)
+							end
+							ParticleManager:DestroyParticle(particle, false)
+							Timers:CreateTimer(3, function()
+								projectile:RemoveSelf()
+							end)
+						end
+					else
+						ParticleManager:SetParticleControl(particle, 2, Vector(0,0,0))
+						return 0.03
 					end
 				end
 			end)
