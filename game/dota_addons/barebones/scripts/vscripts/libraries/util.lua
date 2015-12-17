@@ -196,12 +196,14 @@ end
 
 if not util_unit_keyvalues then util_unit_keyvalues = LoadKeyValues("scripts/vscripts/npc_units.txt") end
 if not util_hero_keyvalues then util_hero_keyvalues = LoadKeyValues("scripts/vscripts/npc_heroes.txt") end
+if not util_custom_unit_keyvalues then util_custom_unit_keyvalues = LoadKeyValues("scripts/npc/npc_units_custom.txt") end
 if not util_custom_hero_keyvalues then util_custom_hero_keyvalues = LoadKeyValues("scripts/npc/npc_heroes_custom.txt") end
 function getProjectileModel(unit_name)
 	local particle_name = nil
 
 	local unit_kvs = util_unit_keyvalues[unit_name]
 	if not unit_kvs then unit_kvs = util_hero_keyvalues[unit_name] end
+	if not unit_kvs then unit_kvs = util_custom_unit_keyvalues[unit_name] end
 	particle_name = unit_kvs["ProjectileModel"]
 	if not particle_name then
 		for k,v in pairs(util_custom_hero_keyvalues) do
