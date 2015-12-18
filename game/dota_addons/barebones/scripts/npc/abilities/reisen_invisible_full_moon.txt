@@ -96,6 +96,8 @@
 	    		"IsPurgable"		"0"
 	    		"Duration"			"%stealth_linger_time"
 
+	    		"Priority"	"MODIFIER_PRIORITY_ULTRA"
+
 	    		"States"
 	    		{
 	    			"MODIFIER_STATE_INVISIBLE"				"MODIFIER_STATE_VALUE_ENABLED"
