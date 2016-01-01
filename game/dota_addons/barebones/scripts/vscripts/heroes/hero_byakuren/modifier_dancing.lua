@@ -63,7 +63,7 @@ function modifier_dancing:OnIntervalThink()
 		local target_point = self.target_point
 
 		-- Virudhaka's Sword light fragments interaction -- dash instantly
-		if target:HasModifier("modifier_light_fragment") then
+		if target:HasModifier("modifier_virudhakas_sword_light_fragment") then
 			local dash_particle = ParticleManager:CreateParticle("particles/byakuren/hanumans_dash_instant.vpcf", PATTACH_ABSORIGIN, caster)
 			ParticleManager:SetParticleControl(dash_particle, 0, caster:GetAbsOrigin())
 

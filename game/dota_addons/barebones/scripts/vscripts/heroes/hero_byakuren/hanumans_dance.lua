@@ -58,7 +58,7 @@ end
 -- end
 
 function hanumans_dance:GetCastRange( vLocation, hTarget )
-	if hTarget ~= nil and hTarget:HasModifier("modifier_light_fragment") then
+	if hTarget ~= nil and hTarget:HasModifier("modifier_virudhakas_sword_light_fragment") then
 		local virudhakas_ability = self:GetCaster():FindAbilityByName("virudhakas_sword")
 		local level = virudhakas_ability:GetLevel() - 1
 		return virudhakas_ability:GetLevelSpecialValueFor("hanumans_dash_range", level)

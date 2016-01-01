@@ -69,13 +69,10 @@ function chargeTimeFinished(keys)
 		ApplyDamage({ victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
 	end
 
-	-- Create particles
+	-- Create shockwave particle
 	caster:SetForwardVector(ability.target_direction)
-
-	-- Timers:CreateTimer(0.15, function() -- A bit of a delay to try to make sure the shockwave particle actually goes in the right direction
-		local particle = ParticleManager:CreateParticle("particles/byakuren/durgas_soul_shockwave.vpcf", PATTACH_ABSORIGIN, caster)
-		ParticleManager:SetParticleControlForward(particle, 0, ability.target_direction)
-	-- end)
+	local particle = ParticleManager:CreateParticle("particles/byakuren/durgas_soul_shockwave.vpcf", PATTACH_ABSORIGIN, caster)
+	ParticleManager:SetParticleControlForward(particle, 0, ability.target_direction)
 
 	-- Remove preview particle
 	ParticleManager:DestroyParticle(caster.durgas_soul_preview_particle, true)

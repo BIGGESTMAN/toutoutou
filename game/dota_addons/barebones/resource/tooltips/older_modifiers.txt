@@ -4,18 +4,18 @@
 		"DOTA_Tooltip_modifier_vajrapanis_charges"	"Charges"
 		"DOTA_Tooltip_modifier_vajrapanis_charges_Description"	"Byakuren can cast abilities while she has charges remaining."
 
-		"DOTA_Tooltip_modifier_pulled"	"Indra's Thunder"
-		"DOTA_Tooltip_modifier_pulled_Description"	"Being pulled to the center of the circle of beads."
+		"DOTA_Tooltip_modifier_indras_thunder_pulled"	"Indra's Thunder"
+		"DOTA_Tooltip_modifier_indras_thunder_pulled_Description"	"Being pulled to the center of the circle of beads."
 
-		"DOTA_Tooltip_modifier_casting"	 "Durga's Soul Charging"
-		"DOTA_Tooltip_modifier_casting_Description"	 "Immune to all damage and disables."
+		"DOTA_Tooltip_modifier_durgas_soul_casting"	 "Durga's Soul Charging"
+		"DOTA_Tooltip_modifier_durgas_soul_casting_Description"	 "Immune to all damage and disables."
 
-		"DOTA_Tooltip_modifier_pulled"	"Virudhaka's Sword"
-		"DOTA_Tooltip_modifier_pulled_Description"	"Being pulled to the target of the spear."
-		"DOTA_Tooltip_modifier_impaled"	 "Impaled"
-		"DOTA_Tooltip_modifier_impaled_Description"	 "Slowed by %dMODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE%%."
-		"DOTA_Tooltip_modifier_light_fragment"	"Light Fragment"
-		"DOTA_Tooltip_modifier_light_fragment_Description"	"This unit has a light fragment attached, allowing Byakuren to see them."
+		"DOTA_Tooltip_modifier_virudhakas_sword_pulled"	"Virudhaka's Sword"
+		"DOTA_Tooltip_modifier_virudhakas_sword_pulled_Description"	"Being pulled to the target of the spear."
+		"DOTA_Tooltip_modifier_virudhakas_sword_impaled"	 "Impaled"
+		"DOTA_Tooltip_modifier_virudhakas_sword_impaled_Description"	 "Slowed by %dMODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE%%."
+		"DOTA_Tooltip_modifier_virudhakas_sword_light_fragment"	"Light Fragment"
+		"DOTA_Tooltip_modifier_virudhakas_sword_light_fragment_Description"	"This unit has a light fragment attached, allowing Byakuren to see them."
 
 		"DOTA_Tooltip_modifier_duplex_barrier_movespeed_slow"  "Duplex Barrier Movement Slow"
 		"DOTA_Tooltip_modifier_duplex_barrier_movespeed_slow_Description"  "Movement speed slowed by %dMODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE%%."

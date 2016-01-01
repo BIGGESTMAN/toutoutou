@@ -49,7 +49,7 @@ function indrasThunderCast(keys)
 
 	-- Virudhaka's Sword light fragments interaction -- remove delay
 	local delay = ability:GetLevelSpecialValueFor("delay", ability_level)
-	if target:HasModifier("modifier_light_fragment") then
+	if target:HasModifier("modifier_virudhakas_sword_light_fragment") then
 		delay = 0.03 -- Wait a frame so dummy can actually finish moving to the target
 	end
 
