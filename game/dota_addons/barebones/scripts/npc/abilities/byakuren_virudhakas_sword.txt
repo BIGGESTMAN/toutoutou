@@ -84,6 +84,11 @@
 				"hanumans_dash_range"	"800 1400 2000"
 				"_value"				"DOTA_Tooltip_Ability_Virudhakas_Sword_Hanumans_Dash_Range"
 			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"tooltip_cast_range"	"800 1000 1200"
+			}
 		}
 
 		"OnSpellStart"
@@ -92,30 +97,21 @@
 	    	{
 	    		"ScriptFile"			"heroes/hero_byakuren/virudhakas_sword.lua"
 	    		"Function"				"virudhakasSwordCast"
-	    		"pull_modifier"			"modifier_pulled"
+	    	}
+	    }
+
+	    "OnUpgrade"
+	    {
+	    	"RunScript"
+	    	{
+	    		"ScriptFile"	"heroes/hero_byakuren/virudhakas_sword"
+	    		"Function"		"onUpgrade"
 	    	}
 	    }
 
 		"Modifiers"
 		{
-			"modifier_virudhakas_sword"
-			{
-				"IsHidden"		"1"
-				"Passive"		"1"
-
-				"ThinkInterval"  "%update_interval"
-
-				"OnIntervalThink"
-				{
-					"RunScript"
-					{
-						"ScriptFile"	"heroes/hero_byakuren/virudhakas_sword"
-						"Function"		"updateAbilityActivated"
-					}
-				}
-			}
-			
-	    	"modifier_pulled"
+			"modifier_virudhakas_sword_pulled"
 			{
 				"IsHidden"		"0"
 				"IsDebuff"		"1"
@@ -128,7 +124,7 @@
 				}
 			}
 
-			"modifier_impaled"
+			"modifier_virudhakas_sword_impaled"
 			{
 				"IsHidden"		"0"
 				"IsDebuff"		"1"
@@ -142,7 +138,7 @@
 				}
 			}
 
-			"modifier_light_fragment"
+			"modifier_virudhakas_sword_light_fragment"
 			{
 				"IsHidden"		"0"
 				"IsDebuff"		"1"

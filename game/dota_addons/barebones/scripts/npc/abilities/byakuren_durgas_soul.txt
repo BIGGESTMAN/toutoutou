@@ -16,6 +16,7 @@
 		{
 			"particle"					"particles/byakuren/durgas_soul_shockwave.vpcf"
 			"particle"					"particles/byakuren/durgas_soul_charging.vpcf"
+			"particle"					"particles/byakuren/durgas_soul/shockwave_preview.vpcf"
 		}
 
 		"AbilityCastPoint"				"0"
@@ -72,7 +73,6 @@
 	    	{
 	    		"ScriptFile"			"heroes/hero_byakuren/durgas_soul.lua"
 	    		"Function"				"durgasSoulCast"
-	    		"modifier"				"modifier_casting"
 	    	}
 	    }
 
@@ -87,7 +87,7 @@
 
 		"Modifiers"
 		{
-	    	"modifier_casting"
+	    	"modifier_durgas_soul_casting"
 	    	{
 	    		"Duration"		"%duration"
 

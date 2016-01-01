@@ -122,7 +122,6 @@
 		},
 		{
 			_class = "C_INIT_RingWave"
-			m_nControlPointNumber = 4
 			m_flParticlesPerOrbit = 70.000000
 			m_flInitialRadius = 120.000000
 			m_flInitialSpeedMin = 2500.000000

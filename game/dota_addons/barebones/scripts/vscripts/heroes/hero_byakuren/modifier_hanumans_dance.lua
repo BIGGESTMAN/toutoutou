@@ -30,14 +30,15 @@ function modifier_hanumans_dance:IsPurgable()
 	return false
 end
 
-function modifier_hanumans_dance:DeclareFunctions()
-	return { MODIFIER_EVENT_ON_ATTACK }
-end
+-- Stuff to make ability go on cooldown when autoattack is made, not currently used
+-- function modifier_hanumans_dance:DeclareFunctions()
+-- 	return { MODIFIER_EVENT_ON_ATTACK }
+-- end
 
-function modifier_hanumans_dance:OnAttack( params )
-	if params.attacker == self:GetParent() then
-		if not self:GetCaster():HasModifier("modifier_dancing") then
-			self:GetAbility():StartCooldown(params.attacker:GetSecondsPerAttack())
-		end
-	end
-end
+-- function modifier_hanumans_dance:OnAttack( params )
+-- 	if params.attacker == self:GetParent() then
+-- 		if not self:GetCaster():HasModifier("modifier_dancing") then
+-- 			self:GetAbility():StartCooldown(params.attacker:GetSecondsPerAttack())
+-- 		end
+-- 	end
+-- end

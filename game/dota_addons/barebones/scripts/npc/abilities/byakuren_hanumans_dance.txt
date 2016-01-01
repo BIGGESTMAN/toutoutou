@@ -19,6 +19,8 @@
 			"particle"					"particles/byakuren/hanumans_dance_slash_hit.vpcf"
 		}
 
+		"AbilityCooldown"				"4.5 3.5 2.5 1.5"
+
 		"AbilitySpecial"
 		{
 			"01"

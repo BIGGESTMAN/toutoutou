@@ -1,0 +1,97 @@
+Byakuren - Intelligence
+
+Base Stats
+
+STR : 18 (+1.9)
+AGI : 15 (+1.8)
+INT : 23 (+2.5)
+Damage : 27
+Armor : 0
+Movement Speed : 310
+Turn Rate : 0.7
+Sight Range : 1800/800
+Attack Range : 128
+Attack Duration : 0.35
+Base Attack Time : 1.5
+
+[Q] Hanuman's Dance (hanumans_dance) : Byakuren dashes forward a short distance, slashing in front of her and dealing bonus magic damage. Bonus damage and slash area increase with each successive cast within a short duration.
+Spell Immunity - Y
+Superhuman : Drains 2 additional charges per slash to gain 300 attack speed while performing slash attacks, {and dash past the opponent instead of just towards them. Will end up a distance past the opponent equal to normal dash range}?
+
+Cast Point : 0
+Cast Range : 390/415/440/465
+Bonus Damage (bonus_damage) : 20/35/50/65
+Damage Increase per Slash: 50%
+Slash Radius (radius) : 175
+Radius Increase per Slash: 15%
+Dash Range (dash_range) : 125/150/175/200
+Successive Slash Window (recast_time) : 2.5
+Charges: 1 per slash
+Cooldown: 4.5/3.5/2.5/1.5
+Base Dash Time: 0.8
+Note0 (note0) : Slashes apply on-hit affects.
+
+[W] Indra's Thunder (indras_thunder) : Byakuren throws a circle of spirit beads at target enemy; upon reaching them, they pause in place, then detonate, dealing magic damage to all enemies hit and pulling them to the center of the circle.
+Spell Immunity - N
+Superhuman : Drains up to 10 additional charges to gain 40 additional radius and 0.1 pull duration for each.
+
+Cast Point : 0.3
+Cast Range: 700
+Travel Speed: 1500
+Delay (delay) : 1
+Radius (radius) : 300
+Magic Damage (damage) : 100/160/220/280
+Pull Duration (pull_duration) : 0.3
+Charges: 1
+Cooldown : 7/6/5/4
+
+[E] Durga's Soul (durgas_soul) : Byakuren gains a shield granting her immunity to damage and debuffs for 2 seconds, after which she unleashes a shockwave which deals magic damage. The shockwave does more damage based on the amount of damage absorbed during the charge.
+Spell Immunity - N
+Superhuman : Drains up to 10 additional charges to unfold wings during the charge, which fire lasers in each {diagonal} cardinal direction once the charge finishes, dealing 10% of the shockwave's damage over 1.5 seconds and stunning enemies hit for 0.2 seconds for each.
+
+Cast Point : 0
+Charge Duration : 2
+Shockwave Range: 300
+Initial Radius: 200
+End Radius: 300
+Magic Damage (damage) : 100/170/240/310
+Damage Increase per Damage Taken: 0.2%
+Charges: 1
+Cooldown : 12/10/8/6
+Note0 (note0) : The shockwave direction can be changed any number of times during the shield duration by recasting the ability.
+Note1 (note1) : Shockwave damage is increased by 100% for every 200 damage absorbed.
+Note2 (note2) : Hits units up to 600 away.
+
+[R] Virudhaka's Sword (virudhakas_sword) : Byakuren throws a spear of light at target enemy hero. The spear deals magic damage to any enemies hit along the way, leaving light fragments in them and pulling them with it; when it reaches the target, it impales them, severely slowing them. Light fragments grant Byakuren vision of enemies and Hanuman's Dance and Indra's Thunder bonus effects.
+Spell Immunity - Y
+
+Cast Point : 0.75
+Cast Range (tooltip_cast_range) : 800/1000/1200
+Travel Speed: 2500
+Spear Radius: 150
+Magic Damage (damage) : 200/250/300
+%Slow (slow) : 60/70/80%
+Slow Duration (slow_duration) : 4
+Light Fragments Duration (light_fragments_duration) : 8
+Charges : 1
+Cooldown : 120/110/100
+Hanuman Dash/Cast Range (hanumans_dash_range) : 800/1400/2000
+Note0 (note0) : Hanuman's Dance's dash has greater range when dashing towards light fragments and travels instantly.
+Note1 (note1) : Indra's Thunder has no activation delay when targeted on light fragments.
+
+[T] Vajrapani's Incantation (vajrapanis_incantation_channel) : Byakuren's abilities cost no mana but each cost 1 charge. Byakuren gains charges passively, and by incanting can gain charges immediately. Levels along with Virudhaka's Sword.
+Spell Immunity - N/A
+Scepter - Max charge limit removed, and channel time per charge reduced to 0.25 seconds. Grants Brilliance of Mahavairocana.
+
+Cast Point : 0
+Channel Time (channel_time_per_charge) : 3/2.5/2/1.5
+Max Charges (max_charges) : 4/5/6/7
+Charge Generation Time (charge_generation_time) : 60/50/40/30
+Mana : 100 per charge
+Cooldown : 0
+
+[Y] Brilliance of Mahavairocana (brilliance_of_mahavairocana) : Toggle. While on, abilities will drain additional charges in order to gain Superhuman effects.
+
+
+
+things to incorporate: dash, jump/teleport+divekick, stick energy spear in people?

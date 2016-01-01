@@ -91,33 +91,14 @@
 	    {
 	    	"RunScript"
 	    	{
-	    		"ScriptFile"		"heroes/hero_byakuren/indras_thunder.lua"
-	    		"Function"			"indrasThunderCast"
-	    		"projectile_modifier"	"modifier_projectile"
-	    		"pull_modifier"		"modifier_pulled"
+	    		"ScriptFile"	"heroes/hero_byakuren/indras_thunder.lua"
+	    		"Function"		"indrasThunderCast"
 	    	}
 	    }
 
 		"Modifiers"
 		{
-			"modifier_indras_thunder"
-			{
-				"IsHidden"		"1"
-				"Passive"		"1"
-
-				"ThinkInterval"  "%update_interval"
-
-				"OnIntervalThink"
-				{
-					"RunScript"
-					{
-						"ScriptFile"	"heroes/hero_byakuren/indras_thunder"
-						"Function"		"updateAbilityActivated"
-					}
-				}
-			}
-			
-	    	"modifier_pulled"
+			"modifier_indras_thunder_pulled"
 			{
 				"IsHidden"		"0"
 				"IsDebuff"		"1"
@@ -130,7 +111,7 @@
 				}
 			}
 
-			"modifier_projectile"
+			"modifier_indras_thunder_projectile"
 			{	
 				"ThinkInterval"			"%update_interval"
 

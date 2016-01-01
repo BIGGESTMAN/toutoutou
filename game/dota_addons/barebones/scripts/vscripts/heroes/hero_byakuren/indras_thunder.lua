@@ -5,13 +5,8 @@ function indrasThunderCast(keys)
 	local ability_level = ability:GetLevel() - 1
 
 	-- Spend a charge, unless charges modifier has expired during cast animation
-	if caster:HasModifier("modifier_vajrapanis_charges") then
-		local charge_modifier = caster:FindModifierByName("modifier_vajrapanis_charges")
-		if charge_modifier:GetStackCount() > 1 then
-			charge_modifier:DecrementStackCount()
-		else
-			charge_modifier:Destroy()
-		end
+	if caster.vajrapanis_charges > 1 then
+		caster.vajrapanis_charges = caster.vajrapanis_charges - 1
 	end
 
 	--------------------------------------------- Dummy projectile ----------------------------------
@@ -19,7 +14,7 @@ function indrasThunderCast(keys)
 	local speed = ability:GetLevelSpecialValueFor("speed", ability_level)
 
 	local dummy_projectile = CreateUnitByName("npc_dummy_unit", caster:GetAbsOrigin(), false, caster, caster, caster:GetTeam())
-	ability:ApplyDataDrivenModifier(caster, dummy_projectile, keys.projectile_modifier, {})
+	ability:ApplyDataDrivenModifier(caster, dummy_projectile, "modifier_indras_thunder_projectile", {})
 
 	local target_point = target:GetAbsOrigin()
 
@@ -56,7 +51,6 @@ function indrasThunderCast(keys)
 	local delay = ability:GetLevelSpecialValueFor("delay", ability_level)
 	if target:HasModifier("modifier_light_fragment") then
 		delay = 0.03 -- Wait a frame so dummy can actually finish moving to the target
-		target:RemoveModifierByName("modifier_light_fragment")
 	end
 
 	Timers:CreateTimer(0, function()
@@ -99,7 +93,7 @@ function indrasThunderCast(keys)
 
 				for k,unit in pairs(targets) do
 					ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
-					ability:ApplyDataDrivenModifier(caster, unit, "modifier_pulled", {})
+					ability:ApplyDataDrivenModifier(caster, unit, "modifier_indras_thunder_pulled", {})
 				end
 
 				-- Lightning strike particle and sound
@@ -134,7 +128,7 @@ function indrasThunderCast(keys)
 						end
 
 						for k,unit in pairs(targets) do
-							unit:RemoveModifierByName(keys.pull_modifier)
+							unit:RemoveModifierByName("modifier_indras_thunder_pulled")
 							FindClearSpaceForUnit(unit, unit:GetAbsOrigin(), false)
 						end
 					end
@@ -198,13 +192,5 @@ function updateBeads( event )
 		local target_point = RotatePosition(rotation_point, QAngle(0,angle,0), prototype_target_point)
 		local bead = dummy_projectile.beads[bead_number]
 		if not bead:IsNull() then bead:SetAbsOrigin(target_point) end -- I still don't understand why this check is necessary, but whatever
-	end
-end
-
-function updateAbilityActivated(keys)
-	if keys.caster:HasModifier("modifier_vajrapanis_charges") then
-		keys.ability:SetActivated(true)
-	else
-		keys.ability:SetActivated(false)
 	end
 end

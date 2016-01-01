@@ -5,13 +5,8 @@ function virudhakasSwordCast(keys)
 	local ability_level = ability:GetLevel() - 1
 
 	-- Spend a charge, unless charges modifier has expired during cast animation
-	if caster:HasModifier("modifier_vajrapanis_charges") then
-		local charge_modifier = caster:FindModifierByName("modifier_vajrapanis_charges")
-		if charge_modifier:GetStackCount() > 1 then
-			charge_modifier:DecrementStackCount()
-		else
-			charge_modifier:Destroy()
-		end
+	if caster.vajrapanis_charges > 1 then
+		caster.vajrapanis_charges = caster.vajrapanis_charges - 1
 	end
 
 	--------------------------------------------- Dummy projectile ----------------------------------
@@ -70,8 +65,8 @@ function virudhakasSwordCast(keys)
 				if not dummy_projectile.units_hit[unit] and unit ~= target then
 					ApplyDamage({victim = unit, attacker = caster, damage = damage, damage_type = damage_type})
 					dummy_projectile.units_hit[unit] = true
-					ability:ApplyDataDrivenModifier(dummy_projectile, unit, "modifier_pulled", {})
-					ability:ApplyDataDrivenModifier(caster, unit, "modifier_light_fragment", {})
+					ability:ApplyDataDrivenModifier(dummy_projectile, unit, "modifier_virudhakas_sword_pulled", {})
+					ability:ApplyDataDrivenModifier(caster, unit, "modifier_virudhakas_sword_light_fragment", {})
 				end
 			end
 
@@ -91,24 +86,21 @@ function virudhakasSwordCast(keys)
 			-- Impale target and delete spear dummy
 			if not target:IsNull() then
 				ApplyDamage({victim = target, attacker = caster, damage = damage, damage_type = damage_type})
-				ability:ApplyDataDrivenModifier(caster, target, "modifier_impaled", {})
-				ability:ApplyDataDrivenModifier(caster, target, "modifier_light_fragment", {})
+				ability:ApplyDataDrivenModifier(caster, target, "modifier_virudhakas_sword_impaled", {})
+				ability:ApplyDataDrivenModifier(caster, target, "modifier_virudhakas_sword_light_fragment", {})
 			end
 			dummy_projectile:RemoveSelf()
 
 			-- Release dragged units
 			for unit,v in pairs(dummy_projectile.units_hit) do
-				unit:RemoveModifierByName("modifier_pulled")
+				unit:RemoveModifierByName("modifier_virudhakas_sword_pulled")
 				FindClearSpaceForUnit(unit, unit:GetAbsOrigin(), false)
 			end
 		end
 	end)
 end
 
-function updateAbilityActivated(keys)
-	if keys.caster:HasModifier("modifier_vajrapanis_charges") then
-		keys.ability:SetActivated(true)
-	else
-		keys.ability:SetActivated(false)
-	end
+function onUpgrade(keys)
+	local vajrapanis_ability = keys.caster:FindAbilityByName("vajrapanis_incantation_channel")
+	vajrapanis_ability:SetLevel(keys.ability:GetLevel() + 1)
 end

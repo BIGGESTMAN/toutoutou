@@ -12,6 +12,7 @@ function modifier_dancing:OnCreated( kv )
 		self.direction = (self.target_point - caster:GetAbsOrigin()):Normalized()
 		caster:SetForwardVector(self.direction)
 
+		local base_dash_duration = 0.8
 		self.minimum_range = 75
 		self.distance_traveled = 0
 		self.dash_range = ability:GetLevelSpecialValueFor("dash_range", ability_level)
@@ -32,16 +33,16 @@ function modifier_dancing:OnCreated( kv )
 					charge_modifier:Destroy()
 				end
 			end
-			-- Manually set cooldown, because this happens after the cast technically
-			ability:EndCooldown()
-			ability:StartCooldown(caster:GetSecondsPerAttack())
+			-- Manually set cooldown, because this happens after the cast technically -- disabled for now
+			-- ability:EndCooldown()
+			-- ability:StartCooldown(caster:GetSecondsPerAttack())
 		end
 
-		local total_dash_duration = caster:GetSecondsPerAttack()
+		local total_dash_duration = base_dash_duration * caster:GetSecondsPerAttack() / caster:GetBaseAttackTime()
 		self.speed = self.dash_range / total_dash_duration
 
-		-- Place autoattack on cooldown afterward
-		caster:AttackNoEarlierThan(caster:GetSecondsPerAttack())
+		-- Place autoattack on cooldown afterward -- disabled for now
+		-- caster:AttackNoEarlierThan(caster:GetSecondsPerAttack())
 
 		-- Remove superhuman bonus attackspeed
 		caster:RemoveModifierByName("modifier_hanumans_dance_as_bonus")
@@ -69,7 +70,6 @@ function modifier_dancing:OnIntervalThink()
 			local direction = (caster:GetAbsOrigin() - target:GetAbsOrigin()):Normalized()
 			caster:SetAbsOrigin(target:GetAbsOrigin() + direction * self.minimum_range)
 			slash(caster, ability, self)
-			target:RemoveModifierByName("modifier_light_fragment")
 
 			ParticleManager:SetParticleControl(dash_particle, 1, caster:GetAbsOrigin())
 		else

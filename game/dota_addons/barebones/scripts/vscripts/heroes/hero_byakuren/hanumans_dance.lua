@@ -22,13 +22,8 @@ function hanumans_dance:OnSpellStart()
 		caster:AddNewModifier(caster, ability, "modifier_dancing", {target = target:GetEntityIndex(), prior_slashes = prior_slashes})
 
 		-- Spend a charge, unless charges modifier has expired during cast animation
-		if caster:HasModifier("modifier_vajrapanis_charges") then
-			local charge_modifier = caster:FindModifierByName("modifier_vajrapanis_charges")
-			if charge_modifier:GetStackCount() > 1 then
-				charge_modifier:DecrementStackCount()
-			else
-				charge_modifier:Destroy()
-			end
+		if caster.vajrapanis_charges > 1 then
+			caster.vajrapanis_charges = caster.vajrapanis_charges - 1
 		end
 
 		caster:AddNewModifier(caster, ability, "modifier_dance_recastable", {duration = ability:GetLevelSpecialValueFor("recast_time", ability_level)})
@@ -49,17 +44,18 @@ function hanumans_dance:OnSpellStart()
 	end
 end
 
-function hanumans_dance:GetIntrinsicModifierName()
-	return "modifier_hanumans_dance"
-end
+-- Ability cooldown functionality, not currently used
+-- function hanumans_dance:GetIntrinsicModifierName()
+-- 	return "modifier_hanumans_dance"
+-- end
 
 function hanumans_dance:GetCastAnimation()
 	return ACT_DOTA_ATTACK
 end
 
-function hanumans_dance:GetCooldown( nLevel )
-	return self:GetCaster():GetSecondsPerAttack()
-end
+-- function hanumans_dance:GetCooldown( nLevel )
+-- 	return self:GetCaster():GetSecondsPerAttack()
+-- end
 
 function hanumans_dance:GetCastRange( vLocation, hTarget )
 	if hTarget ~= nil and hTarget:HasModifier("modifier_light_fragment") then

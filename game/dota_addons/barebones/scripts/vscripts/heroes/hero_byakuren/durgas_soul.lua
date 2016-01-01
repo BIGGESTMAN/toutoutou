@@ -7,16 +7,13 @@ function durgasSoulCast(keys)
 	local ability_level = ability:GetLevel() - 1
 
 	-- Spend a charge
-	local charge_modifier = caster:FindModifierByName("modifier_vajrapanis_charges")
-	if charge_modifier:GetStackCount() > 1 then
-		charge_modifier:DecrementStackCount()
-	else
-		charge_modifier:Destroy()
+	if caster.vajrapanis_charges > 1 then
+		caster.vajrapanis_charges = caster.vajrapanis_charges - 1
 	end
 
 	ability.target_direction = caster:GetForwardVector()
 	ability.damage_absorbed = 0
-	ability:ApplyDataDrivenModifier(caster, caster, keys.modifier, {})
+	ability:ApplyDataDrivenModifier(caster, caster, "modifier_durgas_soul_casting", {})
 
 	-- Animation nonsense
 	local duration = ability:GetLevelSpecialValueFor("duration", ability_level)
@@ -42,6 +39,10 @@ function durgasSoulCast(keys)
 	local sub_ability_name	= "durgas_soul_retarget"
 	caster:SwapAbilities(main_ability_name, sub_ability_name, false, true)
 	-- caster:FindAbilityByName(sub_ability_name):SetActivated(true)
+
+	-- Create shockwave preview particle
+	caster.durgas_soul_preview_particle = ParticleManager:CreateParticleForTeam("particles/byakuren/durgas_soul/shockwave_preview.vpcf", PATTACH_ABSORIGIN, caster, caster:GetTeamNumber())
+	ParticleManager:SetParticleControlForward(caster.durgas_soul_preview_particle, 0, ability.target_direction)
 end
 
 function chargeTimeFinished(keys)
@@ -71,11 +72,14 @@ function chargeTimeFinished(keys)
 	-- Create particles
 	caster:SetForwardVector(ability.target_direction)
 
-	Timers:CreateTimer(0.15, function() -- A bit of a delay to try to make sure the shockwave particle actually goes in the right direction
-		local particle_name = "particles/byakuren/durgas_soul_shockwave.vpcf"
-		local particle = ParticleManager:CreateParticle(particle_name, PATTACH_ABSORIGIN, caster)
-		ParticleManager:SetParticleControlEnt(particle, 4, caster, PATTACH_ABSORIGIN, "attach_origin", caster:GetAbsOrigin(), true)
-	end)
+	-- Timers:CreateTimer(0.15, function() -- A bit of a delay to try to make sure the shockwave particle actually goes in the right direction
+		local particle = ParticleManager:CreateParticle("particles/byakuren/durgas_soul_shockwave.vpcf", PATTACH_ABSORIGIN, caster)
+		ParticleManager:SetParticleControlForward(particle, 0, ability.target_direction)
+	-- end)
+
+	-- Remove preview particle
+	ParticleManager:DestroyParticle(caster.durgas_soul_preview_particle, true)
+	caster.durgas_soul_preview_particle = nil
 
 	-- Disable retarget ability
 	local main_ability_name	= ability:GetAbilityName()
@@ -104,17 +108,14 @@ function modifierApplied(keys)
 end
 
 function setTarget(keys)
-	local direction = (keys.target_points[1] - keys.caster:GetAbsOrigin()):Normalized()
-	local main_ability_name	= "durgas_soul"
-	keys.caster:FindAbilityByName(main_ability_name).target_direction = direction
-end
+	local caster = keys.caster
+	local direction = (keys.target_points[1] - caster:GetAbsOrigin()):Normalized()
+	caster:FindAbilityByName("durgas_soul").target_direction = direction
 
-function updateAbilityActivated(keys)
-	if keys.caster:HasModifier("modifier_vajrapanis_charges") then
-		keys.ability:SetActivated(true)
-	else
-		keys.ability:SetActivated(false)
-	end
+	-- Update preview particle
+	ParticleManager:DestroyParticle(caster.durgas_soul_preview_particle, true)
+	caster.durgas_soul_preview_particle = ParticleManager:CreateParticleForTeam("particles/byakuren/durgas_soul/shockwave_preview.vpcf", PATTACH_ABSORIGIN, caster, caster:GetTeamNumber())
+	ParticleManager:SetParticleControlForward(caster.durgas_soul_preview_particle, 0, direction)
 end
 
 function onUpgrade(keys)
